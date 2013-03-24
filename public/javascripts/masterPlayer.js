@@ -46,11 +46,19 @@ require(['vendor/jquery', '/socket.io/socket.io.js'], function(){
 			switch(data.action) {
 				case 'play':
 					$('.jp-play').trigger('click');
-		        break;
+				break;
 
 				case 'pause':
-			        $('.jp-pause').trigger('click');
-		        break;
+					$('.jp-pause').trigger('click');
+				break;
+
+				case 'next':
+					$('.jp-next').trigger('click');
+				break;
+
+				case 'prev':
+					$('.jp-previous').trigger('click');
+				break;
 			}
 		});
 

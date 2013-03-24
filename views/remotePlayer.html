@@ -2,13 +2,38 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<title>Remo.music - Remote Music Player</title>
+
 	<!-- Utils -->
 	<script defer src="/socket.io/socket.io.js"></script>
 	<script defer src="/javascripts/config.js"></script>
 	<script defer data-main="/javascripts/controlPlayer" src="/javascripts/vendor/require.js"></script>
+
+	<!-- Styles -->
+	<link rel="stylesheet" href="/stylesheets/remotePlayer.css" media="all">
 </head>
-<body>
-	Hello!
+<body ontouchstart="">
+	<!-- Player -->
+	<div id="remotePlayer" data-played="false">
+		<!-- Ações padrões -->
+		<div class="defaultActions">
+			<!-- Música anterior -->
+			<span class="touch-btn circle-btn circle-btn-medium" id="prevMusic">
+				<span class="ico-prev"></span>
+			</span>
+
+			<!-- Play/Pause -->
+			<span class="touch-btn circle-btn circle-btn-big" id="playPauseMusic">
+				<span class="changeIcoToPlayOrPause ico-play"></span>
+			</span>
+
+			<!-- Próxima música -->
+			<span class="touch-btn circle-btn circle-btn-medium" id="nextMusic">
+				<span class="ico-next"></span>
+			</span>
+		</div>
+	</div>
 </body>
 </html>
