@@ -7,7 +7,6 @@ var express = require('express')
   , http = require('http')
   , os = require('os')
   , url = require('url')
-  , remotePlayer = require('./routes/remotePlayer')
   , path = require('path');
 
 var app = require('express')()
@@ -25,12 +24,17 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
-  app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler());
+});
+
+//Configurações apenas para o HEROKU
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
 });
 
 //Rotas
