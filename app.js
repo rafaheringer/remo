@@ -6,14 +6,13 @@
 var express = require('express')
   , http = require('http')
   , routes = require('./routes')
+  , os = require('os')
   , remotePlayer = require('./routes/remotePlayer')
   , path = require('path');
 
 var app = require('express')()
   , server = require('http').createServer(app)
   , io = require('socket.io').listen(server);
-
-server.listen(80);
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -38,6 +37,10 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/remote/:ID', remotePlayer.index);
 
+server.listen(app.get('port'), function(){
+  console.log('Server iniciado na porta ' + app.get('port'));
+});
+
 /*
  * Configurações do player 
  * ***********************
@@ -52,6 +55,13 @@ var PLAYER = {
 io
   .of('/player')
     .on('connection', function(socket){
+      //Envia sucesso de conexão
+      socket.emit('message', {
+        code: 'connect',
+        hostname: os.hostname(),
+        port: app.get('port')
+      });
+
       socket.on('message', function(data){
         //Verifica ID
         if(data.playerID == ('undefined' || 'null' || null || '')) {

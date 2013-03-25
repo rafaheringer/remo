@@ -5,7 +5,6 @@ var newDate = new Date();
 
 //jQuery e SOCKET.IO
 require(['vendor/jquery', '/socket.io/socket.io.js'], function(){
-	
 	//Player
 	require(['vendor/jquery.jplayer.min', 'vendor/jplayer.playlist.min'], function(){
 		//Configurações do player
@@ -16,6 +15,15 @@ require(['vendor/jquery', '/socket.io/socket.io.js'], function(){
 
 		//Abre socket para o webplayer
 		var playerSocket = io.connect(CONFIG.hostname + '/player');
+
+		playerSocket.on('message', function(data){
+			switch(data.code) {
+				case 'connect':
+					console.log(data);
+					CONFIG.hostname = data.hostname + ':' + data.port;
+		        break;
+			}
+		});
 
 		//Autentica o player e ID
 		playerSocket.emit('message', {playerID: PLAYER.id});
@@ -149,7 +157,6 @@ require(['vendor/jquery', '/socket.io/socket.io.js'], function(){
 				supplied: "oga, mp3",
 				wmode: "window"
 			});
-			
 		});
 	});	
 });
