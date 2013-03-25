@@ -5,8 +5,8 @@
 
 var express = require('express')
   , http = require('http')
-  , routes = require('./routes')
   , os = require('os')
+  , url = require('url')
   , remotePlayer = require('./routes/remotePlayer')
   , path = require('path');
 
@@ -34,8 +34,14 @@ app.configure('development', function(){
 });
 
 //Rotas
-app.get('/', routes.index);
-app.get('/remote/:ID', remotePlayer.index);
+app.get('/',  function(req, res){
+  res.render('index', { title: 'Master player' });
+  app.set('hostname', ( req.headers.host.match(/:/g) ) ? req.headers.host.slice( 0, req.headers.host.indexOf(":") ) : req.headers.host);
+});
+
+app.get('/remote/:ID', function(req, res){
+  res.render('remotePlayer', { title: 'Remote player' });
+});
 
 server.listen(app.get('port'), function(){
   console.log('Server iniciado na porta ' + app.get('port'));
@@ -59,7 +65,8 @@ io
       socket.emit('message', {
         code: 'connect',
         hostname: os.hostname(),
-        port: app.get('port')
+        port: app.get('port'),
+        url: app.get('hostname')
       });
 
       socket.on('message', function(data){

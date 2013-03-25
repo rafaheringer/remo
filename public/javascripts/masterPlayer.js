@@ -20,7 +20,7 @@ require(['vendor/jquery', '/socket.io/socket.io.js'], function(){
 			switch(data.code) {
 				case 'connect':
 					console.log(data);
-					CONFIG.hostname = data.hostname + ':' + data.port;
+					CONFIG.url = data.hostname + ':' + data.port;
 		        break;
 			}
 		});
