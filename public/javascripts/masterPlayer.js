@@ -2,16 +2,17 @@
 //http://www.jplayer.org/latest/developer-guide/
 ////////////////////////////////////////////
 var newDate = new Date();
+//Configurações do player
+var PLAYER = {
+	id: newDate.getTime(),
+	socketID: null
+};
 
 //jQuery e SOCKET.IO
 require(['vendor/jquery', '/socket.io/socket.io.js'], function(){
 	//Player
 	require(['vendor/jquery.jplayer.min', 'vendor/jplayer.playlist.min'], function(){
-		//Configurações do player
-		var PLAYER = {
-			id: newDate.getTime(),
-			socketID: null
-		};
+		
 
 		//Abre socket para o webplayer
 		var playerSocket = io.connect(CONFIG.hostname + '/player');
@@ -20,7 +21,8 @@ require(['vendor/jquery', '/socket.io/socket.io.js'], function(){
 			switch(data.code) {
 				case 'connect':
 					console.log(data);
-					CONFIG.url = data.hostname + ':' + data.port;
+					CONFIG.url = '//' + data.url + ':' + data.port;
+					CONFIG.hostname = data.hostname + ':' + data.port;
 		        break;
 			}
 		});
@@ -42,7 +44,7 @@ require(['vendor/jquery', '/socket.io/socket.io.js'], function(){
 					console.log('Usuário autenticado. ID:' + data.socketID);
 
 					require(['vendor/jquery.qrcode', 'vendor/qrcode'], function(){
-						$('#qrcode').qrcode(CONFIG.hostname + '/remote/' + PLAYER.id);
+						$('#qrcode').qrcode(CONFIG.url + '/remote/' + PLAYER.id);
 					});
 					
 				break;
@@ -75,7 +77,7 @@ require(['vendor/jquery', '/socket.io/socket.io.js'], function(){
 			$('<p>Abrir controlador</p>')
 				.appendTo('body')
 				.on('click', function(){
-					window.open(CONFIG.hostname + '/remote/' + PLAYER.id, "");
+					window.open(CONFIG.url + '/remote/' + PLAYER.id, "");
 			});
 
 
