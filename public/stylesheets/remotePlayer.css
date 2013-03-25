@@ -1,0 +1,157 @@
+/*Site: Remo.music
+ *Package: Remote Player Package
+ *Author: Rafael Heringer Carvalho
+ *Version: 1.0
+ *Using: .SASS + Compasss 
+ */
+/* line 34, src/remotePlayer.sass */
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* line 40, src/remotePlayer.sass */
+html,
+body {
+  height: 100%;
+}
+
+/* line 44, src/remotePlayer.sass */
+body {
+  background: url('../images/remotePlayer/bg.jpg?1364158281') repeat #f8f8f8;
+  font-family: Arial;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* line 66, remotePlayer/ico/*.png */
+.ico-sprite, .ico-next, .ico-pause, .ico-play, .ico-prev {
+  background: url('../images/remotePlayer/ico-sc119cf3d90.png') no-repeat;
+}
+
+/* line 60, ../../../../../../../ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.ico-next {
+  background-position: 0 -46px;
+  height: 28px;
+  width: 30px;
+}
+
+/* line 60, ../../../../../../../ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.ico-pause {
+  background-position: 0 -102px;
+  height: 41px;
+  width: 35px;
+}
+
+/* line 60, ../../../../../../../ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.ico-play {
+  background-position: 0 0;
+  height: 46px;
+  width: 32px;
+}
+
+/* line 60, ../../../../../../../ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+.ico-prev {
+  background-position: 0 -74px;
+  height: 28px;
+  width: 30px;
+}
+
+/* line 59, src/remotePlayer.sass */
+.ico-sprite, .ico-next, .ico-pause, .ico-play, .ico-prev {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 64, src/remotePlayer.sass */
+.circle-btn {
+  -webkit-border-radius: 32px;
+  -moz-border-radius: 32px;
+  -ms-border-radius: 32px;
+  -o-border-radius: 32px;
+  border-radius: 32px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25), 0 2px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25), 0 2px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25), 0 2px 3px rgba(0, 0, 0, 0.1);
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f6f6f6), color-stop(100%, #eaeaea)), #eaeaea;
+  background: -webkit-linear-gradient(top, #f6f6f6, #eaeaea), #eaeaea;
+  background: -moz-linear-gradient(top, #f6f6f6, #eaeaea), #eaeaea;
+  background: -o-linear-gradient(top, #f6f6f6, #eaeaea), #eaeaea;
+  background: linear-gradient(top, #f6f6f6, #eaeaea), #eaeaea;
+  margin-right: 30px;
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+  position: relative;
+  line-height: 64px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+/* line 77, src/remotePlayer.sass */
+.circle-btn.circle-btn-medium {
+  -webkit-border-radius: 32px;
+  -moz-border-radius: 32px;
+  -ms-border-radius: 32px;
+  -o-border-radius: 32px;
+  border-radius: 32px;
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+}
+/* line 84, src/remotePlayer.sass */
+.circle-btn.circle-btn-big {
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+}
+/* line 90, src/remotePlayer.sass */
+.circle-btn:active, .circle-btn.active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eaeaea), color-stop(100%, #f6f6f6)), #eaeaea;
+  background: -webkit-linear-gradient(top, #eaeaea, #f6f6f6), #eaeaea;
+  background: -moz-linear-gradient(top, #eaeaea, #f6f6f6), #eaeaea;
+  background: -o-linear-gradient(top, #eaeaea, #f6f6f6), #eaeaea;
+  background: linear-gradient(top, #eaeaea, #f6f6f6), #eaeaea;
+  top: 1px;
+}
+/* line 95, src/remotePlayer.sass */
+.circle-btn:before {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+  -webkit-border-radius: 140px;
+  -moz-border-radius: 140px;
+  -ms-border-radius: 140px;
+  -o-border-radius: 140px;
+  border-radius: 140px;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -8px;
+  right: -8px;
+  bottom: -8px;
+  left: -8px;
+  background-color: #eaeaea;
+}
+
+/* line 111, src/remotePlayer.sass */
+#remotePlayer .defaultActions {
+  text-align: center;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -50px 0 0 -164px;
+}
+/* line 119, src/remotePlayer.sass */
+#remotePlayer .defaultActions .circle-btn {
+  display: inline-block;
+}

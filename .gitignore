@@ -17,7 +17,7 @@ node_modules
 
 ## SASS
 .sass-cache/
-*.css
+#*.css
 
 ## Windows
 Desktop.ini
