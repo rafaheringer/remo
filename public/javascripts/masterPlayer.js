@@ -21,7 +21,7 @@ require(['vendor/jquery', '/socket.io/socket.io.js'], function(){
 			switch(data.code) {
 				case 'connect':
 					console.log(data);
-					CONFIG.url = '//' + data.url + ':' + data.port;
+					CONFIG.url = 'http://' + data.url + ':' + data.port;
 					CONFIG.hostname = data.hostname + ':' + data.port;
 		        break;
 			}
@@ -74,13 +74,6 @@ require(['vendor/jquery', '/socket.io/socket.io.js'], function(){
 
 		//TODO
 		$(function(){
-			$('<p>Abrir controlador</p>')
-				.appendTo('body')
-				.on('click', function(){
-					window.open(CONFIG.url + '/remote/' + PLAYER.id, "");
-			});
-
-
 			//Inicializa PLAYER
 			new jPlayerPlaylist({
 				jPlayer: "#jquery_jplayer_1",

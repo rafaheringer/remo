@@ -2,22 +2,22 @@
  *Package: Remote Player Package
  *Author: Rafael Heringer Carvalho
  *Version: 1.0
- *Using: .SASS + Compasss 
+ *Using: .SASS + Compass 
  */
-/* line 34, src/remotePlayer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/remotePlayer\.sass}line{font-family:\0000334}}
 * {
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-/* line 40, src/remotePlayer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/remotePlayer\.sass}line{font-family:\0000340}}
 html,
 body {
   height: 100%;
 }
 
-/* line 44, src/remotePlayer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/remotePlayer\.sass}line{font-family:\0000344}}
 body {
   background: url('../images/remotePlayer/bg.jpg?1364158281') repeat #f8f8f8;
   font-family: Arial;
@@ -29,46 +29,46 @@ body {
   user-select: none;
 }
 
-/* line 66, remotePlayer/ico/*.png */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Projetos\%20e\%20Freelances\/qx3\/Interfaces\/Treinamento\/Sass\/Programas\%20e\%20Arquivos\/CompassWatcher\/remotePlayer\/ico\/\*\.png}line{font-family:\0000366}}
 .ico-sprite, .ico-next, .ico-pause, .ico-play, .ico-prev {
   background: url('../images/remotePlayer/ico-sc119cf3d90.png') no-repeat;
 }
 
-/* line 60, ../../../../../../../ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Projetos\%20e\%20Freelances\/qx3\/Interfaces\/Treinamento\/Sass\/Programas\%20e\%20Arquivos\/CompassWatcher\/lib\/ruby\/compass_0\.12\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
 .ico-next {
   background-position: 0 -46px;
   height: 28px;
   width: 30px;
 }
 
-/* line 60, ../../../../../../../ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Projetos\%20e\%20Freelances\/qx3\/Interfaces\/Treinamento\/Sass\/Programas\%20e\%20Arquivos\/CompassWatcher\/lib\/ruby\/compass_0\.12\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
 .ico-pause {
   background-position: 0 -102px;
   height: 41px;
   width: 35px;
 }
 
-/* line 60, ../../../../../../../ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Projetos\%20e\%20Freelances\/qx3\/Interfaces\/Treinamento\/Sass\/Programas\%20e\%20Arquivos\/CompassWatcher\/lib\/ruby\/compass_0\.12\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
 .ico-play {
   background-position: 0 0;
   height: 46px;
   width: 32px;
 }
 
-/* line 60, ../../../../../../../ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/sprites/_base.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Projetos\%20e\%20Freelances\/qx3\/Interfaces\/Treinamento\/Sass\/Programas\%20e\%20Arquivos\/CompassWatcher\/lib\/ruby\/compass_0\.12\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
 .ico-prev {
   background-position: 0 -74px;
   height: 28px;
   width: 30px;
 }
 
-/* line 59, src/remotePlayer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/remotePlayer\.sass}line{font-family:\0000359}}
 .ico-sprite, .ico-next, .ico-pause, .ico-play, .ico-prev {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 64, src/remotePlayer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/remotePlayer\.sass}line{font-family:\0000364}}
 .circle-btn {
   -webkit-border-radius: 32px;
   -moz-border-radius: 32px;
@@ -92,7 +92,7 @@ body {
   cursor: pointer;
   vertical-align: middle;
 }
-/* line 77, src/remotePlayer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/remotePlayer\.sass}line{font-family:\0000377}}
 .circle-btn.circle-btn-medium {
   -webkit-border-radius: 32px;
   -moz-border-radius: 32px;
@@ -103,7 +103,7 @@ body {
   height: 64px;
   line-height: 64px;
 }
-/* line 84, src/remotePlayer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/remotePlayer\.sass}line{font-family:\0000384}}
 .circle-btn.circle-btn-big {
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
@@ -114,7 +114,7 @@ body {
   height: 100px;
   line-height: 100px;
 }
-/* line 90, src/remotePlayer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/remotePlayer\.sass}line{font-family:\0000390}}
 .circle-btn:active, .circle-btn.active {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eaeaea), color-stop(100%, #f6f6f6)), #eaeaea;
   background: -webkit-linear-gradient(top, #eaeaea, #f6f6f6), #eaeaea;
@@ -123,7 +123,7 @@ body {
   background: linear-gradient(top, #eaeaea, #f6f6f6), #eaeaea;
   top: 1px;
 }
-/* line 95, src/remotePlayer.sass */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/remotePlayer\.sass}line{font-family:\0000395}}
 .circle-btn:before {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
@@ -142,8 +142,8 @@ body {
   background-color: #eaeaea;
 }
 
-/* line 111, src/remotePlayer.sass */
-#remotePlayer .defaultActions {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/remotePlayer\.sass}line{font-family:\00003111}}
+#remotePlayer .default-actions {
   text-align: center;
   height: 100px;
   position: absolute;
@@ -151,7 +151,7 @@ body {
   left: 50%;
   margin: -50px 0 0 -164px;
 }
-/* line 119, src/remotePlayer.sass */
-#remotePlayer .defaultActions .circle-btn {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/remotePlayer\.sass}line{font-family:\00003119}}
+#remotePlayer .default-actions .circle-btn {
   display: inline-block;
 }

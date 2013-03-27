@@ -1,0 +1,147 @@
+/*!
+ *Site: Remo.music
+ *Package: Remote Player Package
+ *Author: Rafael Heringer Carvalho
+ *Version: 1.0
+ *Using: .SASS + Compass 
+ */
+
+
+//Utilidades
+//==========
+
+//Variáveis
+$gradient-from: 	rgba(103,255,111,0.4) 		//Cor inicial do gradiente básico
+$gradient-to: 		rgba(61,203,255,0.4)		//Cor final do gradiente básico
+$text-color: 		#acacac 					//Cinza: Textos padrões do sistema
+
+//Funções e mixins
+@import compass
+@import plugins/animation
+
+//Mixin para um elemento "clear"
+@mixin clearfix
+	display: inline-block
+	&:after
+		content: "."
+		display: block
+		height: 0
+		clear: both
+		visibility: hidden
+	* html &
+		height: 1px
+
+//Chrome Scrollbar
+::-webkit-scrollbar 
+	width: 5px
+	height: 100%
+	background: transparent
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment
+	height: 30px
+	display: none
+	background-color: transparent
+
+::-webkit-scrollbar-thumb:vertical 
+	+border-radius(5px)
+	+transition (all 200ms ease-in-out)
+	height: 50px
+	background-color: rgba(82,82,82,0.6)
+	
+	&:hover 
+	background-color: rgba(82,82,82,1.0)
+
+
+//Elementos
+//=========
+
+//Reset
+*
+	margin: 0
+	padding: 0
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+//Texto
+a
+	text-decoration: none
+	color: $text-color
+
+//Corpo
+html,
+body
+	height: 100%
+	font-family: Arial, "Open Sans", Helvetica
+	font-size: 12px
+
+body
+	background: image-url("masterPlayer/bg.jpg") repeat #000000
+	font-family: Arial
+	-webkit-touch-callout: none
+	-webkit-user-select: none
+	-khtml-user-select: none
+	-moz-user-select: none
+	-ms-user-select: none
+	user-select: none
+
+//Efeitos visuais BG
++keyframes(bgFades)
+	0%, 100%
+		+background-image(linear-gradient(45deg, $gradient-from, transparent))
+		background-color: $gradient-to
+
+	25%
+		+background-image(linear-gradient(45deg, adjust-hue($gradient-from, 128deg), transparent))
+		background-color: adjust-hue($gradient-to, 128deg)
+
+	50%
+		+background-image(linear-gradient(45deg, adjust-hue($gradient-from, -135deg), transparent))
+		background-color: adjust-hue($gradient-to, -135deg)
+
+#mainContainer
+	+animation(bgFades 100s infinite)
+	width: 100%
+	height: 100%
+
+//Playlist
+#playlist
+	background: rgba(0,0,0,0.85)
+	padding: 10px 10px 10px 0
+	width: 23%
+	height: 65%
+	min-width: 270px
+	//min-height: 325px
+	left: 10%
+	top: 0
+	position: absolute
+
+	.playlist-container
+		height: 100%
+		padding-right: 10px
+		overflow: auto
+
+	.jp-free-media
+		display: none
+
+	.jp-playlist-item
+		+text-shadow(0px 0px 5px rgba(172,172,172,0.5))
+		+ellipsis
+		display: block
+		margin: 7px 0
+		padding: 6px 20px
+		font-size: 16px
+
+		&:hover
+			background: rgba(255,255,255,0.1)
+
+	.jp-playlist-current 
+		.jp-playlist-item
+			color: black
+			background: white
+
+
+
+.jp-jplayer,
+.jp-interface
+#qrcode
+	display: none

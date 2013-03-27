@@ -1,0 +1,238 @@
+/*Site: Remo.music
+ *Package: Remote Player Package
+ *Author: Rafael Heringer Carvalho
+ *Version: 1.0
+ *Using: .SASS + Compass 
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\0000335}}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 100%;
+  background: transparent;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\0000340}}
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+  height: 30px;
+  display: none;
+  background-color: transparent;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\0000346}}
+::-webkit-scrollbar-thumb:vertical {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+  height: 50px;
+  background-color: rgba(82, 82, 82, 0.6);
+  background-color: #525252;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\0000360}}
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\0000366}}
+a {
+  text-decoration: none;
+  color: #acacac;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\0000371}}
+html,
+body {
+  height: 100%;
+  font-family: Arial, "Open Sans", Helvetica;
+  font-size: 12px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\0000377}}
+body {
+  background: url('../images/masterPlayer/bg.jpg?1364346222') repeat black;
+  font-family: Arial;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@-moz-keyframes bgFades {
+  /* line 89, src/masterPlayer.sass */
+  0%, 100% {
+    background-image: -moz-linear-gradient(45deg, rgba(103, 255, 111, 0.4), transparent);
+    background-image: linear-gradient(45deg, rgba(103, 255, 111, 0.4), transparent);
+    background-color: rgba(61, 203, 255, 0.4);
+  }
+
+  /* line 93, src/masterPlayer.sass */
+  25% {
+    background-image: -moz-linear-gradient(45deg, rgba(131, 103, 255, 0.4), transparent);
+    background-image: linear-gradient(45deg, rgba(131, 103, 255, 0.4), transparent);
+    background-color: rgba(255, 61, 177, 0.4);
+  }
+
+  /* line 97, src/masterPlayer.sass */
+  50% {
+    background-image: -moz-linear-gradient(45deg, rgba(255, 103, 133, 0.4), transparent);
+    background-image: linear-gradient(45deg, rgba(255, 103, 133, 0.4), transparent);
+    background-color: rgba(251, 255, 61, 0.4);
+  }
+}
+
+@-webkit-keyframes bgFades {
+  /* line 89, src/masterPlayer.sass */
+  0%, 100% {
+    background-image: -webkit-linear-gradient(45deg, rgba(103, 255, 111, 0.4), transparent);
+    background-image: linear-gradient(45deg, rgba(103, 255, 111, 0.4), transparent);
+    background-color: rgba(61, 203, 255, 0.4);
+  }
+
+  /* line 93, src/masterPlayer.sass */
+  25% {
+    background-image: -webkit-linear-gradient(45deg, rgba(131, 103, 255, 0.4), transparent);
+    background-image: linear-gradient(45deg, rgba(131, 103, 255, 0.4), transparent);
+    background-color: rgba(255, 61, 177, 0.4);
+  }
+
+  /* line 97, src/masterPlayer.sass */
+  50% {
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 103, 133, 0.4), transparent);
+    background-image: linear-gradient(45deg, rgba(255, 103, 133, 0.4), transparent);
+    background-color: rgba(251, 255, 61, 0.4);
+  }
+}
+
+@-o-keyframes bgFades {
+  /* line 89, src/masterPlayer.sass */
+  0%, 100% {
+    background-image: -o-linear-gradient(45deg, rgba(103, 255, 111, 0.4), transparent);
+    background-image: linear-gradient(45deg, rgba(103, 255, 111, 0.4), transparent);
+    background-color: rgba(61, 203, 255, 0.4);
+  }
+
+  /* line 93, src/masterPlayer.sass */
+  25% {
+    background-image: -o-linear-gradient(45deg, rgba(131, 103, 255, 0.4), transparent);
+    background-image: linear-gradient(45deg, rgba(131, 103, 255, 0.4), transparent);
+    background-color: rgba(255, 61, 177, 0.4);
+  }
+
+  /* line 97, src/masterPlayer.sass */
+  50% {
+    background-image: -o-linear-gradient(45deg, rgba(255, 103, 133, 0.4), transparent);
+    background-image: linear-gradient(45deg, rgba(255, 103, 133, 0.4), transparent);
+    background-color: rgba(251, 255, 61, 0.4);
+  }
+}
+
+@-ms-keyframes bgFades {
+  /* line 89, src/masterPlayer.sass */
+  0%, 100% {
+    background-image: linear-gradient(45deg, rgba(103, 255, 111, 0.4), transparent);
+    background-color: rgba(61, 203, 255, 0.4);
+  }
+
+  /* line 93, src/masterPlayer.sass */
+  25% {
+    background-image: linear-gradient(45deg, rgba(131, 103, 255, 0.4), transparent);
+    background-color: rgba(255, 61, 177, 0.4);
+  }
+
+  /* line 97, src/masterPlayer.sass */
+  50% {
+    background-image: linear-gradient(45deg, rgba(255, 103, 133, 0.4), transparent);
+    background-color: rgba(251, 255, 61, 0.4);
+  }
+}
+
+@keyframes bgFades {
+  /* line 89, src/masterPlayer.sass */
+  0%, 100% {
+    background-image: linear-gradient(45deg, rgba(103, 255, 111, 0.4), transparent);
+    background-color: rgba(61, 203, 255, 0.4);
+  }
+
+  /* line 93, src/masterPlayer.sass */
+  25% {
+    background-image: linear-gradient(45deg, rgba(131, 103, 255, 0.4), transparent);
+    background-color: rgba(255, 61, 177, 0.4);
+  }
+
+  /* line 97, src/masterPlayer.sass */
+  50% {
+    background-image: linear-gradient(45deg, rgba(255, 103, 133, 0.4), transparent);
+    background-color: rgba(251, 255, 61, 0.4);
+  }
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003101}}
+#mainContainer {
+  -webkit-animation: bgFades 100s infinite;
+  -moz-animation: bgFades 100s infinite;
+  -ms-animation: bgFades 100s infinite;
+  -o-animation: bgFades 100s infinite;
+  animation: bgFades 100s infinite;
+  width: 100%;
+  height: 100%;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003107}}
+#playlist {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 10px 10px 10px 0;
+  width: 23%;
+  height: 65%;
+  min-width: 270px;
+  left: 10%;
+  top: 0;
+  position: absolute;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003118}}
+#playlist .playlist-container {
+  height: 100%;
+  padding-right: 10px;
+  overflow: auto;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003123}}
+#playlist .jp-free-media {
+  display: none;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003126}}
+#playlist .jp-playlist-item {
+  text-shadow: 0px 0px 5px rgba(172, 172, 172, 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  display: block;
+  margin: 7px 0;
+  padding: 6px 20px;
+  font-size: 16px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003134}}
+#playlist .jp-playlist-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003138}}
+#playlist .jp-playlist-current .jp-playlist-item {
+  color: black;
+  background: white;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/public\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003146}}
+#qrcode {
+  display: none;
+}
