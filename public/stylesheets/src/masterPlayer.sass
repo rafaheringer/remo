@@ -3,7 +3,7 @@
  *Package: Remote Player Package
  *Author: Rafael Heringer Carvalho
  *Version: 1.0
- *Using: .SASS + Compass 
+ *Using: .SASS + Compass + Animation + Animate (http://daneden.me/animate/) 
  */
 
 
@@ -52,6 +52,10 @@ $text-color: 		#acacac 					//Cinza: Textos padrões do sistema
 	&:hover 
 	background-color: rgba(82,82,82,1.0)
 
+//Sprites
+@import "masterPlayer/ico/*.png"
+$ico-sprite-dimensions: true
++all-ico-sprites
 
 //Elementos
 //=========
@@ -61,6 +65,9 @@ $text-color: 		#acacac 					//Cinza: Textos padrões do sistema
 	margin: 0
 	padding: 0
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+	&:focus
+		outline: none
 
 //Texto
 a
@@ -73,6 +80,7 @@ body
 	height: 100%
 	font-family: Arial, "Open Sans", Helvetica
 	font-size: 12px
+	overflow: hidden
 
 body
 	background: image-url("masterPlayer/bg.jpg") repeat #000000
@@ -83,6 +91,17 @@ body
 	-moz-user-select: none
 	-ms-user-select: none
 	user-select: none
+
+	&:before
+		+rotate(-35deg)
+		+background-image(linear-gradient(90deg, rgba(0,0,0,0.6), transparent))
+		position: absolute
+		content: " "
+		display: block
+		height: 300px
+		width: 800px
+		bottom: -140px
+		right: -160px
 
 //Efeitos visuais BG
 +keyframes(bgFades)
@@ -103,6 +122,16 @@ body
 	width: 100%
 	height: 100%
 
+	&:before
+		+background-image(linear-gradient(90deg, rgba(0,0,0,0.6), transparent))
+		position: absolute
+		content: " "
+		display: block
+		height: 70px
+		bottom: 0
+		left: 0
+		right: 0
+
 //Playlist
 #playlist
 	background: rgba(0,0,0,0.85)
@@ -114,7 +143,8 @@ body
 	left: 10%
 	top: 0
 	position: absolute
-
+	
+	//Playlist
 	.playlist-container
 		height: 100%
 		padding-right: 10px
@@ -139,9 +169,97 @@ body
 			color: black
 			background: white
 
+//Controles
+.jp-controls
+	position: absolute
+	display: block
+	bottom: 45px
+	right: 60px
+	text-align: center
 
+	.jp-control-item 
+		+hide-text
+		display: inline-block
+		vertical-align: middle
+		list-style-type: none
+		position: relative
+
+		&:active,
+		&.active
+			+opacity(0.6)
+
+		a
+			display: block
+			width: 100%
+			height: 100%
+
+	.jp-previous,
+	.jp-play,
+	.jp-pause,
+	.jp-next
+		vertical-align: middle
+
+	.jp-stop,
+	.jp-volume-max
+		display: none!important
+
+//Barra de volume
+.jp-volume
+	margin: 10px 0 0 0
+
+	.jp-volume-bar
+		display: inline-block
+		+box-shadow(0,0,5px, rgba(0,0,0,0.3))
+		background: rgba(255,255,255, 0.45)
+		width: 115px
+		position: relative
+		height: 6px
+
+		.jp-volume-bar-value
+			height: 100%
+			background: white
+
+	.jp-mute,
+	.jp-unmute
+		@extend .jp-control-item
+
+
+
+//Barra de progresso
+.jp-progress
+	display: none
+
+//Outros
+.jp-no-solution
+	display: none
+
+.jp-toggles
+	display: none
+
+.jp-time-holder
+	display: none
 
 .jp-jplayer,
 .jp-interface
-#qrcode
 	display: none
+
+//qrCode
+#showQRCode
+	position: absolute
+	left: 12%
+	top: 75%
+	height: 100%
+
+	.qrCode
+		display: none
+
+		canvas
+			width: auto
+			height: 20%
+
+
+	.clickToShowQRCode
+		background: image-url("masterPlayer/click-qrcode.png") no-repeat left top
+		width: 152px
+		height: 51px
+		cursor: pointer

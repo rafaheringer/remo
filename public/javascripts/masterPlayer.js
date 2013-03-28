@@ -154,4 +154,25 @@ require(['vendor/jquery', '/socket.io/socket.io.js'], function(){
 			});
 		});
 	});	
+
+	//qrCode
+	$('#showQRCode').toggle(function(evt){
+		$(this).addClass('showed');
+		$('.clickToShowQRCode').hide();
+		$('#qrcode').fadeIn(100);
+		evt.stopPropagation();
+	}, function(){
+		$(this).removeClass('showed');
+		$('#qrcode').fadeOut(100, function(){
+			$('.clickToShowQRCode').show();
+		});
+		evt.stopPropagation();
+	});
+
+
+	$('body').on('click', function(){
+		if($('#showQRCode').is('.showed')) {
+			$('#showQRCode').trigger('click');
+		}
+	});
 });
