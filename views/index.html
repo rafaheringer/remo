@@ -6,7 +6,12 @@
 	<!-- Utils -->
 	<script defer src="/socket.io/socket.io.js"></script>
 	<script defer src="/javascripts/config.js"></script>
-	<script defer data-main="/javascripts/masterPlayer" src="/javascripts/vendor/require.js"></script>
+	<script defer src="/javascripts/vendor/jquery.js"></script>
+	<script defer src="/javascripts/vendor/jquery.jplayer.min.js"></script>
+	<script defer src="/javascripts/vendor/jplayer.playlist.min.js"></script>
+	<script defer src="/javascripts/vendor/qrcode.js"></script>
+	<script defer src="/javascripts/vendor/jquery.qrcode.js"></script>
+	<script defer src="/javascripts/masterPlayer.js"></script>
 	
 	<!-- jqSkin -->
 	<link href="stylesheets/masterPlayer.css" rel="stylesheet" type="text/css" />
@@ -17,9 +22,9 @@
 		
 
 		<!-- Player -->
-		<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+		<div id="jquery_jplayer" class="jp-jplayer"></div>
 		
-		<div id="jp_container_1" class="jp-audio">
+		<div id="jp_container" class="jp-audio">
 			<div class="jp-type-playlist">
 				<div class="jp-gui jp-interface">
 					
