@@ -13,23 +13,30 @@
 	<script defer src="/javascripts/vendor/jquery.qrcode.js"></script>
 	<script defer src="/javascripts/masterPlayer.js"></script>
 	
-	<!-- jqSkin -->
+	<!-- Styles -->
+	<link href="stylesheets/animate.css" rel="stylesheet" type="text/css" />
 	<link href="stylesheets/masterPlayer.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<div id="mainContainer">
-
-		
+	<div id="main-container">
+		<!-- Drag'n drop layer -->
+		<div id="drag-drop-layer">
+			<div class="drag-drop-text">
+				<span>Drag and drop your musics</span>
+			</div>
+		</div>
 
 		<!-- Player -->
-		<div id="jquery_jplayer" class="jp-jplayer"></div>
+		<div id="jquery_jplayer" class="jp-jplayer">
+			
+		</div>
 		
 		<div id="jp_container" class="jp-audio">
 			<div class="jp-type-playlist">
 				<div class="jp-gui jp-interface">
 					
 					<!-- Controles -->
-					<div class="jp-controls">
+					<div class="jp-controls animated fadeInRight">
 						<span class="jp-control-item ico-previous jp-previous"><a href="javascript:;" tabindex="1">previous</a></span>
 						<span class="jp-control-item ico-play jp-play"><a href="javascript:;" class="" tabindex="1">play</a></span>
 						<span class="jp-control-item ico-pause jp-pause"><a href="javascript:;" tabindex="1">pause</a></span>
@@ -70,7 +77,7 @@
 				</div>
 
 				<!-- Playlist -->
-				<div id="playlist">
+				<div id="playlist" class="animated fadeInLeft">
 					<div class="playlist-container jp-playlist">
 						<ul>
 							<li></li>
@@ -87,9 +94,9 @@
 		</div>
 		
 		<!-- qrCode -->
-		<div id="showQRCode">
-			<div class="clickToShowQRCode"></div>
-			<div class="qrCode" id="qrcode"></div>
+		<div id="show-QR-code" class="animated fadeIn">
+			<div class="click-to-show-QR-code"></div>
+			<div class="qr-code" id="qrcode"></div>
 		</div>
 	</div>
 </body>

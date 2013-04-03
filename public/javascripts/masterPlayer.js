@@ -20,7 +20,7 @@ playerSocket.on('message', function(data){
 			console.log(data);
 			CONFIG.url = 'http://' + data.url + ':' + data.port;
 			CONFIG.hostname = data.hostname + ':' + data.port;
-        break;
+				break;
 	}
 });
 
@@ -69,52 +69,95 @@ playerSocket.on('musicControl', function(data){
 
 
 //Leitor de músicas fileReader
-$('body')
+var dropTarget = $('#drag-drop-layer'),
+	html = $('html'),
+	showDrag = false,
+	timeout = -1;
+
+$('html')
+	//Ao entrar o primeiro drop
+	.on('dragenter', function(event){
+		dropTarget.addClass('hover');
+		showDrag = true;
+	})
+
 	//Ao começar a arrastar
 	.on('dragover', function(event){
-		console.log('Drag começou.. estilizar a tela inteira');	
 		event.preventDefault();
+		showDrag = true;
 	})
 
 	//Ao terminar
-	.on('dragend', function(event){
-		//return false;
+	.on('dragleave', function(event){
+		showDrag = false;
+		clearTimeout(timeout);
+		timeout = setTimeout(function(){
+			if(!showDrag)
+				dropTarget.removeClass('hover');
+		}, 200);
 	})
 
 	//Ao dropar as músicas
 	.on('drop', function(event){
+		//Previne eventos padrões
 		event.preventDefault();
 		event.stopPropagation();
-		console.log(event);
+
+		//Esconde layer
+		$('#drag-drop-layer').removeClass('hover');
+
 		console.log('Dropou os seguintes arquivos:');
 
-		var files = event.originalEvent.dataTransfer.files;
-		var playList = [];
+		var files = event.originalEvent.dataTransfer.files || event.dataTransfer.files,
+			items = event.originalEvent.dataTransfer.items || event.dataTransfer.items,
+			playList = [],
+			timeOutForDone = -1;
+		
+		//Filesystem para pastas
+		function traverseFileTree(item, path) {
+			path = path || "";
+			if (item.isFile) {
+				// Get file
+				item.file(function(file) {
+					if(file.type === 'audio/mp3') {
+						playList.push({
+							title: file.name.replace(".mp3",""),
+							mp3: window.URL.createObjectURL(file)
+						});
+					}
 
-		for(i=0; f = files[i]; i++) {
-			if(f.type === 'audio/mp3') {
-				console.log('Nome: ' + f.name + ' - Tamanhos: ' + f.size + 'bytes', f);
-
-				playList.push({
-					title: f.name,
-					mp3: window.URL.createObjectURL(f)
+					clearTimeout(timeOutForDone);
+					timeOutForDone = setTimeout( function(){
+						//Play the playlist
+						if(playList.length) {
+							myPlaylist.setPlaylist(playList);
+							myPlaylist.play();
+						}
+					}, 200);
 				});
-
-				//Cria playlist ou adiciona ao existente (CTRL apertado)
-				console.log(playList);
-
+			} else if (item.isDirectory) {
+				// Get folder contents
+				var dirReader = item.createReader();
+				dirReader.readEntries(function(entries) {
+					for (var i=0; i<entries.length; i++) {
+						traverseFileTree(entries[i], path + item.name + "/");
+					}
+				});
 			}
 		}
 
-		//Toca player
-		myPlaylist.setPlaylist(playList);
+		for (var i=0; i<items.length; i++) {
+			var item = items[i].webkitGetAsEntry();
+			if (item) {
+				traverseFileTree(item);
+			}
+		}
 
-		myPlaylist.play();
 		return false;
 	});
 
 
-//Inicializa PLAYER
+//Player INIT
 var myPlaylist = new jPlayerPlaylist({
 	jPlayer: "#jquery_jplayer",
 	cssSelectorAncestor: "#jp_container"
@@ -189,27 +232,34 @@ var myPlaylist = new jPlayerPlaylist({
 	}
 ], {
 	swfPath: "javascripts/vendor",
-	supplied: "oga, mp3",
-	wmode: "window"
+	supplied: "oga, mp3, wav",
+	wmode: "window",
+	playlistOptions: {
+		enableRemoveControls: false,
+		displayTime: 0,
+		addTime: 0,
+		removeTime: 0,
+		shuffleTime: 0
+	}
 });
 
 //qrCode
-$('#showQRCode').toggle(function(evt){
+$('#show-QR-code').toggle(function(evt){
 	$(this).addClass('showed');
-	$('.clickToShowQRCode').hide();
+	$('.click-to-show-QR-code').hide();
 	$('#qrcode').fadeIn(100);
 	evt.stopPropagation();
 }, function(evt){
 	$(this).removeClass('showed');
 	$('#qrcode').fadeOut(100, function(){
-		$('.clickToShowQRCode').show();
+		$('.click-to-show-QR-code').show();
 	});
 	evt.stopPropagation();
 });
 
 
 $('body').on('click', function(){
-	if($('#showQRCode').is('.showed')) {
-		$('#showQRCode').trigger('click');
+	if($('#show-QR-code').is('.showed')) {
+		$('#show-QR-code').trigger('click');
 	}
 });
