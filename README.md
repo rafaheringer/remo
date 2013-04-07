@@ -4,17 +4,17 @@ Remo Music Player
 Links:
 ------
 
-0.	[MDN - Using files from web applications](https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications)
-1.	[github/migerh/fileapi](https://github.com/migerh/js-experiments/tree/master/fileapi/) - Exemplo de funcionamento da API web-audio com exemplo de drag-and-drop. Muito útil para estudos e implementação no player.
+*	[MDN - Using files from web applications](https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications)
+*	[github/migerh/fileapi](https://github.com/migerh/js-experiments/tree/master/fileapi/) - Exemplo de funcionamento da API web-audio com exemplo de drag-and-drop. Muito útil para estudos e implementação no player.
 
 Thanks to:
 ----------
 
-0. 	[github/jquery](https://github.com/jquery/jquery) - jQuery JavaScript Library.
-1.	[github/happyworm/jPlayer](https://github.com/happyworm/jPlayer) - jPlayer: HTML5 Audio & Video for jQuery.
-2.	[github/mddrylliog/jsmad](https://github.com/nddrylliog/jsmad) - jsmad is a pure javascript MP3 decoder, based on libmad, with an ID3 decoder written from scratch.
-3.	[github/jeromeetienne/jquery-qrcode](https://github.com/jeromeetienne/jquery-qrcode) - jquery plugin for a pure browser qrcode generation.
-4.	[github/SlexAxton/yepnope.js](https://github.com/SlexAxton/yepnope.js) - An Asynchronous Conditional Resource Loader.
+* 	[github/jquery](https://github.com/jquery/jquery) - jQuery JavaScript Library.
+*	[github/happyworm/jPlayer](https://github.com/happyworm/jPlayer) - jPlayer: HTML5 Audio & Video for jQuery.
+*	[github/mddrylliog/jsmad](https://github.com/nddrylliog/jsmad) - jsmad is a pure javascript MP3 decoder, based on libmad, with an ID3 decoder written from scratch.
+*	[github/jeromeetienne/jquery-qrcode](https://github.com/jeromeetienne/jquery-qrcode) - jquery plugin for a pure browser qrcode generation.
+*	[github/SlexAxton/yepnope.js](https://github.com/SlexAxton/yepnope.js) - An Asynchronous Conditional Resource Loader.
 
 License:
 --------
@@ -72,5 +72,16 @@ Para testes, o sistema sempre tem um deploy para o heroku. Você pode conferir o
 	```
 	heroku login
 	```
-
+1.	Faça o commit de todos os seus arquivos alterados no GIT e faça o push no heroku:
+	
+	```
+	git push heroku master
+	```
+	Caso falhe por conta de permissão, execute o seguinte comando, vá até a pasta .ssh (C:\User\YourName\.ssh) e faça uma cópia do github_rsa para id_rsa. Depois execute: `heroku keys:add`
+2.	Para iniciar a aplicação, basta executar o scale:
+	
+	```
+	heroku ps:scale web=1
+	```
+	Pronto! Você pode ver o status da aplicação com `heroku ps` e pode abri-la no navegador com `heroku open`
 (continuar...)

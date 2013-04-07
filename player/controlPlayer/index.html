@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<title>Remo.music - Remote Music Player</title>
+
+	<!-- Utils -->
+	<script defer src="/controlPlayer/javascripts/vendor/socket.io.js"></script>
+	<script defer src="/controlPlayer/javascripts/vendor/jquery.js"></script>
+	<script defer src="/controlPlayer/javascripts/config.js"></script>
+	<script defer src="/controlPlayer/javascripts/controlPlayer.js"></script>
+
+	<!-- Styles -->
+	<link rel="stylesheet" href="/controlPlayer/stylesheets/controlPlayer.css" media="all">
+</head>
+<body ontouchstart="">
+	<!-- Player -->
+	<div id="remotePlayer" data-played="false">
+		<!-- Ações padrões -->
+		<div class="default-actions">
+			<!-- Música anterior -->
+			<span class="touch-btn circle-btn circle-btn-medium" id="prevMusic">
+				<span class="ico-prev"></span>
+			</span>
+
+			<!-- Play/Pause -->
+			<span class="touch-btn circle-btn circle-btn-big" id="playPauseMusic">
+				<span class="changeIcoToPlayOrPause ico-play"></span>
+			</span>
+
+			<!-- Próxima música -->
+			<span class="touch-btn circle-btn circle-btn-medium" id="nextMusic">
+				<span class="ico-next"></span>
+			</span>
+		</div>
+	</div>
+</body>
+</html>

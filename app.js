@@ -13,13 +13,27 @@ var app = require('express')()
   , server = require('http').createServer(app)
   , io = require('socket.io').listen(server);
 
+var allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+  // intercept OPTIONS method
+  if ('OPTIONS' == req.method) {
+    res.send(200);
+  }
+  else {
+    next();
+  }
+};
+
 app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
-  // app.set('views', __dirname + '/views');
-  // app.engine('html', require('ejs').renderFile);            //Usa EJS com extensão .html
-  // app.use(express.static(path.join(__dirname, 'masterPlayer')));
-  app.use(express.static(path.join(__dirname, 'masterPlayer')));
+  app.use(allowCrossDomain);
+  app.set('port', process.env.PORT || 80);
+  app.set('views', __dirname + '/');
   app.set('view engine', 'html');
+  app.engine('html', require('ejs').renderFile);            //Usa EJS com extensão .html
+  app.use(express.static(path.join(__dirname, '/player')));
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
@@ -40,12 +54,12 @@ io.configure(function () {
 
 //Rotas
 app.get('/',  function(req, res){
-  res.render('masterPlayer/index.html', { title: 'Master player' });
+  res.render('player/masterPlayer/index.html');
   app.set('hostname', ( req.headers.host.match(/:/g) ) ? req.headers.host.slice( 0, req.headers.host.indexOf(":") ) : req.headers.host);
 });
 
 app.get('/remote/:ID', function(req, res){
-  res.render('remotePlayer', { title: 'Remote player' });
+  res.render('player/controlPlayer/index.html');
 });
 
 server.listen(app.get('port'), function(){
@@ -99,6 +113,6 @@ io
         }
 
         //Envia ação
-        PLAYER[data.to].socket.emit('musicControl', data);
+        //PLAYER[data.to].socket.emit('musicControl', data);
       });
     });
