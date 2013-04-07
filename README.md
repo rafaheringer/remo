@@ -1,17 +1,17 @@
-Material de estudo
-------------------
+Links:
+------
 
 0.	[MDN - Using files from web applications](https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications)
 1.	[github/migerh/fileapi](https://github.com/migerh/js-experiments/tree/master/fileapi/) - Exemplo de funcionamento da API web-audio com exemplo de drag-and-drop. Muito útil para estudos e implementação no player.
 
-Agradecimentos
---------------
+Thanks to:
+----------
 
-0. 	[github/jquery](https://github.com/jquery/jquery) - O que seria do desenvolvedor web sem ele?
-1.	[github/happyworm/jPlayer](https://github.com/happyworm/jPlayer) - Player de áudio cross-browser completo. Utilizado como base do player.
-2.	[github/mddrylliog/jsmad](https://github.com/nddrylliog/jsmad) - Grandioso projeto de implementação do decode de MP3 em javascript. Base de estudos do funcionamento de MP3 e do file-reader API.
-3.	[github/jeromeetienne/jquery-qrcode](https://github.com/jeromeetienne/jquery-qrcode) - Biblioteca simples e prática para criação de qrCodes em javascript
-4.	[github/jrburke/requirejs](https://github.com/jrburke/requirejs) - Ótimo gerenciador de scripts assíncronos e dependências.
+0. 	[github/jquery](https://github.com/jquery/jquery) - jQuery JavaScript Library.
+1.	[github/happyworm/jPlayer](https://github.com/happyworm/jPlayer) - jPlayer: HTML5 Audio & Video for jQuery.
+2.	[github/mddrylliog/jsmad](https://github.com/nddrylliog/jsmad) - jsmad is a pure javascript MP3 decoder, based on libmad, with an ID3 decoder written from scratch.
+3.	[github/jeromeetienne/jquery-qrcode](https://github.com/jeromeetienne/jquery-qrcode) - jquery plugin for a pure browser qrcode generation.
+4.	[github/SlexAxton/yepnope.js](https://github.com/SlexAxton/yepnope.js) - An Asynchronous Conditional Resource Loader.
 
 HEROKU
 ------

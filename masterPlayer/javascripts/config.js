@@ -44,9 +44,36 @@ yepnope({
 
 //Have FileReader?
 yepnope({
-	test: true,
+	test: window.File && window.FileReader && window.FileList && window.Blob,
 	yep: ['javascripts/masterPlayer.js'],
 	callback: function(){
 		masterPlayer.fileReaderInit();
 	}
 });
+
+//Is an app?
+yepnope({
+	test: chrome.app.runtime,
+	yep: {
+		'chromeApp': 'javascripts/chromeApp.js'
+	},
+	nope: {
+		'webApp': 'javascripts/masterPlayer.js'
+	},
+	callback: {
+		'chromeApp': function(){
+			masterPlayer.chromeAppInit();
+		},
+		'webApp': function(){
+			//Have fullscreen API?
+			yepnope({
+				test: document.documentElement.webkitRequestFullScreen || document.documentElement.mozRequestFullScreen || document.documentElement.requestFullScreen,
+				yep: ['javascripts/masterPlayer.js'],
+				callback: function(){
+					masterPlayer.chromeWebInit();
+				}
+			});
+		}
+	}
+});
+

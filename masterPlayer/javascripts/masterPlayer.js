@@ -273,3 +273,40 @@ masterPlayer.qrCodeInit = function() {
 		}
 	});
 };
+
+//Chrome actions init
+masterPlayer.chromeWebInit = function() {
+	$('#chrome-actions').show();
+
+	//Close
+	$('.chrome-close').hide();
+	/*.on('click', function(){
+		setTimeout(function(){var ww = window.open(window.location, '_self'); ww.close(); }, 100);
+	});*/
+
+	//Maximize
+	$('.chrome-maximize').on('click', function(){
+
+		var
+			el = document.documentElement,
+			isFullScreen = 
+				document.fullscreen
+				|| document.mozFullScreen
+				|| document.webkitIsFullScreen
+			cancel = 
+				document.exitFullscreen
+				|| document.mozCancelFullScreen
+				|| document.webkitCancelFullScreen
+
+			request =
+				el.requestFullScreen
+				|| el.mozRequestFullScreen
+				|| el.webkitRequestFullScreen;
+
+		
+		isFullScreen ? cancel.call(document) : request.call(el);
+	});
+
+	//Minimize
+	$('.chrome-minimize').hide();
+}
