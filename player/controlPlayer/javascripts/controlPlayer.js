@@ -2,6 +2,8 @@
 //http://www.jplayer.org/latest/developer-guide/
 ////////////////////////////////////////////
 
+//Abre socket para o webplayer
+var playerSocket = io.connect(CONFIG.nodeUrl + '/player');
 
 var REMOTEPLAYER = {
 	playerID: window.location.href.split('/remote/')[1],
@@ -48,11 +50,9 @@ var REMOTEPLAYER = {
 	}
 };
 
-//Abre socket para o webplayer
-var playerSocket = io.connect(CONFIG.nodeUrl + '/player');
-
 //Ações
 ///////
+$('#remotePlayer').data('played', 'false');
 
 //Música anterior
 $('#prevMusic').on('click', function(){

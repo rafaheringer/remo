@@ -239,6 +239,10 @@ masterPlayer.socketInit = function(){
 			case 'prev':
 				$('.jp-previous').trigger('click');
 			break;
+
+			case 'ready':
+				
+			break;
 		}
 	});
 };

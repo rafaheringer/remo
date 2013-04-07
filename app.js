@@ -113,6 +113,6 @@ io
         }
 
         //Envia ação
-        //PLAYER[data.to].socket.emit('musicControl', data);
+        PLAYER[data.to].socket.emit('musicControl', data);
       });
     });
