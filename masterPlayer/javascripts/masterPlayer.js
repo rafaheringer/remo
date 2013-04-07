@@ -140,8 +140,6 @@ masterPlayer.fileReaderInit = function() {
 			//Esconde layer
 			$('#drag-drop-layer').removeClass('hover');
 
-			console.log('Dropou os seguintes arquivos:');
-
 			var files = event.originalEvent.dataTransfer.files || event.dataTransfer.files,
 				items = event.originalEvent.dataTransfer.items || event.dataTransfer.items,
 				playList = [],
