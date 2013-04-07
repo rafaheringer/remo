@@ -15,16 +15,17 @@ var app = require('express')()
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
-  app.set('views', __dirname + '/views');
+  // app.set('views', __dirname + '/views');
+  // app.engine('html', require('ejs').renderFile);            //Usa EJS com extensão .html
+  // app.use(express.static(path.join(__dirname, 'masterPlayer')));
+  app.use(express.static(path.join(__dirname, 'masterPlayer')));
   app.set('view engine', 'html');
-  app.engine('html', require('ejs').renderFile);            //Usa EJS com extensão .html
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
-  app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
@@ -39,7 +40,7 @@ io.configure(function () {
 
 //Rotas
 app.get('/',  function(req, res){
-  res.render('index', { title: 'Master player' });
+  res.render('masterPlayer/index.html', { title: 'Master player' });
   app.set('hostname', ( req.headers.host.match(/:/g) ) ? req.headers.host.slice( 0, req.headers.host.indexOf(":") ) : req.headers.host);
 });
 

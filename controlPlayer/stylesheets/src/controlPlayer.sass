@@ -1,0 +1,122 @@
+/*!
+ *Site: Remo.music
+ *Package: Remote Player Package
+ *Author: Rafael Heringer Carvalho
+ *Version: 1.0
+ *Using: .SASS + Compass 
+ */
+
+
+//Utilidades
+//==========
+
+//Variáveis
+
+//Funções e mixins
+@import compass
+
+//Mixin para um elemento "clear"
+@mixin clearfix
+	display: inline-block
+	&:after
+		content: "."
+		display: block
+		height: 0
+		clear: both
+		visibility: hidden
+	* html &
+		height: 1px
+
+//Elementos
+//=========
+
+//Reset
+*
+	margin: 0
+	padding: 0
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+//Corpo
+html,
+body
+	height: 100%
+
+body
+	background: image-url("remotePlayer/bg.jpg") repeat #f8f8f8
+	font-family: Arial
+	-webkit-touch-callout: none
+	-webkit-user-select: none
+	-khtml-user-select: none
+	-moz-user-select: none
+	-ms-user-select: none
+	user-select: none
+
+//Sprites
+@import "remotePlayer/ico/*.png"
+$ico-sprite-dimensions: true
++all-ico-sprites
+
+.ico-sprite
+	display: inline-block
+	vertical-align: middle
+
+//Botões circulares
+.circle-btn
+	+border-radius(32px)
+	+box-shadow(0 1px 1px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .1))
+	+background(linear-gradient(top, #f6f6f6, #eaeaea), #eaeaea)
+	margin-right: 30px
+	width: 64px
+	height: 64px
+	display: inline-block
+	position: relative
+	line-height: 64px
+	cursor: pointer
+	vertical-align: middle
+
+	&.circle-btn-medium
+		+border-radius(32px)
+		width: 64px
+		height: 64px
+		line-height: 64px
+
+
+	&.circle-btn-big
+		+border-radius(50px)
+		width: 100px
+		height: 100px
+		line-height: 100px
+	
+	&:active,
+	&.active
+		+background(linear-gradient(top, #eaeaea, #f6f6f6), #eaeaea)
+		top: 1px
+
+	&:before
+		+opacity(0.5)
+		+border-radius(140px)
+		content: ''
+		position: absolute
+		z-index: -1
+		top: -8px
+		right: -8px
+		bottom: -8px
+		left: -8px
+		background-color: #eaeaea
+
+//Player
+#remotePlayer
+
+	//Ações principais
+	.default-actions
+		text-align: center
+		height: 100px
+		position: absolute
+		top: 50%
+		left: 50%
+		margin: -50px 0 0 -164px
+
+		.circle-btn
+			display: inline-block
+
+

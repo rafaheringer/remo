@@ -1,0 +1,305 @@
+/*!
+ *Site: Remo.music
+ *Package: Remote Player Package
+ *Author: Rafael Heringer Carvalho
+ *Version: 1.0
+ *Using: .SASS + Compass + Animation + Animate (http://daneden.me/animate/) 
+ */
+
+
+//Utilidades
+//==========
+
+//Variáveis
+$gradient-from: 	rgba(103,255,111,0.4) 		//Cor inicial do gradiente básico
+$gradient-to: 		rgba(61,203,255,0.4)		//Cor final do gradiente básico
+$text-color: 		#acacac 					//Cinza: Textos padrões do sistema
+
+//Funções e mixins
+@import compass
+@import plugins/animation
+
+//Mixin para um elemento "clear"
+@mixin clearfix
+	display: inline-block
+	&:after
+		content: "."
+		display: block
+		height: 0
+		clear: both
+		visibility: hidden
+	* html &
+		height: 1px
+
+//Chrome Scrollbar
+::-webkit-scrollbar 
+	width: 5px
+	height: 100%
+	background: transparent
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment
+	height: 30px
+	display: none
+	background-color: transparent
+
+::-webkit-scrollbar-thumb:vertical 
+	+border-radius(5px)
+	+transition (all 200ms ease-in-out)
+	height: 50px
+	background-color: rgba(82,82,82,0.6)
+	
+	&:hover
+		background-color: rgba(82,82,82,1.0)
+
+//Sprites
+@import "ico/*.png"
+$ico-sprite-dimensions: true
++all-ico-sprites
+
+//Efeitos visuais
+//===============
+
+//Degrade de fundo
++keyframes(bgFades)
+	0%, 100%
+		+background-image(linear-gradient(45deg, $gradient-from, transparent))
+		background-color: $gradient-to
+
+	25%
+		+background-image(linear-gradient(45deg, adjust-hue($gradient-from, 128deg), transparent))
+		background-color: adjust-hue($gradient-to, 128deg)
+
+	50%
+		+background-image(linear-gradient(45deg, adjust-hue($gradient-from, -135deg), transparent))
+		background-color: adjust-hue($gradient-to, -135deg)
+
+//Slide left
+
+
+//Elementos
+//=========
+
+//Reset
+*
+	margin: 0
+	padding: 0
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+	&:focus
+		outline: none
+
+//Texto
+a
+	text-decoration: none
+	color: $text-color
+
+//Corpo
+html,
+body
+	height: 100%
+	font-family: Arial, "Open Sans", Helvetica
+	font-size: 12px
+	overflow: hidden
+
+body
+	background: image-url("bg.jpg") repeat #000000
+	font-family: Arial
+	-webkit-touch-callout: none
+	-webkit-user-select: none
+	-khtml-user-select: none
+	-moz-user-select: none
+	-ms-user-select: none
+	user-select: none
+
+	&:before
+		+rotate(-35deg)
+		+background-image(linear-gradient(0deg, rgba(0,0,0,0.6), transparent))
+		position: absolute
+		content: " "
+		display: block
+		height: 300px
+		width: 800px
+		bottom: -140px
+		right: -160px
+
+#main-container
+	+animation(bgFades 100s infinite)
+	width: 100%
+	height: 100%
+
+	&:before
+		+background-image(linear-gradient(0deg, rgba(0,0,0,0.6), transparent))
+		position: absolute
+		content: " "
+		display: block
+		height: 70px
+		bottom: 0
+		left: 0
+		right: 0
+
+//Playlist
+#playlist
+	background: rgba(0,0,0,0.85)
+	padding: 10px 10px 10px 0
+	width: 23%
+	height: 65%
+	min-width: 270px
+	//min-height: 325px
+	left: 10%
+	top: 0
+	position: absolute
+	
+	//Playlist
+	.playlist-container
+		height: 100%
+		padding-right: 10px
+		overflow: auto
+
+	.jp-free-media
+		display: none
+
+	.jp-playlist-item
+		+text-shadow(0px 0px 5px rgba(172,172,172,0.5))
+		+ellipsis
+		display: block
+		margin: 7px 0
+		padding: 6px 20px
+		font-size: 16px
+
+		&:hover
+			background: rgba(255,255,255,0.1)
+
+	.jp-playlist-current 
+		.jp-playlist-item
+			color: black
+			background: white
+
+//Controles
+.jp-controls
+	position: absolute
+	display: block
+	bottom: 45px
+	right: 60px
+	text-align: center
+
+	.jp-control-item 
+		+hide-text
+		display: inline-block
+		vertical-align: middle
+		list-style-type: none
+		position: relative
+
+		&:active,
+		&.active
+			+opacity(0.6)
+
+		a
+			display: block
+			width: 100%
+			height: 100%
+
+	.jp-previous,
+	.jp-play,
+	.jp-pause,
+	.jp-next
+		vertical-align: middle
+
+	.jp-stop,
+	.jp-volume-max
+		display: none!important
+
+//Barra de volume
+.jp-volume
+	margin: 10px 0 0 0
+
+	.jp-volume-bar
+		display: inline-block
+		+box-shadow(0,0,5px, rgba(0,0,0,0.3))
+		background: rgba(255,255,255, 0.45)
+		width: 115px
+		position: relative
+		height: 6px
+
+		.jp-volume-bar-value
+			height: 100%
+			background: white
+
+	.jp-mute,
+	.jp-unmute
+		@extend .jp-control-item
+
+
+
+//Barra de progresso
+.jp-progress
+	display: none
+
+//Outros
+.jp-no-solution
+	display: none
+
+.jp-toggles
+	display: none
+
+.jp-time-holder
+	display: none
+
+.jp-jplayer,
+.jp-interface
+	display: none
+
+//qrCode
+#show-QR-code
+	position: absolute
+	left: 12%
+	top: 75%
+	height: 100%
+
+	.qr-code
+		display: none
+
+		canvas
+			width: auto
+			height: 20%
+
+	.click-to-show-QR-code
+		background: image-url("click-qrcode.png") no-repeat left top
+		width: 152px
+		height: 51px
+		cursor: pointer
+
+//Drag and drop layer
+#drag-drop-layer
+	+opacity(0.1)
+	+transition (all 200ms ease-in-out)
+	background: rgba(255,255,255,0.8)
+	position: absolute
+	z-index: 5
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
+	padding: 5%
+	display: none
+
+	&.hover
+		+opacity(1)
+		display: block
+
+	.drag-drop-text
+		+box-sizing(border-box)
+		border: 7px dotted darken(white, 25%)
+		width: 100%
+		height: 100%
+		position: relative
+
+		span
+			color: darken(white, 60%)
+			font-size: 3em
+			display: block
+			position: absolute
+			top: 45%
+			left: 0
+			right: 0
+			text-align: center
