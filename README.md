@@ -1,3 +1,6 @@
+Remo Music Player
+=================
+
 Links:
 ------
 
@@ -12,6 +15,22 @@ Thanks to:
 2.	[github/mddrylliog/jsmad](https://github.com/nddrylliog/jsmad) - jsmad is a pure javascript MP3 decoder, based on libmad, with an ID3 decoder written from scratch.
 3.	[github/jeromeetienne/jquery-qrcode](https://github.com/jeromeetienne/jquery-qrcode) - jquery plugin for a pure browser qrcode generation.
 4.	[github/SlexAxton/yepnope.js](https://github.com/SlexAxton/yepnope.js) - An Asynchronous Conditional Resource Loader.
+
+License:
+--------
+**CC BY-NC-ND**
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License.
+
+You are free: to Share — to copy, distribute and transmit the work
+
+Under the following conditions:
+
+*	Attribution — You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
+*	Noncommercial — You may not use this work for commercial purposes.
+*	No Derivative Works — You may not alter, transform, or build upon this work.
+
+[Read more](http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode)
 
 HEROKU
 ------

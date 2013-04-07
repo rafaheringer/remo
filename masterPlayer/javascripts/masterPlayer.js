@@ -164,8 +164,8 @@ masterPlayer.fileReaderInit = function() {
 						timeOutForDone = setTimeout( function(){
 							//Play the playlist
 							if(playList.length) {
-								myPlaylist.setPlaylist(playList);
-								myPlaylist.play();
+								masterPlayer.config.playerInstance.setPlaylist(playList);
+								masterPlayer.config.playerInstance.play();
 							}
 						}, 200);
 					});
