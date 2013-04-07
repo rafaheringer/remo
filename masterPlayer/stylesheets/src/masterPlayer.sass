@@ -7,19 +7,17 @@
  */
 
 
-//Utilidades
-//==========
+//Utils
+//=====
 
-//Variáveis
-$gradient-from: 	rgba(103,255,111,0.4) 		//Cor inicial do gradiente básico
-$gradient-to: 		rgba(61,203,255,0.4)		//Cor final do gradiente básico
-$text-color: 		#acacac 					//Cinza: Textos padrões do sistema
+//config
+$gradient-from: 	rgba(103,255,111,0.4) 		//First gradient bg color
+$gradient-to: 		rgba(61,203,255,0.4)		//Last gradient bf color
+$text-color: 		#acacac 					//Gray: all texts
 
-//Funções e mixins
+//Functions and mixins
 @import compass
 @import plugins/animation
-
-//Mixin para um elemento "clear"
 @mixin clearfix
 	display: inline-block
 	&:after
@@ -57,10 +55,10 @@ $text-color: 		#acacac 					//Cinza: Textos padrões do sistema
 $ico-sprite-dimensions: true
 +all-ico-sprites
 
-//Efeitos visuais
-//===============
+//Visual effects
+//==============
 
-//Degrade de fundo
+//Background gradient
 +keyframes(bgFades)
 	0%, 100%
 		+background-image(linear-gradient(45deg, $gradient-from, transparent))
@@ -74,11 +72,8 @@ $ico-sprite-dimensions: true
 		+background-image(linear-gradient(45deg, adjust-hue($gradient-from, -135deg), transparent))
 		background-color: adjust-hue($gradient-to, -135deg)
 
-//Slide left
-
-
-//Elementos
-//=========
+//Elements
+//========
 
 //Reset
 *
@@ -89,12 +84,12 @@ $ico-sprite-dimensions: true
 	&:focus
 		outline: none
 
-//Texto
+//Texts
 a
 	text-decoration: none
 	color: $text-color
 
-//Corpo
+//Main
 html,
 body
 	height: 100%
@@ -123,6 +118,7 @@ body
 		bottom: -140px
 		right: -160px
 
+//Container
 #main-container
 	+animation(bgFades 100s infinite)
 	width: 100%
@@ -137,6 +133,19 @@ body
 		bottom: 0
 		left: 0
 		right: 0
+
+//Chrome actions
+#chrome-actions
+	position: absolute
+	right: 10px
+	top: 10px
+
+	.chrome-act
+		display: inline-block
+		vertical-align: middle
+
+		&:active
+			+opacity(0.7)
 
 //Playlist
 #playlist
@@ -175,7 +184,7 @@ body
 			color: black
 			background: white
 
-//Controles
+//Player Controls
 .jp-controls
 	position: absolute
 	display: block
@@ -229,13 +238,11 @@ body
 	.jp-unmute
 		@extend .jp-control-item
 
-
-
-//Barra de progresso
+//Music progress bar
 .jp-progress
 	display: none
 
-//Outros
+//Others
 .jp-no-solution
 	display: none
 
@@ -255,6 +262,7 @@ body
 	left: 12%
 	top: 75%
 	height: 100%
+	display: none
 
 	.qr-code
 		display: none

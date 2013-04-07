@@ -1,4 +1,4 @@
-//Configurações de servidor
+//Global config
 var CONFIG = {
 	hostname: ''
 };

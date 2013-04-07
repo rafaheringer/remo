@@ -3,15 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Remo.music - Remote Music Player</title>
-	<!-- Utils -->
-	<script defer src="javascripts/vendor/socket.io.js"></script>
+	<!-- Utils  -->
+	<script defer src="javascripts/vendor/yepnope.1.5.4-min.js"></script>
+	<script defer src="javascripts/config.js"></script>
+
+	<!--<script defer src="javascripts/vendor/socket.io.js"></script>
 	<script defer src="javascripts/config.js"></script>
 	<script defer src="javascripts/vendor/jquery.js"></script>
 	<script defer src="javascripts/vendor/jquery.jplayer.min.js"></script>
 	<script defer src="javascripts/vendor/jplayer.playlist.min.js"></script>
 	<script defer src="javascripts/vendor/qrcode.js"></script>
 	<script defer src="javascripts/vendor/jquery.qrcode.js"></script>
-	<script defer src="javascripts/masterPlayer.js"></script>
+	<script defer src="javascripts/masterPlayer.js"></script>-->
 	
 	<!-- Styles -->
 	<link href="stylesheets/animate.css" rel="stylesheet" type="text/css" />
@@ -24,6 +27,13 @@
 			<div class="drag-drop-text">
 				<span>Drag and drop your musics</span>
 			</div>
+		</div>
+
+		<!-- Chrome actions -->
+		<div id="chrome-actions">
+			<span class="chrome-act chrome-minimize ico-minus"></span>
+			<span class="chrome-act chrome-maximize ico-maximize"></span>
+			<span class="chrome-act chrome-close ico-close"></span>
 		</div>
 
 		<!-- Player -->
