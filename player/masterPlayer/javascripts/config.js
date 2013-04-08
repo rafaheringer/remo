@@ -24,11 +24,25 @@ yepnope({
 	callback: function(){
 		masterPlayer.playerInit();
 
-		//Have fullscreen API?
-		if(document.documentElement.webkitRequestFullScreen || document.documentElement.mozRequestFullScreen || document.documentElement.requestFullScreen) {
-			masterPlayer.chromeWebInit();
+		//Is an app?
+		if(chrome.app.runtime) {
+			yepnope({
+				load: '/masterPlayer/javascripts/chromeApp.js',
+				callback: function() {
+					masterPlayer.chromeAppInit();
+				}
+			});
 		}
 
+		//Is web?
+		else {
+			//Have fullscreen API?
+			if(document.documentElement.webkitRequestFullScreen || document.documentElement.mozRequestFullScreen || document.documentElement.requestFullScreen) {
+				masterPlayer.chromeWebInit();
+			}
+
+		}
+		
 		//Have FileReader?
 		if(window.File && window.FileReader && window.FileList && window.Blob) {
 			masterPlayer.fileReaderInit();
@@ -50,19 +64,6 @@ yepnope({
 		},
 		'jqueryqrcode': function(){
 			masterPlayer.qrCodeInit();
-		}
-	}
-});
-
-//Is an app?
-yepnope({
-	test: chrome.app.runtime,
-	yep: {
-		'chromeApp': '/masterPlayer/javascripts/chromeApp.js'
-	},
-	callback: {
-		'chromeApp': function(){
-			masterPlayer.chromeAppInit();
 		}
 	}
 });

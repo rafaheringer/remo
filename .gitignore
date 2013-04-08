@@ -25,3 +25,8 @@ Thumbs.db
 
 ## Sublime
 *.sublime-workspace
+
+## Others
+*.crx
+*.zip
+*.pem
