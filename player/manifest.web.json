@@ -1,7 +1,7 @@
 {
 	"name": "Remo Music Player",
 	"description": "The first local player in WEB",
-	"version": "0.2.0.2",
+	"version": "0.2.0.3",
 	"manifest_version": 2,
 	"offline_enabled": true,
 	"permissions": [
@@ -20,10 +20,10 @@
 		}
 	},
 	"icons": {
-		"16": "masterPlayer/images/app/remoIco-16.png",
-		"32": "masterPlayer/images/app/remoIco-32.png",
-		"64": "masterPlayer/images/app/remoIco-64.png",
-		"128": "masterPlayer/images/app/remoIco-128.png",
-		"256": "masterPlayer/images/app/remoIco-256.png"
+		"16": "masterPlayer/images/app/16x16.png",
+		"32": "masterPlayer/images/app/32x32.png",
+		"64": "masterPlayer/images/app/64x64.png",
+		"128": "masterPlayer/images/app/128x128.png",
+		"256": "masterPlayer/images/app/256x256.png"
 	}
 }

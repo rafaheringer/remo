@@ -34,7 +34,6 @@ app.configure(function(){
   app.set('view engine', 'html');
   app.engine('html', require('ejs').renderFile);            //Usa EJS com extensão .html
   app.use(express.static(path.join(__dirname, '/player')));
-  app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());

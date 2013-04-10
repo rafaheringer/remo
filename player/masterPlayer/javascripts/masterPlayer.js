@@ -98,9 +98,8 @@ masterPlayer.playerInit = function(){
 			removeTime: 0,
 			shuffleTime: 0,
 			onPlay: function(){
-				console.log(this);
 				//Scroll to music
-				$('.jp-playlist').animate({
+				$('.jp-playlist').stop().animate({
 						scrollTop: (38) * (this.current - 2)
 				});
 			}
