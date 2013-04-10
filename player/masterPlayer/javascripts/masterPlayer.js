@@ -290,6 +290,9 @@ masterPlayer.chromeWebInit = function() {
 			e.preventDefault();
 	});
 
+	//Prevent right-mouse-button click
+	document.oncontextmenu=new Function ("return false");
+
 	//Chrome actions
 	//==============
 	$('#chrome-actions').show();
