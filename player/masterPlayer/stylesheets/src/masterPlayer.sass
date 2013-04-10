@@ -30,25 +30,26 @@ $text-color: 		#acacac 					//Gray: all texts
 		height: 1px
 
 //Chrome Scrollbar
-::-webkit-scrollbar 
-	width: 5px
-	height: 100%
-	background: transparent
+.playlist-container
+	&::-webkit-scrollbar 
+		width: 5px
+		height: 100%
+		background: transparent
 
-::-webkit-scrollbar-button:start:decrement,
-::-webkit-scrollbar-button:end:increment
-	height: 30px
-	display: none
-	background-color: transparent
+	&::-webkit-scrollbar-button:start:decrement,
+	&::-webkit-scrollbar-button:end:increment
+		height: 30px
+		display: none
+		background-color: transparent
 
-::-webkit-scrollbar-thumb:vertical 
-	+border-radius(5px)
-	+transition (all 200ms ease-in-out)
-	height: 50px
-	background-color: rgba(82,82,82,0.6)
-	
-	&:hover
-		background-color: rgba(82,82,82,1.0)
+	&::-webkit-scrollbar-thumb:vertical 
+		+border-radius(5px)
+		+transition (all 200ms ease-in-out)
+		height: 50px
+		background-color: rgba(82,82,82,0.6)
+		
+		&:hover
+			background-color: rgba(82,82,82,1.0)
 
 //Sprites
 @import "ico/*.png"
@@ -109,6 +110,22 @@ body
 	width: 100%
 	height: 100%
 
+//Container
+#main-container
+	+animation(bgFades 100s infinite)
+	width: 100%
+	height: 100%
+
+	&:after
+		+background-image(linear-gradient(0deg, rgba(0,0,0,0.6), transparent))
+		position: absolute
+		content: " "
+		display: block
+		height: 70px
+		bottom: 0
+		left: 0
+		right: 0
+
 	&:before
 		+rotate(-35deg)
 		+background-image(linear-gradient(0deg, rgba(0,0,0,0.6), transparent))
@@ -119,22 +136,6 @@ body
 		width: 800px
 		bottom: -140px
 		right: -160px
-
-//Container
-#main-container
-	+animation(bgFades 100s infinite)
-	width: 100%
-	height: 100%
-
-	&:before
-		+background-image(linear-gradient(0deg, rgba(0,0,0,0.6), transparent))
-		position: absolute
-		content: " "
-		display: block
-		height: 70px
-		bottom: 0
-		left: 0
-		right: 0
 
 //Chrome actions
 #chrome-actions

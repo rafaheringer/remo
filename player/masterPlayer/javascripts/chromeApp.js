@@ -6,7 +6,7 @@ masterPlayer.chromeAppInit = function() {
 		currentMousePos: {x: -1, y: -1},
 		currentBounds: chrome.app.window.current().getBounds()
 	};
-
+	
 	//Chrome actions
 	//==============
 	$('#chrome-actions').show();

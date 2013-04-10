@@ -24,7 +24,7 @@ yepnope({
 	callback: function(){
 		masterPlayer.playerInit();
 
-		//Is an app?
+		//Is an app for Google?
 		if(chrome.app.runtime) {
 			yepnope({
 				load: '/masterPlayer/javascripts/chromeApp.js',

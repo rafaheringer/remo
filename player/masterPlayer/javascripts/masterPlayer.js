@@ -274,13 +274,21 @@ masterPlayer.qrCodeInit = function() {
 
 //Chrome actions init
 masterPlayer.chromeWebInit = function() {
+	//Default binds
+	//=============
+
+	//Prevent Google Chrome scroll (its a bug?)
+	$('body').on('mousewheel', function(e){
+		if(!$(e.target).hasClass('jp-playlist') && !$(e.target).hasClass('jp-playlist-item') && e.target.nodeName != 'UL' )
+			e.preventDefault();
+	});
+
+	//Chrome actions
+	//==============
 	$('#chrome-actions').show();
 
 	//Close
 	$('.chrome-close').hide();
-	/*.on('click', function(){
-		setTimeout(function(){var ww = window.open(window.location, '_self'); ww.close(); }, 100);
-	});*/
 
 	//Maximize
 	$('.chrome-maximize').on('click', function(){
