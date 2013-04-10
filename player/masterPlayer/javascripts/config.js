@@ -15,7 +15,7 @@ var masterPlayer = {};
 yepnope([
 	'/masterPlayer/javascripts/vendor/jquery.js',
 	'/masterPlayer/javascripts/vendor/jquery.jplayer.min.js',
-	'/masterPlayer/javascripts/vendor/jplayer.playlist.min.js'
+	'/masterPlayer/javascripts/vendor/jplayer.playlist.js'
 ]);
 
 //Core

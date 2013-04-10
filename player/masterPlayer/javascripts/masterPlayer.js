@@ -92,10 +92,18 @@ masterPlayer.playerInit = function(){
 		wmode: "window",
 		playlistOptions: {
 			enableRemoveControls: false,
+			loopOnPrevious: true,
 			displayTime: 0,
 			addTime: 0,
 			removeTime: 0,
-			shuffleTime: 0
+			shuffleTime: 0,
+			onPlay: function(){
+				console.log(this);
+				//Scroll to music
+				$('.jp-playlist').animate({
+						scrollTop: (38) * (this.current - 2)
+				});
+			}
 		}
 	});
 };
