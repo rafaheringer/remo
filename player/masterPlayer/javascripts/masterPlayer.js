@@ -122,6 +122,11 @@ masterPlayer.menuControl = function(){
 	$('#open-files').on('change', function(event){
 		masterPlayer.fileTreeReader(event.target.files);
 	});
+
+	//Open credits
+	$('.menu-info').on('click', function(){
+		window.location.hash = 'credits';
+	});
 };
 
 //FileTree reader

@@ -33,16 +33,16 @@
 		<!-- Hidden controls -->
 		<div id="hidden-controls">
 			<!-- Open files -->
-			<input type="file" id="open-files" multiple webkitdirectory="Musics" directory="Musics" />
+			<input type="file" id="open-files" accept="audio/mp3" multiple mozdirectory webkitdirectory directory />
 		</div>
 
 		<!-- Menu -->
-		<div id="menu" class="animated hinge fadeInRight">
-			<div class="menu-item menu-open-files">
+		<div id="menu" class="">
+			<div class="menu-item menu-open-files animated fadeInRight">
 				<span class="ico-folder"></span>
 				<span class="menu-item-title">Open folder</span>
 			</div>
-			<div class="menu-item menu-info">
+			<div class="menu-item menu-info animated hinge fadeInRight">
 				<span class="ico-info"></span>
 				<span class="menu-item-title">More info</span>
 			</div>
@@ -126,6 +126,30 @@
 		<div id="show-QR-code" class="animated fadeIn">
 			<div class="click-to-show-QR-code"></div>
 			<div class="qr-code" id="qrcode"></div>
+		</div>
+
+		<!-- Credits -->
+		<div class="modal" id="credits">
+			<div class="modal-container">
+				<div class="modal-actions">
+					<a href="#" class="ico-contrast-close modal-close" title="Close info modal"></a>
+				</div>
+				<div class="column">
+					<h2>About</h2>
+					<p>Remo.music is a copyleft project by <strong>Rafael Heringer</strong> - <a href="http://www.rafaheringer.com.br" target="_blank">www.rafaheringer.com.br</a></p> 
+					<p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode" target="_blank">Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License.</a></p>
+					<p>See the code at: <a href="http://github.com/rafaheringer/remo" target="_blank">http://github.com/rafaheringer/remo</a></p>
+				</div>
+				<div class="column">
+					<h2>Credits</h2>
+					<p>My thanks for the projects that remo.music uses:</p>
+					<p><a href="https://github.com/jquery/jquery" target="_blank">github/jquery</a> - jQuery JavaScript Library.</p>
+					<p><a href="https://github.com/happyworm/jPlayer" target="_blank">github/happyworm/jPlayer</a> - jPlayer: HTML5 Audio & Video for jQuery.</p>
+					<p><a href="https://github.com/nddrylliog/jsmad" target="_blank">github/mddrylliog/jsmad</a> - jsmad is a pure javascript MP3 decoder, based on libmad, with an ID3 decoder written from scratch.</p>
+					<p><a href="https://github.com/jeromeetienne/jquery-qrcode" target="_blank">github/jeromeetienne/jquery-qrcode</a> - jquery plugin for a pure browser qrcode generation.</p>
+					<p><a href="https://github.com/SlexAxton/yepnope.js" target="_blank">github/SlexAxton/yepnope.js</a> - An Asynchronous Conditional Resource Loader.</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

@@ -14,6 +14,7 @@
 $gradient-from: 	rgba(103,255,111,0.4) 		//First gradient bg color
 $gradient-to: 		rgba(61,203,255,0.4)		//Last gradient bf color
 $text-color: 		#acacac 					//Gray: all texts
+$strong-text-color: #333333 					//Dark gray: for text
 
 //Functions and mixins
 @import compass
@@ -76,6 +77,27 @@ span[class|="ico"]
 		+background-image(linear-gradient(45deg, adjust-hue($gradient-from, -135deg), transparent))
 		background-color: adjust-hue($gradient-to, -135deg)
 
+//Modal effects
++keyframes(bounce)
+	0%
+		+transform(scale3d(0.1,0.1,1))
+
+	55%
+		+transform(scale3d(1.08,1.08,1))
+
+	75%
+		+transform(scale3d(0.95,0.95,1))
+
+	100%
+		+transform(scale3d(1,1,1))
+
++keyframes(minimise)
+	0%
+		+transform(scale3d(1,1,1))
+
+	100%
+		+transform(scale3d(0.1,0.1,1))
+
 //Elements
 //========
 
@@ -105,12 +127,13 @@ a
 html,
 body
 	height: 100%
-	font-family: Arial, "Open Sans", Helvetica
+	font-family: "Open Sans", Arial, Helvetica
 	font-size: 12px
 	overflow: hidden
 
 body
 	background: image-url("bg.jpg") repeat #000000
+	+box-sizing(border-box)
 	font-family: Arial
 	-webkit-touch-callout: none
 	-webkit-user-select: none
@@ -120,6 +143,7 @@ body
 	user-select: none
 	width: 100%
 	height: 100%
+	border: 1px solid black
 	
 	&:before
 		+background-image(linear-gradient(0deg, rgba(0,0,0,0.6), transparent))
@@ -373,3 +397,61 @@ body
 			left: 0
 			right: 0
 			text-align: center
+
+//Modal
+.modal
+	+transition(opacity 100ms ease-in)
+	+opacity(0)
+	pointer-events: none
+	background: rgba(0,0,0,0.5)
+	color: $strong-text-color
+	position: fixed
+	bottom: 0
+	right: 0
+	left: 0
+	top: 0
+
+	&:target
+		+opacity(1)
+		pointer-events: auto
+
+		.modal-container
+			+animation-name(bounce)
+
+	.modal-container
+		+box-sizing(border-box)
+		+animation(minimise 400ms linear)
+		background: white
+		width: 680px
+		height: 360px
+		padding: 30px
+		position: absolute
+		top: 50%
+		left: 50%
+		margin: -180px 0 0 -340px
+
+	.column
+		width: 45%
+		float: left
+		margin-right: 5%
+
+	.modal-actions
+		position: absolute
+		top: 15px
+		right: 15px
+
+	.modal-close
+		display: block
+
+	h2
+		font-size: 32px
+		margin: 0 0 15px 0
+
+	p
+		font-size: 12px
+		margin: 15px 0 0 0
+		
+		a
+			color: $strong-text-color
+			text-decoration: underline
+			cursor: pointer
