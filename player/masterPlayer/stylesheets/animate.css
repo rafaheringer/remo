@@ -1,5 +1,21 @@
-.animated{-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-ms-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-duration:500ms;-moz-animation-duration:500ms;-ms-animation-duration:500ms;-o-animation-duration:500ms;animation-duration:500ms;}.animated.hinge{-webkit-animation-duration:2s;-moz-animation-duration:2s;-ms-animation-duration:2s;-o-animation-duration:2s;animation-duration:2s;}@-webkit-keyframes fadeIn {
-	0% {opacity: 0;}	100% {opacity: 1;}
+.animated {
+	-webkit-animation-fill-mode:both;
+	-moz-animation-fill-mode:both;
+	-ms-animation-fill-mode:both;
+	-o-animation-fill-mode:both;
+	animation-fill-mode:both;
+	-webkit-animation-duration:500ms;-moz-animation-duration:500ms;-ms-animation-duration:500ms;-o-animation-duration:500ms;animation-duration:500ms;}
+.animated.hinge {
+	-webkit-animation-duration:600ms;
+	-moz-animation-duration:600ms;
+	-ms-animation-duration:600ms;
+	-o-animation-duration:600ms;
+	animation-duration:600ms;
+}
+
+@-webkit-keyframes fadeIn {
+	0% {opacity: 0;}	
+	100% {opacity: 1;}
 }
 
 @-moz-keyframes fadeIn {

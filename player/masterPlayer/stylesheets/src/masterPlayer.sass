@@ -55,6 +55,9 @@ $text-color: 		#acacac 					//Gray: all texts
 @import "ico/*.png"
 $ico-sprite-dimensions: true
 +all-ico-sprites
+span[class|="ico"]
+	display: inline-block
+	vertical-align: middle
 
 //Visual effects
 //==============
@@ -85,10 +88,18 @@ $ico-sprite-dimensions: true
 	&:focus
 		outline: none
 
+ul,
+li
+	list-style-type: none
+
+#hidden-controls
+	display: none
+
 //Texts
 a
 	text-decoration: none
 	color: $text-color
+	cursor: default
 
 //Main
 html,
@@ -148,7 +159,6 @@ body
 	.chrome-act
 		display: inline-block
 		vertical-align: middle
-		cursor: pointer
 
 		&:active
 			+opacity(0.7)
@@ -160,6 +170,40 @@ body
 	left: 0
 	right: 0
 	height: 50px
+
+//Menu
+#menu
+	+opacity(0.7)
+	+transition(all 200ms ease-in-out)
+	position: absolute
+	right: 0
+	top: 75px
+	
+	&:hover
+		+opacity(1)
+
+
+	.menu-item
+		+transition(all 500ms ease-in-out)
+		-webkit-transform: none
+		background: rgba(0,0,0,0.85)
+		width: 100px
+		height: auto
+		margin: 0 -80px 10px 0
+		padding: 8px 15px
+		color: white
+
+		&:hover
+			margin-left: -80px
+
+	.menu-item-title
+		display: inline-block
+		vertical-align: middle
+		margin: 0 0 0 10px
+		cursor: default
+			
+			
+
 
 //Playlist
 #playlist
@@ -294,7 +338,6 @@ body
 		background: image-url("click-qrcode.png") no-repeat left top
 		width: 152px
 		height: 51px
-		cursor: pointer
 
 //Drag and drop layer
 #drag-drop-layer

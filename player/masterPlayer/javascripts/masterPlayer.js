@@ -83,6 +83,10 @@ masterPlayer.config = {
 
 //Player init
 masterPlayer.playerInit = function(){
+	//Start controls
+	this.menuControl();
+
+	//Start player
 	this.config.playerInstance = new jPlayerPlaylist({
 		jPlayer: "#jquery_jplayer",
 		cssSelectorAncestor: "#jp_container"
@@ -104,6 +108,14 @@ masterPlayer.playerInit = function(){
 				});
 			}
 		}
+	});
+};
+
+//Menu control
+masterPlayer.menuControl = function(){
+	//Open files
+	$('.menu-open-files').on('click', function(){
+		$('#open-files').trigger('click');
 	});
 };
 
