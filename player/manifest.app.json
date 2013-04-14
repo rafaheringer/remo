@@ -1,7 +1,7 @@
 {
 	"name": "Remo Music Player",
 	"description": "The first local player in WEB",
-	"version": "0.2.0.3",
+	"version": "0.3.0",
 	"manifest_version": 2,
 	"offline_enabled": true,
 	"permissions": [
@@ -12,11 +12,8 @@
 		"unlimitedStorage"
 	],
 	"app": {
-		"launch": {
-			"web_url": "http://remomusic.herokuapp.com/",
-			"container": "panel",
-			"width": 900,
-			"height": 500
+		"background": {
+			"scripts": ["masterPlayer/javascripts/background.js"]
 		}
 	},
 	"icons": {

@@ -8,7 +8,9 @@ masterPlayer.config = {
 	id: newDate.getTime(),
 	socketID: null,
 	playerInstance: null,
+	playing: false,
 	playerSocket: null,
+	playerElement: '#jquery_jplayer',
 	initialMusic: [
 		{
 			title:"Cro Magnon Man",
@@ -86,9 +88,12 @@ masterPlayer.playerInit = function(){
 	//Start controls
 	this.menuControl();
 
+	//Binds
+	this.keyboardEvents();
+
 	//Start player
 	this.config.playerInstance = new jPlayerPlaylist({
-		jPlayer: "#jquery_jplayer",
+		jPlayer: this.config.playerElement,
 		cssSelectorAncestor: "#jp_container"
 	}, this.config.initialMusic, {
 		swfPath: "javascripts/vendor",
@@ -106,6 +111,13 @@ masterPlayer.playerInit = function(){
 				$('.jp-playlist').stop().animate({
 						scrollTop: (38) * (this.current - 2)
 				});
+
+				//Set play
+				masterPlayer.config.playing = true;
+			},
+			onPause: function(){
+				//Set play
+				masterPlayer.config.playing = false;
 			}
 		}
 	});
@@ -234,6 +246,41 @@ masterPlayer.fileReaderInit = function() {
 
 			return false;
 		});
+};
+
+//Bind keyboard events
+masterPlayer.keyboardEvents = function(){
+	$('body').on('keyup', function(event){
+
+		switch(event.keyCode) {
+			//Play or pause
+			case 80: //p
+			case 32: //space
+			case 179: //Multimidia keyboard
+				if(masterPlayer.config.playing)
+					masterPlayer.config.playerInstance.pause();
+				else
+					masterPlayer.config.playerInstance.play();
+			break;
+
+			//Next music
+			case 39: //Right arrow
+			case 40: //Bottom arrow
+			case 176: //Multimidia keyboard
+				masterPlayer.config.playerInstance.next();
+			break;
+
+			//previous music
+			case 37: //Left arrow
+			case 38: //Up arrow
+			case 177: //Multimidia keyboard
+				masterPlayer.config.playerInstance.previous();
+			break;
+		}
+
+		console.log(event);
+		console.log(event.keyCode);
+	});
 };
 
 //Socket init

@@ -20,7 +20,7 @@
  * Modified by: Rafael Heringer Carvalho
  *
  * Itens modfied:
- * - Callback for previous and next musics (options onPlay, onNext and onPrevious)
+ * - Callback for previous and next musics (options onPlay, onPause, onNext and onPrevious)
  */
 
 (function($, undefined) {
@@ -138,6 +138,7 @@
 				freeItemClass: "jp-playlist-item-free",
 				removeItemClass: "jp-playlist-item-remove",
 				onPlay: null,
+				onPause: null,
 				onNext: null,
 				onPrevious: null
 			}
@@ -407,6 +408,10 @@
 		},
 		pause: function() {
 			$(this.cssSelector.jPlayer).jPlayer("pause");
+			//Callback
+			if(typeof this.options.playlistOptions.onPause == "function") {
+				this.options.playlistOptions.onPause.call(this);
+			}
 		},
 		next: function() {
 			var index = (this.current + 1 < this.playlist.length) ? this.current + 1 : 0;
