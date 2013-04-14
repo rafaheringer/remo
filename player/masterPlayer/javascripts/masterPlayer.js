@@ -113,34 +113,96 @@ masterPlayer.playerInit = function(){
 
 //Menu control
 masterPlayer.menuControl = function(){
-	//Open files
+	//On click in open files
 	$('.menu-open-files').on('click', function(){
 		$('#open-files').trigger('click');
 	});
+
+	//On open folder
+	$('#open-files').on('change', function(event){
+		masterPlayer.fileTreeReader(event.target.files);
+	});
+};
+
+//FileTree reader
+masterPlayer.fileTreeReader = function(files){
+	var playList = [],
+		timeOutForDone = -1;
+	
+	//Filesystem for trees
+	function traverseItemTree(item, path) {
+		path = path || "";
+		if (item.isFile) {
+			// Get file
+			item.file(function(file) {
+				traverseFileTree(file);
+			});
+		} else if (item.isDirectory) {
+			// Get folder contents
+			var dirReader = item.createReader();
+			dirReader.readEntries(function(entries) {
+				for (var i=0; i<entries.length; i++) {
+					traverseItemTree(entries[i], path + item.name + "/");
+				}
+			});
+		}
+	}
+
+	//Filesystem for upload trees
+	function traverseFileTree(file) {
+		if(file.type === 'audio/mp3') {
+			playList.push({
+				title: file.name.replace(".mp3",""),
+				mp3: window.URL.createObjectURL(file)
+			});
+
+			clearTimeout(timeOutForDone);
+			timeOutForDone = setTimeout( function(){
+				//Play the playlist
+				if(playList.length) {
+					masterPlayer.config.playerInstance.setPlaylist(playList);
+					masterPlayer.config.playerInstance.play();
+				}
+			}, 200);
+		}
+	}
+
+
+	//Detect
+	for (var i=0; i < files.length; i++) {
+		if(typeof files[i].webkitGetAsEntry == 'function') {
+			var item = files[i].webkitGetAsEntry();
+			if (item) {
+				traverseItemTree(item);
+			}
+		} else {
+			traverseFileTree(files[i]);
+		}
+	}
 };
 
 //FileReader
 masterPlayer.fileReaderInit = function() {
-	//Leitor de músicas fileReader
+	//Music listener with fileReader
 	var dropTarget = $('#drag-drop-layer'),
 		html = $('html'),
 		showDrag = false,
 		timeout = -1;
 
 	$('html')
-		//Ao entrar o primeiro drop
+		//On drag enter
 		.on('dragenter', function(event){
 			dropTarget.addClass('hover');
 			showDrag = true;
 		})
 
-		//Ao começar a arrastar
+		//On drag over
 		.on('dragover', function(event){
 			event.preventDefault();
 			showDrag = true;
 		})
 
-		//Ao terminar
+		//On drag leave
 		.on('dragleave', function(event){
 			showDrag = false;
 			clearTimeout(timeout);
@@ -150,59 +212,20 @@ masterPlayer.fileReaderInit = function() {
 			}, 200);
 		})
 
-		//Ao dropar as músicas
+		//On drop files or folders
 		.on('drop', function(event){
-			//Previne eventos padrões
+			//Prevent default actions
 			event.preventDefault();
 			event.stopPropagation();
 
-			//Esconde layer
+			//Hide layer
 			$('#drag-drop-layer').removeClass('hover');
 
-			var files = event.originalEvent.dataTransfer.files || event.dataTransfer.files,
-				items = event.originalEvent.dataTransfer.items || event.dataTransfer.items,
-				playList = [],
-				timeOutForDone = -1;
-			
-			//Filesystem para pastas
-			function traverseFileTree(item, path) {
-				path = path || "";
-				if (item.isFile) {
-					// Get file
-					item.file(function(file) {
-						if(file.type === 'audio/mp3') {
-							playList.push({
-								title: file.name.replace(".mp3",""),
-								mp3: window.URL.createObjectURL(file)
-							});
-						}
+			//var files = event.originalEvent.dataTransfer.files || event.dataTransfer.files,
+			var items = event.originalEvent.dataTransfer.items || event.dataTransfer.items;
 
-						clearTimeout(timeOutForDone);
-						timeOutForDone = setTimeout( function(){
-							//Play the playlist
-							if(playList.length) {
-								masterPlayer.config.playerInstance.setPlaylist(playList);
-								masterPlayer.config.playerInstance.play();
-							}
-						}, 200);
-					});
-				} else if (item.isDirectory) {
-					// Get folder contents
-					var dirReader = item.createReader();
-					dirReader.readEntries(function(entries) {
-						for (var i=0; i<entries.length; i++) {
-							traverseFileTree(entries[i], path + item.name + "/");
-						}
-					});
-				}
-			}
-
-			for (var i=0; i<items.length; i++) {
-				var item = items[i].webkitGetAsEntry();
-				if (item) {
-					traverseFileTree(item);
-				}
-			}
+			masterPlayer.fileTreeReader(items);
+				
 
 			return false;
 		});
