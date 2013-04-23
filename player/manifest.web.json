@@ -12,8 +12,11 @@
 		"unlimitedStorage"
 	],
 	"app": {
-		"background": {
-			"scripts": ["masterPlayer/javascripts/background.js"]
+		"launch": {
+			"web_url": "http://remomusic.herokuapp.com/",
+			"container": "panel",
+			"width": 900,
+			"height": 500
 		}
 	},
 	"icons": {

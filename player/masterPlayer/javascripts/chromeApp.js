@@ -7,9 +7,6 @@ masterPlayer.chromeAppInit = function() {
 		currentBounds: chrome.app.window.current().getBounds()
 	};
 
-	//Prevent right-mouse-button click
-	document.oncontextmenu=new Function ("return false");
-	
 	//Chrome actions
 	//==============
 	$('#chrome-actions').show();

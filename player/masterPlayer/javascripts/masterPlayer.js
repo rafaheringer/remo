@@ -250,7 +250,7 @@ masterPlayer.fileReaderInit = function() {
 
 //Bind keyboard events
 masterPlayer.keyboardEvents = function(){
-	$('body').on('keyup', function(event){
+	$('body').on('keydown', function(event){
 
 		switch(event.keyCode) {
 			//Play or pause
@@ -261,6 +261,8 @@ masterPlayer.keyboardEvents = function(){
 					masterPlayer.config.playerInstance.pause();
 				else
 					masterPlayer.config.playerInstance.play();
+				return false;
+				event.preventDefault();
 			break;
 
 			//Next music
@@ -268,6 +270,8 @@ masterPlayer.keyboardEvents = function(){
 			case 40: //Bottom arrow
 			case 176: //Multimidia keyboard
 				masterPlayer.config.playerInstance.next();
+				return false;
+				event.preventDefault();
 			break;
 
 			//previous music
@@ -275,11 +279,10 @@ masterPlayer.keyboardEvents = function(){
 			case 38: //Up arrow
 			case 177: //Multimidia keyboard
 				masterPlayer.config.playerInstance.previous();
+				return false;
+				event.preventDefault();
 			break;
 		}
-
-		console.log(event);
-		console.log(event.keyCode);
 	});
 };
 
