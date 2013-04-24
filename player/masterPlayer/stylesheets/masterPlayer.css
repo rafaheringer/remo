@@ -444,26 +444,35 @@ span[class|="ico"] {
 *:focus {
   outline: none;
 }
-
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003114}}
+*.hidden {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  -o-animation: none;
+  animation: none;
+  opacity: 0.01 !important;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003118}}
 ul,
 li {
   list-style-type: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003118}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003122}}
 #hidden-controls {
   display: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003122}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003126}}
 a {
   text-decoration: none;
   color: #acacac;
   cursor: default;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003128}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003132}}
 html,
 body {
   height: 100%;
@@ -472,7 +481,7 @@ body {
   overflow: hidden;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003135}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003139}}
 body {
   background: url('../images/bg.jpg?1364346222') repeat black;
   -webkit-box-sizing: border-box;
@@ -489,7 +498,7 @@ body {
   height: 100%;
   border: 1px solid black;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003149}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003153}}
 body:before {
   background-image: -webkit-linear-gradient(0deg, rgba(0, 0, 0, 0.6), transparent);
   background-image: -moz-linear-gradient(0deg, rgba(0, 0, 0, 0.6), transparent);
@@ -505,13 +514,13 @@ body:before {
   z-index: 2;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003161}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003165}}
 #main-container {
   height: 100%;
   width: 100%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003166}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003170}}
 #bg-effect {
   -webkit-animation: bgFades 100s infinite;
   -moz-animation: bgFades 100s infinite;
@@ -526,7 +535,7 @@ body:before {
   z-index: 2;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003176}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003180}}
 #shadows {
   position: absolute;
   top: 0;
@@ -535,7 +544,7 @@ body:before {
   width: 100%;
   z-index: 3;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003184}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003188}}
 #shadows:after {
   -webkit-transform: rotate(-170deg);
   -moz-transform: rotate(-170deg);
@@ -555,7 +564,7 @@ body:before {
   right: -54px;
   z-index: 2;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003196}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003200}}
 #shadows:before {
   -webkit-transform: rotate(-35deg);
   -moz-transform: rotate(-35deg);
@@ -576,25 +585,24 @@ body:before {
   z-index: 2;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003209}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003213}}
 #chrome-actions {
   position: absolute;
   right: 10px;
   top: 10px;
   display: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003215}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003219}}
 #chrome-actions .chrome-act {
   display: inline-block;
   vertical-align: middle;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003219}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003223}}
 #chrome-actions .chrome-act:active {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003223}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003227}}
 #chrome-drag {
   position: absolute;
   top: 0;
@@ -603,9 +611,8 @@ body:before {
   height: 50px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003231}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003235}}
 #menu {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -615,12 +622,11 @@ body:before {
   right: 0;
   top: 75px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003238}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003242}}
 #menu:hover {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003241}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003245}}
 #menu .menu-item {
   -webkit-transition: all 500ms ease-in-out;
   -moz-transition: all 500ms ease-in-out;
@@ -634,11 +640,11 @@ body:before {
   padding: 8px 15px;
   color: white;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003251}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003255}}
 #menu .menu-item:hover {
   margin-left: -80px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003254}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003258}}
 #menu .menu-item-title {
   display: inline-block;
   vertical-align: middle;
@@ -646,7 +652,7 @@ body:before {
   cursor: default;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003261}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003265}}
 #playlist {
   background: rgba(0, 0, 0, 0.85);
   padding: 10px 10px 10px 0;
@@ -657,21 +663,21 @@ body:before {
   top: 0;
   position: absolute;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003273}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003277}}
 #playlist .playlist-container {
   height: 100%;
   padding-right: 10px;
   overflow: auto;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003278}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003282}}
 #playlist .jp-free-media {
   display: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003281}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003285}}
 #playlist li {
   margin: 7px 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003284}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003288}}
 #playlist .jp-playlist-item {
   text-shadow: 0px 0px 5px rgba(172, 172, 172, 0.5);
   white-space: nowrap;
@@ -683,17 +689,17 @@ body:before {
   padding: 6px 20px;
   font-size: 16px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003291}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003295}}
 #playlist .jp-playlist-item:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003295}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003299}}
 #playlist .jp-playlist-current .jp-playlist-item {
   color: black;
   background: white;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003300}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003304}}
 .jp-controls {
   position: absolute;
   display: block;
@@ -701,7 +707,7 @@ body:before {
   right: 60px;
   text-align: center;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003307}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003311}}
 .jp-controls .jp-control-item, .jp-controls .jp-volume .jp-mute, .jp-volume .jp-controls .jp-mute,
 .jp-controls .jp-volume .jp-unmute,
 .jp-volume .jp-controls .jp-unmute {
@@ -713,16 +719,15 @@ body:before {
   list-style-type: none;
   position: relative;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003314}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003318}}
 .jp-controls .jp-control-item:active, .jp-controls .jp-volume .jp-mute:active, .jp-volume .jp-controls .jp-mute:active,
 .jp-controls .jp-volume .jp-unmute:active,
 .jp-volume .jp-controls .jp-unmute:active, .jp-controls .jp-control-item.active, .jp-controls .jp-volume .active.jp-mute, .jp-volume .jp-controls .active.jp-mute,
 .jp-controls .jp-volume .active.jp-unmute,
 .jp-volume .jp-controls .active.jp-unmute {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003318}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003322}}
 .jp-controls .jp-control-item a, .jp-controls .jp-volume .jp-mute a, .jp-volume .jp-controls .jp-mute a,
 .jp-controls .jp-volume .jp-unmute a,
 .jp-volume .jp-controls .jp-unmute a {
@@ -730,24 +735,24 @@ body:before {
   width: 100%;
   height: 100%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003323}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003327}}
 .jp-controls .jp-previous,
 .jp-controls .jp-play,
 .jp-controls .jp-pause,
 .jp-controls .jp-next {
   vertical-align: middle;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003329}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003333}}
 .jp-controls .jp-stop,
 .jp-controls .jp-volume-max {
   display: none !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003334}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003338}}
 .jp-volume {
   margin: 10px 0 0 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003337}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003341}}
 .jp-volume .jp-volume-bar {
   display: inline-block;
   -webkit-box-shadow: 0, 0, 5px, rgba(0, 0, 0, 0.3);
@@ -758,15 +763,14 @@ body:before {
   position: relative;
   height: 6px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003345}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003349}}
 .jp-volume .jp-volume-bar .jp-volume-bar-value {
   height: 100%;
   background: white;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003354}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003358}}
 .jp-progress {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -779,33 +783,32 @@ body:before {
   z-index: 4;
   height: 15px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003364}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003368}}
 .jp-progress .jp-duration,
 .jp-progress .jp-current-time {
   color: white;
   font-size: 10px;
   position: absolute;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003370}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003374}}
 .jp-progress .jp-duration {
   bottom: 1px;
   right: -33px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003374}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003378}}
 .jp-progress:hover {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
   opacity: 0.8;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003377}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003381}}
 .jp-progress:hover .jp-seek-bar {
   height: 10px;
   margin-top: 5px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003382}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003386}}
 .jp-progress:hover .jp-seek-bar .jp-play-bar .jp-current-time {
   display: block;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003385}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003389}}
 .jp-progress .jp-seek-bar {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -817,7 +820,7 @@ body:before {
   position: relative;
   background: rgba(255, 255, 255, 0.3);
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003393}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003397}}
 .jp-progress .jp-seek-bar .jp-play-bar {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -827,37 +830,37 @@ body:before {
   height: 100%;
   position: relative;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003399}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003403}}
 .jp-progress .jp-seek-bar .jp-play-bar .jp-current-time {
   right: 0;
   margin: -15px -10px 0 0;
   display: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003405}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003409}}
 .jp-no-solution {
   display: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003408}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003412}}
 .jp-toggles {
   display: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003411}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003415}}
 .jp-jplayer,
 .jp-interface {
   display: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003416}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003420}}
 #show-QR-code {
   position: absolute;
   left: 12%;
   top: 75%;
   display: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003422}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003426}}
 #show-QR-code .qr-code {
   background: white;
   display: none;
@@ -865,21 +868,20 @@ body:before {
   border: 10px solid white;
   margin: -20px 0 0 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003429}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003433}}
 #show-QR-code .qr-code canvas {
   width: auto;
   height: 20%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003433}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003437}}
 #show-QR-code .click-to-show-QR-code {
   background: url('../images/click-qrcode.png?1364439840') no-repeat left top;
   width: 152px;
   height: 51px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003439}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003443}}
 #drag-drop-layer {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=10);
   opacity: 0.1;
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -895,13 +897,12 @@ body:before {
   padding: 5%;
   display: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003452}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003456}}
 #drag-drop-layer.hover {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
   display: block;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003456}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003460}}
 #drag-drop-layer .drag-drop-text {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -911,7 +912,7 @@ body:before {
   height: 100%;
   position: relative;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003463}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003467}}
 #drag-drop-layer .drag-drop-text span {
   color: #666666;
   font-size: 3em;
@@ -923,13 +924,12 @@ body:before {
   text-align: center;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003474}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003478}}
 .modal {
   -webkit-transition: opacity 100ms ease-in;
   -moz-transition: opacity 100ms ease-in;
   -o-transition: opacity 100ms ease-in;
   transition: opacity 100ms ease-in;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
   pointer-events: none;
   background: rgba(0, 0, 0, 0.5);
@@ -940,13 +940,12 @@ body:before {
   left: 0;
   top: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003486}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003490}}
 .modal:target {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
   pointer-events: auto;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003490}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003494}}
 .modal:target .modal-container {
   -webkit-animation-name: bounce;
   -moz-animation-name: bounce;
@@ -954,7 +953,7 @@ body:before {
   -o-animation-name: bounce;
   animation-name: bounce;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003493}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003497}}
 .modal .modal-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -973,33 +972,33 @@ body:before {
   left: 50%;
   margin: -180px 0 0 -340px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003505}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003509}}
 .modal .column {
   width: 45%;
   float: left;
   margin-right: 5%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003510}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003514}}
 .modal .modal-actions {
   position: absolute;
   top: 15px;
   right: 15px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003515}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003519}}
 .modal .modal-close {
   display: block;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003518}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003522}}
 .modal h2 {
   font-size: 32px;
   margin: 0 0 15px 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003522}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003526}}
 .modal p {
   font-size: 12px;
   margin: 15px 0 0 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003526}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Rafa\/Documents\/GitHub\/remo\/player\/masterPlayer\/stylesheets\/src\/masterPlayer\.sass}line{font-family:\00003530}}
 .modal p a {
   color: #333333;
   text-decoration: underline;

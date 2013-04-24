@@ -5,11 +5,12 @@ var newDate = new Date();
 
 //Player start config
 masterPlayer.config = {
-	id: newDate.getTime(),
+	id: parseInt(newDate.getTime() + Math.random()),
 	socketID: null,
 	playerInstance: null,
 	playing: false,
 	playerSocket: null,
+
 	playerElement: '#jquery_jplayer',
 	initialMusic: [
 		{
@@ -90,6 +91,7 @@ masterPlayer.playerInit = function(){
 
 	//Binds
 	this.keyboardEvents();
+	this.mouseEvents();
 
 	//Start player
 	this.config.playerInstance = new jPlayerPlaylist({
@@ -286,6 +288,29 @@ masterPlayer.keyboardEvents = function(){
 	});
 };
 
+//Hide elements on mouse move
+masterPlayer.hideOnMouseMove = function(hide){
+	if(hide) {
+		return setTimeout(function(){
+			$('#show-QR-code, .jp-controls, #menu').addClass('hidden');
+		}, 10000);
+	} else {
+		$('#show-QR-code, .jp-controls, #menu').removeClass('hidden');
+	}
+};
+
+//Bind mouse events
+masterPlayer.mouseEvents = function(){
+	//Hide elements when mouse dont move
+	var mousemovePID = this.hideOnMouseMove(true);
+	
+	$('html').on('mousemove', function(){
+		masterPlayer.hideOnMouseMove(false);
+		clearTimeout(mousemovePID);
+		mousemovePID = masterPlayer.hideOnMouseMove(true);
+	});
+};
+
 //Socket init
 masterPlayer.socketInit = function(){
 	//Open socket for player
@@ -415,4 +440,4 @@ masterPlayer.chromeWebInit = function() {
 
 	//Minimize
 	$('.chrome-minimize').hide();
-}
+};

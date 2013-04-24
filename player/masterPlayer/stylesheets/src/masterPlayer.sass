@@ -111,6 +111,10 @@ span[class|="ico"]
 	&:focus
 		outline: none
 
+	&.hidden
+		+animation(none)
+		opacity: 0.01!important
+
 ul,
 li
 	list-style-type: none
@@ -217,7 +221,7 @@ body
 		vertical-align: middle
 
 		&:active
-			+opacity(0.7)
+			opacity: 0.7
 
 //Chrome drag area
 #chrome-drag
@@ -229,14 +233,14 @@ body
 
 //Menu
 #menu
-	+opacity(0.7)
+	opacity: 0.7
 	+transition(all 200ms ease-in-out)
 	position: absolute
 	right: 0
 	top: 75px
 	
 	&:hover
-		+opacity(1)
+		opacity: 1
 
 	.menu-item
 		+transition(all 500ms ease-in-out)
@@ -313,7 +317,7 @@ body
 
 		&:active,
 		&.active
-			+opacity(0.6)
+			opacity: 0.6
 
 		a
 			display: block
@@ -352,7 +356,7 @@ body
 
 //Music progress bar
 .jp-progress
-	+opacity(0.5)
+	opacity: 0.5
 	+transition (all 200ms ease-in-out)
 	position: absolute
 	bottom: 1px
@@ -372,7 +376,7 @@ body
 		right: -33px
 
 	&:hover
-		+opacity(0.8)
+		opacity: 0.8
 
 		.jp-seek-bar
 			height: 10px
@@ -437,7 +441,7 @@ body
 
 //Drag and drop layer
 #drag-drop-layer
-	+opacity(0.1)
+	opacity: 0.1
 	+transition (all 200ms ease-in-out)
 	background: rgba(255,255,255,0.8)
 	position: absolute
@@ -450,7 +454,7 @@ body
 	display: none
 
 	&.hover
-		+opacity(1)
+		opacity: 1
 		display: block
 
 	.drag-drop-text
@@ -473,7 +477,7 @@ body
 //Modal
 .modal
 	+transition(opacity 100ms ease-in)
-	+opacity(0)
+	opacity: 0
 	pointer-events: none
 	background: rgba(0,0,0,0.5)
 	color: $strong-text-color
@@ -484,7 +488,7 @@ body
 	top: 0
 
 	&:target
-		+opacity(1)
+		opacity: 1
 		pointer-events: auto
 
 		.modal-container
