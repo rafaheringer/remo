@@ -105,6 +105,7 @@ span[class|="ico"]
 *
 	margin: 0
 	padding: 0
+	z-index: 2
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 
 	&:focus
@@ -154,6 +155,7 @@ body
 		bottom: 0
 		left: 0
 		right: 0
+		z-index: 1
 
 //Container
 #main-container
@@ -161,6 +163,17 @@ body
 	width: 100%
 	height: 100%
 
+	&:after
+		+rotate(-170deg)
+		+background-image(linear-gradient(0deg, rgba(0,0,0,0.6), transparent))
+		position: absolute
+		content: " "
+		display: block
+		height: 80px
+		width: 410px
+		top: -28px
+		right: -59px
+		z-index: 1
 
 	&:before
 		+rotate(-35deg)
@@ -172,6 +185,7 @@ body
 		width: 800px
 		bottom: -140px
 		right: -160px
+		z-index: 1
 
 //Chrome actions
 #chrome-actions
@@ -206,7 +220,6 @@ body
 	&:hover
 		+opacity(1)
 
-
 	.menu-item
 		+transition(all 500ms ease-in-out)
 		-webkit-transform: none
@@ -226,9 +239,6 @@ body
 		margin: 0 0 0 10px
 		cursor: default
 			
-			
-
-
 //Playlist
 #playlist
 	background: rgba(0,0,0,0.85)
@@ -302,7 +312,7 @@ body
 	.jp-volume-max
 		display: none!important
 
-//Barra de volume
+//Volume control
 .jp-volume
 	margin: 10px 0 0 0
 
