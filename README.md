@@ -5,12 +5,15 @@ Control your local musics with your smartphone. Simple drag and drop your music 
 
 Get the most lightweight and beautiful music player now!
 
+*	[App in Chrome Webstore](https://chrome.google.com/webstore/detail/remo-music-player/ajilpdcmebalpffmjjopcingplogifhb)
+*	[Online Anywhere App](http://remomusic.herokuapp.com) - For Chrome
+
 -----------------
 
-You can use keyboard shortcuts:
-	**space**: play/pause
-	**enter**: play the selected music
-	**left** or **right** arrow: play previous or next music
+You can use keyboard shortcuts:   
+	**space**: play/pause   
+	**enter**: play the selected music   
+	**left** or **right** arrow: play previous or next music   
 	**up** or **down** arrow: select music from playlist
 
 Remo.music is a beta copyleft project in Javascript and NODE.JS optmized for Webkit. Enjoy.

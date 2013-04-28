@@ -10,6 +10,8 @@
 //Utils
 //=====
 
+//Font
+
 //config
 $gradient-from: 	rgba(103,255,111,0.4) 		//First gradient bg color
 $gradient-to: 		rgba(61,203,255,0.4)		//Last gradient bf color
@@ -132,14 +134,13 @@ a
 html,
 body
 	height: 100%
-	font-family: "Open Sans", Arial, Helvetica
 	font-size: 12px
 	overflow: hidden
 
 body
 	background: image-url("bg.jpg") repeat #000000
 	+box-sizing(border-box)
-	font-family: Arial
+	font-family: "Open Sans", Arial
 	-webkit-touch-callout: none
 	-webkit-user-select: none
 	-khtml-user-select: none
@@ -246,14 +247,14 @@ body
 		+transition(all 500ms ease-in-out)
 		-webkit-transform: none
 		background: rgba(0,0,0,0.85)
-		width: 100px
+		width: 105px
 		height: auto
-		margin: 0 -80px 10px 0
+		margin: 0 -85px 10px 0
 		padding: 8px 15px
 		color: white
 
 		&:hover
-			margin-left: -80px
+			margin-left: -85px
 
 	.menu-item-title
 		display: inline-block
@@ -328,6 +329,7 @@ body
 	.jp-play,
 	.jp-pause,
 	.jp-next
+		//+transform(scale(0.8))
 		vertical-align: middle
 
 	.jp-stop,
@@ -336,6 +338,7 @@ body
 
 //Volume control
 .jp-volume
+	//+transform(scale(0.9))
 	margin: 10px 0 0 0
 
 	.jp-volume-bar
@@ -363,7 +366,7 @@ body
 	left: 0
 	right: 43px
 	z-index: 4
-	height: 15px
+	height: 20px
 
 	.jp-duration,
 	.jp-current-time
@@ -380,7 +383,7 @@ body
 
 		.jp-seek-bar
 			height: 10px
-			margin-top: 5px
+			margin-top: 8px
 			
 			.jp-play-bar
 				.jp-current-time
@@ -389,7 +392,7 @@ body
 	.jp-seek-bar
 		+transition (all 200ms ease-in-out)
 		height: 2px
-		margin-top: 7px
+		margin-top: 12px
 		width: 100%
 		position: relative
 		background: rgba(255,255,255,0.3)
@@ -412,8 +415,7 @@ body
 .jp-toggles
 	display: none
 
-.jp-jplayer,
-.jp-interface
+.jp-jplayer
 	display: none
 
 //qrCode
@@ -499,12 +501,12 @@ body
 		+animation(minimise 400ms linear)
 		background: white
 		width: 680px
-		height: 360px
+		height: 380px
 		padding: 30px
 		position: absolute
 		top: 50%
 		left: 50%
-		margin: -180px 0 0 -340px
+		margin: -190px 0 0 -340px
 
 	.column
 		width: 45%

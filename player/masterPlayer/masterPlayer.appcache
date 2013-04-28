@@ -1,0 +1,20 @@
+CACHE MANIFEST
+# 2012-04-28 v1.0.1
+
+# System
+index.html
+
+# Images
+images/*.*
+images/ico/*.*
+images/app/*.*
+
+# Scripts
+javascripts/*.js
+javascripts/vendor/*.js
+
+# Styles
+stylesheets/*.css
+
+# Fonts
+http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700
