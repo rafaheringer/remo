@@ -292,10 +292,10 @@ masterPlayer.keyboardEvents = function(){
 masterPlayer.hideOnMouseMove = function(hide){
 	if(hide) {
 		return setTimeout(function(){
-			$('#show-QR-code, #menu').addClass('hidden');
+			$('#show-QR-code, #menu, .jp-volume').addClass('hidden');
 		}, 10000);
 	} else {
-		$('#show-QR-code, #menu').removeClass('hidden');
+		$('#show-QR-code, #menu, .jp-volume').removeClass('hidden');
 	}
 };
 
