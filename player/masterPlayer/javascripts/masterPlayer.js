@@ -8,7 +8,6 @@ masterPlayer.config = {
 	id: parseInt(newDate.getTime() + Math.random()),
 	socketID: null,
 	playlistInstance: null,
-	playListFiles: [],
 	playing: false,
 	playerSocket: null,
 	playerElement: '#remoMusicPlayer',
@@ -115,7 +114,7 @@ masterPlayer.playerInit = function(){
 		warningAlerts: false,
 		wmode: "window",
 		keyEnabled: false,
-		play: function(){
+		play: function(a){
 			//Scroll to music
 			$('.jp-playlist').stop().animate({
 					scrollTop: (38) * (masterPlayer.config.playlistInstance.current - 2)
@@ -124,8 +123,11 @@ masterPlayer.playerInit = function(){
 			//Set play
 			masterPlayer.config.playing = true;
 
+			console.log(this);
+			console.log(a);
+
 			//Get and set Music info
-			masterPlayer.setMusicInfo(masterPlayer.config.playListFiles[masterPlayer.config.playlistInstance.current]);
+			masterPlayer.setMusicInfo(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current].file);
 		},
 		pause: function() {
 			masterPlayer.config.playing = false;
@@ -205,7 +207,6 @@ masterPlayer.setMusicInfo = function(file) {
 
 //FileTree reader
 masterPlayer.fileTreeReader = function(files){
-	masterPlayer.config.playListFiles = [];
 	var playList = [],
 		timeOutForDone = -1;
 
@@ -240,11 +241,10 @@ masterPlayer.fileTreeReader = function(files){
 				artist = fileName.split(' - ')[0];
 			}
 
-			masterPlayer.config.playListFiles.push(file);
-
 			playList.push({
 				title: title,
 				artist: artist,
+				file: file,
 				mp3: window.URL.createObjectURL(file)
 			});
 
