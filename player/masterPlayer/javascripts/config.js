@@ -45,7 +45,12 @@ yepnope({
 		
 		//Have FileReader?
 		if(window.File && window.FileReader && window.FileList && window.Blob) {
-			masterPlayer.fileReaderInit();
+			yepnope({
+				load: '/masterPlayer/javascripts/vendor/jdataview.js',
+				callback: function() {
+					masterPlayer.fileReaderInit();
+				}
+			});
 		}
 	}
 });

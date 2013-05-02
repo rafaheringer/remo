@@ -7,11 +7,11 @@ var newDate = new Date();
 masterPlayer.config = {
 	id: parseInt(newDate.getTime() + Math.random()),
 	socketID: null,
-	playerInstance: null,
+	playlistInstance: null,
+	playListFiles: [],
 	playing: false,
 	playerSocket: null,
-
-	playerElement: '#jquery_jplayer',
+	playerElement: '#remoMusicPlayer',
 	initialMusic: [
 		{
 			title:"Cro Magnon Man",
@@ -94,39 +94,47 @@ masterPlayer.playerInit = function(){
 	this.mouseEvents();
 
 	//Start player
-	this.config.playerInstance = new jPlayerPlaylist({
+	this.config.playlistInstance = new jPlayerPlaylist({
 		jPlayer: this.config.playerElement,
 		cssSelectorAncestor: "#jp_container"
 	}, this.config.initialMusic, {
-		swfPath: "javascripts/vendor",
-		supplied: "oga, mp3, wav",
-		wmode: "window",
 		playlistOptions: {
 			enableRemoveControls: false,
 			loopOnPrevious: true,
 			displayTime: 0,
 			addTime: 0,
 			removeTime: 0,
-			shuffleTime: 0,
-			onPlay: function(){
-				//Scroll to music
-				$('.jp-playlist').stop().animate({
-						scrollTop: (38) * (this.current - 2)
-				});
+			shuffleTime: 0
+		},
+		swfPath: "javascripts/vendor",
+		supplied: "oga, mp3, wav",
+		smoothPlayBar: true,
+		preload: 'metadata',
+		volume: 0.8,
+		errorAlerts: false,
+		warningAlerts: false,
+		wmode: "window",
+		keyEnabled: false,
+		play: function(){
+			//Scroll to music
+			$('.jp-playlist').stop().animate({
+					scrollTop: (38) * (masterPlayer.config.playlistInstance.current - 2)
+			});
 
-				//Set play
-				masterPlayer.config.playing = true;
-			},
-			onPause: function(){
-				//Set play
-				masterPlayer.config.playing = false;
-			}
+			//Set play
+			masterPlayer.config.playing = true;
+
+			//Get and set Music info
+			masterPlayer.setMusicInfo(masterPlayer.config.playListFiles[masterPlayer.config.playlistInstance.current]);
+		},
+		pause: function() {
+			masterPlayer.config.playing = false;
 		}
 	});
 };
 
 //Menu control
-masterPlayer.menuControl = function(){
+masterPlayer.menuControl = function() {
 	//On click in open files
 	$('.menu-open-files').on('click', function(){
 		$('#open-files').trigger('click');
@@ -143,11 +151,64 @@ masterPlayer.menuControl = function(){
 	});
 };
 
+//Music info
+masterPlayer.setMusicInfo = function(file) {
+	var reader = new FileReader();
+	reader.readAsArrayBuffer(file);
+
+	reader.onload = function(e) {
+		var dv = new jDataView(this.result);
+		var ID3 = {};
+
+		//If dont load, use this information
+		var fileName = file.name.replace(".mp3","");
+		var title = fileName;
+		var artist = null;
+		if(fileName.split(' - ').length >= 2) {
+			title = fileName.split(' - ')[1];
+			artist = fileName.split(' - ')[0];
+		}
+
+		// "TAG" starts at byte -128 from EOF.
+		// See http://en.wikipedia.org/wiki/ID3
+		if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
+			ID3 = {
+				title: dv.getString(30, dv.tell()),
+				artist: dv.getString(30, dv.tell()),
+				album: dv.getString(30, dv.tell()),
+				year: dv.getString(4, dv.tell())
+			};
+
+		}
+
+		//If wont find ID3
+		else {
+			ID3 = {
+				title: title,
+				artist: artist,
+				album: '',
+				year: ''
+			};
+		}
+
+		//More verifications
+		if($.trim(ID3.title).charCodeAt(0) == 0)
+			ID3.title = title;
+
+		if($.trim(ID3.artist).charCodeAt(0) == 0)
+			ID3.artist = artist;
+
+		$('.jp-music-name').html(ID3.title);
+		$('.jp-music-artist').html(ID3.artist);
+	};
+};
+
 //FileTree reader
 masterPlayer.fileTreeReader = function(files){
+	masterPlayer.config.playListFiles = [];
 	var playList = [],
 		timeOutForDone = -1;
-	
+
 	//Filesystem for trees
 	function traverseItemTree(item, path) {
 		path = path || "";
@@ -170,8 +231,20 @@ masterPlayer.fileTreeReader = function(files){
 	//Filesystem for upload trees
 	function traverseFileTree(file) {
 		if(file.type === 'audio/mp3') {
+			var fileName = file.name.replace(".mp3","");
+			var title = fileName;
+			var artist = null;
+			
+			if(fileName.split(' - ').length >= 2) {
+				title = fileName.split(' - ')[1];
+				artist = fileName.split(' - ')[0];
+			}
+
+			masterPlayer.config.playListFiles.push(file);
+
 			playList.push({
-				title: file.name.replace(".mp3",""),
+				title: title,
+				artist: artist,
 				mp3: window.URL.createObjectURL(file)
 			});
 
@@ -179,8 +252,8 @@ masterPlayer.fileTreeReader = function(files){
 			timeOutForDone = setTimeout( function(){
 				//Play the playlist
 				if(playList.length) {
-					masterPlayer.config.playerInstance.setPlaylist(playList);
-					masterPlayer.config.playerInstance.play();
+					masterPlayer.config.playlistInstance.setPlaylist(playList);
+					masterPlayer.config.playlistInstance.play();
 				}
 			}, 200);
 		}
@@ -260,9 +333,9 @@ masterPlayer.keyboardEvents = function(){
 			case 32: //space
 			case 179: //Multimidia keyboard
 				if(masterPlayer.config.playing)
-					masterPlayer.config.playerInstance.pause();
+					masterPlayer.config.playlistInstance.pause();
 				else
-					masterPlayer.config.playerInstance.play();
+					masterPlayer.config.playlistInstance.play();
 				return false;
 				event.preventDefault();
 			break;
@@ -271,7 +344,7 @@ masterPlayer.keyboardEvents = function(){
 			case 39: //Right arrow
 			case 40: //Bottom arrow
 			case 176: //Multimidia keyboard
-				masterPlayer.config.playerInstance.next();
+				masterPlayer.config.playlistInstance.next();
 				return false;
 				event.preventDefault();
 			break;
@@ -280,7 +353,7 @@ masterPlayer.keyboardEvents = function(){
 			case 37: //Left arrow
 			case 38: //Up arrow
 			case 177: //Multimidia keyboard
-				masterPlayer.config.playerInstance.previous();
+				masterPlayer.config.playlistInstance.previous();
 				return false;
 				event.preventDefault();
 			break;

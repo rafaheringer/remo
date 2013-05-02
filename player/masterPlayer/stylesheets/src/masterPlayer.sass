@@ -295,6 +295,10 @@ body
 		padding: 6px 20px
 		font-size: 16px
 
+		.jp-artist
+			+text-shadow(none)
+			color: rgba(255,255,255,0.2)
+
 		&:hover
 			background: rgba(255,255,255,0.1)
 
@@ -303,6 +307,9 @@ body
 			color: black
 			background: white
 
+		.jp-artist
+			color: rgba(0,0,0,0.3)
+
 //Player Controls
 .jp-controls
 	position: absolute
@@ -310,6 +317,7 @@ body
 	bottom: 10.5%
 	right: 5%
 	text-align: center
+	width: 300px
 
 //Toggles
 .jp-toggles
@@ -340,6 +348,7 @@ body
 	position: relative
 	text-align: left
 	float: left
+	width: 270px
 
 	.jp-music-cover
 		margin: 0 20px 0 0
@@ -356,9 +365,17 @@ body
 
 		.jp-music-name
 			font-size: 18px
+			text-overflow: ellipsis
+			overflow: hidden
+			white-space: nowrap
+			width: 165px
 
 		.jp-music-artist
 			font-size: 12px
+			text-overflow: ellipsis
+			overflow: hidden
+			white-space: nowrap
+			width: 165px
 
 	.jp-music-control
 		position: absolute
