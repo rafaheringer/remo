@@ -217,7 +217,6 @@ body
 	position: absolute
 	right: 10px
 	top: 10px
-	display: none
 
 	.chrome-act
 		display: inline-block
@@ -351,12 +350,23 @@ body
 	width: 270px
 
 	.jp-music-cover
+		+box-shadow(0 0 10px rgba(0,0,0,1))
+		width: 70px
+		height: 70px
 		margin: 0 20px 0 0
+		background: image-url("default-cover.jpg")
 		float: left
+		border: 2px solid white
+
+		.jp-fake-image
+			background-size: 70px 70px
+			width: 70px
+			height: 70px
 
 		img
-			+box-shadow(0 0 10px rgba(0,0,0,1))
-			border: 2px solid white
+			//+transition (all 600ms ease-in-out)
+			display: none
+			
 
 	.jp-music-name-and-artist
 		margin: -5px 0 0 0
@@ -429,6 +439,7 @@ body
 		height: 6px
 
 		.jp-volume-bar-value
+			+transition (all 200ms ease-in-out)
 			height: 100%
 			background: white
 

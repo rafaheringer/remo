@@ -49,3 +49,4 @@ Useful stuff:
 
 *	[MDN - Using files from web applications](https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications)
 *	[Some JavaScript experiments](https://github.com/migerh/js-experiments/tree/master/fileapi/)
+*	[last.fm API](http://www.last.fm/api/)

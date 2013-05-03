@@ -11,6 +11,7 @@ masterPlayer.config = {
 	playing: false,
 	playerSocket: null,
 	playerElement: '#remoMusicPlayer',
+	lastFmApiKey: 'f2923bd087687602324332057ed0473a',
 	initialMusic: [
 		{
 			title:"Cro Magnon Man",
@@ -94,9 +95,10 @@ masterPlayer.playerInit = function(){
 
 	//Start player
 	this.config.playlistInstance = new jPlayerPlaylist({
-		jPlayer: this.config.playerElement,
-		cssSelectorAncestor: "#jp_container"
-	}, this.config.initialMusic, {
+			jPlayer: this.config.playerElement,
+			cssSelectorAncestor: "#jp_container"
+		}, 
+		this.config.initialMusic, {
 		playlistOptions: {
 			enableRemoveControls: false,
 			loopOnPrevious: true,
@@ -122,9 +124,6 @@ masterPlayer.playerInit = function(){
 
 			//Set play
 			masterPlayer.config.playing = true;
-
-			console.log(this);
-			console.log(a);
 
 			//Get and set Music info
 			masterPlayer.setMusicInfo(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current].file);
@@ -200,8 +199,44 @@ masterPlayer.setMusicInfo = function(file) {
 		if($.trim(ID3.artist).charCodeAt(0) == 0)
 			ID3.artist = artist;
 
+		//Set artist and title
 		$('.jp-music-name').html(ID3.title);
 		$('.jp-music-artist').html(ID3.artist);
+
+		//Get album info
+		if(navigator.onLine) {
+			$.ajax({
+				url: 'http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=' + masterPlayer.config.lastFmApiKey + '&artist=' + ID3.artist + '&track=' + ID3.title + '&format=json',
+				success: function(result) {
+					if(!result.error && typeof result.track.album != 'undefined') {
+						var oldImage = $('.jp-music-cover img'),
+							backupImage = oldImage.attr('src'),
+							backupWidth = oldImage.attr('width'),
+							backupHeight = oldImage.attr('height'),
+							newImage = document.createElement('img');
+
+						//Create new image  (for get onload callback)
+						newImage.setAttribute('src', result.track.album.image[1]['#text']);
+						newImage.setAttribute('width', backupWidth);
+						newImage.setAttribute('height', backupHeight);
+						oldImage.remove();
+
+						$(newImage)
+							.appendTo('.jp-fake-image')
+							.css({'opacity': 0.01, 'display': 'block'});
+
+						newImage.onload = function(){
+							$(newImage).animate({'opacity': 1}, 600, function(){
+							 	$('.jp-fake-image').css('background-image','url("' + result.track.album.image[1]['#text'] + '")');
+							});
+						};
+					} else {
+						$('.jp-fake-image').css('background-image','none');
+						$('.jp-music-cover img').attr('src','').animate({'opacity': 0.01}, 600);
+					}
+				}
+			});
+		}
 	};
 };
 
@@ -479,7 +514,7 @@ masterPlayer.chromeWebInit = function() {
 	});
 
 	//Prevent right-mouse-button click
-	document.oncontextmenu=new Function ("return false");
+	document.oncontextmenu = new Function ("return false");
 
 	//Chrome actions
 	//==============

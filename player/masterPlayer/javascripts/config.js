@@ -12,11 +12,14 @@ var masterPlayer = {};
 //==============
 
 //Mandatory
-yepnope([
-	'/masterPlayer/javascripts/vendor/jquery.js',
-	'/masterPlayer/javascripts/vendor/jquery.jplayer.min.js',
-	'/masterPlayer/javascripts/vendor/jplayer.playlist.js'
-]);
+yepnope({
+	load: [
+		'/masterPlayer/javascripts/vendor/jquery.js',
+		'/masterPlayer/javascripts/vendor/jquery.jplayer.min.js',
+		'/masterPlayer/javascripts/vendor/jplayer.playlist.js'
+	]
+});
+
 
 //Core
 yepnope({
@@ -25,7 +28,7 @@ yepnope({
 		masterPlayer.playerInit();
 
 		//Is an app for Google?
-		if(typeof chrome !== 'undefined' && chrome.app.runtime) {
+		if(typeof chrome != 'undefined' && typeof chrome.app.runtime != 'undefined') {
 			yepnope({
 				load: '/masterPlayer/javascripts/chromeApp.js',
 				callback: function() {

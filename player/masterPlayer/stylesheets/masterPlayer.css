@@ -605,19 +605,18 @@ body:before {
   position: absolute;
   right: 10px;
   top: 10px;
-  display: none;
 }
-/* line 222, src/masterPlayer.sass */
+/* line 221, src/masterPlayer.sass */
 #chrome-actions .chrome-act {
   display: inline-block;
   vertical-align: middle;
 }
-/* line 226, src/masterPlayer.sass */
+/* line 225, src/masterPlayer.sass */
 #chrome-actions .chrome-act:active {
   opacity: 0.7;
 }
 
-/* line 230, src/masterPlayer.sass */
+/* line 229, src/masterPlayer.sass */
 #chrome-drag {
   position: absolute;
   top: 0;
@@ -626,7 +625,7 @@ body:before {
   height: 50px;
 }
 
-/* line 238, src/masterPlayer.sass */
+/* line 237, src/masterPlayer.sass */
 #menu {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -637,11 +636,11 @@ body:before {
   right: 0;
   top: 75px;
 }
-/* line 245, src/masterPlayer.sass */
+/* line 244, src/masterPlayer.sass */
 #menu:hover {
   opacity: 1;
 }
-/* line 248, src/masterPlayer.sass */
+/* line 247, src/masterPlayer.sass */
 #menu .menu-item {
   -webkit-transition: all 500ms ease-in-out;
   -moz-transition: all 500ms ease-in-out;
@@ -655,11 +654,11 @@ body:before {
   padding: 8px 15px;
   color: white;
 }
-/* line 258, src/masterPlayer.sass */
+/* line 257, src/masterPlayer.sass */
 #menu .menu-item:hover {
   margin-left: -85px;
 }
-/* line 261, src/masterPlayer.sass */
+/* line 260, src/masterPlayer.sass */
 #menu .menu-item-title {
   display: inline-block;
   vertical-align: middle;
@@ -667,7 +666,7 @@ body:before {
   cursor: default;
 }
 
-/* line 268, src/masterPlayer.sass */
+/* line 267, src/masterPlayer.sass */
 #playlist {
   background: rgba(0, 0, 0, 0.85);
   padding: 10px 10px 10px 0;
@@ -678,21 +677,21 @@ body:before {
   top: 0;
   position: absolute;
 }
-/* line 280, src/masterPlayer.sass */
+/* line 279, src/masterPlayer.sass */
 #playlist .playlist-container {
   height: 100%;
   padding-right: 10px;
   overflow: auto;
 }
-/* line 285, src/masterPlayer.sass */
+/* line 284, src/masterPlayer.sass */
 #playlist .jp-free-media {
   display: none;
 }
-/* line 288, src/masterPlayer.sass */
+/* line 287, src/masterPlayer.sass */
 #playlist li {
   margin: 7px 0;
 }
-/* line 291, src/masterPlayer.sass */
+/* line 290, src/masterPlayer.sass */
 #playlist .jp-playlist-item {
   text-shadow: 0px 0px 5px rgba(172, 172, 172, 0.5);
   white-space: nowrap;
@@ -704,26 +703,26 @@ body:before {
   padding: 6px 20px;
   font-size: 16px;
 }
-/* line 298, src/masterPlayer.sass */
+/* line 297, src/masterPlayer.sass */
 #playlist .jp-playlist-item .jp-artist {
   text-shadow: none;
   color: rgba(255, 255, 255, 0.2);
 }
-/* line 302, src/masterPlayer.sass */
+/* line 301, src/masterPlayer.sass */
 #playlist .jp-playlist-item:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-/* line 306, src/masterPlayer.sass */
+/* line 305, src/masterPlayer.sass */
 #playlist .jp-playlist-current .jp-playlist-item {
   color: black;
   background: white;
 }
-/* line 310, src/masterPlayer.sass */
+/* line 309, src/masterPlayer.sass */
 #playlist .jp-playlist-current .jp-artist {
   color: rgba(0, 0, 0, 0.3);
 }
 
-/* line 314, src/masterPlayer.sass */
+/* line 313, src/masterPlayer.sass */
 .jp-controls {
   position: absolute;
   display: block;
@@ -733,12 +732,12 @@ body:before {
   width: 300px;
 }
 
-/* line 323, src/masterPlayer.sass */
+/* line 322, src/masterPlayer.sass */
 .jp-toggles {
   float: left;
   margin: 5px 10px 0 0;
 }
-/* line 327, src/masterPlayer.sass */
+/* line 326, src/masterPlayer.sass */
 .jp-toggles .jp-toggle {
   background: rgba(0, 0, 0, 0.5);
   width: 20px;
@@ -746,20 +745,20 @@ body:before {
   display: block;
   margin: 0 0 3px 0;
 }
-/* line 334, src/masterPlayer.sass */
+/* line 333, src/masterPlayer.sass */
 .jp-toggles .jp-toggle a {
   opacity: 0.5;
 }
-/* line 339, src/masterPlayer.sass */
+/* line 338, src/masterPlayer.sass */
 .jp-toggles .jp-toggle.jp-repeat-off a, .jp-toggles .jp-toggle.jp-shuffle-off a {
   opacity: 1;
 }
-/* line 342, src/masterPlayer.sass */
+/* line 341, src/masterPlayer.sass */
 .jp-toggles .jp-toggle:hover {
   background: rgba(0, 0, 0, 0.7);
 }
 
-/* line 346, src/masterPlayer.sass */
+/* line 345, src/masterPlayer.sass */
 .jp-music-info {
   text-shadow: 0 0px 5px black, 0 0px 10px black;
   position: relative;
@@ -767,25 +766,35 @@ body:before {
   float: left;
   width: 270px;
 }
-/* line 353, src/masterPlayer.sass */
+/* line 352, src/masterPlayer.sass */
 .jp-music-info .jp-music-cover {
-  margin: 0 20px 0 0;
-  float: left;
-}
-/* line 357, src/masterPlayer.sass */
-.jp-music-info .jp-music-cover img {
   -webkit-box-shadow: 0 0 10px black;
   -moz-box-shadow: 0 0 10px black;
   box-shadow: 0 0 10px black;
+  width: 70px;
+  height: 70px;
+  margin: 0 20px 0 0;
+  background: url('../images/default-cover.jpg?1367438801');
+  float: left;
   border: 2px solid white;
 }
 /* line 361, src/masterPlayer.sass */
+.jp-music-info .jp-music-cover .jp-fake-image {
+  background-size: 70px 70px;
+  width: 70px;
+  height: 70px;
+}
+/* line 366, src/masterPlayer.sass */
+.jp-music-info .jp-music-cover img {
+  display: none;
+}
+/* line 371, src/masterPlayer.sass */
 .jp-music-info .jp-music-name-and-artist {
   margin: -5px 0 0 0;
   float: left;
   color: white;
 }
-/* line 366, src/masterPlayer.sass */
+/* line 376, src/masterPlayer.sass */
 .jp-music-info .jp-music-name-and-artist .jp-music-name {
   font-size: 18px;
   text-overflow: ellipsis;
@@ -793,7 +802,7 @@ body:before {
   white-space: nowrap;
   width: 165px;
 }
-/* line 373, src/masterPlayer.sass */
+/* line 383, src/masterPlayer.sass */
 .jp-music-info .jp-music-name-and-artist .jp-music-artist {
   font-size: 12px;
   text-overflow: ellipsis;
@@ -801,14 +810,14 @@ body:before {
   white-space: nowrap;
   width: 165px;
 }
-/* line 380, src/masterPlayer.sass */
+/* line 390, src/masterPlayer.sass */
 .jp-music-info .jp-music-control {
   position: absolute;
   top: 40px;
   left: 90px;
   bottom: 0;
 }
-/* line 386, src/masterPlayer.sass */
+/* line 396, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-control-item, .jp-music-info .jp-music-control .jp-volume .jp-mute, .jp-volume .jp-music-info .jp-music-control .jp-mute,
 .jp-music-info .jp-music-control .jp-volume .jp-unmute,
 .jp-volume .jp-music-info .jp-music-control .jp-unmute {
@@ -817,7 +826,7 @@ body:before {
   list-style-type: none;
   position: relative;
 }
-/* line 392, src/masterPlayer.sass */
+/* line 402, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-control-item:active, .jp-music-info .jp-music-control .jp-volume .jp-mute:active, .jp-volume .jp-music-info .jp-music-control .jp-mute:active,
 .jp-music-info .jp-music-control .jp-volume .jp-unmute:active,
 .jp-volume .jp-music-info .jp-music-control .jp-unmute:active, .jp-music-info .jp-music-control .jp-control-item.active, .jp-music-info .jp-music-control .jp-volume .active.jp-mute, .jp-volume .jp-music-info .jp-music-control .active.jp-mute,
@@ -825,7 +834,7 @@ body:before {
 .jp-volume .jp-music-info .jp-music-control .active.jp-unmute {
   opacity: 0.6;
 }
-/* line 396, src/masterPlayer.sass */
+/* line 406, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-control-item a, .jp-music-info .jp-music-control .jp-volume .jp-mute a, .jp-volume .jp-music-info .jp-music-control .jp-mute a,
 .jp-music-info .jp-music-control .jp-volume .jp-unmute a,
 .jp-volume .jp-music-info .jp-music-control .jp-unmute a {
@@ -833,20 +842,20 @@ body:before {
   width: 100%;
   height: 100%;
 }
-/* line 401, src/masterPlayer.sass */
+/* line 411, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-previous,
 .jp-music-info .jp-music-control .jp-play,
 .jp-music-info .jp-music-control .jp-pause,
 .jp-music-info .jp-music-control .jp-next {
   vertical-align: middle;
 }
-/* line 407, src/masterPlayer.sass */
+/* line 417, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-stop,
 .jp-music-info .jp-music-control .jp-volume-max {
   display: none !important;
 }
 
-/* line 412, src/masterPlayer.sass */
+/* line 422, src/masterPlayer.sass */
 .jp-volume {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -858,11 +867,11 @@ body:before {
   left: 0;
   opacity: 0.7;
 }
-/* line 420, src/masterPlayer.sass */
+/* line 430, src/masterPlayer.sass */
 .jp-volume:hover {
   opacity: 1;
 }
-/* line 423, src/masterPlayer.sass */
+/* line 433, src/masterPlayer.sass */
 .jp-volume .jp-volume-bar {
   -webkit-box-shadow: 0, 0, 5px, rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0, 0, 5px, rgba(0, 0, 0, 0.3);
@@ -873,13 +882,17 @@ body:before {
   position: relative;
   height: 6px;
 }
-/* line 431, src/masterPlayer.sass */
+/* line 441, src/masterPlayer.sass */
 .jp-volume .jp-volume-bar .jp-volume-bar-value {
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
   height: 100%;
   background: white;
 }
 
-/* line 440, src/masterPlayer.sass */
+/* line 451, src/masterPlayer.sass */
 .jp-progress {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -893,32 +906,32 @@ body:before {
   z-index: 4;
   height: 20px;
 }
-/* line 450, src/masterPlayer.sass */
+/* line 461, src/masterPlayer.sass */
 .jp-progress .jp-duration,
 .jp-progress .jp-current-time {
   color: white;
   font-size: 10px;
   position: absolute;
 }
-/* line 456, src/masterPlayer.sass */
+/* line 467, src/masterPlayer.sass */
 .jp-progress .jp-duration {
   bottom: 1px;
   right: -33px;
 }
-/* line 460, src/masterPlayer.sass */
+/* line 471, src/masterPlayer.sass */
 .jp-progress:hover {
   opacity: 0.8;
 }
-/* line 463, src/masterPlayer.sass */
+/* line 474, src/masterPlayer.sass */
 .jp-progress:hover .jp-seek-bar {
   height: 10px;
   margin-top: 8px;
 }
-/* line 468, src/masterPlayer.sass */
+/* line 479, src/masterPlayer.sass */
 .jp-progress:hover .jp-seek-bar .jp-play-bar .jp-current-time {
   display: block;
 }
-/* line 471, src/masterPlayer.sass */
+/* line 482, src/masterPlayer.sass */
 .jp-progress .jp-seek-bar {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -930,7 +943,7 @@ body:before {
   position: relative;
   background: rgba(255, 255, 255, 0.3);
 }
-/* line 479, src/masterPlayer.sass */
+/* line 490, src/masterPlayer.sass */
 .jp-progress .jp-seek-bar .jp-play-bar {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -940,31 +953,31 @@ body:before {
   height: 100%;
   position: relative;
 }
-/* line 485, src/masterPlayer.sass */
+/* line 496, src/masterPlayer.sass */
 .jp-progress .jp-seek-bar .jp-play-bar .jp-current-time {
   right: 0;
   margin: -15px -10px 0 0;
   display: none;
 }
 
-/* line 491, src/masterPlayer.sass */
+/* line 502, src/masterPlayer.sass */
 .jp-no-solution {
   display: none;
 }
 
-/* line 494, src/masterPlayer.sass */
+/* line 505, src/masterPlayer.sass */
 .jp-jplayer {
   display: none;
 }
 
-/* line 498, src/masterPlayer.sass */
+/* line 509, src/masterPlayer.sass */
 #show-QR-code {
   position: absolute;
   left: 12%;
   top: 75%;
   display: none;
 }
-/* line 504, src/masterPlayer.sass */
+/* line 515, src/masterPlayer.sass */
 #show-QR-code .qr-code {
   background: white;
   display: none;
@@ -972,19 +985,19 @@ body:before {
   border: 10px solid white;
   margin: -20px 0 0 0;
 }
-/* line 511, src/masterPlayer.sass */
+/* line 522, src/masterPlayer.sass */
 #show-QR-code .qr-code canvas {
   width: auto;
   height: 20%;
 }
-/* line 515, src/masterPlayer.sass */
+/* line 526, src/masterPlayer.sass */
 #show-QR-code .click-to-show-QR-code {
   background: url('../images/click-qrcode.png?1364439840') no-repeat left top;
   width: 152px;
   height: 51px;
 }
 
-/* line 521, src/masterPlayer.sass */
+/* line 532, src/masterPlayer.sass */
 #drag-drop-layer {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -1001,12 +1014,12 @@ body:before {
   padding: 5%;
   display: none;
 }
-/* line 534, src/masterPlayer.sass */
+/* line 545, src/masterPlayer.sass */
 #drag-drop-layer.hover {
   opacity: 1;
   display: block;
 }
-/* line 538, src/masterPlayer.sass */
+/* line 549, src/masterPlayer.sass */
 #drag-drop-layer .drag-drop-text {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1016,7 +1029,7 @@ body:before {
   height: 100%;
   position: relative;
 }
-/* line 545, src/masterPlayer.sass */
+/* line 556, src/masterPlayer.sass */
 #drag-drop-layer .drag-drop-text span {
   color: #666666;
   font-size: 3em;
@@ -1028,7 +1041,7 @@ body:before {
   text-align: center;
 }
 
-/* line 556, src/masterPlayer.sass */
+/* line 567, src/masterPlayer.sass */
 .modal {
   -webkit-transition: opacity 100ms ease-in;
   -moz-transition: opacity 100ms ease-in;
@@ -1044,12 +1057,12 @@ body:before {
   left: 0;
   top: 0;
 }
-/* line 568, src/masterPlayer.sass */
+/* line 579, src/masterPlayer.sass */
 .modal:target {
   opacity: 1;
   pointer-events: auto;
 }
-/* line 572, src/masterPlayer.sass */
+/* line 583, src/masterPlayer.sass */
 .modal:target .modal-container {
   -webkit-animation-name: bounce;
   -moz-animation-name: bounce;
@@ -1057,7 +1070,7 @@ body:before {
   -o-animation-name: bounce;
   animation-name: bounce;
 }
-/* line 575, src/masterPlayer.sass */
+/* line 586, src/masterPlayer.sass */
 .modal .modal-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1076,33 +1089,33 @@ body:before {
   left: 50%;
   margin: -190px 0 0 -340px;
 }
-/* line 587, src/masterPlayer.sass */
+/* line 598, src/masterPlayer.sass */
 .modal .column {
   width: 45%;
   float: left;
   margin-right: 5%;
 }
-/* line 592, src/masterPlayer.sass */
+/* line 603, src/masterPlayer.sass */
 .modal .modal-actions {
   position: absolute;
   top: 15px;
   right: 15px;
 }
-/* line 597, src/masterPlayer.sass */
+/* line 608, src/masterPlayer.sass */
 .modal .modal-close {
   display: block;
 }
-/* line 600, src/masterPlayer.sass */
+/* line 611, src/masterPlayer.sass */
 .modal h2 {
   font-size: 32px;
   margin: 0 0 15px 0;
 }
-/* line 604, src/masterPlayer.sass */
+/* line 615, src/masterPlayer.sass */
 .modal p {
   font-size: 12px;
   margin: 15px 0 0 0;
 }
-/* line 608, src/masterPlayer.sass */
+/* line 619, src/masterPlayer.sass */
 .modal p a {
   color: #333333;
   text-decoration: underline;
