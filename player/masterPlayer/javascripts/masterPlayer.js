@@ -15,69 +15,80 @@ masterPlayer.config = {
 	initialMusic: [
 		{
 			title:"Cro Magnon Man",
+			artist: "The Stark Palace",
 			mp3:"http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3",
+			file: "http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg"
 		},
 		{
 			title:"Your Face",
+			artist: "The Stark Palace",
 			mp3:"http://www.jplayer.org/audio/mp3/TSP-05-Your_face.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/TSP-05-Your_face.ogg"
 		},
 		{
 			title:"Cyber Sonnet",
+			artist: "The Stark Palace",
 			mp3:"http://www.jplayer.org/audio/mp3/TSP-07-Cybersonnet.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/TSP-07-Cybersonnet.ogg"
 		},
 		{
 			title:"Tempered Song",
+			artist: "Miow",
 			mp3:"http://www.jplayer.org/audio/mp3/Miaow-01-Tempered-song.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/Miaow-01-Tempered-song.ogg"
 		},
 		{
 			title:"Hidden",
+			artist: "Miow",
 			mp3:"http://www.jplayer.org/audio/mp3/Miaow-02-Hidden.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/Miaow-02-Hidden.ogg"
 		},
 		{
 			title:"Lentement",
-			free:true,
+			artist: "Miow",
 			mp3:"http://www.jplayer.org/audio/mp3/Miaow-03-Lentement.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/Miaow-03-Lentement.ogg"
 		},
 		{
 			title:"Lismore",
+			artist: "Miow",
 			mp3:"http://www.jplayer.org/audio/mp3/Miaow-04-Lismore.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/Miaow-04-Lismore.ogg"
 		},
 		{
 			title:"The Separation",
+			artist: "Miow",
 			mp3:"http://www.jplayer.org/audio/mp3/Miaow-05-The-separation.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/Miaow-05-The-separation.ogg"
 		},
 		{
 			title:"Beside Me",
+			artist: "Miow",
 			mp3:"http://www.jplayer.org/audio/mp3/Miaow-06-Beside-me.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/Miaow-06-Beside-me.ogg"
 		},
 		{
 			title:"Bubble",
-			free:true,
+			artist: "Miow",
 			mp3:"http://www.jplayer.org/audio/mp3/Miaow-07-Bubble.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg"
 		},
 		{
 			title:"Stirring of a Fool",
+			artist: "Miow",
 			mp3:"http://www.jplayer.org/audio/mp3/Miaow-08-Stirring-of-a-fool.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/Miaow-08-Stirring-of-a-fool.ogg"
 		},
 		{
 			title:"Partir",
-			free: true,
+			artist: "Miow",
 			mp3:"http://www.jplayer.org/audio/mp3/Miaow-09-Partir.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/Miaow-09-Partir.ogg"
 		},
 		{
 			title:"Thin Ice",
+			artist: "Miow",
 			mp3:"http://www.jplayer.org/audio/mp3/Miaow-10-Thin-ice.mp3",
 			oga:"http://www.jplayer.org/audio/ogg/Miaow-10-Thin-ice.ogg"
 		}
@@ -119,14 +130,14 @@ masterPlayer.playerInit = function(){
 		play: function(a){
 			//Scroll to music
 			$('.jp-playlist').stop().animate({
-					scrollTop: (38) * (masterPlayer.config.playlistInstance.current - 2)
+					scrollTop: (41) * (masterPlayer.config.playlistInstance.current - 2)
 			});
 
 			//Set play
 			masterPlayer.config.playing = true;
 
 			//Get and set Music info
-			masterPlayer.setMusicInfo(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current].file);
+			masterPlayer.setMusicInfo(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current]);
 		},
 		pause: function() {
 			masterPlayer.config.playing = false;
@@ -152,92 +163,151 @@ masterPlayer.menuControl = function() {
 	});
 };
 
+//Grab album cover from WEB and put in player
+masterPlayer.grabAlbumCover = function(ID3) {
+	//info.title and info.artist required; info.album prefer
+
+	if(navigator.onLine) {
+		//Get album info
+		$.ajax({
+			url: 'http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=' + masterPlayer.config.lastFmApiKey + '&artist=' + ID3.artist + '&track=' + ID3.title + '&format=json',
+			cache: true,
+			success: function(result) {
+				if(!result.error && typeof result.track.album != 'undefined') {
+					var oldImage = $('.jp-music-cover img'),
+						backupImage = oldImage.attr('src'),
+						backupWidth = oldImage.attr('width'),
+						backupHeight = oldImage.attr('height'),
+						newImage = document.createElement('img');
+
+					//Create new image  (for get onload callback)
+					newImage.setAttribute('src', result.track.album.image[1]['#text']);
+					newImage.setAttribute('width', backupWidth);
+					newImage.setAttribute('height', backupHeight);
+					oldImage.remove();
+
+					$(newImage)
+						.appendTo('.jp-fake-image')
+						.css({'opacity': 0.01, 'display': 'block'});
+
+					newImage.onload = function(){
+						$(newImage).animate({'opacity': 1}, 600, function(){
+						 	$('.jp-fake-image').css('background-image','url("' + result.track.album.image[1]['#text'] + '")');
+						});
+					};
+				} else {
+					$('.jp-fake-image').css('background-image','none');
+					$('.jp-music-cover img').attr('src','').animate({'opacity': 0.01}, 600);
+				}
+			}
+		});
+	}
+	if(navigator.onLine) {
+		$.ajax({
+			url: 'http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=' + masterPlayer.config.lastFmApiKey + '&artist=' + ID3.artist + '&track=' + ID3.title + '&format=json',
+			cache: true,
+			success: function(result) {
+				if(!result.error && typeof result.track.album != 'undefined') {
+					var oldImage = $('.jp-music-cover img'),
+						backupImage = oldImage.attr('src'),
+						backupWidth = oldImage.attr('width'),
+						backupHeight = oldImage.attr('height'),
+						newImage = document.createElement('img');
+
+					//Create new image  (for get onload callback)
+					newImage.setAttribute('src', result.track.album.image[1]['#text']);
+					newImage.setAttribute('width', backupWidth);
+					newImage.setAttribute('height', backupHeight);
+					oldImage.remove();
+
+					$(newImage)
+						.appendTo('.jp-fake-image')
+						.css({'opacity': 0.01, 'display': 'block'});
+
+					newImage.onload = function(){
+						$(newImage).animate({'opacity': 1}, 600, function(){
+						 	$('.jp-fake-image').css('background-image','url("' + result.track.album.image[1]['#text'] + '")');
+						});
+					};
+				} else {
+					$('.jp-fake-image').css('background-image','none');
+					$('.jp-music-cover img').attr('src','').animate({'opacity': 0.01}, 600);
+				}
+			}
+		});
+	}
+};
+
 //Music info
-masterPlayer.setMusicInfo = function(file) {
+masterPlayer.setMusicInfo = function(music) {
 	var reader = new FileReader();
-	reader.readAsArrayBuffer(file);
+	reader.readAsArrayBuffer(music);
 
-	reader.onload = function(e) {
-		var dv = new jDataView(this.result);
-		var ID3 = {};
+	if(typeof music.file == 'object') {
+		reader.onload = function(e) {
+			var dv = new jDataView(this.result);
+			var ID3 = {};
 
-		//If dont load, use this information
-		var fileName = file.name.replace(".mp3","");
-		var title = fileName;
-		var artist = null;
-		if(fileName.split(' - ').length >= 2) {
-			title = fileName.split(' - ')[1];
-			artist = fileName.split(' - ')[0];
-		}
+			//If dont load, use this information
+			var fileName = music.name.replace(".mp3","");
+			var title = fileName;
+			var artist = null;
+			if(fileName.split(' - ').length >= 2) {
+				title = fileName.split(' - ')[1];
+				artist = fileName.split(' - ')[0];
+			}
 
-		// "TAG" starts at byte -128 from EOF.
-		// See http://en.wikipedia.org/wiki/ID3
-		if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
-			ID3 = {
-				title: dv.getString(30, dv.tell()),
-				artist: dv.getString(30, dv.tell()),
-				album: dv.getString(30, dv.tell()),
-				year: dv.getString(4, dv.tell())
-			};
+			// "TAG" starts at byte -128 from EOF.
+			// See http://en.wikipedia.org/wiki/ID3
+			if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
+				ID3 = {
+					title: dv.getString(30, dv.tell()),
+					artist: dv.getString(30, dv.tell()),
+					album: dv.getString(30, dv.tell()),
+					year: dv.getString(4, dv.tell())
+				};
 
-		}
+			}
 
-		//If wont find ID3
-		else {
-			ID3 = {
-				title: title,
-				artist: artist,
-				album: '',
-				year: ''
-			};
-		}
+			//If wont find ID3
+			else {
+				ID3 = {
+					title: title,
+					artist: artist,
+					album: '',
+					year: ''
+				};
+			}
 
-		//More verifications
-		if($.trim(ID3.title).charCodeAt(0) == 0)
-			ID3.title = title;
+			//More verifications
+			if($.trim(ID3.title).charCodeAt(0) == 0)
+				ID3.title = title;
 
-		if($.trim(ID3.artist).charCodeAt(0) == 0)
-			ID3.artist = artist;
+			if($.trim(ID3.artist).charCodeAt(0) == 0)
+				ID3.artist = artist;
+
+			//Set artist and title
+			$('.jp-music-name').html(ID3.title);
+			$('.jp-music-artist').html(ID3.artist);
+
+			//Get album info
+			masterPlayer.grabAlbumCover(ID3);
+		};
+	} else {
+		var ID3 = {
+			title: music.title,
+			artist: music.artist,
+			album: '',
+			year: ''
+		};
 
 		//Set artist and title
 		$('.jp-music-name').html(ID3.title);
 		$('.jp-music-artist').html(ID3.artist);
 
 		//Get album info
-		if(navigator.onLine) {
-			$.ajax({
-				url: 'http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=' + masterPlayer.config.lastFmApiKey + '&artist=' + ID3.artist + '&track=' + ID3.title + '&format=json',
-				success: function(result) {
-					if(!result.error && typeof result.track.album != 'undefined') {
-						var oldImage = $('.jp-music-cover img'),
-							backupImage = oldImage.attr('src'),
-							backupWidth = oldImage.attr('width'),
-							backupHeight = oldImage.attr('height'),
-							newImage = document.createElement('img');
-
-						//Create new image  (for get onload callback)
-						newImage.setAttribute('src', result.track.album.image[1]['#text']);
-						newImage.setAttribute('width', backupWidth);
-						newImage.setAttribute('height', backupHeight);
-						oldImage.remove();
-
-						$(newImage)
-							.appendTo('.jp-fake-image')
-							.css({'opacity': 0.01, 'display': 'block'});
-
-						newImage.onload = function(){
-							$(newImage).animate({'opacity': 1}, 600, function(){
-							 	$('.jp-fake-image').css('background-image','url("' + result.track.album.image[1]['#text'] + '")');
-							});
-						};
-					} else {
-						$('.jp-fake-image').css('background-image','none');
-						$('.jp-music-cover img').attr('src','').animate({'opacity': 0.01}, 600);
-					}
-				}
-			});
-		}
-	};
+		masterPlayer.grabAlbumCover(ID3);
+	}
 };
 
 //FileTree reader
