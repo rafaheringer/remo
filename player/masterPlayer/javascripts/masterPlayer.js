@@ -241,7 +241,8 @@ masterPlayer.grabAlbumCover = function(ID3) {
 //Music info
 masterPlayer.setMusicInfo = function(music) {
 	var reader = new FileReader();
-	reader.readAsArrayBuffer(music);
+	reader.readAsArrayBuffer(music.file);
+
 
 	if(typeof music.file == 'object') {
 		reader.onload = function(e) {
@@ -249,7 +250,7 @@ masterPlayer.setMusicInfo = function(music) {
 			var ID3 = {};
 
 			//If dont load, use this information
-			var fileName = music.name.replace(".mp3","");
+			var fileName = music.file.name.replace(".mp3","");
 			var title = fileName;
 			var artist = null;
 			if(fileName.split(' - ').length >= 2) {
