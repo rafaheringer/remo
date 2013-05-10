@@ -166,69 +166,61 @@ masterPlayer.menuControl = function() {
 //Grab album cover from WEB and put in player
 masterPlayer.grabAlbumCover = function(ID3) {
 	//info.title and info.artist required; info.album prefer
-
 	if(navigator.onLine) {
+		var setImageCover = function(src) {
+			var oldImage = $('.jp-music-cover img'),
+				backupImage = oldImage.attr('src'),
+				backupWidth = oldImage.attr('width'),
+				backupHeight = oldImage.attr('height'),
+				newImage = document.createElement('img');
+
+			newImage.src = src;
+			newImage.setAttribute('width', backupWidth);
+			newImage.setAttribute('height', backupHeight);
+			oldImage.remove();
+			$(newImage)
+				.appendTo('.jp-fake-image')
+				.css({'opacity': 0.01, 'display': 'block'});
+
+			newImage.onload = function(){
+				$(newImage).animate({'opacity': 1}, 600, function(){
+				 	$('.jp-fake-image').css('background-image','url("' + src + '")');
+				});
+			};
+		};
+
+
 		//Get album info
 		$.ajax({
 			url: 'http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=' + masterPlayer.config.lastFmApiKey + '&artist=' + ID3.artist + '&track=' + ID3.title + '&format=json',
 			cache: true,
 			success: function(result) {
 				if(!result.error && typeof result.track.album != 'undefined') {
-					var oldImage = $('.jp-music-cover img'),
-						backupImage = oldImage.attr('src'),
-						backupWidth = oldImage.attr('width'),
-						backupHeight = oldImage.attr('height'),
-						newImage = document.createElement('img');
-
 					//Create new image  (for get onload callback)
-					newImage.setAttribute('src', result.track.album.image[1]['#text']);
-					newImage.setAttribute('width', backupWidth);
-					newImage.setAttribute('height', backupHeight);
-					oldImage.remove();
+					//Create a blob file for packaged apps (see more at: http://developer.chrome.com/apps/app_external.html#objecttag)
+					if(typeof chrome != 'undefined' && typeof chrome.app.runtime != 'undefined') {
+						var xhr = new XMLHttpRequest();
+						xhr.open('GET', result.track.album.image[1]['#text'], true);
+						xhr.responseType = 'blob';
 
-					$(newImage)
-						.appendTo('.jp-fake-image')
-						.css({'opacity': 0.01, 'display': 'block'});
+						xhr.onerror = function(e, o){
+							console.log(this);
+							console.log(e);
+							console.log(o);
+						};
 
-					newImage.onload = function(){
-						$(newImage).animate({'opacity': 1}, 600, function(){
-						 	$('.jp-fake-image').css('background-image','url("' + result.track.album.image[1]['#text'] + '")');
-						});
-					};
-				} else {
-					$('.jp-fake-image').css('background-image','none');
-					$('.jp-music-cover img').attr('src','').animate({'opacity': 0.01}, 600);
-				}
-			}
-		});
-	}
-	if(navigator.onLine) {
-		$.ajax({
-			url: 'http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=' + masterPlayer.config.lastFmApiKey + '&artist=' + ID3.artist + '&track=' + ID3.title + '&format=json',
-			cache: true,
-			success: function(result) {
-				if(!result.error && typeof result.track.album != 'undefined') {
-					var oldImage = $('.jp-music-cover img'),
-						backupImage = oldImage.attr('src'),
-						backupWidth = oldImage.attr('width'),
-						backupHeight = oldImage.attr('height'),
-						newImage = document.createElement('img');
+						xhr.onload = function(e) {
+							setImageCover(window.webkitURL.createObjectURL(this.response));
+						};
 
-					//Create new image  (for get onload callback)
-					newImage.setAttribute('src', result.track.album.image[1]['#text']);
-					newImage.setAttribute('width', backupWidth);
-					newImage.setAttribute('height', backupHeight);
-					oldImage.remove();
+						xhr.send();
+					} 
 
-					$(newImage)
-						.appendTo('.jp-fake-image')
-						.css({'opacity': 0.01, 'display': 'block'});
+					//Normal flow for create image
+					else {
+						setImageCover(result.track.album.image[1]['#text']);
+					}
 
-					newImage.onload = function(){
-						$(newImage).animate({'opacity': 1}, 600, function(){
-						 	$('.jp-fake-image').css('background-image','url("' + result.track.album.image[1]['#text'] + '")');
-						});
-					};
 				} else {
 					$('.jp-fake-image').css('background-image','none');
 					$('.jp-music-cover img').attr('src','').animate({'opacity': 0.01}, 600);
