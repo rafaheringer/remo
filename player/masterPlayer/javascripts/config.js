@@ -20,7 +20,6 @@ yepnope({
 	]
 });
 
-
 //Core
 yepnope({
 	load: '/masterPlayer/javascripts/masterPlayer.js',
@@ -55,6 +54,17 @@ yepnope({
 				}
 			});
 		}
+
+		//Have connection and not a localhost?
+		yepnope({
+			test: navigator.onLine && window.location.hostname != 'localhost',
+			yep: {
+				'analytics': '/masterPlayer/javascripts/analytics.js'
+			},
+			nope: {
+				'analytics': '/masterPlayer/javascripts/analytics.offline.js'
+			}
+		});
 	}
 });
 

@@ -13,6 +13,7 @@
 		"http://*/",
 		"https://*/"
 	],
+	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 	"app": {
 		"background": {
 			"scripts": ["masterPlayer/javascripts/background.js"]

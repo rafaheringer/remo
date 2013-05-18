@@ -140,6 +140,7 @@
 				onPlay: null,
 				onPause: null,
 				onNext: null,
+				onShuffle: null,
 				onPrevious: null
 			}
 		},
@@ -444,7 +445,7 @@
 
 			//Callback
 			if(typeof this.options.playlistOptions.onPrevious == "function") {
-				this.options.playlistOptions.onNext.call(this);
+				this.options.playlistOptions.onPrevious.call(this);
 			}
 		},
 		shuffle: function(shuffled, playNow) {
@@ -475,6 +476,11 @@
 
 					$(this).slideDown(self.options.playlistOptions.shuffleTime);
 				});
+			}
+
+			//Callback
+			if(typeof this.options.playlistOptions.onShuffle == "function") {
+				this.options.playlistOptions.onShuffle.call(this, shuffled, playNow);
 			}
 		}
 	};

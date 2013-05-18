@@ -14,19 +14,27 @@ masterPlayer.chromeAppInit = function() {
 	//Minimize
 	$('.chrome-minimize').on('click', function(){
 		chrome.app.window.current().minimize();
+		analytics.track('minimize', 'click');
 	});
 
 	//Maximize
 	$('.chrome-maximize').on('click', function(){
-		if(chrome.app.window.current().isMaximized())
+		if(chrome.app.window.current().isMaximized()) {
 			chrome.app.window.current().restore();
-		else
+			analytics.track('restore', 'click');
+		}
+		else {
 			chrome.app.window.current().maximize();
+			analytics.track('maximize', 'click');
+		}
 	});
 
 	//Close
 	$('.chrome-close').on('click', function(){
-		window.close();
+		analytics.track('close', 'click');
+		setTimeout(function(){
+			window.close();
+		}, 600);
 	});
 
 	//Drag chrome methods

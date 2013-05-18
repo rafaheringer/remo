@@ -100,10 +100,6 @@ masterPlayer.playerInit = function(){
 	//Start controls
 	this.menuControl();
 
-	//Binds
-	this.keyboardEvents();
-	this.mouseEvents();
-
 	//Start player
 	this.config.playlistInstance = new jPlayerPlaylist({
 			jPlayer: this.config.playerElement,
@@ -140,9 +136,23 @@ masterPlayer.playerInit = function(){
 			masterPlayer.setMusicInfo(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current]);
 		},
 		pause: function() {
+			//Set play
 			masterPlayer.config.playing = false;
+		},
+		seeking: function(a){
+			//Analytics
+			analytics.track('musicProgress', 'click');
+		},
+		volumechange: function(a) {
+			//Analytics
+			analytics.track('volume', 'click');
 		}
 	});
+
+	//Binds
+	this.keyboardEvents();
+	this.mouseEvents();
+	this.applyAnalytics();
 };
 
 //Menu control
@@ -430,10 +440,14 @@ masterPlayer.keyboardEvents = function(){
 			case 80: //p
 			case 32: //space
 			case 179: //Multimidia keyboard
-				if(masterPlayer.config.playing)
+				if(masterPlayer.config.playing) {
 					masterPlayer.config.playlistInstance.pause();
-				else
+					analytics.track('pauseMusic', 'keyboard', event.keyCode);
+				}
+				else {
 					masterPlayer.config.playlistInstance.play();
+					analytics.track('playMusic', 'keyboard', event.keyCode);
+				}
 				return false;
 				event.preventDefault();
 			break;
@@ -443,6 +457,7 @@ masterPlayer.keyboardEvents = function(){
 			case 40: //Bottom arrow
 			case 176: //Multimidia keyboard
 				masterPlayer.config.playlistInstance.next();
+				analytics.track('nextMusic', 'keyboard', event.keyCode);
 				return false;
 				event.preventDefault();
 			break;
@@ -452,6 +467,7 @@ masterPlayer.keyboardEvents = function(){
 			case 38: //Up arrow
 			case 177: //Multimidia keyboard
 				masterPlayer.config.playlistInstance.previous();
+				analytics.track('prevMusic', 'keyboard', event.keyCode);
 				return false;
 				event.preventDefault();
 			break;
@@ -459,15 +475,82 @@ masterPlayer.keyboardEvents = function(){
 	});
 };
 
-//Hide elements on mouse move
-masterPlayer.hideOnMouseMove = function(hide){
-	if(hide) {
-		return setTimeout(function(){
-			$('#show-QR-code, #menu, .jp-volume').addClass('hidden');
-		}, 10000);
-	} else {
-		$('#show-QR-code, #menu, .jp-volume').removeClass('hidden');
-	}
+//Apply analytics events
+masterPlayer.applyAnalytics = function() {
+	//Play music
+	//See keyboard events at masterPlayer.keyBoardEvents
+	$('.jp-play').on('click', function(){
+		analytics.track('playMusic', 'click');
+	});
+
+	//Pause music
+	//See keyboard events at masterPlayer.keyBoardEvents
+	$('.jp-pause').on('click', function(){
+		analytics.track('pauseMusic', 'click');
+	});
+
+	//Next music
+	//See keyboard events at masterPlayer.keyBoardEvents
+	$('.jp-next').on('click', function(){
+		analytics.track('nextMusic', 'click');
+	});
+
+	//Previous music
+	//See keyboard events at masterPlayer.keyBoardEvents
+	$('.jp-previous').on('click', function(){
+		analytics.track('prevMusic', 'click');
+	});
+
+	//Shuffle
+	$('.jp-shuffle').on('click', function(){
+		analytics.track('suffle', 'on');
+	});
+	$('.jp-shuffle-off').on('click', function(){
+		analytics.track('suffle', 'off');
+	});
+
+	//Repeat
+	$('.jp-repeat').on('click', function(){
+		analytics.track('repeat', 'on');
+	});
+	$('.jp-repeat-off').on('click', function(){
+		analytics.track('repeat', 'off');
+	});
+
+	//Music progress
+	//See event at masterPlayer.init: seeking event
+
+	//Mute
+	$('.jp-mute').on('click', function(){
+		analytics.track('mute', 'on');
+	});
+	$('.jp-unmute').on('click', function(){
+		analytics.track('mute', 'off');
+	});
+
+	//Volume Change
+	//See event at masterPlayer.init: volumechange event
+
+	//Chrome actions
+	//See events at masterPlayer: chromeWebInit and chromeApp.js
+
+	//qrCode actions
+	//See events at masterPlayer.qrCodeInt
+
+	//Change music
+	$('#playlist').on('click', 'li:not(.jp-playlist-current)', function(){
+		analytics.track('changeMusic', 'click');
+	});
+
+	//Open files
+	$('.menu-open-files').on('click', function(){
+		analytics.track('openFiles', 'click');
+	});
+
+	//About
+	$('.menu-info').on('click', function(){
+		analytics.track('openAbout', 'click');
+	});
 };
 
 //Bind mouse events
@@ -480,6 +563,17 @@ masterPlayer.mouseEvents = function(){
 		clearTimeout(mousemovePID);
 		mousemovePID = masterPlayer.hideOnMouseMove(true);
 	});
+};
+
+//Hide elements on mouse move
+masterPlayer.hideOnMouseMove = function(hide){
+	if(hide) {
+		return setTimeout(function(){
+			$('#show-QR-code, #menu, .jp-volume').addClass('hidden');
+		}, 10000);
+	} else {
+		$('#show-QR-code, #menu, .jp-volume').removeClass('hidden');
+	}
 };
 
 //Socket init
@@ -549,12 +643,20 @@ masterPlayer.qrCodeInit = function() {
 		$(this).addClass('showed');
 		$('.click-to-show-QR-code').hide();
 		$('#qrcode').fadeIn(100);
+
+		//Analytics
+		analytics.track('qrCode', 'on');
+
 		evt.stopPropagation();
 	}, function(evt){
 		$(this).removeClass('showed');
 		$('#qrcode').fadeOut(100, function(){
 			$('.click-to-show-QR-code').show();
 		});
+
+		//Analytics
+		analytics.track('qrCode', 'off');
+
 		evt.stopPropagation();
 	});
 
@@ -577,7 +679,7 @@ masterPlayer.chromeWebInit = function() {
 	});
 
 	//Prevent right-mouse-button click
-	document.oncontextmenu = new Function ("return false");
+	document.oncontextmenu = new Function("return false");
 
 	//Chrome actions
 	//==============
@@ -588,7 +690,6 @@ masterPlayer.chromeWebInit = function() {
 
 	//Maximize
 	$('.chrome-maximize').on('click', function(){
-
 		var
 			el = document.documentElement,
 			isFullScreen = 
@@ -605,8 +706,8 @@ masterPlayer.chromeWebInit = function() {
 				|| el.mozRequestFullScreen
 				|| el.webkitRequestFullScreen;
 
-		
 		isFullScreen ? cancel.call(document) : request.call(el);
+		analytics.track('fullscreen', isFullScreen ? 'off' : 'on');
 	});
 
 	//Minimize
