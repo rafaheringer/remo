@@ -1080,6 +1080,7 @@ body:before {
   -o-transition: opacity 100ms ease-in;
   transition: opacity 100ms ease-in;
   opacity: 0;
+  display: none;
   pointer-events: none;
   background: rgba(0, 0, 0, 0.5);
   color: #333333;
@@ -1089,12 +1090,13 @@ body:before {
   left: 0;
   top: 0;
 }
-/* line 581, src/masterPlayer.sass */
+/* line 582, src/masterPlayer.sass */
 .modal:target {
   opacity: 1;
+  display: block;
   pointer-events: auto;
 }
-/* line 585, src/masterPlayer.sass */
+/* line 587, src/masterPlayer.sass */
 .modal:target .modal-container {
   -webkit-animation-name: bounce;
   -moz-animation-name: bounce;
@@ -1102,7 +1104,7 @@ body:before {
   -o-animation-name: bounce;
   animation-name: bounce;
 }
-/* line 588, src/masterPlayer.sass */
+/* line 590, src/masterPlayer.sass */
 .modal .modal-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1121,33 +1123,33 @@ body:before {
   left: 50%;
   margin: -190px 0 0 -340px;
 }
-/* line 600, src/masterPlayer.sass */
+/* line 602, src/masterPlayer.sass */
 .modal .column {
   width: 45%;
   float: left;
   margin-right: 5%;
 }
-/* line 605, src/masterPlayer.sass */
+/* line 607, src/masterPlayer.sass */
 .modal .modal-actions {
   position: absolute;
   top: 15px;
   right: 15px;
 }
-/* line 610, src/masterPlayer.sass */
+/* line 612, src/masterPlayer.sass */
 .modal .modal-close {
   display: block;
 }
-/* line 613, src/masterPlayer.sass */
+/* line 615, src/masterPlayer.sass */
 .modal h2 {
   font-size: 32px;
   margin: 0 0 15px 0;
 }
-/* line 617, src/masterPlayer.sass */
+/* line 619, src/masterPlayer.sass */
 .modal p {
   font-size: 12px;
   margin: 15px 0 0 0;
 }
-/* line 621, src/masterPlayer.sass */
+/* line 623, src/masterPlayer.sass */
 .modal p a {
   color: #333333;
   text-decoration: underline;

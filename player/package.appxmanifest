@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="remomusicapp" Version="1.0.0.0" Publisher="CN=Rafa" />
+  <Properties>
+    <DisplayName>RemoMusic</DisplayName>
+    <PublisherDisplayName>Rafael Heringer</PublisherDisplayName>
+    <Logo>masterPlayer/images/storelogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" StartPage="masterPlayer/index.html">
+      <VisualElements DisplayName="RemoMusic" Logo="masterPlayer/images/app/256x256.jpg" SmallLogo="masterPlayer/images/smalllogo.png" Description="Control your local musics with your smartphone. Simple drag and drop your music folder into Remo.music and listen the best experience ever." ForegroundText="light" BackgroundColor="#61c4b0">
+        <DefaultTile ShowName="allLogos" ShortName="RemoMusic" />
+        <SplashScreen Image="masterPlayer/images/splashscreen.png" BackgroundColor="#61c4b0" />
+        <InitialRotationPreference>
+          <Rotation Preference="portrait" />
+          <Rotation Preference="landscape" />
+        </InitialRotationPreference>
+      </VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="musicLibrary" />
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

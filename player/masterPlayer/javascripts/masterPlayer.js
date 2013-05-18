@@ -242,11 +242,10 @@ masterPlayer.grabAlbumCover = function(ID3) {
 
 //Music info
 masterPlayer.setMusicInfo = function(music) {
-	var reader = new FileReader();
-	reader.readAsArrayBuffer(music.file);
-
-
 	if(typeof music.file == 'object') {
+		var reader = new FileReader();
+		reader.readAsArrayBuffer(music.file);
+
 		reader.onload = function(e) {
 			var dv = new jDataView(this.result);
 			var ID3 = {};
@@ -339,7 +338,7 @@ masterPlayer.fileTreeReader = function(files){
 
 	//Filesystem for upload trees
 	function traverseFileTree(file) {
-		if(file.type === 'audio/mp3') {
+		if(file.type === 'audio/mp3' || file.type === 'audio/mpeg') {
 			var fileName = file.name.replace(".mp3","");
 			var title = fileName;
 			var artist = null;
@@ -366,7 +365,6 @@ masterPlayer.fileTreeReader = function(files){
 			}, 200);
 		}
 	}
-
 
 	//Detect
 	for (var i=0; i < files.length; i++) {
@@ -421,11 +419,9 @@ masterPlayer.fileReaderInit = function() {
 			//Hide layer
 			$('#drag-drop-layer').removeClass('hover');
 
-			//var files = event.originalEvent.dataTransfer.files || event.dataTransfer.files,
-			var items = event.originalEvent.dataTransfer.items || event.dataTransfer.items;
+			var items = event.dataTransfer ? event.dataTransfer.items : (event.originalEvent.dataTransfer.items || event.originalEvent.dataTransfer.files);
 
 			masterPlayer.fileTreeReader(items);
-				
 
 			return false;
 		});

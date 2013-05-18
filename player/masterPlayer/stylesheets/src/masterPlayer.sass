@@ -569,6 +569,7 @@ body
 .modal
 	+transition(opacity 100ms ease-in)
 	opacity: 0
+	display: none
 	pointer-events: none
 	background: rgba(0,0,0,0.5)
 	color: $strong-text-color
@@ -580,6 +581,7 @@ body
 
 	&:target
 		opacity: 1
+		display: block
 		pointer-events: auto
 
 		.modal-container

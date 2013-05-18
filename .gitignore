@@ -22,6 +22,12 @@ node_modules
 ## Windows
 Desktop.ini
 Thumbs.db
+*.pfx
+*.user
+
+## Windows App
+bld
+bin
 
 ## Sublime
 *.sublime-workspace
