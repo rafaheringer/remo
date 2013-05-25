@@ -96,4 +96,38 @@ masterPlayer.windowsAppInit = function () {
 			}
 		});
 	});	
+
+	//Media transport controls
+	//========================
+	
+	//Disable WebKeyboard
+	$('body').off('keydown.musicControl');
+
+	// Assign the button object to mediaControls
+	mediaControls = Windows.Media.MediaControl;
+	
+	// Add an event listener for the Play, Pause Play/Pause toggle button
+	mediaControls.addEventListener("playpausetogglepressed", function(){
+		masterPlayer.config.playing ? masterPlayer.config.playlistInstance.pause() : masterPlayer.config.playlistInstance.play();
+	}, false);
+	
+	//Play
+	mediaControls.addEventListener("playpressed", function(){
+		masterPlayer.config.playlistInstance.play();
+	}, false);
+
+	//Pause
+	mediaControls.addEventListener("pausepressed", function(){
+		masterPlayer.config.playlistInstance.pause();
+	}, false);
+
+	// Enable the previous track button
+	mediaControls.addEventListener("previoustrackpressed", function(){
+		masterPlayer.config.playlistInstance.previous();
+	}, false);
+
+	// Enable the next track button
+	mediaControls.addEventListener("nexttrackpressed", function(){
+		masterPlayer.config.playlistInstance.next();
+	}, false);
 };

@@ -32,6 +32,11 @@
             </SupportedFileTypes>
           </FileTypeAssociation>
         </Extension>
+        <Extension Category="windows.backgroundTasks" StartPage="masterPlayer/index.html">
+          <BackgroundTasks>
+            <Task Type="audio" />
+          </BackgroundTasks>
+        </Extension>
       </Extensions>
       <ApplicationContentUriRules>
         <Rule Match="http://ws.audioscrobbler.com" Type="include" />

@@ -299,6 +299,12 @@ masterPlayer.setMusicInfo = function(music) {
 			$('.jp-music-name').html(ID3.title);
 			$('.jp-music-artist').html(ID3.artist);
 
+			//Media control for windows 8
+			if(yepnope.tests.windowsApp()) {
+				mediaControls.artistName = ID3.artist;
+				mediaControls.trackName = ID3.title;
+			}
+
 			//Get album info
 			masterPlayer.grabAlbumCover(ID3);
 		};
@@ -313,6 +319,12 @@ masterPlayer.setMusicInfo = function(music) {
 		//Set artist and title
 		$('.jp-music-name').html(ID3.title);
 		$('.jp-music-artist').html(ID3.artist);
+
+		//Media control for windows 8
+		if(yepnope.tests.windowsApp()) {
+			mediaControls.artistName = ID3.artist;
+			mediaControls.trackName = ID3.title;
+		}
 
 		//Get album info
 		masterPlayer.grabAlbumCover(ID3);
@@ -436,7 +448,7 @@ masterPlayer.fileReaderInit = function() {
 
 //Bind keyboard events
 masterPlayer.keyboardEvents = function(){
-	$('body').on('keydown', function(event){
+	$('body').on('keydown.musicControl', function(event){
 
 		switch(event.keyCode) {
 			//Play or pause
