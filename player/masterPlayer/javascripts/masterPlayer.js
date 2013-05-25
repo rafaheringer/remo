@@ -2,6 +2,93 @@
 //http://www.jplayer.org/latest/developer-guide/
 ////////////////////////////////////////////
 var newDate = new Date();
+var initialPlaylist = [
+		{
+		    title:"Cro Magnon Man",
+		    artist: "The Stark Palace",
+		    mp3:"http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3",
+		    file: "http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg"
+		},
+		{
+		    title:"Your Face",
+		    artist: "The Stark Palace",
+		    mp3:"http://www.jplayer.org/audio/mp3/TSP-05-Your_face.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/TSP-05-Your_face.ogg"
+		},
+		{
+		    title:"Cyber Sonnet",
+		    artist: "The Stark Palace",
+		    mp3:"http://www.jplayer.org/audio/mp3/TSP-07-Cybersonnet.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/TSP-07-Cybersonnet.ogg"
+		},
+		{
+		    title:"Tempered Song",
+		    artist: "Miow",
+		    mp3:"http://www.jplayer.org/audio/mp3/Miaow-01-Tempered-song.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/Miaow-01-Tempered-song.ogg"
+		},
+		{
+		    title:"Hidden",
+		    artist: "Miow",
+		    mp3:"http://www.jplayer.org/audio/mp3/Miaow-02-Hidden.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/Miaow-02-Hidden.ogg"
+		},
+		{
+		    title:"Lentement",
+		    artist: "Miow",
+		    mp3:"http://www.jplayer.org/audio/mp3/Miaow-03-Lentement.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/Miaow-03-Lentement.ogg"
+		},
+		{
+		    title:"Lismore",
+		    artist: "Miow",
+		    mp3:"http://www.jplayer.org/audio/mp3/Miaow-04-Lismore.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/Miaow-04-Lismore.ogg"
+		},
+		{
+		    title:"The Separation",
+		    artist: "Miow",
+		    mp3:"http://www.jplayer.org/audio/mp3/Miaow-05-The-separation.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/Miaow-05-The-separation.ogg"
+		},
+		{
+		    title:"Beside Me",
+		    artist: "Miow",
+		    mp3:"http://www.jplayer.org/audio/mp3/Miaow-06-Beside-me.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/Miaow-06-Beside-me.ogg"
+		},
+		{
+		    title:"Bubble",
+		    artist: "Miow",
+		    mp3:"http://www.jplayer.org/audio/mp3/Miaow-07-Bubble.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg"
+		},
+		{
+		    title:"Stirring of a Fool",
+		    artist: "Miow",
+		    mp3:"http://www.jplayer.org/audio/mp3/Miaow-08-Stirring-of-a-fool.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/Miaow-08-Stirring-of-a-fool.ogg"
+		},
+		{
+		    title:"Partir",
+		    artist: "Miow",
+		    mp3:"http://www.jplayer.org/audio/mp3/Miaow-09-Partir.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/Miaow-09-Partir.ogg"
+		},
+		{
+		    title:"Thin Ice",
+		    artist: "Miow",
+		    mp3:"http://www.jplayer.org/audio/mp3/Miaow-10-Thin-ice.mp3",
+		    oga:"http://www.jplayer.org/audio/ogg/Miaow-10-Thin-ice.ogg"
+		}
+]
+
+//Player list config
+//TODO
+if (yepnope.tests.windowsApp) {
+    initialPlaylist = null;
+}
 
 //Player start config
 masterPlayer.config = {
@@ -12,87 +99,8 @@ masterPlayer.config = {
 	playerSocket: null,
 	playerElement: '#remoMusicPlayer',
 	lastFmApiKey: 'f2923bd087687602324332057ed0473a',
-	initialMusic: [
-		{
-			title:"Cro Magnon Man",
-			artist: "The Stark Palace",
-			mp3:"http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3",
-			file: "http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg"
-		},
-		{
-			title:"Your Face",
-			artist: "The Stark Palace",
-			mp3:"http://www.jplayer.org/audio/mp3/TSP-05-Your_face.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/TSP-05-Your_face.ogg"
-		},
-		{
-			title:"Cyber Sonnet",
-			artist: "The Stark Palace",
-			mp3:"http://www.jplayer.org/audio/mp3/TSP-07-Cybersonnet.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/TSP-07-Cybersonnet.ogg"
-		},
-		{
-			title:"Tempered Song",
-			artist: "Miow",
-			mp3:"http://www.jplayer.org/audio/mp3/Miaow-01-Tempered-song.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/Miaow-01-Tempered-song.ogg"
-		},
-		{
-			title:"Hidden",
-			artist: "Miow",
-			mp3:"http://www.jplayer.org/audio/mp3/Miaow-02-Hidden.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/Miaow-02-Hidden.ogg"
-		},
-		{
-			title:"Lentement",
-			artist: "Miow",
-			mp3:"http://www.jplayer.org/audio/mp3/Miaow-03-Lentement.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/Miaow-03-Lentement.ogg"
-		},
-		{
-			title:"Lismore",
-			artist: "Miow",
-			mp3:"http://www.jplayer.org/audio/mp3/Miaow-04-Lismore.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/Miaow-04-Lismore.ogg"
-		},
-		{
-			title:"The Separation",
-			artist: "Miow",
-			mp3:"http://www.jplayer.org/audio/mp3/Miaow-05-The-separation.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/Miaow-05-The-separation.ogg"
-		},
-		{
-			title:"Beside Me",
-			artist: "Miow",
-			mp3:"http://www.jplayer.org/audio/mp3/Miaow-06-Beside-me.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/Miaow-06-Beside-me.ogg"
-		},
-		{
-			title:"Bubble",
-			artist: "Miow",
-			mp3:"http://www.jplayer.org/audio/mp3/Miaow-07-Bubble.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg"
-		},
-		{
-			title:"Stirring of a Fool",
-			artist: "Miow",
-			mp3:"http://www.jplayer.org/audio/mp3/Miaow-08-Stirring-of-a-fool.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/Miaow-08-Stirring-of-a-fool.ogg"
-		},
-		{
-			title:"Partir",
-			artist: "Miow",
-			mp3:"http://www.jplayer.org/audio/mp3/Miaow-09-Partir.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/Miaow-09-Partir.ogg"
-		},
-		{
-			title:"Thin Ice",
-			artist: "Miow",
-			mp3:"http://www.jplayer.org/audio/mp3/Miaow-10-Thin-ice.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/Miaow-10-Thin-ice.ogg"
-		}
-	]
+	initialMusic: initialPlaylist
+	
 };
 
 //Player init
@@ -114,14 +122,13 @@ masterPlayer.playerInit = function(){
 			removeTime: 0,
 			shuffleTime: 0
 		},
-		swfPath: "javascripts/vendor",
-		supplied: "oga, mp3, wav",
-		smoothPlayBar: true,
+		supplied: "mp3",
+		smoothPlayBar: false,
 		preload: 'metadata',
 		volume: 0.8,
 		errorAlerts: false,
+		solution: "html",
 		warningAlerts: false,
-		wmode: "window",
 		keyEnabled: false,
 		play: function(a){
 			//Scroll to music
@@ -338,7 +345,7 @@ masterPlayer.fileTreeReader = function(files){
 
 	//Filesystem for upload trees
 	function traverseFileTree(file) {
-		if(file.type === 'audio/mp3' || file.type === 'audio/mpeg') {
+		if(file.type === 'audio/mp3' || file.type === 'audio/mpeg' || file.contentType === 'audio/mpeg') {
 			var fileName = file.name.replace(".mp3","");
 			var title = fileName;
 			var artist = null;
@@ -635,25 +642,28 @@ masterPlayer.qrCodeInit = function() {
 	//qrCode
 	$('#qrcode').qrcode(CONFIG.nodeUrl + '/remote/' + masterPlayer.config.id);
 	
-	$('#show-QR-code').show().toggle(function(evt){
-		$(this).addClass('showed');
-		$('.click-to-show-QR-code').hide();
-		$('#qrcode').fadeIn(100);
+	$('#show-QR-code').show().on('click', function(event){
+		if( !$(this).hasClass('showed') ) {
 
-		//Analytics
-		analytics.track('qrCode', 'on');
+			$(this).addClass('showed');
+			$('.click-to-show-QR-code').hide();
+			$('#qrcode').fadeIn(100);
 
-		evt.stopPropagation();
-	}, function(evt){
-		$(this).removeClass('showed');
-		$('#qrcode').fadeOut(100, function(){
-			$('.click-to-show-QR-code').show();
-		});
+			//Analytics
+			analytics.track('qrCode', 'on');
+		}
 
-		//Analytics
-		analytics.track('qrCode', 'off');
+		else {
+			$(this).removeClass('showed');
+			$('#qrcode').fadeOut(100, function(){
+				$('.click-to-show-QR-code').show();
+			});
 
-		evt.stopPropagation();
+			//Analytics
+			analytics.track('qrCode', 'off');
+		}
+
+		event.stopPropagation();
 	});
 
 	$('body').on('click', function(){
@@ -661,51 +671,4 @@ masterPlayer.qrCodeInit = function() {
 			$('#show-QR-code').trigger('click');
 		}
 	});
-};
-
-//Chrome actions init
-masterPlayer.chromeWebInit = function() {
-	//Default binds
-	//=============
-
-	//Prevent Google Chrome scroll (its a bug?)
-	$('body').on('mousewheel', function(e){
-		if(!$(e.target).hasClass('jp-playlist') && !$(e.target).hasClass('jp-playlist-item') && e.target.nodeName != 'UL' )
-			e.preventDefault();
-	});
-
-	//Prevent right-mouse-button click
-	document.oncontextmenu = new Function("return false");
-
-	//Chrome actions
-	//==============
-	$('#chrome-actions').show();
-
-	//Close
-	$('.chrome-close').hide();
-
-	//Maximize
-	$('.chrome-maximize').on('click', function(){
-		var
-			el = document.documentElement,
-			isFullScreen = 
-				document.fullscreen
-				|| document.mozFullScreen
-				|| document.webkitIsFullScreen
-			cancel = 
-				document.exitFullscreen
-				|| document.mozCancelFullScreen
-				|| document.webkitCancelFullScreen
-
-			request =
-				el.requestFullScreen
-				|| el.mozRequestFullScreen
-				|| el.webkitRequestFullScreen;
-
-		isFullScreen ? cancel.call(document) : request.call(el);
-		analytics.track('fullscreen', isFullScreen ? 'off' : 'on');
-	});
-
-	//Minimize
-	$('.chrome-minimize').hide();
 };

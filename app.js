@@ -29,7 +29,7 @@ var allowCrossDomain = function(req, res, next) {
 
 app.configure(function(){
   app.use(allowCrossDomain);
-  app.set('port', process.env.PORT || 80);
+  app.set('port', process.env.PORT || 8888);
   app.set('views', __dirname + '/');
   app.set('view engine', 'html');
   app.engine('html', require('ejs').renderFile);            //Usa EJS com extensão .html

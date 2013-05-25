@@ -984,32 +984,34 @@ body:before {
   background: white;
   height: 100%;
   position: relative;
+  overflow: visible !important;
 }
-/* line 498, src/masterPlayer.sass */
+/* line 499, src/masterPlayer.sass */
 .jp-progress .jp-seek-bar .jp-play-bar .jp-current-time {
+  position: absolute;
   right: 0;
   margin: -15px -10px 0 0;
   display: none;
 }
 
-/* line 504, src/masterPlayer.sass */
+/* line 506, src/masterPlayer.sass */
 .jp-no-solution {
   display: none;
 }
 
-/* line 507, src/masterPlayer.sass */
+/* line 509, src/masterPlayer.sass */
 .jp-jplayer {
   display: none;
 }
 
-/* line 511, src/masterPlayer.sass */
+/* line 513, src/masterPlayer.sass */
 #show-QR-code {
   position: absolute;
   left: 12%;
   top: 75%;
   display: none;
 }
-/* line 517, src/masterPlayer.sass */
+/* line 519, src/masterPlayer.sass */
 #show-QR-code .qr-code {
   background: white;
   display: none;
@@ -1017,19 +1019,19 @@ body:before {
   border: 10px solid white;
   margin: -20px 0 0 0;
 }
-/* line 524, src/masterPlayer.sass */
+/* line 526, src/masterPlayer.sass */
 #show-QR-code .qr-code canvas {
   width: auto;
   height: 20%;
 }
-/* line 528, src/masterPlayer.sass */
+/* line 530, src/masterPlayer.sass */
 #show-QR-code .click-to-show-QR-code {
   background: url('../images/click-qrcode.png?1364439840') no-repeat left top;
   width: 152px;
   height: 51px;
 }
 
-/* line 534, src/masterPlayer.sass */
+/* line 536, src/masterPlayer.sass */
 #drag-drop-layer {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -1046,12 +1048,12 @@ body:before {
   padding: 5%;
   display: none;
 }
-/* line 547, src/masterPlayer.sass */
+/* line 549, src/masterPlayer.sass */
 #drag-drop-layer.hover {
   opacity: 1;
   display: block;
 }
-/* line 551, src/masterPlayer.sass */
+/* line 553, src/masterPlayer.sass */
 #drag-drop-layer .drag-drop-text {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1061,7 +1063,7 @@ body:before {
   height: 100%;
   position: relative;
 }
-/* line 558, src/masterPlayer.sass */
+/* line 560, src/masterPlayer.sass */
 #drag-drop-layer .drag-drop-text span {
   color: #666666;
   font-size: 3em;
@@ -1073,7 +1075,7 @@ body:before {
   text-align: center;
 }
 
-/* line 569, src/masterPlayer.sass */
+/* line 571, src/masterPlayer.sass */
 .modal {
   -webkit-transition: opacity 100ms ease-in;
   -moz-transition: opacity 100ms ease-in;
@@ -1090,13 +1092,13 @@ body:before {
   left: 0;
   top: 0;
 }
-/* line 582, src/masterPlayer.sass */
+/* line 584, src/masterPlayer.sass */
 .modal:target {
   opacity: 1;
   display: block;
   pointer-events: auto;
 }
-/* line 587, src/masterPlayer.sass */
+/* line 589, src/masterPlayer.sass */
 .modal:target .modal-container {
   -webkit-animation-name: bounce;
   -moz-animation-name: bounce;
@@ -1104,7 +1106,7 @@ body:before {
   -o-animation-name: bounce;
   animation-name: bounce;
 }
-/* line 590, src/masterPlayer.sass */
+/* line 592, src/masterPlayer.sass */
 .modal .modal-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1123,33 +1125,33 @@ body:before {
   left: 50%;
   margin: -190px 0 0 -340px;
 }
-/* line 602, src/masterPlayer.sass */
+/* line 604, src/masterPlayer.sass */
 .modal .column {
   width: 45%;
   float: left;
   margin-right: 5%;
 }
-/* line 607, src/masterPlayer.sass */
+/* line 609, src/masterPlayer.sass */
 .modal .modal-actions {
   position: absolute;
   top: 15px;
   right: 15px;
 }
-/* line 612, src/masterPlayer.sass */
+/* line 614, src/masterPlayer.sass */
 .modal .modal-close {
   display: block;
 }
-/* line 615, src/masterPlayer.sass */
+/* line 617, src/masterPlayer.sass */
 .modal h2 {
   font-size: 32px;
   margin: 0 0 15px 0;
 }
-/* line 619, src/masterPlayer.sass */
+/* line 621, src/masterPlayer.sass */
 .modal p {
   font-size: 12px;
   margin: 15px 0 0 0;
 }
-/* line 623, src/masterPlayer.sass */
+/* line 625, src/masterPlayer.sass */
 .modal p a {
   color: #333333;
   text-decoration: underline;

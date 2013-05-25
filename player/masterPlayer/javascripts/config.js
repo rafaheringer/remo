@@ -8,8 +8,22 @@ var CONFIG = {
 
 var masterPlayer = {};
 
+//console.log(Windows);
+
 //Load resources
 //==============
+
+//Tests
+yepnope.tests = {
+	windowsApp: function(){ return typeof Windows != 'undefined'; },
+	chromeApp: function(){ return typeof chrome != 'undefined' && typeof chrome.app.runtime != 'undefined'; },
+	webApp: function(){ return (!this.windowsApp() && !this.chromeApp()); },
+	fullScreen: function(){ return document.documentElement.webkitRequestFullScreen || document.documentElement.mozRequestFullScreen || document.documentElement.requestFullScreen; },
+	fileReader: function(){ return window.File && window.FileReader && window.FileList && window.Blob; },
+	online: function(){ return navigator.onLine; },
+	localhost: function() { return window.location.hostname == 'localhost'; }
+};
+
 
 //Mandatory
 yepnope({
@@ -24,45 +38,69 @@ yepnope({
 yepnope({
 	load: '/masterPlayer/javascripts/masterPlayer.js',
 	callback: function(){
+		//Init player
 		masterPlayer.playerInit();
 
-		//Is an app for Google?
-		if(typeof chrome != 'undefined' && typeof chrome.app.runtime != 'undefined') {
-			yepnope({
-				load: '/masterPlayer/javascripts/chromeApp.js',
-				callback: function() {
+		//Is a app for Google?
+		yepnope({
+			test: yepnope.tests.chromeApp(),
+			yep: {
+				chromeApp: '/masterPlayer/javascripts/chromeApp.js'
+			},
+			callback: {
+				chromeApp: function(){
 					masterPlayer.chromeAppInit();
 				}
-			});
-		}
-
-		//Is web?
-		else {
-			//Have fullscreen API?
-			if(document.documentElement.webkitRequestFullScreen || document.documentElement.mozRequestFullScreen || document.documentElement.requestFullScreen) {
-				masterPlayer.chromeWebInit();
 			}
+		});
 
-		}
-		
+		//Is a Windows app?
+		yepnope({
+			test: yepnope.tests.windowsApp(),
+			yep: {
+				windowsApp: '/masterPlayer/javascripts/windowsApp.js'
+			},
+			callback: {
+				windowsApp: function(){
+					masterPlayer.windowsAppInit();
+				}
+			}
+		});
+
+		//Is web app?
+		yepnope({
+			test: yepnope.tests.webApp(),
+			yep: {
+				windowsApp: '/masterPlayer/javascripts/webApp.js'
+			},
+			callback: {
+				windowsApp: function(){
+					masterPlayer.webAppInit();
+				}
+			}
+		});
+
 		//Have FileReader?
-		if(window.File && window.FileReader && window.FileList && window.Blob) {
-			yepnope({
-				load: '/masterPlayer/javascripts/vendor/jdataview.js',
-				callback: function() {
+		yepnope({
+			test: yepnope.tests.fileReader(),
+			yep: {
+				jdataview: '/masterPlayer/javascripts/vendor/jdataview.js'
+			},
+			callback: {
+				jdataview: function(){
 					masterPlayer.fileReaderInit();
 				}
-			});
-		}
+			}
+		});
 
-		//Have connection and not a localhost?
+		//Have connection and not a localhost AND not a Windows APP?
 		yepnope({
-			test: navigator.onLine && window.location.hostname != 'localhost',
+			test: yepnope.tests.online() && !yepnope.tests.localhost() && !yepnope.tests.windowsApp(),
 			yep: {
-				'analytics': '/masterPlayer/javascripts/analytics.js'
+				analytics: '/masterPlayer/javascripts/analytics.js'
 			},
 			nope: {
-				'analytics': '/masterPlayer/javascripts/analytics.offline.js'
+				analytics: '/masterPlayer/javascripts/analytics.offline.js'
 			}
 		});
 	}
@@ -70,18 +108,31 @@ yepnope({
 
 //Have connection?
 yepnope({
-	test: navigator.onLine,
+	test: yepnope.tests.online(),
 	yep: {
-		'socket': '/masterPlayer/javascripts/vendor/socket.io.js',
-		'qrcodecore': '/masterPlayer/javascripts/vendor/qrcode.js',
-		'jqueryqrcode': '/masterPlayer/javascripts/vendor/jquery.qrcode.js'
+		socket: '/masterPlayer/javascripts/vendor/socket.io.js',
+		qrcodecore: '/masterPlayer/javascripts/vendor/qrcode.js',
+		jqueryqrcode: '/masterPlayer/javascripts/vendor/jquery.qrcode.js'
 	},
 	callback: {
-		'socket': function(){
+		socket: function(){
 			masterPlayer.socketInit();
 		},
-		'jqueryqrcode': function(){
+		jqueryqrcode: function(){
 			masterPlayer.qrCodeInit();
 		}
 	}
 });
+
+//Windows App Initial Binds
+if(yepnope.tests.windowsApp()) {
+	WinJS.Application.start();
+	WinJS.Application.addEventListener("activated", function (e) {
+		var PID = setInterval(function(){
+			if(typeof masterPlayer.windowsApp != 'undefined') {
+				masterPlayer.windowsApp.activated(e);
+				clearInterval(PID);
+			}
+		}, 100);
+	}, false);
+}

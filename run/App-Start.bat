@@ -2,3 +2,4 @@
 
 cd ./../
 node app
+pause
