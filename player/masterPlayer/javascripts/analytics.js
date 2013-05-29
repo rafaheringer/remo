@@ -1,3 +1,5 @@
+"use strict";
+
 //Google Analytics support
 //========================
 var _gaq = _gaq || [];

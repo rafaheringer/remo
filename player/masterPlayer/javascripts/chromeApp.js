@@ -1,3 +1,5 @@
+﻿"use strict";
+
 masterPlayer.chromeAppInit = function() {
 	this.chromeApp = {
 		startDrag: null,

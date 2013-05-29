@@ -1,3 +1,5 @@
+ï»¿"use strict";
+
 masterPlayer.windowsApp = {
 	randomMusicFolder: function(){
 		//Open random music folder from library
@@ -12,7 +14,7 @@ masterPlayer.windowsApp = {
 				var newListFolder = [];
 
 				items.forEach(function (item) {
-					//Verifica se é do tipo pasta
+					//Verifica se Ã© do tipo pasta
 					if (item.isOfType(Windows.Storage.StorageItemTypes.folder)) {
 						//Adiciona no array
 						folderList.push(item);
@@ -24,7 +26,7 @@ masterPlayer.windowsApp = {
 			};
 
 			var getRandomItem = function (folders) {
-				//Pega uma pasta randôminca
+				//Pega uma pasta randÃ´minca
 				var randomNumber = Math.floor((Math.random() * folders.length));
 				var selectedFolder = folders[randomNumber];
 
@@ -32,8 +34,8 @@ masterPlayer.windowsApp = {
 			};
 
 			var getFolderFiles = function (folder) {
-				//Lê os arquivos dela
-				//TODO: Verificar se não houver pastas com músicas, começar a percorrer subpastas
+				//LÃª os arquivos dela
+				//TODO: Verificar se nÃ£o houver pastas com mÃºsicas, comeÃ§ar a percorrer subpastas
 				folder.getFilesAsync().then(function (files) {
 					if (files.length == 0) {
 						process(items);
@@ -56,9 +58,8 @@ masterPlayer.windowsApp = {
 	},
 	activated: function(event) {
 		if (event.detail.kind === Windows.ApplicationModel.Activation.ActivationKind.file) {
-			activatedAction = true;
 			masterPlayer.fileTreeReader(event.detail.files);
-		} else {
+		} else if(event.detail.kind == Windows.ApplicationModel.Activation.ActivationKind.launch) {
 			masterPlayer.windowsApp.randomMusicFolder();
 		}
 	}
@@ -104,7 +105,7 @@ masterPlayer.windowsAppInit = function () {
 	$('body').off('keydown.musicControl');
 
 	// Assign the button object to mediaControls
-	mediaControls = Windows.Media.MediaControl;
+	
 	
 	// Add an event listener for the Play, Pause Play/Pause toggle button
 	mediaControls.addEventListener("playpausetogglepressed", function(){
@@ -121,6 +122,11 @@ masterPlayer.windowsAppInit = function () {
 		masterPlayer.config.playlistInstance.pause();
 	}, false);
 
+	//Stop
+	mediaControls.addEventListener("stoppressed", function(){
+		masterPlayer.config.playlistInstance.pause();
+	}, false);
+
 	// Enable the previous track button
 	mediaControls.addEventListener("previoustrackpressed", function(){
 		masterPlayer.config.playlistInstance.previous();
@@ -130,4 +136,5 @@ masterPlayer.windowsAppInit = function () {
 	mediaControls.addEventListener("nexttrackpressed", function(){
 		masterPlayer.config.playlistInstance.next();
 	}, false);
+
 };

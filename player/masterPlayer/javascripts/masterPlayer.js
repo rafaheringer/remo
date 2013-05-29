@@ -1,3 +1,5 @@
+﻿"use strict";
+
 //Player MASTER
 //http://www.jplayer.org/latest/developer-guide/
 ////////////////////////////////////////////
@@ -138,6 +140,8 @@ masterPlayer.playerInit = function(){
 
 			//Set play
 			masterPlayer.config.playing = true;
+			if(yepnope.tests.windowsApp())
+				mediaControls.isPlaying = true;
 
 			//Get and set Music info
 			masterPlayer.setMusicInfo(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current]);
@@ -145,6 +149,8 @@ masterPlayer.playerInit = function(){
 		pause: function() {
 			//Set play
 			masterPlayer.config.playing = false;
+			if(yepnope.tests.windowsApp())
+				mediaControls.isPlaying = false;
 		},
 		seeking: function(a){
 			//Analytics
@@ -183,7 +189,7 @@ masterPlayer.menuControl = function() {
 //Grab album cover from WEB and put in player
 masterPlayer.grabAlbumCover = function(ID3) {
 	//info.title and info.artist required; info.album prefer
-	if(navigator.onLine) {
+	if(yepnope.tests.online() && !yepnope.tests.windowsApp()) {
 		var setImageCover = function(src) {
 			var oldImage = $('.jp-music-cover img'),
 				backupImage = oldImage.attr('src'),
@@ -595,6 +601,8 @@ masterPlayer.hideOnMouseMove = function(hide){
 masterPlayer.socketInit = function(){
 	//Open socket for player
 	this.config.playerSocket = io.connect(CONFIG.nodeUrl + '/player');
+
+	console.log(CONFIG.nodeUrl + '/player');
 
 	//system messages
 	this.config.playerSocket.on('message', function(data){

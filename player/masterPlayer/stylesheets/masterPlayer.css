@@ -1,4 +1,4 @@
-/*Site: Remo.music
+﻿/*Site: Remo.music
  *Package: Remote Player Package
  *Author: Rafael Heringer Carvalho
  *Version: 1.0
@@ -712,7 +712,7 @@ body:before {
 /* line 281, src/masterPlayer.sass */
 #playlist .playlist-container {
   height: 100%;
-  padding-right: 10px;
+  padding-right: 20px;
   overflow: auto;
 }
 /* line 286, src/masterPlayer.sass */

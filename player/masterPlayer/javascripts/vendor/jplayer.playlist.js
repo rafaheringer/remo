@@ -1,3 +1,4 @@
+﻿"use strict";
 /*
  * Playlist Object for the jPlayer Plugin
  * http://www.jplayer.org
@@ -22,6 +23,8 @@
  * Itens modfied:
  * - Callback for previous and next musics (options onPlay, onPause, onNext and onPrevious)
  */
+
+var jPlayerPlaylist;
 
 (function($, undefined) {
 

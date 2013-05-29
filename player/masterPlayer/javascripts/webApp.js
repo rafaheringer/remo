@@ -1,3 +1,5 @@
+﻿"use strict";
+
 masterPlayer.webAppInit = function() {
 	//Default binds
 	//=============

@@ -1,3 +1,5 @@
+﻿"use strict";
+
 //Global config
 //=============
 var CONFIG = {
@@ -7,8 +9,6 @@ var CONFIG = {
 };
 
 var masterPlayer = {};
-
-//console.log(Windows);
 
 //Load resources
 //==============
@@ -23,7 +23,6 @@ yepnope.tests = {
 	online: function(){ return navigator.onLine; },
 	localhost: function() { return window.location.hostname == 'localhost'; }
 };
-
 
 //Mandatory
 yepnope({
@@ -108,7 +107,7 @@ yepnope({
 
 //Have connection?
 yepnope({
-	test: yepnope.tests.online(),
+	test: yepnope.tests.online() && !yepnope.tests.windowsApp(),
 	yep: {
 		socket: '/masterPlayer/javascripts/vendor/socket.io.js',
 		qrcodecore: '/masterPlayer/javascripts/vendor/qrcode.js',
@@ -126,7 +125,13 @@ yepnope({
 
 //Windows App Initial Binds
 if(yepnope.tests.windowsApp()) {
+	var mediaControls;
+	mediaControls = Windows.Media.MediaControl;
+
+	//Start Application
 	WinJS.Application.start();
+
+	//On open application
 	WinJS.Application.addEventListener("activated", function (e) {
 		var PID = setInterval(function(){
 			if(typeof masterPlayer.windowsApp != 'undefined') {

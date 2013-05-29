@@ -47,7 +47,10 @@
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <TargetPlatformVersion>8.0</TargetPlatformVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>RemoMusic_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>RemoMusic_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxPackageDir>C:\Users\Rafa\Documents\GitHub\remo\build\WindowsPackage\</AppxPackageDir>
+    <PackageCertificateThumbprint>D255742A56612213A51499423F7E0AB21A845763</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -95,7 +98,7 @@
     <Content Include="masterPlayer\images\app\70x70.png" />
     <Content Include="masterPlayer\images\app\868x420.png" />
     <Content Include="masterPlayer\images\app\90x90.png" />
-    <Content Include="masterPlayer\images\BadgeLogo.scale-180.png" />
+    <Content Include="masterPlayer\images\BadgeLogo.png" />
     <Content Include="masterPlayer\images\bg.jpg" />
     <Content Include="masterPlayer\images\click-qrcode.png" />
     <Content Include="masterPlayer\images\default-cover.jpg" />
@@ -137,45 +140,22 @@
     <Content Include="masterPlayer\images\WideLogo.scale-180.png" />
     <Content Include="masterPlayer\images\WideLogo.scale-80.png" />
     <Content Include="masterPlayer\index.html" />
-    <Content Include="masterPlayer\javascripts\analytics.js" />
     <Content Include="masterPlayer\javascripts\analytics.offline.js" />
-    <Content Include="masterPlayer\javascripts\background.js" />
-    <Content Include="masterPlayer\javascripts\chromeApp.js" />
     <Content Include="masterPlayer\javascripts\config.js" />
     <Content Include="masterPlayer\javascripts\masterPlayer.js" />
     <Content Include="masterPlayer\javascripts\vendor\jdataview.js" />
     <Content Include="masterPlayer\javascripts\vendor\jplayer.playlist.js" />
-    <Content Include="masterPlayer\javascripts\vendor\Jplayer.swf" />
     <Content Include="masterPlayer\javascripts\vendor\jquery.jplayer.min.js" />
     <Content Include="masterPlayer\javascripts\vendor\jquery.js" />
     <Content Include="masterPlayer\javascripts\vendor\jquery.qrcode.js" />
     <Content Include="masterPlayer\javascripts\vendor\qrcode.js" />
     <Content Include="masterPlayer\javascripts\vendor\socket.io.js" />
     <Content Include="masterPlayer\javascripts\vendor\yepnope.1.5.4-min.js" />
-    <Content Include="masterPlayer\javascripts\webApp.js" />
     <Content Include="masterPlayer\javascripts\windowsApp.js" />
     <Content Include="masterPlayer\stylesheets\animate.css" />
     <Content Include="masterPlayer\stylesheets\masterPlayer.css" />
-    <Content Include="masterPlayer\stylesheets\src\masterPlayer.sass" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\bouncing\_bouncing-entrances.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\bouncing\_bouncing-exits.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\fading\_fading-entrances.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\fading\_fading-exits.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\rotating\_rotating-entrances.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\rotating\_rotating-exits.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\_attention-seekers.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\_bouncing.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\_classes.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\_fading.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\_flippers.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\_lightspeed.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\_rotating.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\animate\_specials.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\_animate.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\_core.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\animation\_shared.scss" />
-    <Content Include="masterPlayer\stylesheets\src\plugins\_animation.scss" />
-    <Content Include="masterPlayer\stylesheets\src\_fonts.sass" />
+    <None Include="RemoMusic_StoreKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment
