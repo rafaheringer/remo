@@ -177,7 +177,9 @@ masterPlayer.menuControl = function() {
 
 	//On open folder
 	$('#open-files').on('change', function(event){
-		masterPlayer.fileTreeReader(event.target.files);
+	    masterPlayer.fileTreeReader(event.target.files, function () {
+	        masterPlayer.config.playlistInstance.play();
+	    });
 	});
 
 	//Open credits
@@ -338,7 +340,7 @@ masterPlayer.setMusicInfo = function(music) {
 };
 
 //FileTree reader
-masterPlayer.fileTreeReader = function(files){
+masterPlayer.fileTreeReader = function(files, callback){
 	var playList = [],
 		timeOutForDone = -1;
 
@@ -384,8 +386,10 @@ masterPlayer.fileTreeReader = function(files){
 			timeOutForDone = setTimeout( function(){
 				//Play the playlist
 				if(playList.length) {
-					masterPlayer.config.playlistInstance.setPlaylist(playList);
-					masterPlayer.config.playlistInstance.play();
+				    masterPlayer.config.playlistInstance.setPlaylist(playList);
+				    if (typeof callback == 'function') {
+				        callback.call(this);
+				    }
 				}
 			}, 200);
 		}
@@ -446,7 +450,9 @@ masterPlayer.fileReaderInit = function() {
 
 			var items = event.dataTransfer ? event.dataTransfer.items : (event.originalEvent.dataTransfer.items || event.originalEvent.dataTransfer.files);
 
-			masterPlayer.fileTreeReader(items);
+			masterPlayer.fileTreeReader(items, function () {
+			    masterPlayer.config.playlistInstance.play();
+			});
 
 			return false;
 		});
@@ -579,7 +585,7 @@ masterPlayer.mouseEvents = function(){
 	//Hide elements when mouse dont move
 	var mousemovePID = this.hideOnMouseMove(true);
 	
-	$('html').on('mousemove', function(){
+	$('html').on('mousemove touchstart', function(){
 		masterPlayer.hideOnMouseMove(false);
 		clearTimeout(mousemovePID);
 		mousemovePID = masterPlayer.hideOnMouseMove(true);

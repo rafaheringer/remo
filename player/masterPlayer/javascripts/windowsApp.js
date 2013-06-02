@@ -58,7 +58,8 @@ masterPlayer.windowsApp = {
 	},
 	activated: function(event) {
 		if (event.detail.kind === Windows.ApplicationModel.Activation.ActivationKind.file) {
-			masterPlayer.fileTreeReader(event.detail.files);
+		    masterPlayer.fileTreeReader(event.detail.files);
+		    masterPlayer.config.playlistInstance.play();
 		} else if(event.detail.kind == Windows.ApplicationModel.Activation.ActivationKind.launch) {
 			masterPlayer.windowsApp.randomMusicFolder();
 		}
@@ -88,11 +89,12 @@ masterPlayer.windowsAppInit = function () {
 							
 						} else {
 							musicList.push(item);
-							//masterPlayer.fileTreeReader(items);
 						}
 					});
 
-					masterPlayer.fileTreeReader(musicList);
+					masterPlayer.fileTreeReader(musicList, function () {
+					    masterPlayer.config.playlistInstance.play();
+					});
 				});
 			}
 		});
