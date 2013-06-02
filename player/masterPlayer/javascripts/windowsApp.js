@@ -58,10 +58,36 @@ masterPlayer.windowsApp = {
 	},
 	activated: function(event) {
 		if (event.detail.kind === Windows.ApplicationModel.Activation.ActivationKind.file) {
-		    masterPlayer.fileTreeReader(event.detail.files);
-		    masterPlayer.config.playlistInstance.play();
-		} else if(event.detail.kind == Windows.ApplicationModel.Activation.ActivationKind.launch) {
+		    //Ready
+		    masterPlayer.fileTreeReader(event.detail.files, function(){
+				//Play
+		    	masterPlayer.config.playlistInstance.play();
+		    });
+
+		    //Add charm
+			WinJS.Application.onsettings = function (e) {
+				e.detail.applicationcommands = { "privacy": { title: "Privacy Policy", href: "/masterPlayer/privacy.html" } };
+				WinJS.UI.SettingsFlyout.populateSettings(e);
+			};
+		} 
+
+		else if(event.detail.kind == Windows.ApplicationModel.Activation.ActivationKind.launch) {
+			//Random music play
 			masterPlayer.windowsApp.randomMusicFolder();
+
+			//Add charm
+			WinJS.Application.onsettings = function (e) {
+				//e.detail.applicationcommands = { "privacy": { title: "Privacy Policy", href: "/masterPlayer/privacy.html" } };
+				var vector = e.detail.e.request.applicationCommands;
+				var cmd1 = new Windows.UI.ApplicationSettings.SettingsCommand("privacy", "privacy", function () {
+					window.open('https://github.com/rafaheringer/remo/blob/master/README-PrivacyPolicy.md');
+				});
+            	vector.append(cmd1);
+				WinJS.UI.SettingsFlyout.populateSettings(e);
+			};
+
+			WinJS.Application.start();
+
 		}
 	}
 };

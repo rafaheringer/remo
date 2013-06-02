@@ -585,11 +585,12 @@ masterPlayer.mouseEvents = function(){
 	//Hide elements when mouse dont move
 	var mousemovePID = this.hideOnMouseMove(true);
 	
-	$('html').on('mousemove touchstart', function(){
-		masterPlayer.hideOnMouseMove(false);
-		clearTimeout(mousemovePID);
-		mousemovePID = masterPlayer.hideOnMouseMove(true);
-	});
+	if(!yepnope.tests.windowsApp())
+		$('html').on('mousemove touchstart', function(){
+			masterPlayer.hideOnMouseMove(false);
+			clearTimeout(mousemovePID);
+			mousemovePID = masterPlayer.hideOnMouseMove(true);
+		});
 };
 
 //Hide elements on mouse move

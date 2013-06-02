@@ -139,5 +139,7 @@ if(yepnope.tests.windowsApp()) {
 				clearInterval(PID);
 			}
 		}, 100);
+
+		WinJS.Application.start();
 	}, false);
 }

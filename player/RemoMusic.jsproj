@@ -152,6 +152,7 @@
     <Content Include="masterPlayer\javascripts\vendor\socket.io.js" />
     <Content Include="masterPlayer\javascripts\vendor\yepnope.1.5.4-min.js" />
     <Content Include="masterPlayer\javascripts\windowsApp.js" />
+    <Content Include="masterPlayer\privacy.html" />
     <Content Include="masterPlayer\stylesheets\animate.css" />
     <Content Include="masterPlayer\stylesheets\masterPlayer.css" />
     <None Include="RemoMusic_StoreKey.pfx" />
