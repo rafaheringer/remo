@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="26470RafaelHeringerCarval.RemoMusicPlayer" Version="1.0.1.3" Publisher="CN=8481C179-6A12-4FA3-B823-4595BD710E47" />
+  <Identity Name="26470RafaelHeringerCarval.RemoMusicPlayer" Version="1.0.1.4" Publisher="CN=8481C179-6A12-4FA3-B823-4595BD710E47" />
   <Properties>
     <DisplayName>Remo Music Player</DisplayName>
     <PublisherDisplayName>Rafael Heringer Carvalho</PublisherDisplayName>

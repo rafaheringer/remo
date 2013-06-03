@@ -79,7 +79,7 @@ masterPlayer.windowsApp = {
 			WinJS.Application.onsettings = function (e) {
 				//e.detail.applicationcommands = { "privacy": { title: "Privacy Policy", href: "/masterPlayer/privacy.html" } };
 				var vector = e.detail.e.request.applicationCommands;
-				var cmd1 = new Windows.UI.ApplicationSettings.SettingsCommand("privacy", "privacy", function () {
+				var cmd1 = new Windows.UI.ApplicationSettings.SettingsCommand("privacy", "Privacy Policy", function () {
 					window.open('https://github.com/rafaheringer/remo/blob/master/README-PrivacyPolicy.md');
 				});
             	vector.append(cmd1);
