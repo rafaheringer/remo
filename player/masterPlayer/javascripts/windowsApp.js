@@ -1,4 +1,5 @@
-﻿"use strict";
+﻿/// <reference path="_references.js" />
+"use strict";
 
 masterPlayer.windowsApp = {
 	randomMusicFolder: function(){

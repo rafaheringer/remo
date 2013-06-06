@@ -1,4 +1,5 @@
-﻿"use strict";
+﻿/// <reference path="_references.js" />
+"use strict";
 
 //Player MASTER
 //http://www.jplayer.org/latest/developer-guide/
@@ -188,33 +189,48 @@ masterPlayer.menuControl = function() {
 	});
 };
 
-//Grab album cover from WEB and put in player
-masterPlayer.grabAlbumCover = function(ID3) {
+//Set album cover
+masterPlayer.setAlbumCover = function (src) {
+	var oldImage = $('.jp-music-cover img'),
+			backupImage = oldImage.attr('src'),
+			backupWidth = oldImage.attr('width'),
+			backupHeight = oldImage.attr('height'),
+			newImage = document.createElement('img');
+
+	newImage.src = src;
+	newImage.setAttribute('width', backupWidth);
+	newImage.setAttribute('height', backupHeight);
+	oldImage.remove();
+	$(newImage)
+		.appendTo('.jp-fake-image')
+		.css({ 'opacity': 0.01, 'display': 'block' });
+
+	newImage.onload = function () {
+		$(newImage).animate({ 'opacity': 1 }, 600, function () {
+			$('.jp-fake-image').css('background-image', 'url("' + src + '")');
+		});
+	};
+};
+
+//Grab album cover from WEB or file and put in player
+masterPlayer.grabAlbumCover = function (ID3) {
+	var _self = this;
+
+    //info.file for WIN8 apps
+	if(yepnope.tests.windowsApp()){
+		ID3.file.getThumbnailAsync(Windows.Storage.FileProperties.ThumbnailMode.musicView, 70).done(function (imageProperties) {
+			if (imageProperties && imageProperties.type !== 1) {
+				_self.setAlbumCover(URL.createObjectURL(imageProperties));
+			} else {
+				$('.jp-fake-image').css('background-image', 'none');
+				$('.jp-music-cover img').animate({ 'opacity': 0.01 }, 600);
+			}
+		});
+	}
+
 	//info.title and info.artist required; info.album prefer
-	if(yepnope.tests.online() && !yepnope.tests.windowsApp()) {
-		var setImageCover = function(src) {
-			var oldImage = $('.jp-music-cover img'),
-				backupImage = oldImage.attr('src'),
-				backupWidth = oldImage.attr('width'),
-				backupHeight = oldImage.attr('height'),
-				newImage = document.createElement('img');
-
-			newImage.src = src;
-			newImage.setAttribute('width', backupWidth);
-			newImage.setAttribute('height', backupHeight);
-			oldImage.remove();
-			$(newImage)
-				.appendTo('.jp-fake-image')
-				.css({'opacity': 0.01, 'display': 'block'});
-
-			newImage.onload = function(){
-				$(newImage).animate({'opacity': 1}, 600, function(){
-				 	$('.jp-fake-image').css('background-image','url("' + src + '")');
-				});
-			};
-		};
-
-
+	else if(yepnope.tests.online()) {
+		
 		//Get album info
 		$.ajax({
 			url: 'http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=' + masterPlayer.config.lastFmApiKey + '&artist=' + ID3.artist + '&track=' + ID3.title + '&format=json',
@@ -235,7 +251,7 @@ masterPlayer.grabAlbumCover = function(ID3) {
 						};
 
 						xhr.onload = function(e) {
-							setImageCover(window.webkitURL.createObjectURL(this.response));
+							_self.setAlbumCover(window.webkitURL.createObjectURL(this.response));
 						};
 
 						xhr.send();
@@ -243,12 +259,12 @@ masterPlayer.grabAlbumCover = function(ID3) {
 
 					//Normal flow for create image
 					else {
-						setImageCover(result.track.album.image[1]['#text']);
+						_self.setAlbumCover(result.track.album.image[1]['#text']);
 					}
 
 				} else {
 					$('.jp-fake-image').css('background-image','none');
-					$('.jp-music-cover img').attr('src','').animate({'opacity': 0.01}, 600);
+					$('.jp-music-cover img').animate({'opacity': 0.01}, 600);
 				}
 			}
 		});
@@ -281,7 +297,8 @@ masterPlayer.setMusicInfo = function(music) {
 					title: dv.getString(30, dv.tell()),
 					artist: dv.getString(30, dv.tell()),
 					album: dv.getString(30, dv.tell()),
-					year: dv.getString(4, dv.tell())
+					year: dv.getString(4, dv.tell()),
+					file: music.file
 				};
 
 			}
@@ -292,6 +309,7 @@ masterPlayer.setMusicInfo = function(music) {
 					title: title,
 					artist: artist,
 					album: '',
+					file: music.file,
 					year: ''
 				};
 			}
@@ -311,6 +329,7 @@ masterPlayer.setMusicInfo = function(music) {
 			if(yepnope.tests.windowsApp()) {
 				mediaControls.artistName = ID3.artist;
 				mediaControls.trackName = ID3.title;
+				ID3.properties = music.file.properties;
 			}
 
 			//Get album info
@@ -320,6 +339,7 @@ masterPlayer.setMusicInfo = function(music) {
 		var ID3 = {
 			title: music.title,
 			artist: music.artist,
+			file: music.file,
 			album: '',
 			year: ''
 		};
@@ -582,15 +602,16 @@ masterPlayer.applyAnalytics = function() {
 
 //Bind mouse events
 masterPlayer.mouseEvents = function(){
-	//Hide elements when mouse dont move
-	var mousemovePID = this.hideOnMouseMove(true);
-	
-	if(!yepnope.tests.windowsApp())
-		$('html').on('mousemove touchstart', function(){
+	if (!yepnope.tests.windowsApp()) {
+		//Hide elements when mouse dont move
+		var mousemovePID = this.hideOnMouseMove(true);
+
+		$('html').on('mousemove touchstart', function () {
 			masterPlayer.hideOnMouseMove(false);
 			clearTimeout(mousemovePID);
 			mousemovePID = masterPlayer.hideOnMouseMove(true);
 		});
+	}
 };
 
 //Hide elements on mouse move
