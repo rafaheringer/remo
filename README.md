@@ -5,7 +5,8 @@ Control your local musics with your smartphone. Simple drag and drop your music 
 
 Get the most lightweight and beautiful music player now!
 
-*	[App in Chrome Webstore](https://chrome.google.com/webstore/detail/remo-music-player/ajilpdcmebalpffmjjopcingplogifhb)
+*	[Windows 8 App](http://apps.microsoft.com/windows/en-us/app/remo-music-player/da5568e7-e1e6-403c-b77f-11a98af53b68)
+*	[Chrome Webstore](https://chrome.google.com/webstore/detail/remo-music-player/ajilpdcmebalpffmjjopcingplogifhb)
 *	[Online Anywhere App](http://remomusic.herokuapp.com) - For Chrome
 
 -----------------
@@ -17,15 +18,6 @@ You can use keyboard shortcuts:
 	**up** or **down** arrow: select music from playlist
 
 Remo.music is a beta copyleft project in Javascript and NODE.JS optmized for Webkit. Enjoy.
-
-Thanks to:
-----------
-
-* 	[github/jquery](https://github.com/jquery/jquery) - jQuery JavaScript Library.
-*	[github/happyworm/jPlayer](https://github.com/happyworm/jPlayer) - jPlayer: HTML5 Audio & Video for jQuery.
-*	[github/mddrylliog/jsmad](https://github.com/nddrylliog/jsmad) - jsmad is a pure javascript MP3 decoder, based on libmad, with an ID3 decoder written from scratch.
-*	[github/jeromeetienne/jquery-qrcode](https://github.com/jeromeetienne/jquery-qrcode) - jquery plugin for a pure browser qrcode generation.
-*	[github/SlexAxton/yepnope.js](https://github.com/SlexAxton/yepnope.js) - An Asynchronous Conditional Resource Loader.
 
 License:
 --------
@@ -43,6 +35,16 @@ Under the following conditions:
 
 [Read more](http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode)
 
+Thanks to:
+----------
+
+* 	[github/jquery](https://github.com/jquery/jquery) - jQuery JavaScript Library.
+*	[github/happyworm/jPlayer](https://github.com/happyworm/jPlayer) - jPlayer: HTML5 Audio & Video for jQuery.
+*	[github/mddrylliog/jsmad](https://github.com/nddrylliog/jsmad) - jsmad is a pure javascript MP3 decoder, based on libmad, with an ID3 decoder written from scratch.
+*	[github/jeromeetienne/jquery-qrcode](https://github.com/jeromeetienne/jquery-qrcode) - jquery plugin for a pure browser qrcode generation.
+*	[github/SlexAxton/yepnope.js](https://github.com/SlexAxton/yepnope.js) - An Asynchronous Conditional Resource Loader.
+
+*	Icons by [http://icomoon.io/](Ico Moon)
 
 Useful stuff:
 -------------
@@ -50,3 +52,4 @@ Useful stuff:
 *	[MDN - Using files from web applications](https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications)
 *	[Some JavaScript experiments](https://github.com/migerh/js-experiments/tree/master/fileapi/)
 *	[last.fm API](http://www.last.fm/api/)
+*	[Web Audio Equalizer](http://helpknow.com/eq/)

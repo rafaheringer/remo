@@ -19,6 +19,7 @@
 	<script defer src="/masterPlayer/javascripts/config.js"></script>
 
 	<!-- Styles -->
+	<link href="/masterPlayer/stylesheets/icoMoon.css" rel="stylesheet" type="text/css" />
 	<link href="/masterPlayer/stylesheets/animate.css" rel="stylesheet" type="text/css" />
 	<link href="/masterPlayer/stylesheets/masterPlayer.css" rel="stylesheet" type="text/css" />
 </head>
@@ -67,7 +68,7 @@
 		<!-- Chrome actions -->
 		<div id="chrome-actions" class="animated fadeInRight">
 			<span title="Minimize" class="chrome-act chrome-minimize ico-minus"></span>
-			<span title="Maximize" class="chrome-act chrome-maximize ico-maximize"></span>
+			<span title="Maximize" class="chrome-act chrome-maximize ico-expand"></span>
 			<span title="Close" class="chrome-act chrome-close ico-close"></span>
 		</div>
 
@@ -84,8 +85,8 @@
 						<div class="jp-toggles">
 							<div class="jp-shuffle jp-toggle"><a class="ico-shuffle" title="Turn on shuffle"></a></div>
 							<div class="jp-shuffle-off jp-toggle"><a class="ico-shuffle" title="Turn off shuffle"></a></div>
-							<div class="jp-repeat jp-toggle"><a class="ico-repeat" title="Repeat playlist"></a></div>
-							<div class="jp-repeat-off jp-toggle"><a class="ico-repeat" title="Disable repeat playlist"></a></div>
+							<div class="jp-repeat jp-toggle"><a class="ico-loop" title="Repeat playlist"></a></div>
+							<div class="jp-repeat-off jp-toggle"><a class="ico-loop" title="Disable repeat playlist"></a></div>
 						</div>
 
 						<!-- Music info -->
@@ -108,19 +109,19 @@
 
 							<!-- Music control -->
 							<div class="jp-music-control">
-								<div style="display: inline-block" class="jp-control-item ico-previous jp-previous"><a title="Previous music" tabindex="1"></a></div>
-								<div style="display: inline-block" class="jp-control-item ico-play jp-play"><a title="Play the music" class="" tabindex="1"></a></div>
-								<div style="display: inline-block" class="jp-control-item ico-pause jp-pause"><a title="Pause the music" tabindex="1"></a></div>
-								<div style="display: inline-block" class="jp-control-item ico-next jp-next"><a title="Next music" tabindex="1"></a></div>
-								<div style="display: inline-block" class="jp-control-item jp-stop"><a tabindex="1"></a></div>
-								<div style="display: inline-block" class="jp-control-item jp-volume-max"><a tabindex="1" title="Max volume"></a></div>	
+								<div style="display: inline-block" class="jp-control-item jp-previous"><a title="Previous music" class="ico-backward"></a></div>
+								<div style="display: inline-block" class="jp-control-item jp-play"><a title="Play the music" class="ico-play"></a></div>
+								<div style="display: inline-block" class="jp-control-item jp-pause"><a title="Pause the music" class="ico-pause"></a></div>
+								<div style="display: inline-block" class="jp-control-item jp-next"><a title="Next music" class="ico-forward"></a></div>
+								<div style="display: inline-block" class="jp-control-item jp-stop"><a class="ico-stop"></a></div>
+								<div style="display: inline-block" class="jp-control-item jp-volume-max"><a class="ico-volume" title="Max volume"></a></div>	
 							</div>
 						</div>
 
 						<!-- Volume bar -->
 						<div class="jp-volume">
-							<div class="ico-speaker jp-mute"><a tabindex="1" title="Mute"></a></div>
-							<div class="ico-speaker-mute jp-unmute" style="display: inline-block"><a tabindex="1" title="Unmute"></a></div>
+							<div class="jp-mute"><a class="ico-volume-high" title="Mute"></a></div>
+							<div class="jp-unmute" style="display: inline-block"><a class="ico-volume-mute" title="Unmute"></a></div>
 							<div class="jp-volume-bar">
 								<div class="jp-volume-bar-value"></div>
 							</div>

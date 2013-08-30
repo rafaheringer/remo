@@ -1,0 +1,107 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot');
+	src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon.woff') format('woff'),
+		url('../fonts/icomoon.ttf') format('truetype'),
+		url('../fonts/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    @font-face {
+        font-family: 'icomoon';
+        src: url('../fonts/icomoon.svg#icomoon') format('svg');
+    }
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'icomoon';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="ico-"] {
+*/
+.ico-home, .ico-pencil, .ico-folder-open, .ico-folder, .ico-tag, .ico-remove, .ico-forward, .ico-backward, .ico-play, .ico-pause, .ico-stop, .ico-info, .ico-equalizer, .ico-loop, .ico-shuffle, .ico-volume-mute, .ico-volume-high, .ico-minus, .ico-close, .ico-expand {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.ico-home:before {
+	content: "\e000";
+}
+.ico-pencil:before {
+	content: "\e001";
+}
+.ico-folder-open:before {
+	content: "\e002";
+}
+.ico-folder:before {
+	content: "\e003";
+}
+.ico-tag:before {
+	content: "\e004";
+}
+.ico-remove:before {
+	content: "\e005";
+}
+.ico-forward:before {
+	content: "\e006";
+}
+.ico-backward:before {
+	content: "\e007";
+}
+.ico-play:before {
+	content: "\e008";
+}
+.ico-pause:before {
+	content: "\e009";
+}
+.ico-stop:before {
+	content: "\e00a";
+}
+.ico-info:before {
+	content: "\e00b";
+}
+.ico-equalizer:before {
+	content: "\e00c";
+}
+.ico-loop:before {
+	content: "\e00d";
+}
+.ico-shuffle:before {
+	content: "\e00e";
+}
+.ico-volume-mute:before {
+	content: "\e00f";
+}
+.ico-volume-high:before {
+	content: "\e010";
+}
+.ico-minus:before {
+	content: "\e011";
+}
+.ico-close:before {
+	content: "\e012";
+}
+.ico-expand:before {
+	content: "\e013";
+}

@@ -56,18 +56,17 @@ $strong-text-color: #333333 					//Dark gray: for text
 		&:hover
 			background-color: rgba(82,82,82,1.0)
 
-//Sprites
-@import "ico/*.png"
-$ico-sprite-dimensions: true
-+all-ico-sprites
+//Icons
 span[class|="ico"],
 a[class|="ico"],
 div[class|="ico"]
 	display: inline-block
 	vertical-align: middle
+	color: white
 
+//=========================
 //Visual effects
-//==============
+//=========================
 
 //Background gradient
 +keyframes(bgFades)
@@ -104,10 +103,12 @@ div[class|="ico"]
 	100%
 		+transform(scale3d(0.1,0.1,1))
 
+//=========================
 //Elements
-//========
+//=========================
 
 //Reset
+//=========================
 *
 	margin: 0
 	padding: 0
@@ -129,12 +130,14 @@ li
 	display: none
 
 //Texts
+//=========================
 a
 	text-decoration: none
 	color: $text-color
 	cursor: default
 
 //Main
+//=========================
 html,
 body
 	height: 100%
@@ -167,11 +170,13 @@ body
 		z-index: 2
 
 //Main container
+//=========================
 #main-container
 	height: 100%
 	width: 100%
 
 //Background effects
+//=========================
 #bg-effect
 	+animation(bgFades 100s infinite)
 	position: absolute
@@ -182,6 +187,7 @@ body
 	z-index: 2
 
 //Shadows
+//=========================
 #shadows
 	position: absolute
 	top: 0
@@ -215,14 +221,19 @@ body
 		z-index: 2
 
 //Chrome actions
+//=========================
 #chrome-actions
 	position: absolute
 	right: 10px
 	top: 10px
 
 	.chrome-act
+		+text-shadow(0px 0px 5px #000)
 		display: inline-block
 		vertical-align: middle
+		color: white
+		font-size: 12px
+		margin: 0 5px 0 5px
 
 		&:active
 			opacity: 0.7
@@ -236,6 +247,7 @@ body
 	height: 50px
 
 //Menu
+//=========================
 #menu
 	+transition(all 200ms ease-in-out)
 	opacity: 0.7
@@ -259,6 +271,9 @@ body
 		&:hover
 			margin-left: -85px
 
+		span[class|="ico"]
+			font-size: 24px
+
 	.menu-item-title
 		display: inline-block
 		vertical-align: middle
@@ -266,6 +281,7 @@ body
 		cursor: default
 			
 //Playlist
+//=========================
 #playlist
 	background: rgba(0,0,0,0.85)
 	padding: 10px 10px 10px 0
@@ -312,6 +328,7 @@ body
 			color: rgba(0,0,0,0.3)
 
 //Player Controls
+//=========================
 .jp-controls
 	position: absolute
 	display: block
@@ -321,6 +338,7 @@ body
 	width: 300px
 
 //Toggles
+//=========================
 .jp-toggles
 	float: left
 	margin: 5px 10px 0 0
@@ -334,6 +352,8 @@ body
 
 		a
 			opacity: 0.5
+			color: white
+			font-size: 12px
 
 		&.jp-repeat-off,
 		&.jp-shuffle-off
@@ -344,8 +364,8 @@ body
 			background: rgba(0,0,0,0.7)
 
 //Music info and controls
+//=========================
 .jp-music-info
-	+text-shadow(0 0px 5px #000000, 0 0px 10px #000000)
 	position: relative
 	text-align: left
 	float: left
@@ -369,8 +389,8 @@ body
 			//+transition (all 600ms ease-in-out)
 			display: none
 			
-
 	.jp-music-name-and-artist
+		+text-shadow(0 0px 5px #000000, 0 0px 10px #000000)
 		margin: -5px 0 0 0
 		float: left
 		color: white
@@ -406,15 +426,29 @@ body
 				opacity: 0.6
 
 			a
+				+text-shadow(0 0px 5px #000000, 0 0px 10px #000000)
 				display: block
-				width: 100%
-				height: 100%
+
+				&:hover
+					+opacity(0.7)
 
 		.jp-previous,
 		.jp-play,
 		.jp-pause,
 		.jp-next
 			vertical-align: middle
+
+		.jp-play a
+			font-size: 36px
+			padding: 0 3px
+
+		.jp-pause a
+			font-size: 30px
+			padding: 3px 6px
+
+		.jp-next a,
+		.jp-previous a
+			font-size: 24px
 
 		.jp-stop,
 		.jp-volume-max
@@ -447,7 +481,10 @@ body
 
 	.jp-mute,
 	.jp-unmute
-		@extend .jp-control-item
+		display: inline-block
+		margin: 0 7px 0 3px
+		+text-shadow(0px 0px 5px #000)
+		font-size: 15px
 
 //Music progress bar
 .jp-progress
@@ -503,6 +540,7 @@ body
 				display: none
 
 //Others
+//=========================
 .jp-no-solution
 	display: none
 
