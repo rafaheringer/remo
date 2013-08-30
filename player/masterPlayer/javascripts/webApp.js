@@ -28,11 +28,12 @@ masterPlayer.webAppInit = function() {
 				isFullScreen = 
 					document.fullscreen
 					|| document.mozFullScreen
-					|| document.webkitIsFullScreen
+					|| document.webkitIsFullScreen,
+					
 				cancel = 
 					document.exitFullscreen
 					|| document.mozCancelFullScreen
-					|| document.webkitCancelFullScreen
+					|| document.webkitCancelFullScreen,
 
 				request =
 					el.requestFullScreen
