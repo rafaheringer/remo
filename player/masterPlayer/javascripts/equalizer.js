@@ -126,7 +126,7 @@ $(function(){
 		min: -12,
 		max: 12,
 		animate: true,
-		step: 0.01
+		step: 0.1
 	};
 
 	var savedFilters = savedUserInfo.get('equalizer.filters');
@@ -135,13 +135,11 @@ $(function(){
 		$('.eq-fq-slider', '.equalizer-sliders').eq(i - 1).slider($.extend({
 			slide: function(event, ui) {	
 				filters[i.toString()].gain.value = ui.value;
-				
-				savedFilters[i.toString()] = ui.value;
-				savedUserInfo.set('equalizer.filters', savedFilters);
 			},
 			change: function(event, ui){
 				filters[i.toString()].gain.value = ui.value;
 
+				//Save
 				savedFilters[i.toString()] = ui.value;
 				savedUserInfo.set('equalizer.filters', savedFilters);
 			}
