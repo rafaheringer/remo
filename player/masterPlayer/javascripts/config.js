@@ -11,6 +11,24 @@ var CONFIG = {
 
 var masterPlayer = {};
 
+//Custom Options (localStorage)
+//==============
+
+var savedUserInfo = {
+	//Get saved info as OBJECT
+	get: function(Item) {
+		return localStorage.getItem(Item) ? $.parseJSON(localStorage.getItem(Item)) : null;
+	},
+
+	//Save info in OBJECT
+	set: function(Item, Info){
+		return localStorage.setItem(Item, JSON.stringify(Info));
+	}
+};
+
+//References
+savedUserInfo.set('equalizer', {});
+
 //Load resources
 //==============
 

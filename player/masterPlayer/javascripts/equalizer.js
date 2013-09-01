@@ -1,3 +1,7 @@
+/// <reference path="_references.js" />
+"use strict";
+
+
 // Fix up for prefixing
 window.AudioContext = window.AudioContext||window.webkitAudioContext;
 
@@ -7,14 +11,9 @@ $(function(){
 	var audioContext 	= new webkitAudioContext();
 	var audioElement	= document.getElementsByTagName('audio')[0]
 	var audioSource 	= audioContext.createMediaElementSource( audioElement );
-	var qFactor 		= 0;	//1 <> 100
+	var qFactor 		= -20;	//1 <> 100
 	var filters 		= {};
 	
-	//Gain nodes
-	var gainNode 		= audioContext.createGainNode();
-	gainNode.gain.value = 1;
-	
-
 	//Filters
 	//-----------------------
 
@@ -89,8 +88,6 @@ $(function(){
 	filters['10'].Q.value 			= qFactor;
 
 	//Connect destination
-	audioSource.connect(gainNode);
-	gainNode.connect(filters['1']);
 	filters['1'].connect(filters['2']);
 	filters['2'].connect(filters['3']);
 	filters['3'].connect(filters['4']);
@@ -100,9 +97,30 @@ $(function(){
 	filters['7'].connect(filters['8']);
 	filters['8'].connect(filters['9']);
 	filters['9'].connect(filters['10']);
-	gainNode.connect(audioContext.destination);
-	filters['10'].connect(audioContext.destination);
+	
+
 	audioSource.connect(audioContext.destination);
+	audioSource.connect(filters['1']);
+	filters['10'].connect(audioContext.destination);
+
+	//Local storage
+	//-----------------------
+	if(!savedUserInfo.get('equalizer.filters')) {
+		savedUserInfo.set('equalizer.filters', {
+				1: 0,
+				2: 0,
+				3: 0,
+				4: 0,
+				5: 0,
+				6: 0,
+				7: 0,
+				8: 0,
+				9: 0,
+				10: 0
+			}
+		);
+	}
+
 	
 	//HTML Sliders
 	//-----------------------
@@ -115,15 +133,27 @@ $(function(){
 		step: 0.01
 	};
 
+	var savedFilters = savedUserInfo.get('equalizer.filters');
+
 	$.each(filters, function(i, filter){
 		$('.eq-fq-slider', '.equalizer-sliders').eq(i - 1).slider($.extend({
 			slide: function(event, ui) {	
 				filters[i.toString()].gain.value = ui.value;
+				
+				savedFilters[i.toString()] = ui.value;
+				savedUserInfo.set('equalizer.filters', savedFilters);
 			},
 			change: function(event, ui){
 				filters[i.toString()].gain.value = ui.value;
+
+				savedFilters[i.toString()] = ui.value;
+				savedUserInfo.set('equalizer.filters', savedFilters);
 			}
 		},sliderDefaultOptions));
+
+		if( savedFilters[i.toString()] != 0 ) {
+			$('.eq-fq-slider', '.equalizer-sliders').eq(i - 1).slider('value', savedFilters[i.toString()]);
+		}
 	});
 
 	//Reset FILTERS
@@ -131,5 +161,5 @@ $(function(){
 		$('.eq-fq-slider', '.equalizer-sliders').slider('value', '0');
 		event.preventDefault();
 	});
-
+	
 });
