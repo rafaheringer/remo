@@ -1,14 +1,45 @@
 {
-  "name": "Remo",
+  "name": "remoMusicPlayer",
   "description": "Remote music player",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "homepage": "https://github.com/rafaheringer/remo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rafaheringer/remo"
+  },
+  "authors": [
+    "Rafael Heringer"
+  ],
+  "license": "CC BY-NC-ND",
   "private": true,
+  "main": "app.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "run",
+    "build",
+    "player/bin",
+    "player/bld",
+    "player/RemoMusic.*"
+  ],
   "scripts": {
     "start": "node app"
   },
   "dependencies": {
+    "grunt": "0.4.1",
     "express": "3.1.0",
     "socket.io": "0.9.x",
-    "ejs": "*"
+    "ejs": "0.8.x"
+  },
+  "devDependencies": {
+    "grunt-cli": "0.1.9",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-copy-to": "0.0.9",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "~0.4.1"
   }
 }

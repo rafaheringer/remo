@@ -6,7 +6,8 @@
 var CONFIG = {
 	hostname: '',
 	//nodeUrl: 'http://localhost'
-	nodeUrl: 'http://remomusic.herokuapp.com'
+	nodeUrl: 'http://remomusic.herokuapp.com',
+	devmode: true
 };
 
 var masterPlayer = {};
@@ -25,9 +26,6 @@ var savedUserInfo = {
 		return localStorage.setItem(Item, JSON.stringify(Info));
 	}
 };
-
-//References
-savedUserInfo.set('equalizer', {});
 
 //Load resources
 //==============
