@@ -19,9 +19,10 @@
 	<script defer src="/masterPlayer/javascripts/config.js"></script>
 
 	<!-- Styles -->
-	<link href="/masterPlayer/stylesheets/icoMoon.css" rel="stylesheet" type="text/css" />
 	<link href="/masterPlayer/stylesheets/animate.css" rel="stylesheet" type="text/css" />
 	<link href="/masterPlayer/stylesheets/masterPlayer.css" rel="stylesheet" type="text/css" />
+	<link href="/masterPlayer/stylesheets/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<link href="/masterPlayer/stylesheets/icoMoon.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<div id="main-container">
@@ -58,6 +59,10 @@
 			<div class="menu-item menu-open-files animated fadeInRight">
 				<span class="ico-folder"></span>
 				<span class="menu-item-title">Open folder</span>
+			</div>
+			<div class="menu-item menu-equalizer animated hinge fadeInRight">
+				<span class="ico-equalizer"></span>
+				<span class="menu-item-title">Equalizer</span>
 			</div>
 			<div class="menu-item menu-info animated hinge fadeInRight">
 				<span class="ico-info"></span>
@@ -146,7 +151,61 @@
 					</div>
 				</div>
 
-				<!-- Outros -->
+				<!-- Equalizer -->
+				<div id="equalizer" class="secondary-box">
+					<div class="box-container">
+						<div class="box-header">
+							<h3>Equalizer</h3>
+							<a href="#" class="ico-close box-close box-actions" title="Close this box"></a>
+							<span class="clearfix"></span>
+						</div>
+						
+						<div class="box-content">
+							<div class="equalizer-actions">
+								<a href="#" class="btn inverse equalizer-reset">Reset</a>
+							</div>
+							<div class="equalizer-container">
+								<div class="equalizer-frequency"></div>
+								<div class="equalizer-sliders">
+									<div class="eq-fq-slider">
+										<span>32Hz</span>
+									</div>
+									<div class="eq-fq-slider">
+										<span>64</span>
+									</div>
+									<div class="eq-fq-slider">
+										<span>125</span>
+									</div>
+									<div class="eq-fq-slider">
+										<span>250</span>
+									</div>
+									<div class="eq-fq-slider">
+										<span>500</span>
+									</div>
+									<div class="eq-fq-slider">
+										<span>1KHz</span>
+									</div>
+									<div class="eq-fq-slider">
+										<span>2</span>
+									</div>
+									<div class="eq-fq-slider">
+										<span>4</span>
+									</div>
+									<div class="eq-fq-slider">
+										<span>8</span>
+									</div>
+									<div class="eq-fq-slider">
+										<span>16KHz</span>
+									</div>
+						
+								</div>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+
+				<!-- Others -->
 				<div class="jp-no-solution">
 					<span>Update Required</span>
 					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.

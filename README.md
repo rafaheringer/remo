@@ -19,6 +19,25 @@ You can use keyboard shortcuts:
 
 Remo.music is a beta copyleft project in Javascript and NODE.JS optmized for Webkit. Enjoy.
 
+
+Features:
+---------
+**Current development**
+*	Equalizer (nice!)
+*	Font icons
+
+**v1.0 and lower**
+*	Nice theme
+*	Basic music controls (play, pause, ff, bw and volume)
+*	Keyboard control
+*	Shuffle playlist
+*	Repeat playlist
+*	Windows 8 integration
+*	Chrome App integration
+*	Basic control with your phone via sockets
+*	Seeker
+
+
 License:
 --------
 **CC BY-NC-ND**
@@ -43,7 +62,6 @@ Thanks to:
 *	[github/mddrylliog/jsmad](https://github.com/nddrylliog/jsmad) - jsmad is a pure javascript MP3 decoder, based on libmad, with an ID3 decoder written from scratch.
 *	[github/jeromeetienne/jquery-qrcode](https://github.com/jeromeetienne/jquery-qrcode) - jquery plugin for a pure browser qrcode generation.
 *	[github/SlexAxton/yepnope.js](https://github.com/SlexAxton/yepnope.js) - An Asynchronous Conditional Resource Loader.
-
 *	Icons by [http://icomoon.io/](Ico Moon)
 
 Useful stuff:
@@ -53,3 +71,5 @@ Useful stuff:
 *	[Some JavaScript experiments](https://github.com/migerh/js-experiments/tree/master/fileapi/)
 *	[last.fm API](http://www.last.fm/api/)
 *	[Web Audio Equalizer](http://helpknow.com/eq/)
+*	[BiQuadFilterNode Docs](http://www.w3.org/2011/audio/drafts/1WD/WebAudio/#BiquadFilterNode-section)
+*	[jQuery UI Builder for this app](http://jqueryui.com/download/#!version=1.10.3&themeParams=none&components=1110000000000000100000000000000000)

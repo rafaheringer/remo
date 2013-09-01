@@ -187,6 +187,11 @@ masterPlayer.menuControl = function() {
 	$('.menu-info').on('click', function(){
 		window.location.hash = 'credits';
 	});
+
+	//Open equalizer
+	$('.menu-equalizer').on('click', function(){
+		window.location.hash = 'equalizer';
+	});
 };
 
 //Set album cover

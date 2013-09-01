@@ -4,6 +4,7 @@
 /// <reference path="background.js" />
 /// <reference path="analytics.offline.js" />
 /// <reference path="config.js" />
+/// <reference path="equalizer.js" />
 /// <reference path="windowsApp.js" />
 /// <reference path="analytics.js" />
 /// <reference path="vendor/inpage_linkid.js" />

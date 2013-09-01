@@ -25,11 +25,18 @@ yepnope.tests = {
 	localhost: function() { return window.location.hostname == 'localhost'; }
 };
 
+//jQuery UI core, if use
+var jQueryUiCore = [
+	'/masterPlayer/javascripts/vendor/jquery.ui.core.js',
+	'/masterPlayer/javascripts/vendor/jquery.ui.widget.js',
+	'/masterPlayer/javascripts/vendor/jquery.ui.mouse.js'
+];
+
 //Mandatory
 yepnope({
 	load: [
 		'/masterPlayer/javascripts/vendor/jquery.js',
-		'/masterPlayer/javascripts/vendor/jquery.jplayer.min.js',
+		'/masterPlayer/javascripts/vendor/jquery.jplayer.js',
 		'/masterPlayer/javascripts/vendor/jplayer.playlist.js'
 	]
 });
@@ -90,6 +97,18 @@ yepnope({
 				jdataview: function(){
 					masterPlayer.fileReaderInit();
 				}
+			}
+		});
+
+		//Have AudioContext?
+		yepnope({
+			test: window.AudioContext || window.webkitAudioContext,
+			yep: jQueryUiCore,
+			complete: function(){
+				yepnope({load: [
+					'/masterPlayer/javascripts/vendor/jquery.ui.slider.js',
+					'/masterPlayer/javascripts/equalizer.js'
+				]});
 			}
 		});
 
