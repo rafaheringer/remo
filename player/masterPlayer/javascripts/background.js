@@ -3,7 +3,7 @@
 chrome.app.runtime.onLaunched.addListener(function() {
   chrome.app.window.create('masterPlayer/index.html', {
   	id: 'masterPlayer',
-    width: 900,
+    width: 902,
     height: 500,
     minWidth: 900,
     minHeight: 500,

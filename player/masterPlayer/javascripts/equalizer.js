@@ -11,7 +11,7 @@ $(function(){
 	var audioContext 	= new webkitAudioContext();
 	var audioElement	= document.getElementsByTagName('audio')[0]
 	var audioSource 	= audioContext.createMediaElementSource( audioElement );
-	var qFactor 		= -20;	//1 <> 100
+	var qFactor 		= 1;	//1 <> 100
 	var filters 		= {};
 	
 	//Filters
@@ -88,6 +88,7 @@ $(function(){
 	filters['10'].Q.value 			= qFactor;
 
 	//Connect destination
+	audioSource.connect(filters['1']);
 	filters['1'].connect(filters['2']);
 	filters['2'].connect(filters['3']);
 	filters['3'].connect(filters['4']);
@@ -97,10 +98,6 @@ $(function(){
 	filters['7'].connect(filters['8']);
 	filters['8'].connect(filters['9']);
 	filters['9'].connect(filters['10']);
-	
-
-	audioSource.connect(audioContext.destination);
-	audioSource.connect(filters['1']);
 	filters['10'].connect(audioContext.destination);
 
 	//Local storage
@@ -121,7 +118,6 @@ $(function(){
 		);
 	}
 
-	
 	//HTML Sliders
 	//-----------------------
 	var sliderDefaultOptions = {
