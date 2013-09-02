@@ -5,21 +5,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-		//Uglify (minify JS)
-		uglify: {
-			options: {
-				banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-			},
-
-			//For APP
-			chromeApp: {
-				files: {
-					'build/ChromeApp/player/masterPlayer/javascripts/<%= basename %>.min.js': ['player/masterPlayer/javascripts/<%= basename %>.js'],
-					'build/ChromeApp/player/masterPlayer/javascripts/vendor/<%= basename %>.min.js': ['player/masterPlayer/javascripts/vendor/<%= basename %>.js']
-				}
-			}
-		},
-
 		//Clean release folders
 		clean: {
 			chromeApp: ['build/chromeApp'],
@@ -41,7 +26,8 @@ module.exports = function(grunt) {
 					ignore: [
 					'player/**/.*', 'player/**/src{,/**/*}', 'player/**/RemoMusic*.*', 
 					'player/bin{,/**/*}', 'player/bld{,/**/*}', 'player/**/*.rb', 'player/**/*.appcache',
-					'player/*.appxmanifest', 'player/Package*.*'
+					'player/*.appxmanifest', 'player/Package*.*',
+					'/player/masterPlayer/javascripts/*.js', '/player/masterPlayer/javascripts/vendor/*.js'	//UGLIFY
 					]
 				}
 			},
@@ -53,17 +39,32 @@ module.exports = function(grunt) {
 					'build/webApp/masterPlayer/images/app/': 'player/masterPlayer/images/app/*.*',
 				}
 			}
-		}
+		},
+
+		//Uglify (minify JS)
+		uglify: {
+			options: {
+				banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
+				compress: true
+			},
+
+			//For APP
+			chromeApp: {
+				files: grunt.file.expandMapping(['./player/masterPlayer/javascripts/*.js', './player/masterPlayer/javascripts/vendor/*.js'], './build/chromeApp/masterPlayer/javascripts/', {
+					rename: function(destBase,destPath) {
+						return destBase+destPath.replace('./player/masterPlayer/javascripts/','');
+					}
+				})
+			}
+		},
 	});
 
-
-
 	//Load plugins
-	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-copy-to');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	//And register tasks
-	grunt.registerTask('deploy', ['clean','copyto','copy']);
+	grunt.registerTask('deploy', ['clean','copyto','copy','uglify']);
 };
