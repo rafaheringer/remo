@@ -1,11 +1,12 @@
 /// <reference path="_references.js" />
 "use strict";
 
-
 // Fix up for prefixing
-window.AudioContext = window.AudioContext||window.webkitAudioContext;
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
 
 $(function(){
+
 	//Context and connect audio
 	var audio			= document.getElementsByTagName('audio')[0];
 	var audioContext	= new webkitAudioContext();
@@ -100,10 +101,12 @@ $(function(){
 	frequencies['9'].connect(frequencies['10']);
 	frequencies['10'].connect(audioContext.destination);
 
+
 	//Local storage
 	//-----------------------
-	if(!savedUserInfo.get('equalizer.frequencies')) {
-		savedUserInfo.set('equalizer.frequencies', {
+	savedUserInfo.get('equalizer.frequencies', function(result){
+		if(!result) {
+			var savedFrequencies = {
 				1: 0,
 				2: 0,
 				3: 0,
@@ -114,46 +117,54 @@ $(function(){
 				8: 0,
 				9: 0,
 				10: 0
-			}
-		);
-	}
+			};
 
-	//HTML Sliders
-	//-----------------------
-	var sliderDefaultOptions = {
-		orientation: 'vertical',
-		range: 'min',
-		min: -12,
-		max: 12,
-		animate: true,
-		step: 0.1
-	};
-
-	var savedFrequencies = savedUserInfo.get('equalizer.frequencies');
-
-	$.each(frequencies, function(i, filter){
-		$('.eq-fq-slider', '.equalizer-sliders').eq(i - 1).slider($.extend({
-			slide: function(event, ui) {	
-				frequencies[i.toString()].gain.value = ui.value;
-			},
-			change: function(event, ui){
-				frequencies[i.toString()].gain.value = ui.value;
-
-				//Save
-				savedFrequencies[i.toString()] = ui.value;
-				savedUserInfo.set('equalizer.frequencies', savedFrequencies);
-			}
-		},sliderDefaultOptions));
-
-		if( savedFrequencies[i.toString()] != 0 ) {
-			$('.eq-fq-slider', '.equalizer-sliders').eq(i - 1).slider('value', savedFrequencies[i.toString()]);
+			savedUserInfo.set('equalizer.frequencies', savedFrequencies);
+		} else {
+			var savedFrequencies = result;
 		}
-	});
 
-	//Reset frequencies
-	$('.equalizer-reset', '#equalizer').on('click', function(event) {
-		$('.eq-fq-slider', '.equalizer-sliders').slider('value', '0');
-		event.preventDefault();
+		//HTML Sliders
+		//-----------------------
+		var sliderDefaultOptions = {
+			orientation: 'vertical',
+			range: 'min',
+			min: -12,
+			max: 12,
+			animate: true,
+			step: 0.1
+		};
+
+		$.each(frequencies, function(i, filter){
+			$('.eq-fq-slider', '.equalizer-sliders').eq(i - 1).slider($.extend({
+				slide: function(event, ui) {	
+					frequencies[i.toString()].gain.value = ui.value;
+				},
+				change: function(event, ui){
+					frequencies[i.toString()].gain.value = ui.value;
+
+					//Save
+					savedFrequencies[i.toString()] = ui.value;
+					savedUserInfo.set('equalizer.frequencies', savedFrequencies);
+				}
+			},sliderDefaultOptions));
+
+			if( savedFrequencies[i.toString()] != 0 ) {
+				$('.eq-fq-slider', '.equalizer-sliders').eq(i - 1).slider('value', savedFrequencies[i.toString()]);
+			}
+		});
+
+		//Reset frequencies
+		$('.equalizer-reset', '#equalizer').on('click', function(event) {
+			$('.eq-fq-slider', '.equalizer-sliders').slider('value', '0');
+			event.preventDefault();
+		});
+
 	});
-	
 });
+
+	
+
+
+	
+	

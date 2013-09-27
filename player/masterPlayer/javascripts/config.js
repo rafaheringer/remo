@@ -17,13 +17,26 @@ var masterPlayer = {};
 
 var savedUserInfo = {
 	//Get saved info as OBJECT
-	get: function(Item) {
-		return localStorage.getItem(Item) ? $.parseJSON(localStorage.getItem(Item)) : null;
+	get: function(Item, callback) {
+		if(typeof chrome != 'undefined' && chrome.storage) {
+			chrome.storage.local.get(Item, function(result){ callback.call(this, result[Item])});
+		} else {
+			var result = localStorage.getItem(Item) ? $.parseJSON(localStorage.getItem(Item)) : null;
+			callback.call(this, result);
+		}
 	},
 
 	//Save info in OBJECT
 	set: function(Item, Info){
-		return localStorage.setItem(Item, JSON.stringify(Info));
+		var obj = {};
+		obj[Item] = Info;
+
+		if(typeof chrome != 'undefined' && chrome.storage)
+			chrome.storage.local.set(obj);
+		else
+			localStorage.setItem(Item, JSON.stringify(Info));
+
+		return obj;
 	}
 };
 
@@ -130,7 +143,7 @@ yepnope({
 
 		//Have connection and not a localhost AND not a Windows APP?
 		yepnope({
-			test: yepnope.tests.online() && !yepnope.tests.localhost() && !yepnope.tests.windowsApp(),
+			test: yepnope.tests.online() && !yepnope.tests.localhost() && !yepnope.tests.windowsApp() && !yepnope.tests.chromeApp(),
 			yep: {
 				analytics: '/masterPlayer/javascripts/analytics.js'
 			},

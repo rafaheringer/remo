@@ -1,7 +1,7 @@
 {
 	"name": "Remo Music Player",
 	"description": "Play your mp3 files on this beautiful music player and control it by your phone. TRY! Beta version.",
-	"version": "0.5.4",
+	"version": "0.5.6",
 	"manifest_version": 2,
 	"offline_enabled": true,
 	"permissions": [
@@ -13,7 +13,6 @@
 		"http://*/",
 		"https://*/"
 	],
-	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 	"app": {
 		"background": {
 			"scripts": ["masterPlayer/javascripts/background.js"]

@@ -16,13 +16,11 @@ module.exports = function(grunt) {
 			chromeApp: {
 				files: [{
 					cwd: 'player/',
-					src: '**/*',
-					dest: 'build/chromeApp/'
+					src: ['**'],
+					dest: 'build/chromeApp/',
+					filter: 'isFile'
 				}],
 				options: {
-					processContent: function(content, path) {
-	          			return content;
-		      		},
 					ignore: [
 					'player/**/.*', 'player/**/src{,/**/*}', 'player/**/RemoMusic*.*', 
 					'player/bin{,/**/*}', 'player/bld{,/**/*}', 'player/**/*.rb', 'player/**/*.appcache',
@@ -47,8 +45,6 @@ module.exports = function(grunt) {
 				banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
 				compress: true
 			},
-
-			//For APP
 			chromeApp: {
 				files: grunt.file.expandMapping(['./player/masterPlayer/javascripts/*.js', './player/masterPlayer/javascripts/vendor/*.js'], './build/chromeApp/masterPlayer/javascripts/', {
 					rename: function(destBase,destPath) {

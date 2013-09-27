@@ -125,7 +125,7 @@ masterPlayer.playerInit = function(){
 			removeTime: 0,
 			shuffleTime: 0
 		},
-		supplied: "mp3",
+		supplied: "mp3, ogg",
 		smoothPlayBar: false,
 		preload: 'metadata',
 		volume: 0.8,
