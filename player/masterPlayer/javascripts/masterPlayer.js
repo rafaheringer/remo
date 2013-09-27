@@ -125,7 +125,6 @@ masterPlayer.playerInit = function(){
 			removeTime: 0,
 			shuffleTime: 0
 		},
-		supplied: "mp3, ogg",
 		smoothPlayBar: false,
 		preload: 'metadata',
 		volume: 0.8,
@@ -390,7 +389,8 @@ masterPlayer.fileTreeReader = function(files, callback){
 
 	//Filesystem for upload trees
 	function traverseFileTree(file) {
-		if(file.type === 'audio/mp3' || file.type === 'audio/mpeg' || file.contentType === 'audio/mpeg') {
+		console.log(file);
+		if(file.type === 'audio/mp3' || file.type === 'audio/mpeg' || file.type === 'audio/ogg' || file.contentType === 'audio/mpeg' || file.contentType === 'audio/ogg') {
 			var fileName = file.name.replace(".mp3","");
 			var title = fileName;
 			var artist = null;
@@ -417,6 +417,8 @@ masterPlayer.fileTreeReader = function(files, callback){
 					}
 				}
 			}, 200);
+		} else {
+			//Your file is not supported.
 		}
 	}
 
