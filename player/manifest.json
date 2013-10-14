@@ -6,9 +6,11 @@
 	"offline_enabled": true,
 	"permissions": [
 		"fileSystem",
+		{"fileSystem": ["write"]}, //FOR CHROME 31"retainEntries"
 		"fullscreen",
 		"notifications",
 		"storage",
+		"system.storage",
 		"unlimitedStorage",
 		"http://*/",
 		"https://*/"

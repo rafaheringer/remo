@@ -23,10 +23,15 @@ Remo.music is a beta copyleft project in Javascript and NODE.JS optmized for Web
 Features:
 ---------
 **Current development**
+* Ogg support
+* Save playlist state
+* Save volume state
+
+**v0.5.5**
 *	Equalizer (nice!)
 *	Font icons
 
-**v1.0 and lower**
+**v0.5.4 and lower**
 *	Nice theme
 *	Basic music controls (play, pause, ff, bw and volume)
 *	Keyboard control

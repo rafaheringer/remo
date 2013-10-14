@@ -1,5 +1,6 @@
 ﻿"use strict";
 
+//On start
 chrome.app.runtime.onLaunched.addListener(function() {
   chrome.app.window.create('masterPlayer/index.html', {
   	id: 'masterPlayer',

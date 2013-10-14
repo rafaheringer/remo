@@ -1,10 +1,6 @@
 /// <reference path="_references.js" />
 "use strict";
 
-// Fix up for prefixing
-window.AudioContext = window.AudioContext || window.webkitAudioContext;
-
-
 $(function(){
 
 	//Context and connect audio

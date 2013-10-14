@@ -7,38 +7,56 @@ var CONFIG = {
 	hostname: '',
 	//nodeUrl: 'http://localhost'
 	nodeUrl: 'http://remomusic.herokuapp.com',
-	devmode: true
+	devmode: true,
+	fileSystemMaxStorage: 200 * 1024 * 1024
 };
 
 var masterPlayer = {};
 
-//Custom Options (localStorage)
+//Custom Options
 //==============
 
+
+//Local Storage
 var savedUserInfo = {
 	//Get saved info as OBJECT
 	get: function(Item, callback) {
 		if(typeof chrome != 'undefined' && chrome.storage) {
-			chrome.storage.local.get(Item, function(result){ callback.call(this, result[Item])});
+			chrome.storage.local.get(Item, function(result){ 
+				if(typeof callback == 'function') callback.call(this, result[Item]);
+			});
 		} else {
 			var result = localStorage.getItem(Item) ? $.parseJSON(localStorage.getItem(Item)) : null;
-			callback.call(this, result);
+			if(typeof callback == 'function') callback.call(this, result);
 		}
 	},
 
 	//Save info in OBJECT
-	set: function(Item, Info){
+	set: function(Item, Info, callback){
 		var obj = {};
 		obj[Item] = Info;
 
-		if(typeof chrome != 'undefined' && chrome.storage)
-			chrome.storage.local.set(obj);
-		else
-			localStorage.setItem(Item, JSON.stringify(Info));
+		if(typeof chrome != 'undefined' && chrome.storage) {
+			chrome.storage.local.set(obj, function(result){
+				if(typeof callback == 'function') callback.call(this, result);
+			});
+		} else {
+			var result = localStorage.setItem(Item, JSON.stringify(Info));
+			if(typeof callback == 'function') callback.call(this, result);
+		}
 
 		return obj;
 	}
 };
+
+//File System
+window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
+
+//Audio Context
+window.audioContext = window.webkitAudioContext || window.AudioContext;
+
+//To Array Helper
+window.toArray = function(list){return Array.prototype.slice.call(list || [], 0);};
 
 //Load resources
 //==============

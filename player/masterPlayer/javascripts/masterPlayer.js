@@ -5,6 +5,7 @@
 //http://www.jplayer.org/latest/developer-guide/
 ////////////////////////////////////////////
 var newDate = new Date();
+// var globalFileSystem = null;
 var initialPlaylist = [
 		{
 			title:"Cro Magnon Man",
@@ -87,11 +88,10 @@ var initialPlaylist = [
 		}
 ]
 
-//Player list config
-//TODO
-if (yepnope.tests.windowsApp) {
-	initialPlaylist = null;
-}
+//Request fileSystem
+// requestFileSystem(PERSISTENT, 200 * 1024 * 1024, function(fs) {
+// 	globalFileSystem = fs;
+// });
 
 //Player start config
 masterPlayer.config = {
@@ -108,60 +108,130 @@ masterPlayer.config = {
 
 //Player init
 masterPlayer.playerInit = function(){
+	var _self = this;
+
 	//Start controls
 	this.menuControl();
 
-	//Start player
-	this.config.playlistInstance = new jPlayerPlaylist({
-			jPlayer: this.config.playerElement,
-			cssSelectorAncestor: "#jp_container"
-		}, 
-		this.config.initialMusic, {
-		playlistOptions: {
-			enableRemoveControls: false,
-			loopOnPrevious: true,
-			displayTime: 0,
-			addTime: 0,
-			removeTime: 0,
-			shuffleTime: 0
-		},
-		smoothPlayBar: false,
-		preload: 'metadata',
-		volume: 0.8,
-		errorAlerts: false,
-		solution: "html",
-		warningAlerts: false,
-		keyEnabled: false,
-		play: function(a){
-			//Scroll to music
-			$('.jp-playlist').stop().animate({
-					scrollTop: (41) * (masterPlayer.config.playlistInstance.current - 2)
-			});
+	//Playlist config
+	savedUserInfo.get('playlist.entries', function(playlist){
+		var isReady = false;
+		var count = 0;
 
-			//Set play
-			masterPlayer.config.playing = true;
-			if(yepnope.tests.windowsApp())
-				mediaControls.isPlaying = true;
+		if(playlist){
 
-			//Get and set Music info
-			masterPlayer.setMusicInfo(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current]);
-		},
-		pause: function() {
-			//Set play
-			masterPlayer.config.playing = false;
-			if(yepnope.tests.windowsApp())
-				mediaControls.isPlaying = false;
-		},
-		seeking: function(a){
-			//Analytics
-			analytics.track('musicProgress', 'click');
-		},
-		volumechange: function(a) {
-			//Analytics
-			analytics.track('volume', 'click');
-		}
+			masterPlayer.config.initialMusic = [];
+
+			//Pass playlist array
+			for(var i = 0; i < playlist.length; i++){
+				//console.log(chrome.fileSystem.retainEntry(playlist[i].fileEntry)); //TODO: On Chrome 31 Stable version
+
+				(function(i){
+					//Request file system
+					window.requestFileSystem(window.PERSISTENT, 1024*1024, function(fs) {
+
+						//Request the file
+						fs.root.getFile('currentPlaylist/' + playlist[i].file.name, {create: false}, function(fileEntry) {
+
+							//Request the file and transform in BLOB (///TODO: Read directly from dir)
+							fileEntry.file(function(file) {
+								 var reader = new FileReader();
+								 reader.onloadend = function(e) {
+								 	count++;
+								 	var r = this.result;
+
+								 	//Insert in list
+									masterPlayer.config.initialMusic.push({
+										title: playlist[i].title,
+										artist: playlist[i].artist,
+										mp3: r
+									});	
+
+									//Its ready?
+									if(count >= playlist.length) {
+										isReady = true;
+									}
+								 };
+
+								 reader.readAsDataURL(file);
+							});
+							
+						});
+					});
+				})(i);
+				
+			}
+		} else {isReady = true;}
+
+		var readyToGo = function(){
+			console.log('isReady',isReady);
+			if(isReady)
+				_self.newPlayerInstance();
+			else
+				setTimeout(function(){
+					readyToGo();
+				}, 10);
+		};
+
+		readyToGo(isReady);
+
+
+		
 	});
 
+	//Start player
+	this.newPlayerInstance = function(){
+		this.config.playlistInstance = new jPlayerPlaylist({
+				jPlayer: this.config.playerElement,
+				cssSelectorAncestor: "#jp_container"
+			}, 
+			this.config.initialMusic, {
+			playlistOptions: {
+				enableRemoveControls: false,
+				loopOnPrevious: true,
+				displayTime: 0,
+				addTime: 0,
+				removeTime: 0,
+				shuffleTime: 0
+			},
+			smoothPlayBar: false,
+			preload: 'metadata',
+			volume: 0.8,
+			errorAlerts: false,
+			solution: "html",
+			warningAlerts: false,
+			keyEnabled: false,
+			play: function(a){
+				//Scroll to music
+				$('.jp-playlist').stop().animate({
+						scrollTop: (41) * (masterPlayer.config.playlistInstance.current - 2)
+				});
+
+				//Set play
+				masterPlayer.config.playing = true;
+				if(yepnope.tests.windowsApp())
+					mediaControls.isPlaying = true;
+
+				//Get and set Music info
+				masterPlayer.setMusicInfo(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current]);
+			},
+			pause: function() {
+				//Set play
+				masterPlayer.config.playing = false;
+				if(yepnope.tests.windowsApp())
+					mediaControls.isPlaying = false;
+			},
+			seeking: function(a){
+				//Analytics
+				analytics.track('musicProgress', 'click');
+			},
+			volumechange: function(a) {
+				//Analytics
+				analytics.track('volume', 'click');
+			}
+		});
+	};
+	
 	//Binds
 	this.keyboardEvents();
 	this.mouseEvents();
@@ -363,33 +433,87 @@ masterPlayer.setMusicInfo = function(music) {
 	}
 };
 
+//Save playlist to read later
+masterPlayer.savePlaylist = function(playList){
+	//Limit to 200Mb; Request QUOTA
+	requestFileSystem(PERSISTENT, CONFIG.fileSystemMaxStorage, function(fs) {
+		for (var i = 0; i < playList.length; i++) {
+			(function(f) {
+				//directoryEntry.filesystem
+				fs.root.getDirectory('currentPlaylist', {create: true}, function(directoryEntry) {
+					fs.root.getFile('currentPlaylist/' + f.name, {create: true, exclusive: false}, function(fileEntry) {
+						fileEntry.createWriter(function(fileWriter) {
+							fileWriter.write(f);
+						}, errorHandler);
+					}, errorHandler);
+				}, errorHandler);
+			})(playList[i].file);
+		}
+	},errorHandler);
+
+
+	//Error Handler
+	//TODO: Display error for user
+	function errorHandler(e) {
+		var msg = '';
+
+		switch (e.code) {
+			case FileError.QUOTA_EXCEEDED_ERR:
+				msg = 'QUOTA_EXCEEDED_ERR';
+			break;
+			case FileError.NOT_FOUND_ERR:
+				msg = 'NOT_FOUND_ERR';
+			break;
+			case FileError.SECURITY_ERR:
+				msg = 'SECURITY_ERR';
+			break;
+			case FileError.INVALID_MODIFICATION_ERR:
+				msg = 'INVALID_MODIFICATION_ERR';
+			break;
+			case FileError.INVALID_STATE_ERR:
+				msg = 'INVALID_STATE_ERR';
+			break;
+			default:
+				msg = 'Unknown Error';
+			break;
+		};
+
+		//console.log(e);
+		console.log('Error: ' + msg, e);
+	};
+
+
+	//Save playlist
+	savedUserInfo.set('playlist.entries', playList);
+};
+
+
 //FileTree reader
 masterPlayer.fileTreeReader = function(files, callback){
 	var playList = [],
 		timeOutForDone = -1;
 
 	//Filesystem for trees
-	function traverseItemTree(item, path) {
+	function traverseItemTree(fileEntry, path) {
 		path = path || "";
-		if (item.isFile) {
+		if (fileEntry.isFile) {
 			// Get file
-			item.file(function(file) {
-				traverseFileTree(file);
+			fileEntry.file(function(file) {
+				traverseFileTree(file, fileEntry);
 			});
-		} else if (item.isDirectory) {
+		} else if (fileEntry.isDirectory) {
 			// Get folder contents
-			var dirReader = item.createReader();
+			var dirReader = fileEntry.createReader();
 			dirReader.readEntries(function(entries) {
 				for (var i=0; i<entries.length; i++) {
-					traverseItemTree(entries[i], path + item.name + "/");
+					traverseItemTree(entries[i], path + fileEntry.name + "/");
 				}
 			});
 		}
 	}
 
 	//Filesystem for upload trees
-	function traverseFileTree(file) {
-		console.log(file);
+	function traverseFileTree(file, fileEntry) {
 		if(file.type === 'audio/mp3' || file.type === 'audio/mpeg' || file.type === 'audio/ogg' || file.contentType === 'audio/mpeg' || file.contentType === 'audio/ogg') {
 			var fileName = file.name.replace(".mp3","");
 			var title = fileName;
@@ -409,8 +533,11 @@ masterPlayer.fileTreeReader = function(files, callback){
 
 			clearTimeout(timeOutForDone);
 			timeOutForDone = setTimeout( function(){
-				//Play the playlist
 				if(playList.length) {
+					//Save playlist
+					masterPlayer.savePlaylist(playList);
+
+					//Play the playlist
 					masterPlayer.config.playlistInstance.setPlaylist(playList);
 					if (typeof callback == 'function') {
 						callback.call(this);
