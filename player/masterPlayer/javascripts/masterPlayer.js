@@ -178,7 +178,7 @@ masterPlayer.playerInit = function(){
 			else {
 				setTimeout(function(){
 					readyToGo();
-				}, 10);
+				}, 1000);
 			}
 		};
 
