@@ -23,10 +23,13 @@ var savedUserInfo = {
 	get: function(Item, callback) {
 		if(typeof chrome != 'undefined' && chrome.storage) {
 			chrome.storage.local.get(Item, function(result){ 
+				//Callback
 				if(typeof callback == 'function') callback.call(this, result[Item]);
 			});
 		} else {
 			var result = localStorage.getItem(Item) ? $.parseJSON(localStorage.getItem(Item)) : null;
+			
+			//Callback
 			if(typeof callback == 'function') callback.call(this, result);
 		}
 	},
@@ -38,10 +41,22 @@ var savedUserInfo = {
 
 		if(typeof chrome != 'undefined' && chrome.storage) {
 			chrome.storage.local.set(obj, function(result){
+				
+				//Callback
 				if(typeof callback == 'function') callback.call(this, result);
 			});
 		} else {
-			var result = localStorage.setItem(Item, JSON.stringify(Info));
+			//Remove item
+			if(Info === null) {
+				var result = localStorage.removeItem(Item);
+			} 
+
+			//Update item
+			else {
+				var result = localStorage.setItem(Item, stringify(Info));
+			}
+			
+			//Callback
 			if(typeof callback == 'function') callback.call(this, result);
 		}
 
@@ -82,6 +97,7 @@ var jQueryUiCore = [
 //Mandatory
 yepnope({
 	load: [
+		'/masterPlayer/javascripts/vendor/stringify.js',
 		'/masterPlayer/javascripts/vendor/jquery.js',
 		'/masterPlayer/javascripts/vendor/jquery.jplayer.js',
 		'/masterPlayer/javascripts/vendor/jplayer.playlist.js'

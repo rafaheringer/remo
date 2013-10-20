@@ -12,7 +12,8 @@ var initialPlaylist = [
 			artist: "The Stark Palace",
 			mp3:"http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3",
 			file: "http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3",
-			oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg"
+			oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg",
+			orderId: 1
 		},
 		{
 			title:"Your Face",
@@ -108,12 +109,69 @@ masterPlayer.playerInit = function(){
 	//Start controls
 	this.menuControl();
 
+	//Start player
+	this.newPlayerInstance = function(){
+		this.config.playlistInstance = new jPlayerPlaylist({
+				jPlayer: this.config.playerElement,
+				cssSelectorAncestor: "#jp_container"
+			}, 
+			this.config.initialMusic, {
+			playlistOptions: {
+				enableRemoveControls: false,
+				loopOnPrevious: true,
+				displayTime: 0,
+				addTime: 0,
+				removeTime: 0,
+				shuffleTime: 0
+			},
+			smoothPlayBar: false,
+			preload: 'metadata',
+			volume: 0.8,
+			errorAlerts: false,
+			solution: "html",
+			warningAlerts: false,
+			keyEnabled: false,
+			play: function(a){
+				//Save orderId in localstorage 
+				if(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current].orderId)
+					savedUserInfo.set('playlist.play', masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current].orderId);
+
+				//Scroll to music
+				$('.jp-playlist').stop().animate({
+						scrollTop: (41) * (masterPlayer.config.playlistInstance.current - 2)
+				});
+
+				//Set play
+				masterPlayer.config.playing = true;
+				if(yepnope.tests.windowsApp())
+					mediaControls.isPlaying = true;
+
+				//Get and set Music info
+				masterPlayer.setMusicInfo(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current]);
+			},
+			pause: function() {
+				//Set play
+				masterPlayer.config.playing = false;
+				if(yepnope.tests.windowsApp())
+					mediaControls.isPlaying = false;
+			},
+			seeking: function(a){
+				//Analytics
+				analytics.track('musicProgress', 'click');
+			},
+			volumechange: function(a) {
+				//Analytics
+				analytics.track('volume', 'click');
+			}
+		});
+	};
+
 	//Playlist config
 	savedUserInfo.get('playlist.entries', function(playlist){
 		var isReady = false;
 		var count = 0;
 
-		if(playlist){
+		if(playlist && yepnope.tests.chromeApp()){
 
 			masterPlayer.config.initialMusic = [];
 
@@ -186,62 +244,6 @@ masterPlayer.playerInit = function(){
 		_self.newPlayerInstance();
 		readyToGo(isReady);
 	});
-
-	//Start player
-	this.newPlayerInstance = function(){
-		this.config.playlistInstance = new jPlayerPlaylist({
-				jPlayer: this.config.playerElement,
-				cssSelectorAncestor: "#jp_container"
-			}, 
-			this.config.initialMusic, {
-			playlistOptions: {
-				enableRemoveControls: false,
-				loopOnPrevious: true,
-				displayTime: 0,
-				addTime: 0,
-				removeTime: 0,
-				shuffleTime: 0
-			},
-			smoothPlayBar: false,
-			preload: 'metadata',
-			volume: 0.8,
-			errorAlerts: false,
-			solution: "html",
-			warningAlerts: false,
-			keyEnabled: false,
-			play: function(a){
-				//Save orderId in localstorage 
-				savedUserInfo.set('playlist.play', masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current].orderId);
-
-				//Scroll to music
-				$('.jp-playlist').stop().animate({
-						scrollTop: (41) * (masterPlayer.config.playlistInstance.current - 2)
-				});
-
-				//Set play
-				masterPlayer.config.playing = true;
-				if(yepnope.tests.windowsApp())
-					mediaControls.isPlaying = true;
-
-				//Get and set Music info
-				masterPlayer.setMusicInfo(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current]);
-			},
-			pause: function() {
-				//Set play
-				masterPlayer.config.playing = false;
-				if(yepnope.tests.windowsApp())
-					mediaControls.isPlaying = false;
-			},
-			seeking: function(a){
-				//Analytics
-				analytics.track('musicProgress', 'click');
-			},
-			volumechange: function(a) {
-				//Analytics
-				analytics.track('volume', 'click');
-			}
-		});
-	};
 	
 	//Binds
 	this.keyboardEvents();
@@ -447,8 +449,10 @@ masterPlayer.setMusicInfo = function(music) {
 //Save playlist to read later
 masterPlayer.savePlaylist = function(playList){
 	//Grant access to the file history
-	for (var i = 0; i < playList.length; i++) {
-		playList[i].id = chrome.fileSystem.retainEntry(playList[i].fileEntry);
+	if(yepnope.tests.chromeApp()) {
+		for (var i = 0; i < playList.length; i++) {
+			playList[i].id = chrome.fileSystem.retainEntry(playList[i].fileEntry);
+		}
 	}
 
 	//Save playlist
