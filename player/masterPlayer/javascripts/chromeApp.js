@@ -9,6 +9,16 @@ masterPlayer.chromeAppInit = function() {
 		currentBounds: chrome.app.window.current().getBounds()
 	};
 
+	//Save DEV
+	if(typeof chrome.fileSystem.retainEntry == 'undefined')
+		chrome.fileSystem.retainEntry = function(){return false};
+
+	if(typeof chrome.fileSystem.isRestorable == 'undefined')
+		chrome.fileSystem.isRestorable = function(){return false};
+
+	if(typeof chrome.fileSystem.restoreEntry == 'undefined')
+		chrome.fileSystem.restoreEntry = function(){return false};
+
 	//Chrome actions
 	//==============
 	$('#chrome-actions').show();

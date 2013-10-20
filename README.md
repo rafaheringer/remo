@@ -19,6 +19,9 @@ You can use keyboard shortcuts:
 
 Remo.music is a beta copyleft project in Javascript and NODE.JS optmized for Webkit. Enjoy.
 
+Requirements
+------------
+31+ Google Chrome version
 
 Features:
 ---------

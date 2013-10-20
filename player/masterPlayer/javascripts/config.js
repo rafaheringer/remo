@@ -16,7 +16,6 @@ var masterPlayer = {};
 //Custom Options
 //==============
 
-
 //Local Storage
 var savedUserInfo = {
 	//Get saved info as OBJECT
