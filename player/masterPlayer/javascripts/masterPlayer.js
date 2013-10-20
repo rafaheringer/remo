@@ -133,11 +133,7 @@ masterPlayer.playerInit = function(){
 								 	count++;
 
 								 	//Insert in list
-									masterPlayer.config.initialMusic.push({
-										title: playlistItem.title,
-										artist: playlistItem.artist,
-										mp3: window.URL.createObjectURL(file)
-									});	
+									masterPlayer.config.initialMusic.push($.extend({}, playlistItem, {mp3: window.URL.createObjectURL(file)}));
 
 									//Its ready?
 									if(count >= playlist.length) {
@@ -154,20 +150,40 @@ masterPlayer.playerInit = function(){
 		} else {isReady = true;}
 
 		var readyToGo = function(){
-			console.log('isReady',isReady);
 			if(isReady) {
 				//Remove playlist loading indicator
 				$('#playlist').removeClass('loading');
 
-				//New player
-				_self.newPlayerInstance();
+				//Set playlist
+				masterPlayer.config.playlistInstance.setPlaylist(masterPlayer.config.initialMusic);
+
+				//Get last music played
+				savedUserInfo.get('playlist.play', function(orderId){
+					if(orderId) {
+						for(var item in masterPlayer.config.playlistInstance.playlist) {
+							if(masterPlayer.config.playlistInstance.playlist[item].orderId == orderId) {
+								masterPlayer.config.playlistInstance.select(Number(item));
+								
+								//TRICK: execute the play function and callbacks
+								masterPlayer.config.playlistInstance.play();
+								masterPlayer.config.playlistInstance.pause();
+								return false;
+							}
+						
+						}
+					}
+				});
+				
 			}
-			else
+			else {
 				setTimeout(function(){
 					readyToGo();
 				}, 10);
+			}
 		};
 
+		//New player
+		_self.newPlayerInstance();
 		readyToGo(isReady);
 	});
 
@@ -194,6 +210,9 @@ masterPlayer.playerInit = function(){
 			warningAlerts: false,
 			keyEnabled: false,
 			play: function(a){
+				//Save orderId in localstorage 
+				savedUserInfo.set('playlist.play', masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current].orderId);
+
 				//Scroll to music
 				$('.jp-playlist').stop().animate({
 						scrollTop: (41) * (masterPlayer.config.playlistInstance.current - 2)
@@ -473,11 +492,12 @@ masterPlayer.fileTreeReader = function(files, callback){
 			}
 
 			playList.push({
-				title: title,
-				artist: artist,
-				file: file,
-				fileEntry: fileEntry,
-				mp3: window.URL.createObjectURL(file)
+				title: title,											//Title of music
+				artist: artist,											//Artist
+				file: file,												//The file of mp3
+				fileEntry: fileEntry,									//The entry file
+				mp3: window.URL.createObjectURL(file),					//The converted BLOB
+				orderId: new Date().getTime() + (Math.random() * 1000)	//UniqueID
 			});
 
 			clearTimeout(timeOutForDone);
