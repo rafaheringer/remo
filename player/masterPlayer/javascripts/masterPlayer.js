@@ -88,11 +88,6 @@ var initialPlaylist = [
 		}
 ]
 
-//Request fileSystem
-// requestFileSystem(PERSISTENT, 200 * 1024 * 1024, function(fs) {
-// 	globalFileSystem = fs;
-// });
-
 //Player start config
 masterPlayer.config = {
 	id: parseInt(newDate.getTime() + Math.random()),
@@ -113,6 +108,9 @@ masterPlayer.playerInit = function(){
 	//Start controls
 	this.menuControl();
 
+	//Set playlist waiting
+	
+
 	//Playlist config
 	savedUserInfo.get('playlist.entries', function(playlist){
 		var isReady = false;
@@ -125,35 +123,29 @@ masterPlayer.playerInit = function(){
 			//Pass playlist array
 			for(var i = 0; i < playlist.length; i++){
 				(function(i, playlistItem){
+
+					//Verify if is restorable ID
 					chrome.fileSystem.isRestorable(playlistItem.id, function( isRestorable ) {
 
 						if(isRestorable === true) {
-							console.log(i, isRestorable, playlistItem.id);
 
+							//Restore the file
+							chrome.fileSystem.restoreEntry(playlistItem.id, function( entry ) {
 
-							chrome.fileSystem.restoreEntry(playlistItem.id, function( fe ) {
-								console.log(fe);
+								entry.file(function(file) {
+								 	count++;
 
-								fe.file(function(file) {
-									 var reader = new FileReader();
-									 reader.onloadend = function(e) {
-									 	count++;
-									 	var r = this.result;
+								 	//Insert in list
+									masterPlayer.config.initialMusic.push({
+										title: playlistItem.title,
+										artist: playlistItem.artist,
+										mp3: window.URL.createObjectURL(file)
+									});	
 
-									 	//Insert in list
-										masterPlayer.config.initialMusic.push({
-											title: playlist[i].title,
-											artist: playlist[i].artist,
-											mp3: r
-										});	
-
-										//Its ready?
-										if(count >= playlist.length) {
-											isReady = true;
-										}
-									 };
-
-									 reader.readAsDataURL(file);
+									//Its ready?
+									if(count >= playlist.length) {
+										isReady = true;
+									}
 								});
 
 							});
@@ -174,7 +166,7 @@ masterPlayer.playerInit = function(){
 				}, 10);
 		};
 
-		readyToGo();
+		readyToGo(isReady);
 	});
 
 	//Start player
@@ -441,7 +433,6 @@ masterPlayer.savePlaylist = function(playList){
 	//Save playlist
 	savedUserInfo.set('playlist.entries', playList);
 };
-
 
 //FileTree reader
 masterPlayer.fileTreeReader = function(files, callback){
