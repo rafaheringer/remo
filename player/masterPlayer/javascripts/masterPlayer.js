@@ -108,9 +108,6 @@ masterPlayer.playerInit = function(){
 	//Start controls
 	this.menuControl();
 
-	//Set playlist waiting
-	
-
 	//Playlist config
 	savedUserInfo.get('playlist.entries', function(playlist){
 		var isReady = false;
@@ -158,8 +155,13 @@ masterPlayer.playerInit = function(){
 
 		var readyToGo = function(){
 			console.log('isReady',isReady);
-			if(isReady)
+			if(isReady) {
+				//Remove playlist loading indicator
+				$('#playlist').removeClass('loading');
+
+				//New player
 				_self.newPlayerInstance();
+			}
 			else
 				setTimeout(function(){
 					readyToGo();
