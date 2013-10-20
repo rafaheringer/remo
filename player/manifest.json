@@ -6,7 +6,7 @@
 	"offline_enabled": true,
 	"permissions": [
 		"fileSystem",
-		{"fileSystem": ["write"]}, //FOR CHROME 31"retainEntries"
+		{"fileSystem": ["write", "retainEntries", "directory"]},
 		"fullscreen",
 		"notifications",
 		"storage",

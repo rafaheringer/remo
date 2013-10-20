@@ -124,42 +124,43 @@ masterPlayer.playerInit = function(){
 
 			//Pass playlist array
 			for(var i = 0; i < playlist.length; i++){
-				//console.log(chrome.fileSystem.retainEntry(playlist[i].fileEntry)); //TODO: On Chrome 31 Stable version
+				(function(i, playlistItem){
+					chrome.fileSystem.isRestorable(playlistItem.id, function( isRestorable ) {
 
-				(function(i){
-					//Request file system
-					window.requestFileSystem(window.PERSISTENT, 1024*1024, function(fs) {
+						if(isRestorable === true) {
+							console.log(i, isRestorable, playlistItem.id);
 
-						//Request the file
-						fs.root.getFile('currentPlaylist/' + playlist[i].file.name, {create: false}, function(fileEntry) {
 
-							//Request the file and transform in BLOB (///TODO: Read directly from dir)
-							fileEntry.file(function(file) {
-								 var reader = new FileReader();
-								 reader.onloadend = function(e) {
-								 	count++;
-								 	var r = this.result;
+							chrome.fileSystem.restoreEntry(playlistItem.id, function( fe ) {
+								console.log(fe);
 
-								 	//Insert in list
-									masterPlayer.config.initialMusic.push({
-										title: playlist[i].title,
-										artist: playlist[i].artist,
-										mp3: r
-									});	
+								fe.file(function(file) {
+									 var reader = new FileReader();
+									 reader.onloadend = function(e) {
+									 	count++;
+									 	var r = this.result;
 
-									//Its ready?
-									if(count >= playlist.length) {
-										isReady = true;
-									}
-								 };
+									 	//Insert in list
+										masterPlayer.config.initialMusic.push({
+											title: playlist[i].title,
+											artist: playlist[i].artist,
+											mp3: r
+										});	
 
-								 reader.readAsDataURL(file);
+										//Its ready?
+										if(count >= playlist.length) {
+											isReady = true;
+										}
+									 };
+
+									 reader.readAsDataURL(file);
+								});
+
 							});
-							
-						});
+						}
 					});
-				})(i);
-				
+				})(i, playlist[i]);
+			
 			}
 		} else {isReady = true;}
 
@@ -173,10 +174,7 @@ masterPlayer.playerInit = function(){
 				}, 10);
 		};
 
-		readyToGo(isReady);
-
-
-		
+		readyToGo();
 	});
 
 	//Start player
@@ -435,53 +433,10 @@ masterPlayer.setMusicInfo = function(music) {
 
 //Save playlist to read later
 masterPlayer.savePlaylist = function(playList){
-	//Limit to 200Mb; Request QUOTA
-	requestFileSystem(PERSISTENT, CONFIG.fileSystemMaxStorage, function(fs) {
-		for (var i = 0; i < playList.length; i++) {
-			(function(f) {
-				//directoryEntry.filesystem
-				fs.root.getDirectory('currentPlaylist', {create: true}, function(directoryEntry) {
-					fs.root.getFile('currentPlaylist/' + f.name, {create: true, exclusive: false}, function(fileEntry) {
-						fileEntry.createWriter(function(fileWriter) {
-							fileWriter.write(f);
-						}, errorHandler);
-					}, errorHandler);
-				}, errorHandler);
-			})(playList[i].file);
-		}
-	},errorHandler);
-
-
-	//Error Handler
-	//TODO: Display error for user
-	function errorHandler(e) {
-		var msg = '';
-
-		switch (e.code) {
-			case FileError.QUOTA_EXCEEDED_ERR:
-				msg = 'QUOTA_EXCEEDED_ERR';
-			break;
-			case FileError.NOT_FOUND_ERR:
-				msg = 'NOT_FOUND_ERR';
-			break;
-			case FileError.SECURITY_ERR:
-				msg = 'SECURITY_ERR';
-			break;
-			case FileError.INVALID_MODIFICATION_ERR:
-				msg = 'INVALID_MODIFICATION_ERR';
-			break;
-			case FileError.INVALID_STATE_ERR:
-				msg = 'INVALID_STATE_ERR';
-			break;
-			default:
-				msg = 'Unknown Error';
-			break;
-		};
-
-		//console.log(e);
-		console.log('Error: ' + msg, e);
-	};
-
+	//Grant access to the file history
+	for (var i = 0; i < playList.length; i++) {
+		playList[i].id = chrome.fileSystem.retainEntry(playList[i].fileEntry);
+	}
 
 	//Save playlist
 	savedUserInfo.set('playlist.entries', playList);
@@ -528,6 +483,7 @@ masterPlayer.fileTreeReader = function(files, callback){
 				title: title,
 				artist: artist,
 				file: file,
+				fileEntry: fileEntry,
 				mp3: window.URL.createObjectURL(file)
 			});
 
