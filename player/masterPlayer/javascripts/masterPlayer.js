@@ -200,6 +200,13 @@ masterPlayer.playerInit = function(){
 								});
 
 							});
+						} else {
+							count++;
+
+							//Its ready?
+							if(count >= playlist.length) {
+								isReady = true;
+							}
 						}
 					});
 				})(i, playlist[i]);
@@ -213,6 +220,7 @@ masterPlayer.playerInit = function(){
 				$('#playlist').removeClass('loading');
 
 				//Set playlist
+				if(masterPlayer.config.initialMusic.length == 0) { masterPlayer.config.initialMusic = initialPlaylist;}
 				masterPlayer.config.playlistInstance.setPlaylist(masterPlayer.config.initialMusic);
 
 				//Get last music played
