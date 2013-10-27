@@ -182,7 +182,7 @@ masterPlayer.playerInit = function(){
 		var isReady = false;
 		var count = 0;
 
-		if(playlist && yepnope.tests.chromeApp()){
+		if(playlist && yepnope.tests.chromeApp() && yepnope.tests.chrome.restorable()){
 
 			masterPlayer.config.initialMusic = [];
 
@@ -477,7 +477,7 @@ masterPlayer.setMusicInfo = function(music) {
 //Save playlist to read later
 masterPlayer.savePlaylist = function(playList){
 	//Grant access to the file history
-	if(yepnope.tests.chromeApp()) {
+	if(yepnope.tests.chromeApp() &&  yepnope.tests.chrome.restorable()) {
 		for (var i = 0; i < playList.length; i++) {
 			playList[i].id = chrome.fileSystem.retainEntry(playList[i].fileEntry);
 		}
