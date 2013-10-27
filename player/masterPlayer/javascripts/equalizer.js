@@ -6,7 +6,7 @@ $(function(){
 	//Context and connect audio
 	var audio			= document.getElementsByTagName('audio')[0];
 	var audioContext	= new webkitAudioContext();
-	var audioElement	= document.getElementsByTagName('audio')[0]
+	var audioElement	= document.getElementsByTagName('audio')[0];
 	var audioSource		= audioContext.createMediaElementSource( audioElement );
 	var qFactor			= 1;	//1 <> 100
 	var frequencies		= {};

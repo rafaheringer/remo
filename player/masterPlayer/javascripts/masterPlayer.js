@@ -96,21 +96,21 @@ masterPlayer.config = {
 	playlistInstance: null,
 	playing: false,
 	playerSocket: null,
+	playlistMaxEntries: 500,
 	playerElement: '#remoMusicPlayer',
 	lastFmApiKey: 'f2923bd087687602324332057ed0473a',
 	initialMusic: initialPlaylist
-	
 };
 
 //Player init
-masterPlayer.playerInit = function(){
+masterPlayer.playerInit = function(callback){
 	var _self = this;
 
 	//Start controls
 	this.menuControl();
 
 	//Start player
-	this.newPlayerInstance = function(){
+	this.newPlayerInstance = function(callback){
 		this.config.playlistInstance = new jPlayerPlaylist({
 				jPlayer: this.config.playerElement,
 				cssSelectorAncestor: "#jp_container"
@@ -175,6 +175,11 @@ masterPlayer.playerInit = function(){
 					analytics.track('volume', 'click');
 			}
 		});
+
+		//Callback
+		if(typeof callback == 'function') {
+			callback.call(this, this.newPlayerInstance);
+		}
 	};
 
 	//Playlist config
@@ -184,44 +189,50 @@ masterPlayer.playerInit = function(){
 
 		if(playlist && yepnope.tests.chromeApp() && yepnope.tests.chrome.restorable()){
 
-			masterPlayer.config.initialMusic = [];
+			//Is too much? Performance issue ///TODO: Passar para quando adiciona músicas, criar alerta
+			if(playlist.length > masterPlayer.config.playlistMaxEntries){
+				isReady = true;
+			} else {
 
-			//Pass playlist array
-			for(var i = 0; i < playlist.length; i++){
-				(function(i, playlistItem){
+				masterPlayer.config.initialMusic = [];
 
-					//Verify if is restorable ID
-					chrome.fileSystem.isRestorable(playlistItem.id, function( isRestorable ) {
+				//Pass playlist array
+				for(var i = 0; i < playlist.length; i++){
+					(function(i, playlistItem){
 
-						if(isRestorable === true) {
+						//Verify if is restorable ID
+						chrome.fileSystem.isRestorable(playlistItem.id, function( isRestorable ) {
 
-							//Restore the file
-							chrome.fileSystem.restoreEntry(playlistItem.id, function( entry ) {
+							if(isRestorable === true) {
 
-								entry.file(function(file) {
-								 	count++;
+								//Restore the file
+								chrome.fileSystem.restoreEntry(playlistItem.id, function( entry ) {
 
-								 	//Insert in list
-									masterPlayer.config.initialMusic.push($.extend({}, playlistItem, {mp3: window.URL.createObjectURL(file)}));
+									entry.file(function(file) {
+									 	count++;
 
-									//Its ready?
-									if(count >= playlist.length) {
-										isReady = true;
-									}
+									 	//Insert in list
+										masterPlayer.config.initialMusic.push($.extend({}, playlistItem, {mp3: window.URL.createObjectURL(file)}));
+
+										//Its ready?
+										if(count >= playlist.length) {
+											isReady = true;
+										}
+									});
+
 								});
+							} else {
+								count++;
 
-							});
-						} else {
-							count++;
-
-							//Its ready?
-							if(count >= playlist.length) {
-								isReady = true;
+								//Its ready?
+								if(count >= playlist.length) {
+									isReady = true;
+								}
 							}
-						}
-					});
-				})(i, playlist[i]);
-			
+						});
+					})(i, playlist[i]);
+				
+				}
 			}
 		} else {isReady = true;}
 
