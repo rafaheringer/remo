@@ -111,6 +111,7 @@ masterPlayer.playerInit = function(callback){
 
 	//Start player
 	this.newPlayerInstance = function(callback){
+		console.log('>>>>>>>>>>>>>>>>>>>>',callback);
 		this.config.playlistInstance = new jPlayerPlaylist({
 				jPlayer: this.config.playerElement,
 				cssSelectorAncestor: "#jp_container"
@@ -178,7 +179,7 @@ masterPlayer.playerInit = function(callback){
 
 		//Callback
 		if(typeof callback == 'function') {
-			callback.call(this, this.newPlayerInstance);
+			callback.call(this);
 		}
 	};
 
@@ -271,7 +272,7 @@ masterPlayer.playerInit = function(callback){
 		};
 
 		//New player
-		_self.newPlayerInstance();
+		_self.newPlayerInstance(callback);
 		readyToGo(isReady);
 	});
 	
