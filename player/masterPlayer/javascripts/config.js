@@ -16,6 +16,25 @@ var masterPlayer = {};
 //Custom Options
 //==============
 
+//File System
+window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
+
+//Audio Context
+window.audioContext = window.webkitAudioContext || window.AudioContext;
+
+//Helpers  (///TODO: put helpers in another file)
+//=======
+
+//To Array Helper
+window.toArray = function(list){return Array.prototype.slice.call(list || [], 0);};
+
+//Reset saved user info
+window.resetUserInfo = function(){
+	savedUserInfo.set('playlist.entries', null);
+	savedUserInfo.set('playlist.play', null);
+	savedUserInfo.set('playlist.volume', null);
+};
+
 //Local Storage
 var savedUserInfo = {
 	//Get saved info as OBJECT
@@ -63,14 +82,6 @@ var savedUserInfo = {
 	}
 };
 
-//File System
-window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
-
-//Audio Context
-window.audioContext = window.webkitAudioContext || window.AudioContext;
-
-//To Array Helper
-window.toArray = function(list){return Array.prototype.slice.call(list || [], 0);};
 
 //Load resources
 //==============
