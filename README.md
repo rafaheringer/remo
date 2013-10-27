@@ -26,15 +26,20 @@ Requirements
 Features:
 ---------
 **Current development**
+* Bugs in ChromeOS
+* Default mp3 file handler in ChromeOS
+* Bugs in Linux OS
+
+**v0.5.7**
 * Ogg support
 * Save playlist state
 * Save volume state
 
-**v0.5.5**
+**v0.5.6**
 *	Equalizer (nice!)
 *	Font icons
 
-**v0.5.4 and lower**
+**v0.5.5 and lower**
 *	Nice theme
 *	Basic music controls (play, pause, ff, bw and volume)
 *	Keyboard control

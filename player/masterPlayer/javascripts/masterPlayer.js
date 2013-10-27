@@ -159,9 +159,20 @@ masterPlayer.playerInit = function(){
 				//Analytics
 				analytics.track('musicProgress', 'click');
 			},
-			volumechange: function(a) {
+			volumechange: function(a, b) {
+
+				//Muted?
+				if($(masterPlayer.config.playerElement).jPlayer('option', 'muted') == true) {
+					//Save
+					savedUserInfo.set('playlist.volume', 0);
+				} else {
+					//Save
+					savedUserInfo.set('playlist.volume', $(masterPlayer.config.playerElement).jPlayer('option', 'volume'));
+				}
+
 				//Analytics
-				analytics.track('volume', 'click');
+				if(typeof analytics != 'undefined') //For first volume bind
+					analytics.track('volume', 'click');
 			}
 		});
 	};
@@ -257,6 +268,15 @@ masterPlayer.playerInit = function(){
 	this.keyboardEvents();
 	this.mouseEvents();
 	this.applyAnalytics();
+
+	//Volume config
+	savedUserInfo.get('playlist.volume', function(volume) {
+		if(parseFloat(volume) == 0) {
+			$(masterPlayer.config.playerElement).jPlayer('option','muted', true);
+		} else {
+			$(masterPlayer.config.playerElement).jPlayer('option','volume', parseFloat(volume));
+		}
+	});
 };
 
 //Menu control
