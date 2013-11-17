@@ -31,13 +31,6 @@ window.audioContext = window.webkitAudioContext || window.AudioContext;
 //Load resources
 //==============
 
-//jQuery UI core, if use
-var jQueryUiCore = [
-	CONFIG.dir.vendor + 'jquery.ui.core.js',
-	CONFIG.dir.vendor + 'jquery.ui.widget.js',
-	CONFIG.dir.vendor + 'jquery.ui.mouse.js'
-];
-
 //System Required
 yepnope({
 	load: [
@@ -105,18 +98,6 @@ yepnope({
 			}
 		});
 
-		//Have AudioContext?
-		yepnope({
-			test: window.AudioContext || window.webkitAudioContext,
-			yep: jQueryUiCore,
-			complete: function(){
-				yepnope({load: [
-					CONFIG.dir.vendor + 'jquery.ui.slider.js',
-					CONFIG.dir.scripts + 'plugins/equalizer.js'
-				]});
-			}
-		});
-
 		//Have connection and not a localhost AND not a Windows APP?
 		yepnope({
 			test: yepnope.tests.online() && !yepnope.tests.localhost() && !yepnope.tests.windowsApp() && !yepnope.tests.chromeApp(),
@@ -130,41 +111,30 @@ yepnope({
 	}
 });
 
-//Have connection?
-yepnope({
-	test: yepnope.tests.online() && !yepnope.tests.windowsApp(),
-	yep: {
-		socket: CONFIG.dir.vendor + 'socket.io.js',
-		qrcodecore: CONFIG.dir.vendor + 'qrcode.js',
-		jqueryqrcode: CONFIG.dir.vendor + 'jquery.qrcode.js'
-	},
-	callback: {
-		socket: function(){
-			masterPlayer.socketInit();
-		},
-		jqueryqrcode: function(){
-			masterPlayer.qrCodeInit();
-		}
-	}
-});
+//Call plugins
+yepnope([
+	CONFIG.dir.plugins + 'qrCode.js',
+	CONFIG.dir.plugins + 'equalizer.js'
+]);
 
-//Windows App Initial Binds
-if(yepnope.tests.windowsApp()) {
-	var mediaControls;
-	mediaControls = Windows.Media.MediaControl;
 
-	//Start Application
-	WinJS.Application.start();
+// //Windows App Initial Binds
+// if(yepnope.tests.windowsApp()) {
+// 	var mediaControls;
+// 	mediaControls = Windows.Media.MediaControl;
 
-	//On open application
-	WinJS.Application.addEventListener("activated", function (e) {
-		var PID = setInterval(function(){
-			if(typeof masterPlayer.windowsApp != 'undefined') {
-				masterPlayer.windowsApp.activated(e);
-				clearInterval(PID);
-			}
-		}, 100);
+// 	//Start Application
+// 	WinJS.Application.start();
 
-		WinJS.Application.start();
-	}, false);
-}
+// 	//On open application
+// 	WinJS.Application.addEventListener("activated", function (e) {
+// 		var PID = setInterval(function(){
+// 			if(typeof masterPlayer.windowsApp != 'undefined') {
+// 				masterPlayer.windowsApp.activated(e);
+// 				clearInterval(PID);
+// 			}
+// 		}, 100);
+
+// 		WinJS.Application.start();
+// 	}, false);
+// }
