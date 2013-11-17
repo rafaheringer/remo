@@ -265,7 +265,7 @@ masterPlayer.grabAlbumCover = function (ID3) {
 	var _self = this;
 
 	//info.title and info.artist required; info.album prefer
-	else if(yepnope.tests.online()) {
+	if(yepnope.tests.online()) {
 		
 		//Get album info
 		$.ajax({

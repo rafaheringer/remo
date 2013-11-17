@@ -1,7 +1,7 @@
 //Tests
 yepnope.tests = {
 	chromeApp: function(){ return typeof chrome != 'undefined' && typeof chrome.app.runtime != 'undefined'; },
-	webApp: function(){ return (!this.windowsApp() && !this.chromeApp()); },
+	webApp: function(){ return (!this.chromeApp()); },
 	fullScreen: function(){ return document.documentElement.webkitRequestFullScreen || document.documentElement.mozRequestFullScreen || document.documentElement.requestFullScreen; },
 	fileReader: function(){ return window.File && window.FileReader && window.FileList && window.Blob; },
 	online: function(){ return navigator.onLine; },
