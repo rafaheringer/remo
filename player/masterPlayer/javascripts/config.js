@@ -98,7 +98,8 @@ yepnope.tests = {
 	
 	//Tests for chrome apps
 	chrome: {
-		restorable: function(){return typeof chrome.fileSystem.isRestorable != 'undefined';}
+		restorable: function(){return typeof chrome.fileSystem.isRestorable != 'undefined';},
+		chooseEntry: function(){return typeof chrome.fileSystem.chooseEntry != 'undefined';}
 	}
 };
 

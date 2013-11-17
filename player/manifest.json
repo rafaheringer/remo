@@ -3,9 +3,8 @@
 	"short_name": "Remo",
 	"description": "Play your mp3 files on this beautiful music player and control it by your phone. TRY! Beta version.",
 	"author": "Rafael Heringer Carvalho",
-	"version": "0.5.7",
+	"version": "0.5.7.3",
 	"manifest_version": 2,
-	"minimum_chrome_version": "31",
 	"offline_enabled": true,
 	"permissions": [
 		"fileSystem",

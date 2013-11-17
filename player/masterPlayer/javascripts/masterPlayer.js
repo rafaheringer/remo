@@ -111,7 +111,6 @@ masterPlayer.playerInit = function(callback){
 
 	//Start player
 	this.newPlayerInstance = function(callback){
-		console.log('>>>>>>>>>>>>>>>>>>>>',callback);
 		this.config.playlistInstance = new jPlayerPlaylist({
 				jPlayer: this.config.playerElement,
 				cssSelectorAncestor: "#jp_container"
@@ -296,10 +295,18 @@ masterPlayer.menuControl = function() {
 	//On click in open files
 	$('.menu-open-files').on('click', function(){
 		$('#open-files').trigger('click');
+
+		///TODO: Why don't work on Linux dist?
+		// chrome.fileSystem.chooseEntry({type: 'openDirectory'}, function(items) {
+		// 	masterPlayer.fileTreeReader([items], function () {
+		// 		masterPlayer.config.playlistInstance.play();
+		// 	});
+		// });
 	});
 
 	//On open folder
 	$('#open-files').on('change', function(event){
+		console.log('---------------------------');
 		masterPlayer.fileTreeReader(event.target.files, function () {
 			masterPlayer.config.playlistInstance.play();
 		});
@@ -491,7 +498,9 @@ masterPlayer.savePlaylist = function(playList){
 	//Grant access to the file history
 	if(yepnope.tests.chromeApp() &&  yepnope.tests.chrome.restorable()) {
 		for (var i = 0; i < playList.length; i++) {
-			playList[i].id = chrome.fileSystem.retainEntry(playList[i].fileEntry);
+			if(typeof playList[i].fileEntry != 'undefined') {
+				playList[i].id = chrome.fileSystem.retainEntry(playList[i].fileEntry);
+			}
 		}
 	}
 
@@ -571,6 +580,7 @@ masterPlayer.fileTreeReader = function(files, callback){
 			}
 		} else {
 			traverseFileTree(files[i]);
+			//traverseItemTree(files[i]);
 		}
 	}
 };
