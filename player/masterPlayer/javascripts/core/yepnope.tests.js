@@ -1,6 +1,5 @@
 //Tests
 yepnope.tests = {
-	windowsApp: function(){ return typeof Windows != 'undefined'; },
 	chromeApp: function(){ return typeof chrome != 'undefined' && typeof chrome.app.runtime != 'undefined'; },
 	webApp: function(){ return (!this.windowsApp() && !this.chromeApp()); },
 	fullScreen: function(){ return document.documentElement.webkitRequestFullScreen || document.documentElement.mozRequestFullScreen || document.documentElement.requestFullScreen; },

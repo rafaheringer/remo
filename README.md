@@ -5,7 +5,6 @@ Control your local musics with your smartphone. Simple drag and drop your music 
 
 Get the most lightweight and beautiful music player now!
 
-*	[Windows 8 App](http://apps.microsoft.com/windows/en-us/app/remo-music-player/da5568e7-e1e6-403c-b77f-11a98af53b68)
 *	[Chrome Webstore](https://chrome.google.com/webstore/detail/remo-music-player/ajilpdcmebalpffmjjopcingplogifhb)
 *	[Online Anywhere App](http://remomusic.herokuapp.com) - For Chrome
 

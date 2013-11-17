@@ -59,27 +59,15 @@ yepnope({
 			}
 		});
 
-		//Is a Windows app?
-		yepnope({
-			test: yepnope.tests.windowsApp(),
-			yep: {
-				windowsApp: CONFIG.dir.scripts + 'windowsApp.js'
-			},
-			callback: {
-				windowsApp: function(){
-					masterPlayer.windowsAppInit();
-				}
-			}
-		});
 
 		//Is web app?
 		yepnope({
 			test: yepnope.tests.webApp(),
 			yep: {
-				windowsApp: CONFIG.dir.scripts + 'webApp.js'
+				webApp: CONFIG.dir.scripts + 'webApp.js'
 			},
 			callback: {
-				windowsApp: function(){
+				webApp: function(){
 					masterPlayer.webAppInit();
 				}
 			}
@@ -98,9 +86,9 @@ yepnope({
 			}
 		});
 
-		//Have connection and not a localhost AND not a Windows APP?
+		//Have connection and not a localhost?
 		yepnope({
-			test: yepnope.tests.online() && !yepnope.tests.localhost() && !yepnope.tests.windowsApp() && !yepnope.tests.chromeApp(),
+			test: yepnope.tests.online() && !yepnope.tests.localhost() && !yepnope.tests.chromeApp(),
 			yep: {
 				analytics: CONFIG.dir.scripts + 'analytics.js'
 			},
@@ -116,25 +104,3 @@ yepnope([
 	CONFIG.dir.plugins + 'qrCode.js',
 	CONFIG.dir.plugins + 'equalizer.js'
 ]);
-
-
-// //Windows App Initial Binds
-// if(yepnope.tests.windowsApp()) {
-// 	var mediaControls;
-// 	mediaControls = Windows.Media.MediaControl;
-
-// 	//Start Application
-// 	WinJS.Application.start();
-
-// 	//On open application
-// 	WinJS.Application.addEventListener("activated", function (e) {
-// 		var PID = setInterval(function(){
-// 			if(typeof masterPlayer.windowsApp != 'undefined') {
-// 				masterPlayer.windowsApp.activated(e);
-// 				clearInterval(PID);
-// 			}
-// 		}, 100);
-
-// 		WinJS.Application.start();
-// 	}, false);
-// }
