@@ -22,86 +22,9 @@ window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFile
 //Audio Context
 window.audioContext = window.webkitAudioContext || window.AudioContext;
 
-//Helpers  (///TODO: put helpers in another file)
-//=======
-
-//To Array Helper
-window.toArray = function(list){return Array.prototype.slice.call(list || [], 0);};
-
-//Reset saved user info
-window.resetUserInfo = function(){
-	savedUserInfo.set('playlist.entries', null);
-	savedUserInfo.set('playlist.play', null);
-	savedUserInfo.set('playlist.volume', null);
-};
-
-//Local Storage
-var savedUserInfo = {
-	//Get saved info as OBJECT
-	get: function(Item, callback) {
-		if(typeof chrome != 'undefined' && chrome.storage) {
-			chrome.storage.local.get(Item, function(result){ 
-				//Callback
-				if(typeof callback == 'function') callback.call(this, result[Item]);
-			});
-		} else {
-			var result = localStorage.getItem(Item) ? $.parseJSON(localStorage.getItem(Item)) : null;
-			
-			//Callback
-			if(typeof callback == 'function') callback.call(this, result);
-		}
-	},
-
-	//Save info in OBJECT
-	set: function(Item, Info, callback){
-		var obj = {};
-		obj[Item] = Info;
-
-		if(typeof chrome != 'undefined' && chrome.storage) {
-			chrome.storage.local.set(obj, function(result){
-				
-				//Callback
-				if(typeof callback == 'function') callback.call(this, result);
-			});
-		} else {
-			//Remove item
-			if(Info === null) {
-				var result = localStorage.removeItem(Item);
-			} 
-
-			//Update item
-			else {
-				var result = localStorage.setItem(Item, stringify(Info));
-			}
-			
-			//Callback
-			if(typeof callback == 'function') callback.call(this, result);
-		}
-
-		return obj;
-	}
-};
-
 
 //Load resources
 //==============
-
-//Tests
-yepnope.tests = {
-	windowsApp: function(){ return typeof Windows != 'undefined'; },
-	chromeApp: function(){ return typeof chrome != 'undefined' && typeof chrome.app.runtime != 'undefined'; },
-	webApp: function(){ return (!this.windowsApp() && !this.chromeApp()); },
-	fullScreen: function(){ return document.documentElement.webkitRequestFullScreen || document.documentElement.mozRequestFullScreen || document.documentElement.requestFullScreen; },
-	fileReader: function(){ return window.File && window.FileReader && window.FileList && window.Blob; },
-	online: function(){ return navigator.onLine; },
-	localhost: function() { return window.location.hostname == 'localhost'; },
-	
-	//Tests for chrome apps
-	chrome: {
-		restorable: function(){return typeof chrome.fileSystem.isRestorable != 'undefined';},
-		chooseEntry: function(){return typeof chrome.fileSystem.chooseEntry != 'undefined';}
-	}
-};
 
 //jQuery UI core, if use
 var jQueryUiCore = [
@@ -110,11 +33,9 @@ var jQueryUiCore = [
 	'/masterPlayer/javascripts/vendor/jquery.ui.mouse.js'
 ];
 
-//Mandatory
+//System Required
 yepnope({
 	load: [
-		'/masterPlayer/javascripts/vendor/stringify.js',
-		'/masterPlayer/javascripts/vendor/jquery.js',
 		'/masterPlayer/javascripts/vendor/jquery.jplayer.js',
 		'/masterPlayer/javascripts/vendor/jplayer.playlist.js'
 	]
