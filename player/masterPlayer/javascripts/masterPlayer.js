@@ -208,19 +208,17 @@ masterPlayer.playerInit = function(callback){
 masterPlayer.menuControl = function() {
 	//On click in open files
 	$('.menu-open-files').on('click', function(){
-		$('#open-files').trigger('click');
+		//$('#open-files').trigger('click');
 
-		///TODO: Why don't work on Linux dist?
-		// chrome.fileSystem.chooseEntry({type: 'openDirectory'}, function(items) {
-		// 	masterPlayer.fileTreeReader([items], function () {
-		// 		masterPlayer.config.playlistInstance.play();
-		// 	});
-		// });
+		chrome.fileSystem.chooseEntry({type: 'openFile', acceptsMultiple: true, accepts: [{description: 'Audio (mp3 or ogg)', mimeTypes:['audio/mp3', 'audio/ogg', 'audio/mpeg']}]}, function(items) {
+			masterPlayer.fileTreeReader(items, function () {
+				masterPlayer.config.playlistInstance.play();
+			});
+		});
 	});
 
 	//On open folder
 	$('#open-files').on('change', function(event){
-		console.log('---------------------------');
 		masterPlayer.fileTreeReader(event.target.files, function () {
 			masterPlayer.config.playlistInstance.play();
 		});
@@ -385,6 +383,7 @@ masterPlayer.setMusicInfo = function(music) {
 
 //Save playlist to read later
 masterPlayer.savePlaylist = function(playList){
+
 	//Grant access to the file history
 	if(yepnope.tests.chromeApp() &&  yepnope.tests.chrome.restorable()) {
 		for (var i = 0; i < playList.length; i++) {
@@ -469,8 +468,7 @@ masterPlayer.fileTreeReader = function(files, callback){
 				traverseItemTree(item);
 			}
 		} else {
-			traverseFileTree(files[i]);
-			//traverseItemTree(files[i]);
+			traverseItemTree(files[i]);
 		}
 	}
 };
