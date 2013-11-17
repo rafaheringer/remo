@@ -7,8 +7,13 @@ var CONFIG = {
 	hostname: '',
 	//nodeUrl: 'http://localhost'
 	nodeUrl: 'http://remomusic.herokuapp.com',
-	devmode: true,
-	fileSystemMaxStorage: 200 * 1024 * 1024
+	devmode: false,
+	fileSystemMaxStorage: 200 * 1024 * 1024,
+	dir: {
+		scripts: 	'/masterPlayer/javascripts/',
+		vendor: 	'/masterPlayer/javascripts/vendor/',
+		plugins: 	'/masterPlayer/javascripts/plugins/'
+	}
 };
 
 var masterPlayer = {};
@@ -28,22 +33,22 @@ window.audioContext = window.webkitAudioContext || window.AudioContext;
 
 //jQuery UI core, if use
 var jQueryUiCore = [
-	'/masterPlayer/javascripts/vendor/jquery.ui.core.js',
-	'/masterPlayer/javascripts/vendor/jquery.ui.widget.js',
-	'/masterPlayer/javascripts/vendor/jquery.ui.mouse.js'
+	CONFIG.dir.vendor + 'jquery.ui.core.js',
+	CONFIG.dir.vendor + 'jquery.ui.widget.js',
+	CONFIG.dir.vendor + 'jquery.ui.mouse.js'
 ];
 
 //System Required
 yepnope({
 	load: [
-		'/masterPlayer/javascripts/vendor/jquery.jplayer.js',
-		'/masterPlayer/javascripts/vendor/jplayer.playlist.js'
+		CONFIG.dir.vendor + 'jquery.jplayer.js',
+		CONFIG.dir.vendor + 'jplayer.playlist.js'
 	]
 });
 
 //Core
 yepnope({
-	load: '/masterPlayer/javascripts/masterPlayer.js',
+	load: CONFIG.dir.scripts + 'masterPlayer.js',
 	callback: function(){
 		//Init player
 		masterPlayer.playerInit();
@@ -52,7 +57,7 @@ yepnope({
 		yepnope({
 			test: yepnope.tests.chromeApp(),
 			yep: {
-				chromeApp: '/masterPlayer/javascripts/chromeApp.js'
+				chromeApp: CONFIG.dir.scripts + 'chromeApp.js'
 			},
 			callback: {
 				chromeApp: function(){
@@ -65,7 +70,7 @@ yepnope({
 		yepnope({
 			test: yepnope.tests.windowsApp(),
 			yep: {
-				windowsApp: '/masterPlayer/javascripts/windowsApp.js'
+				windowsApp: CONFIG.dir.scripts + 'windowsApp.js'
 			},
 			callback: {
 				windowsApp: function(){
@@ -78,7 +83,7 @@ yepnope({
 		yepnope({
 			test: yepnope.tests.webApp(),
 			yep: {
-				windowsApp: '/masterPlayer/javascripts/webApp.js'
+				windowsApp: CONFIG.dir.scripts + 'webApp.js'
 			},
 			callback: {
 				windowsApp: function(){
@@ -91,7 +96,7 @@ yepnope({
 		yepnope({
 			test: yepnope.tests.fileReader(),
 			yep: {
-				jdataview: '/masterPlayer/javascripts/vendor/jdataview.js'
+				jdataview: CONFIG.dir.vendor + 'jdataview.js'
 			},
 			callback: {
 				jdataview: function(){
@@ -106,8 +111,8 @@ yepnope({
 			yep: jQueryUiCore,
 			complete: function(){
 				yepnope({load: [
-					'/masterPlayer/javascripts/vendor/jquery.ui.slider.js',
-					'/masterPlayer/javascripts/equalizer.js'
+					CONFIG.dir.vendor + 'jquery.ui.slider.js',
+					CONFIG.dir.scripts + 'plugins/equalizer.js'
 				]});
 			}
 		});
@@ -116,10 +121,10 @@ yepnope({
 		yepnope({
 			test: yepnope.tests.online() && !yepnope.tests.localhost() && !yepnope.tests.windowsApp() && !yepnope.tests.chromeApp(),
 			yep: {
-				analytics: '/masterPlayer/javascripts/analytics.js'
+				analytics: CONFIG.dir.scripts + 'analytics.js'
 			},
 			nope: {
-				analytics: '/masterPlayer/javascripts/analytics.offline.js'
+				analytics: CONFIG.dir.scripts + 'analytics.offline.js'
 			}
 		});
 	}
@@ -129,9 +134,9 @@ yepnope({
 yepnope({
 	test: yepnope.tests.online() && !yepnope.tests.windowsApp(),
 	yep: {
-		socket: '/masterPlayer/javascripts/vendor/socket.io.js',
-		qrcodecore: '/masterPlayer/javascripts/vendor/qrcode.js',
-		jqueryqrcode: '/masterPlayer/javascripts/vendor/jquery.qrcode.js'
+		socket: CONFIG.dir.vendor + 'socket.io.js',
+		qrcodecore: CONFIG.dir.vendor + 'qrcode.js',
+		jqueryqrcode: CONFIG.dir.vendor + 'jquery.qrcode.js'
 	},
 	callback: {
 		socket: function(){
