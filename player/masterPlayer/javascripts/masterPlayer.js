@@ -423,8 +423,17 @@ masterPlayer.fileTreeReader = function(files, callback){
 
 	//Filesystem for upload trees
 	function traverseFileTree(file, fileEntry) {
-		if(file.type === 'audio/mp3' || file.type === 'audio/mpeg' || file.type === 'audio/ogg' || file.contentType === 'audio/mpeg' || file.contentType === 'audio/ogg') {
-			var fileName = file.name.replace(".mp3","");
+		console.log('File Traverser - ','file:', file,'filetype:', file.type, 'file.contentType:', file.contentType);
+		
+		if(
+			file.type === 'audio/mp3' 			|| 
+			file.type === 'audio/mpeg' 			|| 
+			file.type === 'audio/ogg' 			||
+			file.type === 'audio/x-m4a'			||
+			file.contentType === 'audio/mpeg' 	|| 
+			file.contentType === 'audio/ogg'
+		) {
+			var fileName = file.name.replace(".mp3","").replace(".mp4","").replace(".m4a","").replace(".ogg","");
 			var title = fileName;
 			var artist = null;
 			
@@ -667,6 +676,3 @@ masterPlayer.hideOnMouseMove = function(hide){
 		$('#show-QR-code, #menu, .jp-volume').removeClass('hidden');
 	}
 };
-
-
-
