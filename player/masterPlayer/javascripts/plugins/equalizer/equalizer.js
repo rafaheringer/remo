@@ -172,6 +172,11 @@ masterPlayer.prototype.equalizer = function(){
 	};
 	
 	this.__constructor();
+
+	//Public methods
+	return {
+		init: this.init
+	};
 };
 
 //Have AudioContext?
@@ -185,10 +190,8 @@ yepnope({
 	},
 	callback: {
 		jqueryUiSlider: function(){
-			$(function(){
-				var equalizer = new mp.equalizer();
-				equalizer.init();
-			});
+			masterPlayer.plugins.equalizer = new mp.equalizer();
+			masterPlayer.plugins.equalizer.init();
 		}
 	}
 });
