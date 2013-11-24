@@ -84,7 +84,7 @@ window.appendSecondaryBox = function(boxId, boxName, content) {
 
 //Append blank box in player
 window.appendBlankBox = function(boxId, boxName, content) {
-	var html = '<div id="' + boxId + '" class="blank-box"> \
+	var html = '<div id="' + boxId + '" class="blank-box animated fadeInRight"> \
 					<div class="box-container"> \
 						<div class="box-content">' + content + '</div> \
 					</div> \

@@ -20,7 +20,8 @@ masterPlayer.config = {
 	playlistMaxEntries: 500,
 	playerElement: '#remoMusicPlayer',
 	lastFmApiKey: 'f2923bd087687602324332057ed0473a',
-	initialMusic: initialPlaylist
+	initialMusic: initialPlaylist,
+	musicInfo: null
 };
 
 //Player init
@@ -364,6 +365,9 @@ masterPlayer.setMusicInfo = function(music) {
 
 			//Get album info
 			masterPlayer.grabAlbumCover(ID3);
+
+			//Save
+			masterPlayer.config.musicInfo = ID3;
 		};
 	} else {
 		var ID3 = {
@@ -381,6 +385,9 @@ masterPlayer.setMusicInfo = function(music) {
 
 		//Get album info
 		masterPlayer.grabAlbumCover(ID3);
+
+		//Save
+		masterPlayer.config.musicInfo = ID3;
 	}
 };
 

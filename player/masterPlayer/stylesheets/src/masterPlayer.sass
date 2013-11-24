@@ -438,15 +438,16 @@ body
 		width: 20px
 		height: 20px
 		display: block
-		margin: 0 0 3px 0
+		margin: 0 0 4px 0
 
 		a
 			opacity: 0.5
 			color: white
 			font-size: 12px
 
-		&.jp-repeat-off,
-		&.jp-shuffle-off
+		&[class*="off"],
+			display: none
+
 			a
 				opacity: 1
 
