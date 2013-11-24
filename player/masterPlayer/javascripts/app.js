@@ -16,7 +16,8 @@ var CONFIG = {
 	}
 };
 
-var masterPlayer = {};
+var masterPlayer = function(){};
+var mp = new masterPlayer();
 
 //Custom Options
 //==============
@@ -102,5 +103,6 @@ yepnope({
 //Call plugins
 yepnope([
 	CONFIG.dir.plugins + 'qrCode.js',
-	CONFIG.dir.plugins + 'equalizer.js'
+	CONFIG.dir.plugins + 'equalizer/equalizer.js',
+	CONFIG.dir.plugins + 'lyrics/lyrics.js'
 ]);
