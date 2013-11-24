@@ -7,6 +7,9 @@
 var newDate = new Date();
 var initialPlaylist = new Array();
 
+//Registered plugins
+masterPlayer.plugins = new Object();
+
 //Player start config
 masterPlayer.config = {
 	id: parseInt(newDate.getTime() + Math.random()),
