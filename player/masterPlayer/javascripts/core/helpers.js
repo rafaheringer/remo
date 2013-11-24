@@ -81,3 +81,15 @@ window.appendSecondaryBox = function(boxId, boxName, content) {
 
 	return $(html).appendTo($('.jp-type-playlist','#jp_container'));
 };
+
+//Append blank box in player
+window.appendBlankBox = function(boxId, boxName, content) {
+	var html = '<div id="' + boxId + '" class="blank-box"> \
+					<div class="box-container"> \
+						<div class="box-content">' + content + '</div> \
+					</div> \
+				</div> \
+	';
+
+	return $(html).appendTo($('.jp-type-playlist','#jp_container'));
+};
