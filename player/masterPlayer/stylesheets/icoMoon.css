@@ -35,7 +35,27 @@ Instead of a list of all class selectors,
 you can use the generic selector below, but it's slower:
 [class*="ico-"] {
 */
-.ico-home, .ico-pencil, .ico-folder-open, .ico-folder, .ico-tag, .ico-remove, .ico-forward, .ico-backward, .ico-play, .ico-pause, .ico-stop, .ico-info, .ico-equalizer, .ico-loop, .ico-shuffle, .ico-volume-mute, .ico-volume-high, .ico-minus, .ico-close, .ico-expand {
+.ico-file,
+.ico-home, 
+.ico-pencil, 
+.ico-folder-open, 
+.ico-folder, 
+.ico-tag, 
+.ico-remove, 
+.ico-forward, 
+.ico-backward, 
+.ico-play, 
+.ico-pause, 
+.ico-stop, 
+.ico-info, 
+.ico-equalizer, 
+.ico-loop, 
+.ico-shuffle, 
+.ico-volume-mute, 
+.ico-volume-high, 
+.ico-minus, 
+.ico-close, 
+.ico-expand {
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
@@ -44,6 +64,9 @@ you can use the generic selector below, but it's slower:
 	text-transform: none;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
+}
+.ico-file:before {
+	content: "\e600";
 }
 .ico-home:before {
 	content: "\e000";
