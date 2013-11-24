@@ -57,3 +57,8 @@ window.resetUserInfo = function(){
 	savedUserInfo.set('playlist.play', null);
 	savedUserInfo.set('playlist.volume', null);
 };
+
+//Append CSS in player
+window.appendCSS = function(path){
+	$('head').append('<link rel="stylesheet" href="/masterPlayer/' + path + '" type="text/css" />');
+};
