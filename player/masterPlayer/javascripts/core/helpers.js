@@ -56,9 +56,28 @@ window.resetUserInfo = function(){
 	savedUserInfo.set('playlist.entries', null);
 	savedUserInfo.set('playlist.play', null);
 	savedUserInfo.set('playlist.volume', null);
+	return true;
 };
 
 //Append CSS in player
 window.appendCSS = function(path){
 	$('head').append('<link rel="stylesheet" href="/masterPlayer/' + path + '" type="text/css" />');
+};
+
+
+//Append secondary box in player
+window.appendSecondaryBox = function(boxId, boxName, content) {
+	var html = '<div id="' + boxId + '" class="secondary-box"> \
+					<div class="box-container"> \
+						<div class="box-header"> \
+							<h3>' + boxName + '</h3> \
+							<a href="#" class="ico-close box-close box-actions" title="Close this box"></a> \
+							<span class="clearfix"></span> \
+						</div> \
+						<div class="box-content">' + content + '</div> \
+					</div> \
+				</div> \
+	';
+
+	return $(html).appendTo($('.jp-type-playlist','#jp_container'));
 };
