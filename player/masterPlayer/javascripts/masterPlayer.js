@@ -67,7 +67,7 @@ masterPlayer.playerInit = function(callback){
 				masterPlayer.config.playing = true;
 
 				//Get and set Music info
-				masterPlayer.setMusicInfo(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current]);
+				masterPlayer.setMusicInfo();
 			},
 			pause: function() {
 				//Set play
@@ -310,7 +310,21 @@ masterPlayer.grabAlbumCover = function (ID3) {
 };
 
 //Music info
-masterPlayer.setMusicInfo = function(music) {
+masterPlayer.setMusicInfo = function() {
+	masterPlayer.getMusicInfo(function(ID3) {
+		//Set artist and title
+		$('.jp-music-name').html(ID3.title);
+		$('.jp-music-artist').html(ID3.artist);
+
+		//Get album info
+		masterPlayer.grabAlbumCover(ID3);
+	});
+};
+
+//GET Music Info
+masterPlayer.getMusicInfo = function(callback) {
+	var music = masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current];
+
 	if(typeof music.file == 'object') {
 		var reader = new FileReader();
 		reader.readAsArrayBuffer(music.file);
@@ -359,15 +373,13 @@ masterPlayer.setMusicInfo = function(music) {
 			if($.trim(ID3.artist).charCodeAt(0) == 0)
 				ID3.artist = artist;
 
-			//Set artist and title
-			$('.jp-music-name').html(ID3.title);
-			$('.jp-music-artist').html(ID3.artist);
-
-			//Get album info
-			masterPlayer.grabAlbumCover(ID3);
-
 			//Save
 			masterPlayer.config.musicInfo = ID3;
+
+			//Callback
+			if(typeof callback == 'function') {
+				callback.call(this, ID3);
+			}
 		};
 	} else {
 		var ID3 = {
@@ -378,13 +390,10 @@ masterPlayer.setMusicInfo = function(music) {
 			year: ''
 		};
 
-		//Set artist and title
-		$('.jp-music-name').html(ID3.title);
-		$('.jp-music-artist').html(ID3.artist);
-
-
-		//Get album info
-		masterPlayer.grabAlbumCover(ID3);
+		//Callback
+		if(typeof callback == 'function') {
+			callback.call(this, ID3);
+		}
 
 		//Save
 		masterPlayer.config.musicInfo = ID3;

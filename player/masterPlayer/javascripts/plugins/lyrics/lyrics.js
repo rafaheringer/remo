@@ -41,13 +41,17 @@ masterPlayer.prototype.lyrics = function() {
 
 	//Search lyric
 	this.searchLyric = function() {
-		console.log('Lyrics: searchLyric', masterPlayer.config.musicInfo);
+		//Loading
+		_self.elements.lyricsContainer.addClass('loading');
 
-		if(masterPlayer.config.musicInfo) {
+		//Get music info
+		masterPlayer.getMusicInfo(function(ID3) {
+			console.log('Lyrics: searchLyric',ID3);
+
 			jQuery.getJSON(
 				'http://www.vagalume.com.br/api/search.php'
-				+ '?art=' + masterPlayer.config.musicInfo.artist
-				+ '&mus=' + masterPlayer.config.musicInfo.title,
+				+ '?art=' +ID3.artist
+				+ '&mus=' +ID3.title,
 				function(data){
 					//If Captcha
 					if (data.captcha) {
@@ -79,9 +83,12 @@ masterPlayer.prototype.lyrics = function() {
 
 					//Add vagalume logo
 					_self.elements.lyricsContent.prepend('<p><a target="_blank" href="http://www.vagalume.com.br"><img border="0" src="/masterPlayer/javascripts/plugins/lyrics/vagalume.jpg" alt="Vagalume"></a></p>');
+
+					//Remove loading
+					_self.elements.lyricsContainer.removeClass('loading');
 				}
 			);
-		}
+		});
 	};
 
 	//Show lyrics
@@ -131,7 +138,7 @@ masterPlayer.prototype.lyrics = function() {
 		//On seek
 		$(masterPlayer.config.playerElement).on($.jPlayer.event.timeupdate + '.lyrics', function(event) {
 			if(_self.autoscroll) {
-				var height 	= 		_self.elements.lyricsContent.height();
+				var height 	= 		_self.elements.lyricsContent.outerHeight(true, true);
 				height 		= 		height - _self.elements.lyricsContainer.height();
 				var calc 	= 		(height / 100)  * event.jPlayer.status.currentPercentAbsolute;
 

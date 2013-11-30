@@ -1,36 +1,4 @@
-@font-face {
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 400;
-  src: url(/masterPlayer/fonts/cJZKeOuBrn4kERxqtaUH3fY6323mHUZFJMgTvxaG2iE.eot);
-  src: local("Open Sans"), local("OpenSans"), url(/masterPlayer/fonts/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 600;
-  src: url(/masterPlayer/fonts/MTP_ySUJH_bn48VBG8sNSnZ2MAKAc2x4R1uOSeegc5U.eot);
-  src: local("Open Sans Semibold"), local("OpenSans-Semibold"), url(/masterPlayer/fonts/MTP_ySUJH_bn48VBG8sNSnhCUOGz7vYGh680lGh-uXM.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 700;
-  src: url(/masterPlayer/fonts/k3k702ZOKiLJc3WVjuplzHZ2MAKAc2x4R1uOSeegc5U.eot);
-  src: local("Open Sans Bold"), local("OpenSans-Bold"), url(/masterPlayer/fonts/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Open Sans";
-  font-style: italic;
-  font-weight: 400;
-  src: url(/masterPlayer/fonts/xjAJXh38I15wypJXxuGMBmfQcKutQXcIrRfyR5jdjY8.eot);
-  src: local("Open Sans Italic"), local("OpenSans-Italic"), url(/masterPlayer/fonts/xjAJXh38I15wypJXxuGMBobN6UDyHWBl620a-IRfuBk.woff) format("woff");
-}
-
-/* line 5, lyrics.sass */
+/* line 4, lyrics.sass */
 #lyrics {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -45,7 +13,7 @@
   top: 0;
   display: none;
 }
-/* line 17, lyrics.sass */
+/* line 16, lyrics.sass */
 #lyrics .box-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -53,25 +21,24 @@
   overflow: auto;
   position: relative;
   height: 100%;
-  padding: 100px 10px 120px 10px;
 }
-/* line 25, lyrics.sass */
+/* line 23, lyrics.sass */
 #lyrics .box-container:hover::-webkit-scrollbar-thumb:vertical {
   background-color: rgba(255, 255, 255, 0.4);
 }
-/* line 28, lyrics.sass */
+/* line 26, lyrics.sass */
 #lyrics .box-container::-webkit-scrollbar {
   width: 5px;
   height: 100%;
   background: transparent;
 }
-/* line 33, lyrics.sass */
+/* line 31, lyrics.sass */
 #lyrics .box-container::-webkit-scrollbar-button:start:decrement, #lyrics .box-container::-webkit-scrollbar-button:end:increment {
   height: 30px;
   display: none;
   background-color: transparent;
 }
-/* line 39, lyrics.sass */
+/* line 37, lyrics.sass */
 #lyrics .box-container::-webkit-scrollbar-thumb:vertical {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -80,26 +47,27 @@
   height: 50px;
   background-color: rgba(255, 255, 255, 0);
 }
-/* line 44, lyrics.sass */
+/* line 42, lyrics.sass */
 #lyrics .box-container::-webkit-scrollbar-thumb:vertical:hover {
   background-color: rgba(255, 255, 255, 0.7);
 }
-/* line 48, lyrics.sass */
+/* line 45, lyrics.sass */
 #lyrics .lyrics-content {
   text-shadow: 0px 0px 5px black, 0px 0px 10px black;
+  padding: 100px 10px 220px 10px;
   white-space: pre-line;
   color: white;
   font-size: 14px;
   line-height: 25px;
   text-align: center;
 }
-/* line 56, lyrics.sass */
+/* line 54, lyrics.sass */
 #lyrics .lyrics-content img {
   border-radius: 5px;
   opacity: 0.9;
   margin-bottom: 25px;
 }
-/* line 61, lyrics.sass */
+/* line 59, lyrics.sass */
 #lyrics .lyrics-actions {
   color: white;
   position: absolute;
@@ -107,7 +75,7 @@
   left: 10px;
   font-size: 10px;
 }
-/* line 68, lyrics.sass */
+/* line 66, lyrics.sass */
 #lyrics .lyrics-actions input {
   margin-right: 5px;
   width: 10px;
