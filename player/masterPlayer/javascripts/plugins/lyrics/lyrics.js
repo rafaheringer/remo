@@ -60,12 +60,12 @@ masterPlayer.prototype.lyrics = function() {
 					} 
 
 					//If song not found
-					if (data.type == 'song_notfound') {
+					else if (data.type == 'song_notfound') {
 						console.log('Song not found.',data,masterPlayer.config.musicInfo);
 						_self.elements.lyricsContent.text('Sorry, song not found :(');
 					}
 
-					if (data.type == 'notfound') {
+					else if (data.type == 'notfound') {
 						console.log('Artist not found.',data,masterPlayer.config.musicInfo);
 
 						_self.elements.lyricsContent.text('Sorry, artist not found :(');
@@ -76,6 +76,9 @@ masterPlayer.prototype.lyrics = function() {
 						_self.elements.lyricsContent.text(data.mus[0].text);
 					}
 
+					//Remove loading
+					_self.elements.lyricsContainer.removeClass('loading');
+
 					//Scroll to top
 					$(_self.elements.lyricsBoxContainer).stop().animate({
 							scrollTop: 0
@@ -84,8 +87,6 @@ masterPlayer.prototype.lyrics = function() {
 					//Add vagalume logo
 					_self.elements.lyricsContent.prepend('<p><a target="_blank" href="http://www.vagalume.com.br"><img border="0" src="/masterPlayer/javascripts/plugins/lyrics/vagalume.jpg" alt="Vagalume"></a></p>');
 
-					//Remove loading
-					_self.elements.lyricsContainer.removeClass('loading');
 				}
 			);
 		});
