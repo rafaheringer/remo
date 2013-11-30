@@ -53,7 +53,7 @@ masterPlayer.playerInit = function(callback){
 			solution: "html",
 			warningAlerts: false,
 			keyEnabled: false,
-			play: function(a){
+			play: function(){
 				//Save orderId in localstorage 
 				if(masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current].orderId)
 					savedUserInfo.set('playlist.play', masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current].orderId);
@@ -73,14 +73,14 @@ masterPlayer.playerInit = function(callback){
 				//Set play
 				masterPlayer.config.playing = false;
 			},
-			seeking: function(a){
+			seeking: function(){
 				//Analytics
 				analytics.track('musicProgress', 'click');
 			},
-			volumechange: function(a, b) {
+			volumechange: function() {
 
 				//Muted?
-				if($(masterPlayer.config.playerElement).jPlayer('option', 'muted') == true) {
+				if($(masterPlayer.config.playerElement).jPlayer('option', 'muted') === true) {
 					//Save
 					savedUserInfo.set('playlist.volume', 0);
 				} else {
@@ -242,10 +242,9 @@ masterPlayer.menuControl = function() {
 //Set album cover
 masterPlayer.setAlbumCover = function (src) {
 	var oldImage = $('.jp-music-cover img'),
-			backupImage = oldImage.attr('src'),
-			backupWidth = oldImage.attr('width'),
-			backupHeight = oldImage.attr('height'),
-			newImage = document.createElement('img');
+		backupWidth = oldImage.attr('width'),
+		backupHeight = oldImage.attr('height'),
+		newImage = document.createElement('img');
 
 	newImage.src = src;
 	newImage.setAttribute('width', backupWidth);
@@ -288,7 +287,7 @@ masterPlayer.grabAlbumCover = function (ID3) {
 							console.log(o);
 						};
 
-						xhr.onload = function(e) {
+						xhr.onload = function() {
 							_self.setAlbumCover(window.webkitURL.createObjectURL(this.response));
 						};
 
@@ -329,7 +328,7 @@ masterPlayer.getMusicInfo = function(callback) {
 		var reader = new FileReader();
 		reader.readAsArrayBuffer(music.file);
 
-		reader.onload = function(e) {
+		reader.onload = function() {
 			var dv = new jDataView(this.result);
 			var ID3 = {};
 
@@ -505,13 +504,12 @@ masterPlayer.fileTreeReader = function(files, callback){
 masterPlayer.fileReaderInit = function() {
 	//Music listener with fileReader
 	var dropTarget = $('#drag-drop-layer'),
-		html = $('html'),
 		showDrag = false,
 		timeout = -1;
 
 	$('html')
 		//On drag enter
-		.on('dragenter', function(event){
+		.on('dragenter', function(){
 			dropTarget.addClass('hover');
 			showDrag = true;
 		})
@@ -523,7 +521,7 @@ masterPlayer.fileReaderInit = function() {
 		})
 
 		//On drag leave
-		.on('dragleave', function(event){
+		.on('dragleave', function(){
 			showDrag = false;
 			clearTimeout(timeout);
 			timeout = setTimeout(function(){
@@ -571,7 +569,7 @@ masterPlayer.keyboardEvents = function(){
 				return false;
 				event.preventDefault();
 			break;
-
+			
 			//Next music
 			case 39: //Right arrow
 			case 40: //Bottom arrow

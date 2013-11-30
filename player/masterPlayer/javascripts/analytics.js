@@ -39,7 +39,8 @@ analytics._playMusic = function(additionalInfo, value) {
 	return {
 		categoty: 'MusicControl',
 		action: 'Play',
-		label: additionalInfo || null
+		label: additionalInfo || null,
+		value: value || null
 	};
 };
 
