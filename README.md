@@ -10,7 +10,7 @@ Get the most lightweight and beautiful music player now!
 
 -----------------
 
-You can use keyboard shortcuts:   
+You can use keyboard shortcuts (media keys are supported):   
 	**space**: play/pause   
 	**enter**: play the selected music   
 	**left** or **right** arrow: play previous or next music   
@@ -24,10 +24,21 @@ Requirements
 
 Features:
 ---------
+**Planned - Future**
+* Equalizer presets
+* Advanced remote control
+* Global keyboard media keys support
+
 **Current development**
 * Bugs in ChromeOS
-* Default mp3 file handler in ChromeOS
 * Bugs in Linux OS
+* Default mp3 file handler in ChromeOS
+* Library management
+
+**v0.5.8**
+- New lyrics feature
+- New image background
+- M4a files support
 
 **v0.5.7**
 * Ogg support
@@ -35,19 +46,19 @@ Features:
 * Save volume state
 
 **v0.5.6**
-*	Equalizer (nice!)
-*	Font icons
+* Equalizer (nice!)
+* Font icons
 
 **v0.5.5 and lower**
-*	Nice theme
-*	Basic music controls (play, pause, ff, bw and volume)
-*	Keyboard control
-*	Shuffle playlist
-*	Repeat playlist
-*	Windows 8 integration
-*	Chrome App integration
-*	Basic control with your phone via sockets
-*	Seeker
+* Nice theme
+* Basic music controls (play, pause, ff, bw and volume)
+* Keyboard control
+* Shuffle playlist
+* Repeat playlist
+* Windows 8 integration
+* Chrome App integration
+* Basic control with your phone via sockets
+* Seeker
 
 
 License:
@@ -85,3 +96,20 @@ Useful stuff:
 *	[Web Audio Equalizer](http://helpknow.com/eq/)
 *	[BiQuadFilterNode Docs](http://www.w3.org/2011/audio/drafts/1WD/WebAudio/#BiquadFilterNode-section)
 *	[jQuery UI Builder for this app](http://jqueryui.com/download/#!version=1.10.3&themeParams=none&components=1110000000000000100000000000000000)
+
+Reviews (Thanks!):
+------------------
+*	http://lifehacker.com/the-best-packaged-apps-for-chrome-1377567494
+*	http://www.omgchrome.com/offline-music-player-for-chromebooks-and-chromeos/
+*	http://www.techtimepiece.com/2013/08/remo-music-player-review-chrome-package.html
+*	http://techmef.blogspot.com/2013/09/best-of-chrome-remo-music-player.html
+*	http://www.chromestory.com/2013/08/music-player-for-chromebook/
+*	http://octoba.net/archives/20131013-android-feature-remo-music-player.html
+*	http://www.freegroup.org/2013/09/remo-music-player/
+*	http://my-chrome.ru/2013/09/prilozhenie-remo-music-player/
+*	http://www.mobiflip.de/remo-music-player-fuer-chrome-und-chrome-os/
+*	http://yemista.com/awesome-chrome-apps-that-run-offline-without-browser/
+*	http://www.blogtogo.de/remo-music-player-lokale-musikdateien-ueber-chrome-und-chrome-os-abspielen/
+*	http://mundonline.es/remo-un-reproductor-de-musica-offline-para-chrome-os/
+*	http://cocasblog.de/remo-music-player-chrome/
+*	http://www.youtube.com/watch?v=a4ZBzLJC5oo

@@ -21,7 +21,8 @@ masterPlayer.config = {
 	playerElement: '#remoMusicPlayer',
 	lastFmApiKey: 'f2923bd087687602324332057ed0473a',
 	initialMusic: initialPlaylist,
-	musicInfo: null
+	musicInfo: null,
+	loadedItems: loadedItems //Global from background.js
 };
 
 //Player init
@@ -101,11 +102,20 @@ masterPlayer.playerInit = function(callback){
 	};
 
 	//Playlist config
-	savedUserInfo.get('playlist.entries', function(playlist){
+	savedUserInfo.get('playlist.entries', function(playlist) {
 		var isReady = false;
 		var count = 0;
 
-		if(playlist && yepnope.tests.chromeApp() && yepnope.tests.chrome.restorable()){
+		//Loaded music?
+		if(masterPlayer.config.loadedItems) {
+			masterPlayer.fileTreeReader(masterPlayer.config.loadedItems, function () {
+				isReady = true;
+			});
+			
+		}
+
+		//Restore music?
+		else if(playlist && yepnope.tests.chromeApp() && yepnope.tests.chrome.restorable()){
 
 			//Is too much? Performance issue ///TODO: Passar para quando adiciona músicas, criar alerta
 			if(playlist.length > masterPlayer.config.playlistMaxEntries){
@@ -152,33 +162,44 @@ masterPlayer.playerInit = function(callback){
 				
 				}
 			}
-		} else {isReady = true;}
+		} 
 
+		//Nothing?
+		else {isReady = true;}
+
+		//On ready
 		var readyToGo = function(){
 			if(isReady) {
 				//Remove playlist loading indicator
 				$('#playlist').removeClass('loading');
 
-				//Set playlist
-				if(masterPlayer.config.initialMusic.length == 0) { masterPlayer.config.initialMusic = initialPlaylist;}
-				masterPlayer.config.playlistInstance.setPlaylist(masterPlayer.config.initialMusic);
+				//Play
+				if(masterPlayer.config.loadedItems) {
+					masterPlayer.config.playlistInstance.play();
+				} 
 
 				//Get last music played
-				savedUserInfo.get('playlist.play', function(orderId){
-					if(orderId) {
-						for(var item in masterPlayer.config.playlistInstance.playlist) {
-							if(masterPlayer.config.playlistInstance.playlist[item].orderId == orderId) {
-								masterPlayer.config.playlistInstance.select(Number(item));
-								
-								//TRICK: execute the play function and callbacks
-								masterPlayer.config.playlistInstance.play();
-								masterPlayer.config.playlistInstance.pause();
-								return false;
+				else {
+					//Set playlist
+					if(masterPlayer.config.initialMusic.length == 0) { masterPlayer.config.initialMusic = initialPlaylist;}
+					masterPlayer.config.playlistInstance.setPlaylist(masterPlayer.config.initialMusic);
+					
+					savedUserInfo.get('playlist.play', function(orderId){
+						if(orderId) {
+							for(var item in masterPlayer.config.playlistInstance.playlist) {
+								if(masterPlayer.config.playlistInstance.playlist[item].orderId == orderId) {
+									masterPlayer.config.playlistInstance.select(Number(item));
+									
+									//TRICK: execute the play function and callbacks
+									masterPlayer.config.playlistInstance.play();
+									masterPlayer.config.playlistInstance.pause();
+									return false;
+								}
+							
 							}
-						
 						}
-					}
-				});
+					});
+				}
 				
 			}
 			else {
@@ -495,6 +516,9 @@ masterPlayer.fileTreeReader = function(files, callback){
 				traverseItemTree(item);
 			}
 		} else {
+			if(files[i].entry) {
+				files[i] = files[i].entry;
+			}
 			traverseItemTree(files[i]);
 		}
 	}

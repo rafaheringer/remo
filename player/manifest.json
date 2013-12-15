@@ -3,7 +3,7 @@
 	"short_name": "Remo",
 	"description": "Play your mp3 files on this beautiful music player and control it by your phone. TRY! Beta version.",
 	"author": "Rafael Heringer Carvalho",
-	"version": "0.5.8.1",
+	"version": "0.5.8.3",
 	"manifest_version": 2,
 	"offline_enabled": true,
 	"permissions": [
@@ -31,7 +31,7 @@
 	},
 	"file_handlers": {
 		"any": {
-			"extensions": ["mp3","ogg"],
+			"extensions": ["mp3","ogg", "m4a"],
 			"title": "Remo Music Player"
 		}
 	}

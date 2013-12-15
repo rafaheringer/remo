@@ -105,7 +105,9 @@ masterPlayer.prototype.lyrics = function() {
 		_self.elements.lyricsContainer.show();
 
 		//Search
-		_self.searchLyric();
+		if(masterPlayer.config.playlistInstance.playlist.length) { 
+			_self.searchLyric();
+		}
 
 		//Save state
 		_self.status = 'on';
@@ -202,6 +204,7 @@ masterPlayer.prototype.lyrics = function() {
 
 			else {
 				_self.autoscroll = false;
+				_self.elements.autoScroll.attr('checked', false).trigger('change');
 			}
 		});
 	};
