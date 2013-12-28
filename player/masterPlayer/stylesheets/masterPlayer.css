@@ -596,18 +596,19 @@ body:before {
 }
 /* line 258, src/masterPlayer.sass */
 .secondary-box .box-header .box-actions {
+  -webkit-app-region: no-drag;
   color: white;
   float: right;
   font-size: 10px;
   padding: 10px;
   margin: -10px;
 }
-/* line 265, src/masterPlayer.sass */
+/* line 266, src/masterPlayer.sass */
 .secondary-box .box-content {
   clear: both;
 }
 
-/* line 270, src/masterPlayer.sass */
+/* line 271, src/masterPlayer.sass */
 #bg-effect {
   -webkit-animation: bgFades 100s infinite;
   -moz-animation: bgFades 100s infinite;
@@ -622,7 +623,7 @@ body:before {
   z-index: 2;
 }
 
-/* line 281, src/masterPlayer.sass */
+/* line 282, src/masterPlayer.sass */
 #shadows {
   position: absolute;
   top: 0;
@@ -631,7 +632,7 @@ body:before {
   width: 100%;
   z-index: 3;
 }
-/* line 289, src/masterPlayer.sass */
+/* line 290, src/masterPlayer.sass */
 #shadows:after {
   -webkit-transform: rotate(-170deg);
   -moz-transform: rotate(-170deg);
@@ -651,7 +652,7 @@ body:before {
   right: -54px;
   z-index: 2;
 }
-/* line 301, src/masterPlayer.sass */
+/* line 302, src/masterPlayer.sass */
 #shadows:before {
   -webkit-transform: rotate(-35deg);
   -moz-transform: rotate(-35deg);
@@ -672,7 +673,7 @@ body:before {
   z-index: 2;
 }
 
-/* line 315, src/masterPlayer.sass */
+/* line 316, src/masterPlayer.sass */
 #chrome-actions {
   -webkit-app-region: no-drag;
   position: absolute;
@@ -680,7 +681,7 @@ body:before {
   top: 10px;
   z-index: 4;
 }
-/* line 322, src/masterPlayer.sass */
+/* line 323, src/masterPlayer.sass */
 #chrome-actions .chrome-act {
   text-shadow: 0px 0px 5px black;
   display: inline-block;
@@ -689,16 +690,16 @@ body:before {
   font-size: 12px;
   padding: 5px;
 }
-/* line 330, src/masterPlayer.sass */
+/* line 331, src/masterPlayer.sass */
 #chrome-actions .chrome-act:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
-/* line 333, src/masterPlayer.sass */
+/* line 334, src/masterPlayer.sass */
 #chrome-actions .chrome-act:active {
   opacity: 0.7;
 }
 
-/* line 337, src/masterPlayer.sass */
+/* line 338, src/masterPlayer.sass */
 #chrome-drag {
   -webkit-app-region: drag;
   position: absolute;
@@ -708,7 +709,7 @@ body:before {
   height: 50px;
 }
 
-/* line 347, src/masterPlayer.sass */
+/* line 348, src/masterPlayer.sass */
 #menu {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -720,11 +721,11 @@ body:before {
   top: 75px;
   z-index: 5;
 }
-/* line 355, src/masterPlayer.sass */
+/* line 356, src/masterPlayer.sass */
 #menu:hover {
   opacity: 1;
 }
-/* line 358, src/masterPlayer.sass */
+/* line 359, src/masterPlayer.sass */
 #menu .menu-item {
   -webkit-transition: all 250ms ease-in-out;
   -moz-transition: all 250ms ease-in-out;
@@ -738,15 +739,15 @@ body:before {
   padding: 8px 15px;
   color: white;
 }
-/* line 368, src/masterPlayer.sass */
+/* line 369, src/masterPlayer.sass */
 #menu .menu-item:hover {
   margin-left: -85px;
 }
-/* line 371, src/masterPlayer.sass */
+/* line 372, src/masterPlayer.sass */
 #menu .menu-item span[class|="ico"] {
   font-size: 22px;
 }
-/* line 374, src/masterPlayer.sass */
+/* line 375, src/masterPlayer.sass */
 #menu .menu-item-title {
   display: inline-block;
   vertical-align: middle;
@@ -754,7 +755,7 @@ body:before {
   cursor: default;
 }
 
-/* line 382, src/masterPlayer.sass */
+/* line 383, src/masterPlayer.sass */
 #playlist {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -768,7 +769,7 @@ body:before {
   top: 0;
   position: absolute;
 }
-/* line 396, src/masterPlayer.sass */
+/* line 397, src/masterPlayer.sass */
 #playlist .playlist-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -778,15 +779,15 @@ body:before {
   padding-right: 20px;
   overflow: auto;
 }
-/* line 403, src/masterPlayer.sass */
+/* line 404, src/masterPlayer.sass */
 #playlist .jp-free-media {
   display: none;
 }
-/* line 406, src/masterPlayer.sass */
+/* line 407, src/masterPlayer.sass */
 #playlist li {
   margin: 7px 0;
 }
-/* line 409, src/masterPlayer.sass */
+/* line 410, src/masterPlayer.sass */
 #playlist .jp-playlist-item {
   text-shadow: 0px 0px 5px rgba(172, 172, 172, 0.5);
   white-space: nowrap;
@@ -798,26 +799,26 @@ body:before {
   padding: 6px 20px;
   font-size: 16px;
 }
-/* line 416, src/masterPlayer.sass */
+/* line 417, src/masterPlayer.sass */
 #playlist .jp-playlist-item .jp-artist {
   text-shadow: none;
   color: rgba(255, 255, 255, 0.2);
 }
-/* line 420, src/masterPlayer.sass */
+/* line 421, src/masterPlayer.sass */
 #playlist .jp-playlist-item:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-/* line 424, src/masterPlayer.sass */
+/* line 425, src/masterPlayer.sass */
 #playlist .jp-playlist-current .jp-playlist-item {
   color: black;
   background: white;
 }
-/* line 428, src/masterPlayer.sass */
+/* line 429, src/masterPlayer.sass */
 #playlist .jp-playlist-current .jp-artist {
   color: rgba(0, 0, 0, 0.3);
 }
 
-/* line 433, src/masterPlayer.sass */
+/* line 434, src/masterPlayer.sass */
 .jp-controls {
   position: absolute;
   display: block;
@@ -827,12 +828,12 @@ body:before {
   width: 300px;
 }
 
-/* line 443, src/masterPlayer.sass */
+/* line 444, src/masterPlayer.sass */
 .jp-toggles {
   float: left;
   margin: 5px 10px 0 0;
 }
-/* line 447, src/masterPlayer.sass */
+/* line 448, src/masterPlayer.sass */
 .jp-toggles .jp-toggle {
   background: rgba(0, 0, 0, 0.5);
   width: 20px;
@@ -840,33 +841,33 @@ body:before {
   display: block;
   margin: 0 0 4px 0;
 }
-/* line 454, src/masterPlayer.sass */
+/* line 455, src/masterPlayer.sass */
 .jp-toggles .jp-toggle a {
   opacity: 0.5;
   color: white;
   font-size: 12px;
 }
-/* line 459, src/masterPlayer.sass */
+/* line 460, src/masterPlayer.sass */
 .jp-toggles .jp-toggle[class*="off"] {
   display: none;
 }
-/* line 462, src/masterPlayer.sass */
+/* line 463, src/masterPlayer.sass */
 .jp-toggles .jp-toggle[class*="off"] a {
   opacity: 1;
 }
-/* line 465, src/masterPlayer.sass */
+/* line 466, src/masterPlayer.sass */
 .jp-toggles .jp-toggle:hover {
   background: rgba(0, 0, 0, 0.7);
 }
 
-/* line 470, src/masterPlayer.sass */
+/* line 471, src/masterPlayer.sass */
 .jp-music-info {
   position: relative;
   text-align: left;
   float: left;
   width: 270px;
 }
-/* line 476, src/masterPlayer.sass */
+/* line 477, src/masterPlayer.sass */
 .jp-music-info .jp-music-cover {
   -webkit-box-shadow: 0 0 10px black;
   -moz-box-shadow: 0 0 10px black;
@@ -878,24 +879,24 @@ body:before {
   float: left;
   border: 2px solid white;
 }
-/* line 485, src/masterPlayer.sass */
+/* line 486, src/masterPlayer.sass */
 .jp-music-info .jp-music-cover .jp-fake-image {
   background-size: 70px 70px;
   width: 70px;
   height: 70px;
 }
-/* line 490, src/masterPlayer.sass */
+/* line 491, src/masterPlayer.sass */
 .jp-music-info .jp-music-cover img {
   display: none;
 }
-/* line 494, src/masterPlayer.sass */
+/* line 495, src/masterPlayer.sass */
 .jp-music-info .jp-music-name-and-artist {
   text-shadow: 0 0px 5px black, 0 0px 10px black;
   margin: -5px 0 0 0;
   float: left;
   color: white;
 }
-/* line 500, src/masterPlayer.sass */
+/* line 501, src/masterPlayer.sass */
 .jp-music-info .jp-music-name-and-artist .jp-music-name {
   font-size: 18px;
   text-overflow: ellipsis;
@@ -903,7 +904,7 @@ body:before {
   white-space: nowrap;
   width: 165px;
 }
-/* line 507, src/masterPlayer.sass */
+/* line 508, src/masterPlayer.sass */
 .jp-music-info .jp-music-name-and-artist .jp-music-artist {
   font-size: 12px;
   text-overflow: ellipsis;
@@ -911,63 +912,63 @@ body:before {
   white-space: nowrap;
   width: 165px;
 }
-/* line 514, src/masterPlayer.sass */
+/* line 515, src/masterPlayer.sass */
 .jp-music-info .jp-music-control {
   position: absolute;
   top: 40px;
   left: 90px;
   bottom: 0;
 }
-/* line 520, src/masterPlayer.sass */
+/* line 521, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-control-item {
   display: inline-block;
   vertical-align: middle;
   list-style-type: none;
   position: relative;
 }
-/* line 526, src/masterPlayer.sass */
+/* line 527, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-control-item:active, .jp-music-info .jp-music-control .jp-control-item.active {
   opacity: 0.6;
 }
-/* line 530, src/masterPlayer.sass */
+/* line 531, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-control-item a {
   text-shadow: 0 0px 5px black, 0 0px 10px black;
   display: block;
 }
-/* line 534, src/masterPlayer.sass */
+/* line 535, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-control-item a:hover {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
 }
-/* line 537, src/masterPlayer.sass */
+/* line 538, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-previous,
 .jp-music-info .jp-music-control .jp-play,
 .jp-music-info .jp-music-control .jp-pause,
 .jp-music-info .jp-music-control .jp-next {
   vertical-align: middle;
 }
-/* line 543, src/masterPlayer.sass */
+/* line 544, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-play a {
   font-size: 36px;
   padding: 0 3px;
 }
-/* line 547, src/masterPlayer.sass */
+/* line 548, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-pause a {
   font-size: 30px;
   padding: 3px 6px;
 }
-/* line 551, src/masterPlayer.sass */
+/* line 552, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-next a,
 .jp-music-info .jp-music-control .jp-previous a {
   font-size: 24px;
 }
-/* line 555, src/masterPlayer.sass */
+/* line 556, src/masterPlayer.sass */
 .jp-music-info .jp-music-control .jp-stop,
 .jp-music-info .jp-music-control .jp-volume-max {
   display: none !important;
 }
 
-/* line 560, src/masterPlayer.sass */
+/* line 561, src/masterPlayer.sass */
 .jp-volume {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -979,11 +980,11 @@ body:before {
   left: 0;
   opacity: 0.7;
 }
-/* line 568, src/masterPlayer.sass */
+/* line 569, src/masterPlayer.sass */
 .jp-volume:hover {
   opacity: 1;
 }
-/* line 571, src/masterPlayer.sass */
+/* line 572, src/masterPlayer.sass */
 .jp-volume .jp-volume-bar {
   -webkit-box-shadow: 0, 0, 5px, rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0, 0, 5px, rgba(0, 0, 0, 0.3);
@@ -994,7 +995,7 @@ body:before {
   position: relative;
   height: 6px;
 }
-/* line 579, src/masterPlayer.sass */
+/* line 580, src/masterPlayer.sass */
 .jp-volume .jp-volume-bar .jp-volume-bar-value {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -1003,7 +1004,7 @@ body:before {
   height: 100%;
   background: white;
 }
-/* line 584, src/masterPlayer.sass */
+/* line 585, src/masterPlayer.sass */
 .jp-volume .jp-mute,
 .jp-volume .jp-unmute {
   display: inline-block;
@@ -1012,7 +1013,7 @@ body:before {
   font-size: 15px;
 }
 
-/* line 592, src/masterPlayer.sass */
+/* line 593, src/masterPlayer.sass */
 .jp-progress {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -1026,32 +1027,32 @@ body:before {
   z-index: 4;
   height: 20px;
 }
-/* line 602, src/masterPlayer.sass */
+/* line 603, src/masterPlayer.sass */
 .jp-progress .jp-duration,
 .jp-progress .jp-current-time {
   color: white;
   font-size: 10px;
   position: absolute;
 }
-/* line 608, src/masterPlayer.sass */
+/* line 609, src/masterPlayer.sass */
 .jp-progress .jp-duration {
   bottom: 1px;
   right: -33px;
 }
-/* line 612, src/masterPlayer.sass */
+/* line 613, src/masterPlayer.sass */
 .jp-progress:hover {
   opacity: 0.8;
 }
-/* line 615, src/masterPlayer.sass */
+/* line 616, src/masterPlayer.sass */
 .jp-progress:hover .jp-seek-bar {
   height: 10px;
   margin-top: 8px;
 }
-/* line 620, src/masterPlayer.sass */
+/* line 621, src/masterPlayer.sass */
 .jp-progress:hover .jp-seek-bar .jp-play-bar .jp-current-time {
   display: block;
 }
-/* line 623, src/masterPlayer.sass */
+/* line 624, src/masterPlayer.sass */
 .jp-progress .jp-seek-bar {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -1063,7 +1064,7 @@ body:before {
   position: relative;
   background: rgba(255, 255, 255, 0.3);
 }
-/* line 631, src/masterPlayer.sass */
+/* line 632, src/masterPlayer.sass */
 .jp-progress .jp-seek-bar .jp-play-bar {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -1074,7 +1075,7 @@ body:before {
   position: relative;
   overflow: visible !important;
 }
-/* line 638, src/masterPlayer.sass */
+/* line 639, src/masterPlayer.sass */
 .jp-progress .jp-seek-bar .jp-play-bar .jp-current-time {
   position: absolute;
   right: 0;
@@ -1082,17 +1083,17 @@ body:before {
   display: none;
 }
 
-/* line 646, src/masterPlayer.sass */
+/* line 647, src/masterPlayer.sass */
 #equalizer {
   min-width: 470px;
   max-width: 470px;
 }
-/* line 650, src/masterPlayer.sass */
+/* line 651, src/masterPlayer.sass */
 #equalizer .equalizer-actions {
   text-align: right;
   margin: 0 0 30px 0;
 }
-/* line 654, src/masterPlayer.sass */
+/* line 655, src/masterPlayer.sass */
 #equalizer .equalizer-frequency {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAABXCAYAAACpxH1mAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAActJREFUeNrsnIFtgzAQRU2UBdIR6Ais0I5AV+gIrJCM0K6QEeoRmhFghGQE15bOimsRUkSMwH0nfQUwBD84fznKyYUxRiWI1urVqpb9g5ohNlEHSrXi2Ay0NVZGACuBdftnq5fo3DJod5+7oK2W405fqWHaoNN+u5EOX+Q8t/1uVVgde2D2Vlra3yIYJcef5B51Kpit1XOU512Q522U85V0NB4D7tinbJ+C71ACr+TB6B7QW2EemWZ9aVfLk++itkvwtqpo7NUBcPi270UxWs7NBtRalVbf5ne00XmlHPNt/romuvbjzv0mqUhkzYtzs9XFNgMGkxNMkWWaAYMBYAAYADAYAAaAAQCDATxkwOcAUzBmgMEAmAEwAwAGA8AAMABgMAAMgDEzPnw9wSx1ACmjEhj39/wsdQCpYcK6AK3+XtJilvZmTupaF+DrALoRA3uU5oDxlR5nATkmszXqAJgBMANgBgAMBoABYADAYAAYAAYADAYwacDnAEMdADAYADMAZgDAYAAYAAYADAawOAOYcz2A/2cAq1wP4BbIKtcDUEGHwxxf3XoAIYwWDaXdTp58HH49AK361wM4qGsdgJ76W/82fkbrAfwIMAAhXrwdgRq+rAAAAABJRU5ErkJggg==) no-repeat left top;
   width: 51px;
@@ -1100,15 +1101,15 @@ body:before {
   float: left;
   margin: -4px 10px 0 0;
 }
-/* line 661, src/masterPlayer.sass */
+/* line 662, src/masterPlayer.sass */
 #equalizer .equalizer-container {
   min-width: 450px;
 }
-/* line 664, src/masterPlayer.sass */
+/* line 665, src/masterPlayer.sass */
 #equalizer .equalizer-sliders {
   margin-left: -5px;
 }
-/* line 667, src/masterPlayer.sass */
+/* line 668, src/masterPlayer.sass */
 #equalizer .equalizer-sliders .eq-fq-slider {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAABRCAYAAAAuCa0YAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAI5JREFUeNrs2D0OgCAMBlA0nsKZ+5/I2Wsgi4sL1sE/XpMuBNLl5QvpUErJKV5L7bn2Wjv8fqhD08Xah4ZrTA9UP0OnwN18gNQ6BwkkkEACCaSXQcqNP1L0HkgSSSKBBBJIIIH0JUhX90hn/kggSSSJBBJIIIEE0t8g2SOBJJFAAgkkkEDqGdLte6RNgAEAkc1j60UqpYIAAAAASUVORK5CYII=) no-repeat left top;
   position: relative;
@@ -1118,11 +1119,11 @@ body:before {
   height: 81px;
   opacity: 0.7;
 }
-/* line 676, src/masterPlayer.sass */
+/* line 677, src/masterPlayer.sass */
 #equalizer .equalizer-sliders .eq-fq-slider:hover {
   opacity: 1;
 }
-/* line 679, src/masterPlayer.sass */
+/* line 680, src/masterPlayer.sass */
 #equalizer .equalizer-sliders .eq-fq-slider span {
   position: absolute;
   color: white;
@@ -1132,7 +1133,7 @@ body:before {
   text-align: center;
   display: block;
 }
-/* line 689, src/masterPlayer.sass */
+/* line 690, src/masterPlayer.sass */
 #equalizer .equalizer-sliders .ui-slider-handle {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi/A8EDEQCJgYSwCBRzALEjKQoHtahARBgAKMFBRYoRybiAAAAAElFTkSuQmCC") no-repeat center center;
   width: 11px;
@@ -1140,7 +1141,7 @@ body:before {
   padding: 3px;
   left: 6px;
 }
-/* line 696, src/masterPlayer.sass */
+/* line 697, src/masterPlayer.sass */
 #equalizer .equalizer-sliders .ui-slider-range {
   background: white;
   width: 1px;
@@ -1148,24 +1149,24 @@ body:before {
   margin-bottom: 1px;
 }
 
-/* line 705, src/masterPlayer.sass */
+/* line 706, src/masterPlayer.sass */
 .jp-no-solution {
   display: none;
 }
 
-/* line 708, src/masterPlayer.sass */
+/* line 709, src/masterPlayer.sass */
 .jp-jplayer {
   display: none;
 }
 
-/* line 712, src/masterPlayer.sass */
+/* line 713, src/masterPlayer.sass */
 #show-QR-code {
   position: absolute;
   left: 12%;
   top: 75%;
   display: none;
 }
-/* line 718, src/masterPlayer.sass */
+/* line 719, src/masterPlayer.sass */
 #show-QR-code .qr-code {
   background: white;
   display: none;
@@ -1173,19 +1174,19 @@ body:before {
   border: 10px solid white;
   margin: -20px 0 0 0;
 }
-/* line 725, src/masterPlayer.sass */
+/* line 726, src/masterPlayer.sass */
 #show-QR-code .qr-code canvas {
   width: auto;
   height: 20%;
 }
-/* line 729, src/masterPlayer.sass */
+/* line 730, src/masterPlayer.sass */
 #show-QR-code .click-to-show-QR-code {
   background: url('../images/click-qrcode.png?1364439840') no-repeat left top;
   width: 152px;
   height: 51px;
 }
 
-/* line 735, src/masterPlayer.sass */
+/* line 736, src/masterPlayer.sass */
 #drag-drop-layer {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -1202,12 +1203,12 @@ body:before {
   padding: 5%;
   display: none;
 }
-/* line 748, src/masterPlayer.sass */
+/* line 749, src/masterPlayer.sass */
 #drag-drop-layer.hover {
   opacity: 1;
   display: block;
 }
-/* line 752, src/masterPlayer.sass */
+/* line 753, src/masterPlayer.sass */
 #drag-drop-layer .drag-drop-text {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1217,7 +1218,7 @@ body:before {
   height: 100%;
   position: relative;
 }
-/* line 759, src/masterPlayer.sass */
+/* line 760, src/masterPlayer.sass */
 #drag-drop-layer .drag-drop-text span {
   color: #666666;
   font-size: 3em;
@@ -1229,7 +1230,7 @@ body:before {
   text-align: center;
 }
 
-/* line 770, src/masterPlayer.sass */
+/* line 771, src/masterPlayer.sass */
 .modal {
   -webkit-transition: opacity 100ms ease-in;
   -moz-transition: opacity 100ms ease-in;
@@ -1246,18 +1247,18 @@ body:before {
   left: 0;
   top: 0;
 }
-/* line 783, src/masterPlayer.sass */
+/* line 784, src/masterPlayer.sass */
 .modal .modal-close {
   color: black;
   font-size: 12px;
 }
-/* line 787, src/masterPlayer.sass */
+/* line 788, src/masterPlayer.sass */
 .modal:target {
   opacity: 1;
   display: block;
   pointer-events: auto;
 }
-/* line 792, src/masterPlayer.sass */
+/* line 793, src/masterPlayer.sass */
 .modal:target .modal-container {
   -webkit-animation-name: bounce;
   -moz-animation-name: bounce;
@@ -1265,7 +1266,7 @@ body:before {
   -o-animation-name: bounce;
   animation-name: bounce;
 }
-/* line 795, src/masterPlayer.sass */
+/* line 796, src/masterPlayer.sass */
 .modal .modal-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1284,33 +1285,33 @@ body:before {
   left: 50%;
   margin: -190px 0 0 -340px;
 }
-/* line 807, src/masterPlayer.sass */
+/* line 808, src/masterPlayer.sass */
 .modal .column {
   width: 45%;
   float: left;
   margin-right: 5%;
 }
-/* line 812, src/masterPlayer.sass */
+/* line 813, src/masterPlayer.sass */
 .modal .modal-actions {
   position: absolute;
   top: 15px;
   right: 15px;
 }
-/* line 817, src/masterPlayer.sass */
+/* line 818, src/masterPlayer.sass */
 .modal .modal-close {
   display: block;
 }
-/* line 820, src/masterPlayer.sass */
+/* line 821, src/masterPlayer.sass */
 .modal h2 {
   font-size: 32px;
   margin: 0 0 15px 0;
 }
-/* line 824, src/masterPlayer.sass */
+/* line 825, src/masterPlayer.sass */
 .modal p {
   font-size: 12px;
   margin: 10px 0 0 0;
 }
-/* line 828, src/masterPlayer.sass */
+/* line 829, src/masterPlayer.sass */
 .modal p a {
   color: #333333;
   text-decoration: underline;
