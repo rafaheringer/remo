@@ -5,8 +5,10 @@
 //=============
 var CONFIG = {
 	hostname: '',
-	//nodeUrl: 'http://localhost'
-	nodeUrl: 'http://remomusic.herokuapp.com',
+	nodeUrl: 'http://localhost',
+	//nodeUrl: 'http://remomusic.herokuapp.com',
+	nodePort: 8080,
+	// nodePort: 80,
 	devmode: false,
 	fileSystemMaxStorage: 200 * 1024 * 1024,
 	dir: {
@@ -102,6 +104,7 @@ yepnope({
 
 //Call plugins
 yepnope([
+	CONFIG.dir.plugins + 'socket.js',
 	CONFIG.dir.plugins + 'qrCode.js',
 	CONFIG.dir.plugins + 'equalizer/equalizer.js',
 	CONFIG.dir.plugins + 'lyrics/lyrics.js'

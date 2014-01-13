@@ -12,7 +12,7 @@ masterPlayer.plugins = new Object();
 
 //Player start config
 masterPlayer.config = {
-	id: parseInt(newDate.getTime() + Math.random()),
+	id: 123456,//parseInt(newDate.getTime() + Math.random()),
 	socketID: null,
 	playlistInstance: null,
 	playing: false,
@@ -22,7 +22,7 @@ masterPlayer.config = {
 	lastFmApiKey: 'f2923bd087687602324332057ed0473a',
 	initialMusic: initialPlaylist,
 	musicInfo: null,
-	loadedItems: loadedItems //Global from background.js
+	loadedItems: typeof(loadedItems) != 'undefined' ? loadedItems : null //Global from background.js
 };
 
 //Player init

@@ -29,7 +29,7 @@ var allowCrossDomain = function(req, res, next) {
 
 app.configure(function(){
   app.use(allowCrossDomain);
-  app.set('port', process.env.PORT || 8888);
+  app.set('port', process.env.PORT || 8080);
   app.set('views', __dirname + '/');
   app.set('view engine', 'html');
   app.engine('html', require('ejs').renderFile);            //Usa EJS com extensão .html
@@ -62,7 +62,7 @@ app.get('/remote/:ID', function(req, res){
 });
 
 server.listen(app.get('port'), function(){
-  console.log('Server iniciado na porta ' + app.get('port'));
+  console.log('Server started at ' + os.hostname() + ':' + app.get('port'));
 });
 
 /*
@@ -79,7 +79,7 @@ var PLAYER = {
 io
   .of('/player')
     .on('connection', function(socket){
-      //Envia sucesso de conexão
+      //Send message: good connection
       socket.emit('message', {
         code: 'connect',
         hostname: os.hostname(),
@@ -87,25 +87,56 @@ io
         url: app.get('hostname')
       });
 
+      //From cp (Control Player) to mp (Master Player)
+      socket.on('mp', function(m) {
+        if(PLAYER[m.playerId])
+          PLAYER[m.playerId].socket.emit('message-mp', m);
+      });
+
+      //From mp (Master Player) to cp (Control Player)
+      socket.on('cp', function(m) {
+        PLAYER[m.playerId + 'r'].socket.emit('message-cp', m);
+      });
+
+
+
+
+
+
       socket.on('message', function(data){
-        //Verifica ID
-        if(data.playerID == ('undefined' || 'null' || null || '')) {
-          socket.emit('authenticateMessage', {code: '001', message: 'Autenticação falhou.'});
+        //Verify ID
+        if(data.playerId == ('undefined' || 'null' || null || '')) {
+          socket.emit('authenticateMessage', {code: '001', message: 'Authenticate failded.'});
           return false;
         }
 
-        //Seta ID
-        PLAYER[data.playerID] = {
-          socketID: socket.id,
-          socket: socket
-        };
-        console.log('Usuário entrou. Player id: ' + data.playerID + ' Socket: ' + PLAYER[data.playerID].socketID);
-        socket.emit('authenticateMessage', {code: '000', socketID: PLAYER[data.playerID].socketID});
+        //From Master Player
+        if(data.from == 'mp') {
+
+          //Set ID
+          PLAYER[data.playerId] = {
+            socketID: socket.id,
+            socket: socket
+          };
+
+        }
+
+        //From Control Player
+        else if(data.from == 'cp') {
+          //Set ID
+          PLAYER[data.playerId + 'r'] = {
+            socketID: socket.id,
+            socket: socket
+          };
+        }
+
+        console.log('User authenticated. Player id: ' + data.playerId + ' Socket: ' + PLAYER[data.playerId].socketID);
+        socket.emit('authenticateMessage', {code: '000', socketID: PLAYER[data.playerId].socketID});
       });
 
-      //Métodos de controle de música
+      //Music Control
       socket.on('musicControl', function(data){
-        //Verifica se está com ID
+        //Have ID?
         if(data.to == ('undefined' || 'null' || null || '')) {
           socket.emit('message', {code: '001', message: 'O ID retornou nulo ou indefinido'});
           return false;

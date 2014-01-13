@@ -5,15 +5,10 @@ yepnope({
 	//Have connection?
 	test: yepnope.tests.online(),
 	yep: {
-		socketio: CONFIG.dir.vendor + 'socket.io.js',
-		socket: CONFIG.dir.plugins + 'socket.js',
 		qrcodecore: CONFIG.dir.vendor + 'qrcode.js',
 		jqueryqrcode: CONFIG.dir.vendor + 'jquery.qrcode.js'
 	},
 	callback: {
-		socket: function(){
-			masterPlayer.socketInit();
-		},
 		jqueryqrcode: function(){
 			masterPlayer.qrCodeInit();
 		}
