@@ -318,7 +318,7 @@ masterPlayer.getAlbumCover = function (ID3, callback) {
 
 						xhr.onload = function() {
 							if(typeof callback == 'function') {
-								callback.call(_self, window.webkitURL.createObjectURL(this.response), this.response);
+								callback.call(_self, window.webkitURL.createObjectURL(this.response), this.response, result.track.album.image[1]['#text']);
 							}
 						};
 
@@ -359,11 +359,11 @@ masterPlayer.getPlaylistWebInfo = function (playlist) {
 				playlist[i].title = ID3.title;
 
 				//Get album cover
-				masterPlayer.getAlbumCover(ID3, function(src, url) {
+				masterPlayer.getAlbumCover(ID3, function(a,b, originalUrl) {
 					count++;
-					playlist[i].thumbnail = src;
-					playlist[i].thumbBlob = url;
-					console.log(url);
+					playlist[i].thumbnail = originalUrl;
+					//playlist[i].thumbBlob = url;
+					console.log(originalUrl);
 
 				});
 			});
@@ -374,10 +374,10 @@ masterPlayer.getPlaylistWebInfo = function (playlist) {
 	countInterval = setInterval(function(){
 		if(count == playlist.length) {
 			//Save playlist
-			//savedUserInfo.set('playlist.entries', playlist);
+			savedUserInfo.set('playlist.entries', playlist);
 
 			//Trigger event
-			//$(masterPlayer.config.playerElement).trigger('updatemusicinfo');
+			$(masterPlayer.config.playerElement).trigger('updatemusicinfo');
 
 			console.log(playlist);
 
