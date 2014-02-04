@@ -237,6 +237,7 @@ masterPlayer.menuControl = function() {
 
 		chrome.fileSystem.chooseEntry({type: 'openFile', acceptsMultiple: true, accepts: [{description: 'Audio (mp3 or ogg)', mimeTypes:['audio/mp3', 'audio/ogg', 'audio/mpeg']}]}, function(items) {
 			masterPlayer.fileTreeReader(items, function () {
+				masterPlayer.getPlaylistWebInfo();
 				masterPlayer.config.playlistInstance.play();
 			});
 		});
@@ -245,6 +246,7 @@ masterPlayer.menuControl = function() {
 	//On open folder
 	$('#open-files').on('change', function(event){
 		masterPlayer.fileTreeReader(event.target.files, function () {
+			masterPlayer.getPlaylistWebInfo();
 			masterPlayer.config.playlistInstance.play();
 		});
 	});
@@ -262,28 +264,34 @@ masterPlayer.menuControl = function() {
 
 //Set album cover
 masterPlayer.setAlbumCover = function (src) {
-	var oldImage = $('.jp-music-cover img'),
-		backupWidth = oldImage.attr('width'),
-		backupHeight = oldImage.attr('height'),
-		newImage = document.createElement('img');
+	if(src) {	
 
-	newImage.src = src;
-	newImage.setAttribute('width', backupWidth);
-	newImage.setAttribute('height', backupHeight);
-	oldImage.remove();
-	$(newImage)
-		.appendTo('.jp-fake-image')
-		.css({ 'opacity': 0.01, 'display': 'block' });
+		var oldImage = $('.jp-music-cover img'),
+			backupWidth = oldImage.attr('width'),
+			backupHeight = oldImage.attr('height'),
+			newImage = document.createElement('img');
 
-	newImage.onload = function () {
-		$(newImage).animate({ 'opacity': 1 }, 600, function () {
-			$('.jp-fake-image').css('background-image', 'url("' + src + '")');
-		});
-	};
+		newImage.src = src;
+		newImage.setAttribute('width', backupWidth);
+		newImage.setAttribute('height', backupHeight);
+		oldImage.remove();
+		$(newImage)
+			.appendTo('.jp-fake-image')
+			.css({ 'opacity': 0.01, 'display': 'block' });
+
+		newImage.onload = function () {
+			$(newImage).animate({ 'opacity': 1 }, 600, function () {
+				$('.jp-fake-image').css('background-image', 'url("' + src + '")');
+			});
+		};
+	} else {
+		$('.jp-fake-image').css('background-image','none');
+		$('.jp-music-cover img').animate({'opacity': 0.01}, 600);
+	}
 };
 
-//Grab album cover from WEB or file and put in player
-masterPlayer.grabAlbumCover = function (ID3) {
+//Get album cover from WEB or file and put in player
+masterPlayer.getAlbumCover = function (ID3, callback) {
 	var _self = this;
 
 	//info.title and info.artist required; info.album prefer
@@ -309,7 +317,9 @@ masterPlayer.grabAlbumCover = function (ID3) {
 						};
 
 						xhr.onload = function() {
-							_self.setAlbumCover(window.webkitURL.createObjectURL(this.response));
+							if(typeof callback == 'function') {
+								callback.call(_self, window.webkitURL.createObjectURL(this.response), this.response);
+							}
 						};
 
 						xhr.send();
@@ -317,33 +327,82 @@ masterPlayer.grabAlbumCover = function (ID3) {
 
 					//Normal flow for create image
 					else {
-						_self.setAlbumCover(result.track.album.image[1]['#text']);
+						if(typeof callback == 'function') {
+							callback.call(_self, result.track.album.image[1]['#text'], result.track.album.image[1]['#text']);
+						}
 					}
 
 				} else {
-					$('.jp-fake-image').css('background-image','none');
-					$('.jp-music-cover img').animate({'opacity': 0.01}, 600);
+					if(typeof callback == 'function') {
+						callback.call(_self, null);
+					}
 				}
 			}
 		});
 	}
 };
 
+//Update thumbnails from all music on the list
+masterPlayer.getPlaylistWebInfo = function (playlist) {
+	//Get playlist
+	var playlist = playlist || masterPlayer.config.playlistInstance.playlist;
+	var count = 0;
+	var countInterval = null;
+
+	//For all music
+	for(var i = 0; i < playlist.length; i++) {
+		//Get music info
+		new function(i){
+			masterPlayer.getMusicInfo(playlist[i], function(ID3) {
+				//Update playlist name and artist
+				playlist[i].artist = ID3.artist;
+				playlist[i].title = ID3.title;
+
+				//Get album cover
+				masterPlayer.getAlbumCover(ID3, function(src, url) {
+					count++;
+					playlist[i].thumbnail = src;
+					playlist[i].thumbBlob = url;
+					console.log(url);
+
+				});
+			});
+		}(i);
+	}
+
+	//Save playlist
+	countInterval = setInterval(function(){
+		if(count == playlist.length) {
+			//Save playlist
+			//savedUserInfo.set('playlist.entries', playlist);
+
+			//Trigger event
+			//$(masterPlayer.config.playerElement).trigger('updatemusicinfo');
+
+			console.log(playlist);
+
+			clearInterval(countInterval);
+		}
+	},200);
+};
+
 //Music info
 masterPlayer.setMusicInfo = function() {
-	masterPlayer.getMusicInfo(function(ID3) {
+	masterPlayer.getMusicInfo(null, function(ID3) {
 		//Set artist and title
 		$('.jp-music-name').html(ID3.title);
 		$('.jp-music-artist').html(ID3.artist);
 
 		//Get album info
-		masterPlayer.grabAlbumCover(ID3);
+		masterPlayer.getAlbumCover(ID3, function(src) {
+			masterPlayer.setAlbumCover(src);
+		});
 	});
 };
 
 //GET Music Info
-masterPlayer.getMusicInfo = function(callback) {
-	var music = masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current];
+masterPlayer.getMusicInfo = function(music, callback) {
+	music = music || masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current];
 
 	if(typeof music.file == 'object') {
 		var reader = new FileReader();
@@ -566,6 +625,7 @@ masterPlayer.fileReaderInit = function() {
 			var items = event.dataTransfer ? event.dataTransfer.items : (event.originalEvent.dataTransfer.items || event.originalEvent.dataTransfer.files);
 
 			masterPlayer.fileTreeReader(items, function () {
+				masterPlayer.getPlaylistWebInfo();
 				masterPlayer.config.playlistInstance.play();
 			});
 

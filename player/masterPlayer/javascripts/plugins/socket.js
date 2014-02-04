@@ -2,6 +2,7 @@
 "use strict";
 
 //Player start config
+masterPlayer.config.viacp = false;
 masterPlayer.config.socketID = null;
 masterPlayer.config.playerSocket = null;
 
@@ -21,21 +22,21 @@ masterPlayer.prototype.socket = function() {
 	};
 
 	//Send to CP updated info
-	this.updateControlPlayer = function(type, message) {
-		var data = {};
+	this.updateControlPlayer = function(type, message, data) {
+		data = data || {};
 
-		switch(type) {
-			//Playlist
-			case 'playlist':
-			case 'update':
-				data.playlist = {};
-				data.playlist.list =  masterPlayer.config.playlistInstance.playlist;
-				data.playlist.current = masterPlayer.config.playlistInstance.current;
-				data.playlist.loop = masterPlayer.config.playlistInstance.loop;
-				data.playlist.shuffled = masterPlayer.config.playlistInstance.shuffled;
-				data.playlist.playing = masterPlayer.config.playing;
-			break;
-		}
+		// switch(type) {
+		// 	//Playlist
+		// 	case 'playlist':
+		// 	case 'update':
+		// 		data.playlist = {};
+		// 		data.playlist.list =  masterPlayer.config.playlistInstance.playlist;
+		// 		data.playlist.current = masterPlayer.config.playlistInstance.current;
+		// 		data.playlist.loop = masterPlayer.config.playlistInstance.loop;
+		// 		data.playlist.shuffled = masterPlayer.config.playlistInstance.shuffled;
+		// 		data.playlist.playing = masterPlayer.config.playing;
+		// 	break;
+		// }
 
 		//Send to control player
 		console.log('Socket: Send message - ', type, message, data);
@@ -43,6 +44,7 @@ masterPlayer.prototype.socket = function() {
 			type: type,
 			message: message,
 			data: data,
+			from: 'mp',
 			playerId: masterPlayer.config.id
 		});
 	};
@@ -57,16 +59,30 @@ masterPlayer.prototype.socket = function() {
 				case 'status':
 					if(m.message == 'ready') {
 						//Send firt informations
-						_self.updateControlPlayer('update','playlist');
+						var data = {};
+						data.playlist = {};
+						data.playlist.list =  masterPlayer.config.playlistInstance.playlist;
+						data.playlist.current = masterPlayer.config.playlistInstance.current;
+						data.playlist.loop = masterPlayer.config.playlistInstance.loop;
+						data.playlist.shuffled = masterPlayer.config.playlistInstance.shuffled;
+						data.playlist.playing = masterPlayer.config.playing;
+						_self.updateControlPlayer('update','playlist',data);
 					}
 				break;
 
 				//Playlist updates
 				case 'playlist':
 					//Current playing
+					if(masterPlayer.config.playlistInstance.current != m.data.current) {
+						masterPlayer.config.viacp = true;
+						masterPlayer.config.playlistInstance.select(Number(m.data.current));
+						if(m.data.playing == true) { masterPlayer.config.playlistInstance.play(); }
+						else { masterPlayer.config.playlistInstance.play(); masterPlayer.config.playlistInstance.pause(); }
+					}
 
 					//Play or pause
 					if(masterPlayer.config.playing != m.data.playing) {
+						masterPlayer.config.viacp = true;
 						if(m.data.playing == true) { masterPlayer.config.playlistInstance.play(); }
 						else { masterPlayer.config.playlistInstance.pause(); }
 					}
@@ -118,12 +134,36 @@ masterPlayer.prototype.socket = function() {
 
 		//Play
 		$(masterPlayer.config.playerElement).on($.jPlayer.event.play + '.socket', function() {
-			_self.updateControlPlayer('playlist');
+			if(masterPlayer.config.viacp == false) {
+				var data = {};
+				data.playlist = {};
+				data.playlist.playing = masterPlayer.config.playing;
+				data.playlist.current = masterPlayer.config.playlistInstance.current;
+				_self.updateControlPlayer('playlist','play', data);
+			} else {
+				masterPlayer.config.viacp = false;
+			}
 		});
 
 		//Pause
 		$(masterPlayer.config.playerElement).on($.jPlayer.event.pause + '.socket', function() {
-			_self.updateControlPlayer('playlist');
+			if(masterPlayer.config.viacp == false) {
+				var data = {};
+				data.playlist = {};
+				data.playlist.playing = masterPlayer.config.playing;
+				_self.updateControlPlayer('playlist','play',data);
+			} else {
+				masterPlayer.config.viacp = false;
+			}
+		});
+
+		//Update music info
+		$(masterPlayer.config.playerElement).on('updatemusicinfo.socket', function() {
+			if(masterPlayer.config.viacp == false) {
+				_self.updateControlPlayer('playlist');
+			} else {
+				masterPlayer.config.viacp = false;
+			}
 		});
 	};
 

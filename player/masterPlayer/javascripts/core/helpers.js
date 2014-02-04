@@ -64,7 +64,6 @@ window.appendCSS = function(path){
 	$('head').append('<link rel="stylesheet" href="/masterPlayer/' + path + '" type="text/css" />');
 };
 
-
 //Append secondary box in player
 window.appendSecondaryBox = function(boxId, boxName, content) {
 	var html = '<div id="' + boxId + '" class="secondary-box"> \
@@ -92,4 +91,23 @@ window.appendBlankBox = function(boxId, boxName, content) {
 	';
 
 	return $(html).appendTo($('.jp-type-playlist','#jp_container'));
+};
+
+//Transform image to base64
+window.convertImgToBase64 = function(url, callback, outputFormat){
+	var canvas = document.createElement('CANVAS');
+	var ctx = canvas.getContext('2d');
+	var img = new Image;
+	img.crossOrigin = 'Anonymous';
+	
+	img.onload = function(){
+		canvas.height = img.height;
+		canvas.width = img.width;
+		ctx.drawImage(img,0,0);
+		var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+		callback.call(this, dataURL);
+		// Clean up
+		canvas = null; 
+	};
+	img.src = url;
 };
