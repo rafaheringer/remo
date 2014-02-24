@@ -25,19 +25,6 @@ masterPlayer.prototype.socket = function() {
 	this.updateControlPlayer = function(type, message, data) {
 		data = data || {};
 
-		// switch(type) {
-		// 	//Playlist
-		// 	case 'playlist':
-		// 	case 'update':
-		// 		data.playlist = {};
-		// 		data.playlist.list =  masterPlayer.config.playlistInstance.playlist;
-		// 		data.playlist.current = masterPlayer.config.playlistInstance.current;
-		// 		data.playlist.loop = masterPlayer.config.playlistInstance.loop;
-		// 		data.playlist.shuffled = masterPlayer.config.playlistInstance.shuffled;
-		// 		data.playlist.playing = masterPlayer.config.playing;
-		// 	break;
-		// }
-
 		//Send to control player
 		console.log('Socket: Send message - ', type, message, data);
 		masterPlayer.config.playerSocket.emit('cp', {
@@ -60,6 +47,8 @@ masterPlayer.prototype.socket = function() {
 					if(m.message == 'ready') {
 						//Send firt informations
 						var data = {};
+						data.volume = $(masterPlayer.config.playerElement).jPlayer('option', 'volume') * 100;
+						data.muted = $(masterPlayer.config.playerElement).jPlayer('option', 'muted');
 						data.playlist = {};
 						data.playlist.list =  masterPlayer.config.playlistInstance.playlist;
 						data.playlist.current = masterPlayer.config.playlistInstance.current;
@@ -85,6 +74,17 @@ masterPlayer.prototype.socket = function() {
 						masterPlayer.config.viacp = true;
 						if(m.data.playing == true) { masterPlayer.config.playlistInstance.play(); }
 						else { masterPlayer.config.playlistInstance.pause(); }
+					}
+				break;
+
+
+				//Controls updates
+				case 'control':
+					//Volume
+					if(m.message == 'volume') {
+						masterPlayer.config.viacp = true;
+						$(masterPlayer.config.playerElement).jPlayer('volume', m.data.volume);
+						$(masterPlayer.config.playerElement).jPlayer('mute', m.data.muted);
 					}
 				break;
 			}
@@ -165,6 +165,20 @@ masterPlayer.prototype.socket = function() {
 				masterPlayer.config.viacp = false;
 			}
 		});
+
+		//Update volume control
+		$(masterPlayer.config.playerElement).on($.jPlayer.event.volumechange + '.socket', function() {
+			if(masterPlayer.config.viacp == false) {
+				var data = {};
+				data.volume = $(masterPlayer.config.playerElement).jPlayer('option', 'volume') * 100;
+				data.muted = $(masterPlayer.config.playerElement).jPlayer('option', 'muted');
+				_self.updateControlPlayer('control','volume',data);
+			} else {
+				masterPlayer.config.viacp = false;
+			}
+		});
+		
+
 	};
 
 	this.__constructor();
