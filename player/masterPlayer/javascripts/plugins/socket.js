@@ -55,28 +55,32 @@ masterPlayer.prototype.socket = function() {
 						data.playlist.loop = masterPlayer.config.playlistInstance.loop;
 						data.playlist.shuffled = masterPlayer.config.playlistInstance.shuffled;
 						data.playlist.playing = masterPlayer.config.playing;
+						data.playlist.currentTime = $(masterPlayer.config.playerElement).data('jPlayer').status.currentTime;
+						data.playlist.duration = $(masterPlayer.config.playerElement).data('jPlayer').status.duration;
 						_self.updateControlPlayer('update','playlist',data);
 					}
 				break;
 
 				//Playlist updates
 				case 'playlist':
-					//Current playing
-					if(masterPlayer.config.playlistInstance.current != m.data.current) {
-						masterPlayer.config.viacp = true;
-						masterPlayer.config.playlistInstance.select(Number(m.data.current));
-						if(m.data.playing == true) { masterPlayer.config.playlistInstance.play(); }
-						else { masterPlayer.config.playlistInstance.play(); masterPlayer.config.playlistInstance.pause(); }
-					}
+					switch(m.message) {
+						//Playing (play or pause)
+						case 'playing':
+							masterPlayer.config.viacp = true;
+							if(m.data.playing == true) { masterPlayer.config.playlistInstance.play(); }
+							else { masterPlayer.config.playlistInstance.pause(); }
+						break;
 
-					//Play or pause
-					if(masterPlayer.config.playing != m.data.playing) {
-						masterPlayer.config.viacp = true;
-						if(m.data.playing == true) { masterPlayer.config.playlistInstance.play(); }
-						else { masterPlayer.config.playlistInstance.pause(); }
-					}
+						///Current playing
+						case 'current':
+							masterPlayer.config.viacp = true;
+							masterPlayer.config.playlistInstance.select(Number(m.data.current));
+							masterPlayer.config.viacp = true;
+							if(m.data.playing == true) { masterPlayer.config.playlistInstance.play(); }
+							else { masterPlayer.config.playlistInstance.play(); masterPlayer.config.viacp = true; masterPlayer.config.playlistInstance.pause(); }
+						break;
+					};
 				break;
-
 
 				//Controls updates
 				case 'control':
@@ -84,6 +88,7 @@ masterPlayer.prototype.socket = function() {
 					if(m.message == 'volume') {
 						masterPlayer.config.viacp = true;
 						$(masterPlayer.config.playerElement).jPlayer('volume', m.data.volume);
+						masterPlayer.config.viacp = true;
 						$(masterPlayer.config.playerElement).jPlayer('mute', m.data.muted);
 					}
 				break;
@@ -131,6 +136,32 @@ masterPlayer.prototype.socket = function() {
 	//Delegate events
 	this.delegateEvents = function() {
 		var _self = this;
+
+		//Update time
+		$(masterPlayer.config.playerElement).on($.jPlayer.event.durationchange + '.socket', function() {
+			if(masterPlayer.config.viacp == false) {
+				var data = {};
+				data.playlist = {};
+				data.playlist.currentTime = $(masterPlayer.config.playerElement).data('jPlayer').status.currentTime;
+				data.playlist.duration = $(masterPlayer.config.playerElement).data('jPlayer').status.duration;
+				_self.updateControlPlayer('playlist','currenttime', data);
+			} else {
+				masterPlayer.config.viacp = false;
+			}
+		});
+
+		//On seek
+		$(masterPlayer.config.playerElement).on($.jPlayer.event.seeked + '.socket', function() {
+			if(masterPlayer.config.viacp == false) {
+				var data = {};
+				data.playlist = {};
+				data.playlist.currentTime = $(masterPlayer.config.playerElement).data('jPlayer').status.currentTime;
+				data.playlist.duration = $(masterPlayer.config.playerElement).data('jPlayer').status.duration;
+				_self.updateControlPlayer('playlist','currenttime', data);
+			} else {
+				masterPlayer.config.viacp = false;
+			}
+		});
 
 		//Play
 		$(masterPlayer.config.playerElement).on($.jPlayer.event.play + '.socket', function() {
