@@ -497,6 +497,9 @@ masterPlayer.savePlaylist = function(playList){
 
 //FileTree reader
 masterPlayer.fileTreeReader = function(files, callback){
+	//Loading event
+	$(masterPlayer.config.playerElement).trigger('startloading');
+
 	var playList = [],
 		timeOutForDone = -1;
 

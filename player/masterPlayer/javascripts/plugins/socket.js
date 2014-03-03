@@ -15,6 +15,34 @@ masterPlayer.prototype.socket = function() {
 		//Config
 	};
 
+	//Update all controls of control player (Ready state)
+	this.resetControlPlayer = function() {
+		//Send first informations
+		var data = {};
+		data.volume = $(masterPlayer.config.playerElement).jPlayer('option', 'volume') * 100;
+		data.muted = $(masterPlayer.config.playerElement).jPlayer('option', 'muted');
+		data.playlist = {};
+		data.playlist.list =  [];
+
+		//Todo: I need to remove some information from playlist to send to control Player. Best performance for this?
+		var pl = masterPlayer.config.playlistInstance.playlist;
+		for(var i = 0; i < pl.length; i++) {
+			data.playlist.list.push({
+				artist: pl[i].artist,
+				thumbnail: pl[i].thumbnail,
+				title: pl[i].title
+			});
+		}
+
+		data.playlist.current = masterPlayer.config.playlistInstance.current;
+		data.playlist.loop = masterPlayer.config.playlistInstance.loop;
+		data.playlist.shuffled = masterPlayer.config.playlistInstance.shuffled;
+		data.playlist.playing = masterPlayer.config.playing;
+		data.playlist.currentTime = $(masterPlayer.config.playerElement).data('jPlayer').status.currentTime;
+		data.playlist.duration = $(masterPlayer.config.playerElement).data('jPlayer').status.duration;
+		_self.updateControlPlayer('update','playlist',data);
+	};
+
 	//Open Socket connection
 	this.openSocket = function() {
 		console.log('Socket: ' + CONFIG.nodeUrl + ':' + CONFIG.nodePort + '/player');
@@ -45,19 +73,7 @@ masterPlayer.prototype.socket = function() {
 				//Ready status
 				case 'status':
 					if(m.message == 'ready') {
-						//Send firt informations
-						var data = {};
-						data.volume = $(masterPlayer.config.playerElement).jPlayer('option', 'volume') * 100;
-						data.muted = $(masterPlayer.config.playerElement).jPlayer('option', 'muted');
-						data.playlist = {};
-						data.playlist.list =  masterPlayer.config.playlistInstance.playlist;
-						data.playlist.current = masterPlayer.config.playlistInstance.current;
-						data.playlist.loop = masterPlayer.config.playlistInstance.loop;
-						data.playlist.shuffled = masterPlayer.config.playlistInstance.shuffled;
-						data.playlist.playing = masterPlayer.config.playing;
-						data.playlist.currentTime = $(masterPlayer.config.playerElement).data('jPlayer').status.currentTime;
-						data.playlist.duration = $(masterPlayer.config.playerElement).data('jPlayer').status.duration;
-						_self.updateControlPlayer('update','playlist',data);
+						_self.resetControlPlayer();
 					}
 				break;
 
@@ -191,7 +207,7 @@ masterPlayer.prototype.socket = function() {
 		//Update music info
 		$(masterPlayer.config.playerElement).on('updatemusicinfo.socket', function() {
 			if(masterPlayer.config.viacp == false) {
-				_self.updateControlPlayer('playlist');
+				_self.resetControlPlayer();
 			} else {
 				masterPlayer.config.viacp = false;
 			}
@@ -208,6 +224,14 @@ masterPlayer.prototype.socket = function() {
 				masterPlayer.config.viacp = false;
 			}
 		});
+
+		//On loading music files
+		$(masterPlayer.config.playerElement).on('startloading.socket', function() {
+			var data = {};
+			data.loading = true;
+			_self.updateControlPlayer('status','loading',data);
+		});
+
 		
 
 	};
