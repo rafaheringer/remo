@@ -1,20 +1,21 @@
 ﻿/// <reference path="_references.js" />
 "use strict";
 
+//Debug mode
+//==========
+var DEBUG = true;
+
 //Global config
 //=============
 var CONFIG = {
-	hostname: '',
-	nodeUrl: 'http://localhost',
-	//nodeUrl: 'http://remomusic.herokuapp.com',
-	nodePort: 8080,
-	// nodePort: 80,
-	devmode: false,
-	fileSystemMaxStorage: 200 * 1024 * 1024,
+	hostname: 				'',
+	nodeUrl: 				DEBUG ? 'http://192.168.25.3' : 'http://localhost',
+	nodePort: 				DEBUG ? 8080 : 80,
+	fileSystemMaxStorage: 	200 * 1024 * 1024,
 	dir: {
-		scripts: 	'/masterPlayer/javascripts/',
-		vendor: 	'/masterPlayer/javascripts/vendor/',
-		plugins: 	'/masterPlayer/javascripts/plugins/'
+		scripts: 			'/masterPlayer/javascripts/',
+		vendor: 			'/masterPlayer/javascripts/vendor/',
+		plugins: 			'/masterPlayer/javascripts/plugins/'
 	}
 };
 

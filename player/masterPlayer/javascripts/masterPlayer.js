@@ -12,17 +12,17 @@ masterPlayer.plugins = new Object();
 
 //Player start config
 masterPlayer.config = {
-	id: 123456,//parseInt(newDate.getTime() + Math.random()),
-	socketID: null,
-	playlistInstance: null,
-	playing: false,
-	playerSocket: null,
-	playlistMaxEntries: 500,
-	playerElement: '#remoMusicPlayer',
-	lastFmApiKey: 'f2923bd087687602324332057ed0473a',
-	initialMusic: initialPlaylist,
-	musicInfo: null,
-	loadedItems: typeof(loadedItems) != 'undefined' ? loadedItems : null //Global from background.js
+	id: 					DEBUG ? 123456 : parseInt(newDate.getTime() + Math.random()),
+	socketID: 				null,
+	playlistInstance: 		null,
+	playing: 				false,
+	playerSocket: 			null,
+	playlistMaxEntries: 	500,
+	playerElement: 			'#remoMusicPlayer',
+	lastFmApiKey: 			'f2923bd087687602324332057ed0473a',
+	initialMusic: 			initialPlaylist,
+	musicInfo: 				null,
+	loadedItems: 			typeof(loadedItems) != 'undefined' ? loadedItems : null //Global from background.js
 };
 
 //Player init

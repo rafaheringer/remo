@@ -46,7 +46,7 @@ masterPlayer.prototype.lyrics = function() {
 
 		//Get music info
 		masterPlayer.getMusicInfo(function(ID3) {
-			console.log('Lyrics: searchLyric',ID3);
+			console.log('Lyrics: searchLyric', ID3);
 
 			jQuery.getJSON(
 				'http://www.vagalume.com.br/api/search.php'

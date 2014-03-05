@@ -1,4 +1,5 @@
 //Tests
+//=====
 yepnope.tests = {
 	chromeApp: function(){ return typeof chrome != 'undefined' && typeof chrome.app.runtime != 'undefined'; },
 	webApp: function(){ return (!this.chromeApp()); },

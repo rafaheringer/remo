@@ -7,6 +7,7 @@ var express = require('express')
   , http = require('http')
   , os = require('os')
   , url = require('url')
+  , colors = require('colors')
   , path = require('path');
 
 var app = require('express')()
@@ -105,14 +106,11 @@ io
       });
 
 
-
-
-
-
       socket.on('message', function(data){
-        //Verify ID
+        //Verify ID from Control Player
         if(data.playerId == ('undefined' || 'null' || null || '')) {
-          socket.emit('authenticateMessage', {code: '001', message: 'Authenticate failded.'});
+          socket.emit('authenticateMessage', {code: '001', message: 'Authenticate failed.'});
+          console.error('Authenticate failed. PlayerId is not defined.'.red);
           return false;
         }
 
@@ -124,7 +122,6 @@ io
             socketID: socket.id,
             socket: socket
           };
-
         }
 
         //From Control Player
@@ -134,6 +131,13 @@ io
             socketID: socket.id,
             socket: socket
           };
+        }
+
+        //Verify registered Master Player ID
+        if(!PLAYER[data.playerId]) {
+          socket.emit('authenticateMessage', {code: '001', message: 'Authenticate failed.'});
+          console.error('Authenticate failed. The Master Player with this playerId not exist.'.red);
+          return false;
         }
 
         console.log('User authenticated. Player id: ' + data.playerId + ' Socket: ' + PLAYER[data.playerId].socketID);
