@@ -90,6 +90,20 @@ masterPlayer.prototype.socket = function() {
 						///Current playing
 						case 'current':
 							masterPlayer.config.viacp = true;
+
+							//Next or prev
+							if(m.data.current == '-') {
+								if(masterPlayer.config.playlistInstance.current != 0)
+									m.data.current = masterPlayer.config.playlistInstance.current - 1;
+								else
+									m.data.current = 0;
+							} else if(m.data.current == '+') {
+								if(masterPlayer.config.playlistInstance.current < masterPlayer.config.playlistInstance.playlist.length -1)
+									m.data.current = masterPlayer.config.playlistInstance.current + 1;
+								else
+									m.data.current = masterPlayer.config.playlistInstance.playlist.length -1;
+							}
+
 							masterPlayer.config.playlistInstance.select(Number(m.data.current));
 							masterPlayer.config.viacp = true;
 							if(m.data.playing == true) { masterPlayer.config.playlistInstance.play(); }

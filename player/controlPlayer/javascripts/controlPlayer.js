@@ -34,7 +34,7 @@ var REMOTEPLAYER = {
 				from: 'cp',
 				type: 'playlist',
 				message: 'playing',
-				data: {playing: pause},
+				data: {playing: false},
 				playerId: REMOTEPLAYER.playerID
 			});
 
