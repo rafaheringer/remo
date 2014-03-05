@@ -105,8 +105,8 @@ yepnope({
 
 //Call plugins
 yepnope([
-	CONFIG.dir.plugins + 'socket.js',
-	CONFIG.dir.plugins + 'qrCode.js',
+	CONFIG.dir.plugins + 'socket/socket.js',
+	CONFIG.dir.plugins + 'qrCode/qrCode.js',
 	CONFIG.dir.plugins + 'equalizer/equalizer.js',
 	CONFIG.dir.plugins + 'lyrics/lyrics.js'
 ]);
