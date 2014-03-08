@@ -9,7 +9,8 @@ var DEBUG = true;
 //=============
 var CONFIG = {
 	hostname: 				'',
-	nodeUrl: 				DEBUG ? 'http://192.168.25.3' : 'http://localhost',
+	nodeUrl: 				DEBUG ? 'http://192.168.25.3' : 'http://remomusic.herokuapp.com',
+	controlPlayerUrl:		DEBUG ? 'http://192.168.25.3:8888/?id=' : 'http://remomusic.herokuapp.com/remote/',
 	nodePort: 				DEBUG ? 8080 : 80,
 	fileSystemMaxStorage: 	200 * 1024 * 1024,
 	dir: {

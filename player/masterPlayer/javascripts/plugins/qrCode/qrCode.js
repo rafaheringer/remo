@@ -18,7 +18,8 @@ yepnope({
 //qrCode init
 masterPlayer.qrCodeInit = function() {
 	//qrCode
-	$('#qrcode').qrcode(CONFIG.nodeUrl + '/remote/' + masterPlayer.config.id);
+	//$('#qrcode').qrcode('remo.music://' + masterPlayer.config.id);
+	$('#qrcode').qrcode(CONFIG.controlPlayerUrl + masterPlayer.config.id);
 	
 	$('#show-QR-code').show().on('click', function(event){
 		if( !$(this).hasClass('showed') ) {

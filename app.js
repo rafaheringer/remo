@@ -102,7 +102,8 @@ io
 
       //From mp (Master Player) to cp (Control Player)
       socket.on('cp', function(m) {
-        PLAYER[m.playerId + 'r'].socket.emit('message-cp', m);
+        if(PLAYER[m.playerId + 'r'])
+          PLAYER[m.playerId + 'r'].socket.emit('message-cp', m);
       });
 
 
