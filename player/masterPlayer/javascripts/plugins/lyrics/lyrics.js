@@ -7,7 +7,7 @@ masterPlayer.prototype.lyrics = function() {
 	//Constructor
 	this.__constructor = function() {
 		//Config
-		_self.elements = {
+		this.elements = {
 			lyricsOnBtn: null,
 			lyricsOffBtn: null,
 			lyricsContainer: null,
@@ -16,8 +16,8 @@ masterPlayer.prototype.lyrics = function() {
 			autoScroll: null
 		};
 
-		_self.status = 'off';
-		_self.autoscroll = false;
+		this.status = 'off';
+		this.autoscroll = false;
 	};
 
 	//Append Elements
@@ -112,6 +112,9 @@ masterPlayer.prototype.lyrics = function() {
 		//Save state
 		_self.status = 'on';
 		savedUserInfo.set('lyrics.status', _self.status);
+
+		//Event
+		$(masterPlayer.config.playerElement).trigger('updatelyrics');
 	};
 
 	//Hide lyrics
@@ -127,6 +130,9 @@ masterPlayer.prototype.lyrics = function() {
 
 		//UnBinds
 		_self.unbinds();
+
+		//Event
+		$(masterPlayer.config.playerElement).trigger('updatelyrics');
 	};
 
 	//Binds
@@ -214,7 +220,9 @@ masterPlayer.prototype.lyrics = function() {
 	//Public methods
 	return {
 		init: this.init,
-		show: this.showLyrics
+		show: this.showLyrics,
+		hide: this.hideLyrics,
+		status: this.status
 	};
 };
 

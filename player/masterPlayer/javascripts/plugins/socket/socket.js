@@ -21,6 +21,7 @@ masterPlayer.prototype.socket = function() {
 		var data = {};
 		data.volume = $(masterPlayer.config.playerElement).jPlayer('option', 'volume') * 100;
 		data.muted = $(masterPlayer.config.playerElement).jPlayer('option', 'muted');
+		data.lyrics = false; ///TODO
 		data.playlist = {};
 		data.playlist.list =  [];
 
@@ -35,8 +36,8 @@ masterPlayer.prototype.socket = function() {
 		}
 
 		data.playlist.current = masterPlayer.config.playlistInstance.current;
-		data.playlist.loop = masterPlayer.config.playlistInstance.loop;
-		data.playlist.shuffled = masterPlayer.config.playlistInstance.shuffled;
+		data.playlist.repeat = masterPlayer.config.playlistInstance.loop;
+		data.playlist.shuffle = masterPlayer.config.playlistInstance.shuffled;
 		data.playlist.playing = masterPlayer.config.playing;
 		data.playlist.currentTime = $(masterPlayer.config.playerElement).data('jPlayer').status.currentTime;
 		data.playlist.duration = $(masterPlayer.config.playerElement).data('jPlayer').status.duration;
@@ -114,12 +115,36 @@ masterPlayer.prototype.socket = function() {
 
 				//Controls updates
 				case 'control':
-					//Volume
-					if(m.message == 'volume') {
-						masterPlayer.config.viacp = true;
-						$(masterPlayer.config.playerElement).jPlayer('volume', m.data.volume);
-						masterPlayer.config.viacp = true;
-						$(masterPlayer.config.playerElement).jPlayer('mute', m.data.muted);
+					switch(m.message) {
+						//Volume
+						case 'volume':
+							masterPlayer.config.viacp = true;
+							$(masterPlayer.config.playerElement).jPlayer('volume', m.data.volume);
+							masterPlayer.config.viacp = true;
+							$(masterPlayer.config.playerElement).jPlayer('mute', m.data.muted);
+						break;
+
+						//Repeat
+						case 'repeat':
+							masterPlayer.config.viacp = true;
+							$(masterPlayer.config.playerElement).jPlayer('option', 'loop', m.data.repeat);
+
+						break;
+
+						//Shuffle
+						case 'shuffle':
+							masterPlayer.config.viacp = true;
+							masterPlayer.config.playlistInstance.shuffle(m.data.shuffle);
+							_self.resetControlPlayer();
+						break;
+
+						//Lyrics
+						case 'lyrics':
+							if(masterPlayer.plugins.lyrics) {
+								masterPlayer.config.viacp = true;
+								m.data.lyrics === true ? masterPlayer.plugins.lyrics.show() : masterPlayer.plugins.lyrics.hide();
+							}
+						break;
 					}
 				break;
 			}
@@ -239,11 +264,39 @@ masterPlayer.prototype.socket = function() {
 			}
 		});
 
+		//Repeat
+		$(masterPlayer.config.playerElement).on($.jPlayer.event.repeat + '.socket', function() {
+			if(masterPlayer.config.viacp == false) {
+				_self.updateControlPlayer('control','repeat',{playlist: {repeat: $(masterPlayer.config.playerElement).jPlayer('option', 'loop')}});
+			} else {
+				masterPlayer.config.viacp = false;
+			}
+		});
+
+		//Shuffle (///TODO: Do jPlayer have shuffle event trigger?)
+		$('.jp-shuffle, .jp-shuffle-off').on('click.socket', function() {
+			if(masterPlayer.config.viacp == false) {
+				_self.updateControlPlayer('control','shuffle', {playlist: {suffle: masterPlayer.config.playlistInstance.shuffled}});
+
+				//Update playlist
+				_self.resetControlPlayer();
+			} else {
+				masterPlayer.config.viacp = false;
+			}
+		});
+
+		//Lyrics (///TODO: Put this part in lyrics plugin?)
+		$(masterPlayer.config.playerElement).on('updatelyrics.socket', function() {
+			if(masterPlayer.config.viacp == false) {
+				_self.updateControlPlayer('control','lyrics', {lyrics: masterPlayer.plugins.lyrics.status});
+			} else {
+				masterPlayer.config.viacp = false;
+			}
+		});
+
 		//On loading music files
 		$(masterPlayer.config.playerElement).on('startloading.socket', function() {
-			var data = {};
-			data.loading = true;
-			_self.updateControlPlayer('status','loading',data);
+			_self.updateControlPlayer('status','loading', {loading: true});
 		});
 
 		
