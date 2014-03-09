@@ -47,16 +47,16 @@ app.configure('development', function(){
 });
 
 //Configurações apenas para o HEROKU
-//io.configure(function () { 
-  //io.set("transports", ["xhr-polling"]); 
-  //io.set("polling duration", 10); 
-//});
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
+});
 
 //Production config
-// io.enable('browser client minification');
-// io.enable('browser client etag');
-// io.enable('browser client gzip');
-// io.set('log level', 1);
+io.enable('browser client minification');
+io.enable('browser client etag');
+io.enable('browser client gzip');
+io.set('log level', 1);
 
 //Rotas
 app.get('/',  function(req, res){

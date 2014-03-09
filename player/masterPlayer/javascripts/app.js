@@ -3,7 +3,7 @@
 
 //Debug mode
 //==========
-var DEBUG = true;
+var DEBUG = false;
 
 //Global config
 //=============
