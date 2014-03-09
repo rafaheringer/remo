@@ -135,6 +135,11 @@ masterPlayer.prototype.lyrics = function() {
 		$(masterPlayer.config.playerElement).trigger('updatelyrics');
 	};
 
+	//Get status
+	this.getStatus = function() {
+		return _self.status;
+	};
+
 	//Binds
 	this.binds = function() {
 		//On play
@@ -222,7 +227,7 @@ masterPlayer.prototype.lyrics = function() {
 		init: this.init,
 		show: this.showLyrics,
 		hide: this.hideLyrics,
-		status: this.status
+		getStatus: this.getStatus
 	};
 };
 

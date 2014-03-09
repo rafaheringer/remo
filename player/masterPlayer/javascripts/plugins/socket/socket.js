@@ -21,7 +21,7 @@ masterPlayer.prototype.socket = function() {
 		var data = {};
 		data.volume = $(masterPlayer.config.playerElement).jPlayer('option', 'volume') * 100;
 		data.muted = $(masterPlayer.config.playerElement).jPlayer('option', 'muted');
-		data.lyrics = false; ///TODO
+		data.lyrics = masterPlayer.plugins.lyrics.getStatus() == 'on' ? true : false;
 		data.playlist = {};
 		data.playlist.list =  [];
 
@@ -288,7 +288,7 @@ masterPlayer.prototype.socket = function() {
 		//Lyrics (///TODO: Put this part in lyrics plugin?)
 		$(masterPlayer.config.playerElement).on('updatelyrics.socket', function() {
 			if(masterPlayer.config.viacp == false) {
-				_self.updateControlPlayer('control','lyrics', {lyrics: masterPlayer.plugins.lyrics.status});
+				_self.updateControlPlayer('control','lyrics', {lyrics: masterPlayer.plugins.lyrics.getStatus() == 'on' ? true : false});
 			} else {
 				masterPlayer.config.viacp = false;
 			}
