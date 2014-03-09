@@ -41,11 +41,13 @@ masterPlayer.prototype.lyrics = function() {
 
 	//Search lyric
 	this.searchLyric = function() {
+		console.log('Lyrics: init searchLyric');
+
 		//Loading
 		_self.elements.lyricsContainer.addClass('loading');
 
 		//Get music info
-		masterPlayer.getMusicInfo(function(ID3) {
+		masterPlayer.getMusicInfo(null, function(ID3) {
 			console.log('Lyrics: searchLyric', ID3);
 
 			jQuery.getJSON(
@@ -119,6 +121,8 @@ masterPlayer.prototype.lyrics = function() {
 
 	//Hide lyrics
 	this.hideLyrics = function() {
+		console.log('Lyrics: hideLyrics');
+
 		//Hide btn
 		_self.elements.lyricsOnBtn.show();
 		_self.elements.lyricsOffBtn.hide();
