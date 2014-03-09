@@ -53,10 +53,10 @@ io.configure(function () {
 });
 
 //Production config
-io.enable('browser client minification');
-io.enable('browser client etag');
-io.enable('browser client gzip');
-io.set('log level', 1);
+// io.enable('browser client minification');
+// io.enable('browser client etag');
+// io.enable('browser client gzip');
+// io.set('log level', 1);
 
 //Rotas
 app.get('/',  function(req, res){
