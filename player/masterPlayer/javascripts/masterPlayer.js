@@ -95,6 +95,9 @@ masterPlayer.playerInit = function(callback){
 			}
 		});
 
+		//Remove playlist loading indicator
+		$('#playlist').removeClass('loading');
+
 		//Callback
 		if(typeof callback == 'function') {
 			callback.call(this);
@@ -203,6 +206,9 @@ masterPlayer.playerInit = function(callback){
 				
 			}
 			else {
+				//Add playlist loading indicator
+				$('#playlist').addClass('loading');
+
 				setTimeout(function(){
 					readyToGo();
 				}, 1000);
@@ -404,7 +410,8 @@ masterPlayer.setMusicInfo = function() {
 masterPlayer.getMusicInfo = function(music, callback) {
 	music = music || masterPlayer.config.playlistInstance.playlist[masterPlayer.config.playlistInstance.current];
 
-	if(typeof music.file == 'object') {
+
+	if(typeof music.file == 'object' && typeof music.name != 'undefined') {
 		var reader = new FileReader();
 		reader.readAsArrayBuffer(music.file);
 
