@@ -1,6 +1,78 @@
 /// <reference path="_references.js" />
 "use strict";
 
+//qrCode init
+masterPlayer.prototype.qrCode = function() {
+	var _self 				= this,
+		qrCodeElement 		= null,
+		qrCodeButton 		= null,
+		clickToShowButton 	= null,
+		timeOut 			= null;
+
+	//Constructor
+	this.__constructor = function() {
+		//Create qrCode elements
+		qrCodeButton = $('<div id="show-QR-code" class="animated fadeIn"></div>').insertAfter('#jp_container');
+		clickToShowButton = $('<div class="click-to-show-QR-code"></div>').appendTo(qrCodeButton);
+		qrCodeElement = $('<div class="qr-code" id="qrcode"></div>').appendTo(qrCodeButton);
+	};
+
+	//Init
+	this.init = function() {
+		//Apply qrCode function
+		qrCodeElement.qrcode(CONFIG.controlPlayerUrl + masterPlayer.config.id);
+
+		//On click in button
+		qrCodeButton.on('click', function(event) {
+			if(!$(this).hasClass('showed'))
+				_self.show();
+			else
+				_self.hide();
+
+			event.stopPropagation();
+		});
+
+		//On body click
+		$('body').on('click', function(){
+			if(qrCodeButton.is('.showed'))
+				qrCodeButton.trigger('click');
+		});
+
+		//Show buttons
+		qrCodeButton.show();
+	};
+
+	//Hide qrCode element
+	this.hide = function() {
+		qrCodeButton.removeClass('showed');
+		qrCodeElement.fadeOut(100, function(){
+			clickToShowButton.show();
+		});
+
+		clearTimeout(timeOut);
+
+		//Analytics
+		analytics.track('qrCode', 'off');
+	};
+
+	//Show qrCode element
+	this.show = function() {
+		qrCodeButton.addClass('showed');
+		clickToShowButton.hide();
+		qrCodeElement.fadeIn(100);
+
+		//Timeout
+		timeOut = setTimeout(function(){
+			_self.hide();
+		}, 20000);
+
+		//Analytics
+		analytics.track('qrCode', 'on');
+	};
+
+	this.__constructor();
+};
+
 yepnope({
 	//Have connection?
 	test: yepnope.tests.online(),
@@ -10,44 +82,8 @@ yepnope({
 	},
 	callback: {
 		jqueryqrcode: function(){
-			masterPlayer.qrCodeInit();
+			masterPlayer.plugins.qrCode = new mp.qrCode();
+			masterPlayer.plugins.qrCode.init();
 		}
 	}
 });
-
-//qrCode init
-masterPlayer.qrCodeInit = function() {
-	//qrCode
-	//$('#qrcode').qrcode('remo.music://' + masterPlayer.config.id);
-	$('#qrcode').qrcode(CONFIG.controlPlayerUrl + masterPlayer.config.id);
-	
-	$('#show-QR-code').show().on('click', function(event){
-		if( !$(this).hasClass('showed') ) {
-
-			$(this).addClass('showed');
-			$('.click-to-show-QR-code').hide();
-			$('#qrcode').fadeIn(100);
-
-			//Analytics
-			analytics.track('qrCode', 'on');
-		}
-
-		else {
-			$(this).removeClass('showed');
-			$('#qrcode').fadeOut(100, function(){
-				$('.click-to-show-QR-code').show();
-			});
-
-			//Analytics
-			analytics.track('qrCode', 'off');
-		}
-
-		event.stopPropagation();
-	});
-
-	$('body').on('click', function(){
-		if($('#show-QR-code').is('.showed')) {
-			$('#show-QR-code').trigger('click');
-		}
-	});
-};

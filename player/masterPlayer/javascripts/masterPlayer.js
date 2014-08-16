@@ -781,9 +781,9 @@ masterPlayer.mouseEvents = function(){
 masterPlayer.hideOnMouseMove = function(hide){
 	if(hide) {
 		return setTimeout(function(){
-			$('#show-QR-code, #menu, .jp-volume').addClass('hidden');
+			$('#menu').addClass('hidden');
 		}, 10000);
 	} else {
-		$('#show-QR-code, #menu, .jp-volume').removeClass('hidden');
+		$('#menu').removeClass('hidden');
 	}
 };
