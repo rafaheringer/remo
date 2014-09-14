@@ -147,6 +147,11 @@ masterPlayer.prototype.socket = function() {
 						break;
 					}
 				break;
+
+				//PING
+				case 'ping':
+					_self.updateControlPlayer('ping', 'received');
+				break;
 			}
 		});
 	};
@@ -299,8 +304,10 @@ masterPlayer.prototype.socket = function() {
 			_self.updateControlPlayer('status','loading', {loading: true});
 		});
 
-		
-
+		//On suspend (close) app
+		$(masterPlayer.config.playerElement).on('suspend.socket', function() {
+			_self.updateControlPlayer('status', 'suspend', {});
+		});
 	};
 
 	this.__constructor();

@@ -26,7 +26,7 @@ masterPlayer.config = {
 };
 
 //Player init
-masterPlayer.playerInit = function(callback){
+masterPlayer.playerInit = function(callback) {
 	var _self = this;
 
 	//Start controls
@@ -487,7 +487,7 @@ masterPlayer.getMusicInfo = function(music, callback) {
 };
 
 //Save playlist to read later
-masterPlayer.savePlaylist = function(playList){
+masterPlayer.savePlaylist = function(playList) {
 
 	//Grant access to the file history
 	if(yepnope.tests.chromeApp() &&  yepnope.tests.chrome.restorable()) {
@@ -503,7 +503,7 @@ masterPlayer.savePlaylist = function(playList){
 };
 
 //FileTree reader
-masterPlayer.fileTreeReader = function(files, callback){
+masterPlayer.fileTreeReader = function(files, callback) {
 	//Loading event
 	$(masterPlayer.config.playerElement).trigger('startloading');
 
@@ -644,7 +644,7 @@ masterPlayer.fileReaderInit = function() {
 };
 
 //Bind keyboard events
-masterPlayer.keyboardEvents = function(){
+masterPlayer.keyboardEvents = function() {
 	$('body').on('keydown.musicControl', function(event){
 
 		switch(event.keyCode) {
@@ -778,7 +778,7 @@ masterPlayer.mouseEvents = function(){
 };
 
 //Hide elements on mouse move
-masterPlayer.hideOnMouseMove = function(hide){
+masterPlayer.hideOnMouseMove = function(hide) {
 	if(hide) {
 		return setTimeout(function(){
 			$('#menu').addClass('hidden');
@@ -786,4 +786,9 @@ masterPlayer.hideOnMouseMove = function(hide){
 	} else {
 		$('#menu').removeClass('hidden');
 	}
+};
+
+//On close the player
+masterPlayer.suspend = function() {
+	$(masterPlayer.config.playerElement).trigger('suspend');
 };

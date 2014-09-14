@@ -1,96 +1,97 @@
 /// <reference path="_references.js" />
+// https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Porting_webkitAudioContext_code_to_standards_based_AudioContext#BiquadFilterNode.type
 "use strict";
 
 //Equalizer init
 masterPlayer.prototype.equalizer = function(){
 	//Context and connect audio
-	var audio,
-		audioContext,
+	var audioContext,
 		audioElement,
 		audioSource,
 		qFactor,
 		frequencies;
 
+	window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
 	//Constructor
 	this.__constructor = function(){
 		//Context and connect audio
-		audio			= document.getElementsByTagName('audio')[0];
-		audioContext	= new webkitAudioContext();
+		audioContext	= new AudioContext();
 		audioElement	= document.getElementsByTagName('audio')[0];
 		audioSource		= audioContext.createMediaElementSource( audioElement );
 		qFactor			= 1;	//1 <> 100
 		frequencies		= {};
-		
+
 		//Frequencies
 		//-----------------------
 
 		//32Hz
 		frequencies['1']					= audioContext.createBiquadFilter();
 		frequencies['1'].frequency.value	= 32;
-		frequencies['1'].type				= 3;		
+		frequencies['1'].type				= 'lowshelf';		
 		frequencies['1'].gain.value			= 0;
 		frequencies['1'].Q.value			= qFactor;
 
 		//64Hz
 		frequencies['2']					= audioContext.createBiquadFilter();
 		frequencies['2'].frequency.value	= 64;
-		frequencies['2'].type				= 3;
+		frequencies['2'].type				= 'lowshelf';
 		frequencies['2'].gain.value			= 0;
 		frequencies['2'].Q.value			= qFactor;
 
 		//125Hz
 		frequencies['3']					= audioContext.createBiquadFilter();
 		frequencies['3'].frequency.value	= 125;
-		frequencies['3'].type				= 3;
+		frequencies['3'].type				= 'lowshelf';
 		frequencies['3'].gain.value			= 0;
 		frequencies['3'].Q.value			= qFactor;
 
 		//250Hz
 		frequencies['4']					= audioContext.createBiquadFilter();
 		frequencies['4'].frequency.value	= 250;
-		frequencies['4'].type				= 5;
+		frequencies['4'].type				= 'peaking';
 		frequencies['4'].gain.value			= 0;
 		frequencies['4'].Q.value			= qFactor;
 
 		//500Hz
 		frequencies['5']					= audioContext.createBiquadFilter();
 		frequencies['5'].frequency.value	= 500;
-		frequencies['5'].type				= 5;
+		frequencies['5'].type				= 'peaking';
 		frequencies['5'].gain.value			= 0;
 		frequencies['5'].Q.value			= qFactor;
 
 		//1KHz
 		frequencies['6']					= audioContext.createBiquadFilter();
 		frequencies['6'].frequency.value	= 1000;
-		frequencies['6'].type				= 5;
+		frequencies['6'].type				= 'peaking';
 		frequencies['6'].gain.value			= 0;
 		frequencies['6'].Q.value			= qFactor;
 
 		//2KHz
 		frequencies['7']					= audioContext.createBiquadFilter();
 		frequencies['7'].frequency.value	= 2000;
-		frequencies['7'].type				= 5;
+		frequencies['7'].type				= 'peaking';
 		frequencies['7'].gain.value			= 0;
 		frequencies['7'].Q.value			= qFactor;
 
 		//4KHz
 		frequencies['8']					= audioContext.createBiquadFilter();
 		frequencies['8'].frequency.value	= 4000;
-		frequencies['8'].type				= 4;
+		frequencies['8'].type				= 'highshelf';
 		frequencies['8'].gain.value			= 0;
 		frequencies['8'].Q.value			= qFactor;
 
 		//8KHz
 		frequencies['9']					= audioContext.createBiquadFilter();
 		frequencies['9'].frequency.value	= 8000;
-		frequencies['9'].type				= 4;
+		frequencies['9'].type				= 'highshelf';
 		frequencies['9'].gain.value			= 0;
 		frequencies['9'].Q.value			= qFactor;
 
 		//16KHz
 		frequencies['10']					= audioContext.createBiquadFilter();
 		frequencies['10'].frequency.value	= 16000;
-		frequencies['10'].type				= 4;
+		frequencies['10'].type				= 'highshelf';
 		frequencies['10'].gain.value		= 0;
 		frequencies['10'].Q.value			= qFactor;
 
@@ -106,6 +107,7 @@ masterPlayer.prototype.equalizer = function(){
 		frequencies['8'].connect(frequencies['9']);
 		frequencies['9'].connect(frequencies['10']);
 		frequencies['10'].connect(audioContext.destination);
+
 	};
 
 	//Init

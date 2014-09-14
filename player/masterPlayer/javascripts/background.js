@@ -23,5 +23,12 @@ chrome.app.runtime.onLaunched.addListener(function(items) {
 				contentWindow.masterPlayer.config.playlistInstance.play();
 			});
 		}
+
+		//On suspend
+		createdWindow.onClosed.addListener(function() {
+			//Send close action to control player
+			console.log('Master player closed.');
+			contentWindow.masterPlayer.suspend();
+		});
 	});
 });

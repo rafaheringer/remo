@@ -15,6 +15,9 @@ masterPlayer.prototype.qrCode = function() {
 		qrCodeButton = $('<div id="show-QR-code" class="animated fadeIn"></div>').insertAfter('#jp_container');
 		clickToShowButton = $('<div class="click-to-show-QR-code"></div>').appendTo(qrCodeButton);
 		qrCodeElement = $('<div class="qr-code" id="qrcode"></div>').appendTo(qrCodeButton);
+
+		//TODO: Append CSS
+		//window.appendCSS('javascripts/plugins/qrCode/qrCode.css');
 	};
 
 	//Init
@@ -40,6 +43,9 @@ masterPlayer.prototype.qrCode = function() {
 
 		//Show buttons
 		qrCodeButton.show();
+
+		//If debug mode, shows ID
+		$('body').append('<div class="debug-qr-code">' + masterPlayer.config.id + '</div>');
 	};
 
 	//Hide qrCode element

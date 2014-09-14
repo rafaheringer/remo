@@ -1,4 +1,5 @@
-/*Site: Remo.music
+/*!
+ *Site: Remo.music
  *Package: Remote Player Package
  *Author: Rafael Heringer Carvalho
  *Version: 1.0
@@ -1186,7 +1187,15 @@ body:before {
   height: 51px;
 }
 
-/* line 736, src/masterPlayer.sass */
+/* line 735, src/masterPlayer.sass */
+.debug-qr-code {
+  background: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/* line 742, src/masterPlayer.sass */
 #drag-drop-layer {
   -webkit-transition: all 200ms ease-in-out;
   -moz-transition: all 200ms ease-in-out;
@@ -1203,12 +1212,12 @@ body:before {
   padding: 5%;
   display: none;
 }
-/* line 749, src/masterPlayer.sass */
+/* line 755, src/masterPlayer.sass */
 #drag-drop-layer.hover {
   opacity: 1;
   display: block;
 }
-/* line 753, src/masterPlayer.sass */
+/* line 759, src/masterPlayer.sass */
 #drag-drop-layer .drag-drop-text {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1218,7 +1227,7 @@ body:before {
   height: 100%;
   position: relative;
 }
-/* line 760, src/masterPlayer.sass */
+/* line 766, src/masterPlayer.sass */
 #drag-drop-layer .drag-drop-text span {
   color: #666666;
   font-size: 3em;
@@ -1230,7 +1239,7 @@ body:before {
   text-align: center;
 }
 
-/* line 771, src/masterPlayer.sass */
+/* line 777, src/masterPlayer.sass */
 .modal {
   -webkit-transition: opacity 100ms ease-in;
   -moz-transition: opacity 100ms ease-in;
@@ -1247,18 +1256,18 @@ body:before {
   left: 0;
   top: 0;
 }
-/* line 784, src/masterPlayer.sass */
+/* line 790, src/masterPlayer.sass */
 .modal .modal-close {
   color: black;
   font-size: 12px;
 }
-/* line 788, src/masterPlayer.sass */
+/* line 794, src/masterPlayer.sass */
 .modal:target {
   opacity: 1;
   display: block;
   pointer-events: auto;
 }
-/* line 793, src/masterPlayer.sass */
+/* line 799, src/masterPlayer.sass */
 .modal:target .modal-container {
   -webkit-animation-name: bounce;
   -moz-animation-name: bounce;
@@ -1266,7 +1275,7 @@ body:before {
   -o-animation-name: bounce;
   animation-name: bounce;
 }
-/* line 796, src/masterPlayer.sass */
+/* line 802, src/masterPlayer.sass */
 .modal .modal-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1285,33 +1294,33 @@ body:before {
   left: 50%;
   margin: -190px 0 0 -340px;
 }
-/* line 808, src/masterPlayer.sass */
+/* line 814, src/masterPlayer.sass */
 .modal .column {
   width: 45%;
   float: left;
   margin-right: 5%;
 }
-/* line 813, src/masterPlayer.sass */
+/* line 819, src/masterPlayer.sass */
 .modal .modal-actions {
   position: absolute;
   top: 15px;
   right: 15px;
 }
-/* line 818, src/masterPlayer.sass */
+/* line 824, src/masterPlayer.sass */
 .modal .modal-close {
   display: block;
 }
-/* line 821, src/masterPlayer.sass */
+/* line 827, src/masterPlayer.sass */
 .modal h2 {
   font-size: 32px;
   margin: 0 0 15px 0;
 }
-/* line 825, src/masterPlayer.sass */
+/* line 831, src/masterPlayer.sass */
 .modal p {
   font-size: 12px;
   margin: 10px 0 0 0;
 }
-/* line 829, src/masterPlayer.sass */
+/* line 835, src/masterPlayer.sass */
 .modal p a {
   color: #333333;
   text-decoration: underline;

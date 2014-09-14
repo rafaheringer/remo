@@ -871,6 +871,7 @@
 			if(this.require.audio) { // If a supplied format is audio
 				this.htmlElement.audio = document.createElement('audio');
 				this.htmlElement.audio.id = this.internal.audio.id;
+
 				//SERIOUS???
 				this.htmlElement.audio.setAttribute("msAudioCategory", "BackgroundCapableMedia");
 				this.htmlElement.audio.setAttribute("MsAudioCategory", "backgroundCapableMedia");
@@ -935,6 +936,13 @@
 			// If neither html nor flash are being used by this browser, then media playback is not possible. Trigger an error event.
 			if(!(this.html.used)) {
 				this._error( {
+					type: $.jPlayer.error.NO_SOLUTION, 
+					context: "{solution:'" + this.options.solution + "', supplied:'" + this.options.supplied + "'}",
+					message: $.jPlayer.errorMsg.NO_SOLUTION,
+					hint: $.jPlayer.errorHint.NO_SOLUTION
+				});
+
+				console.error({
 					type: $.jPlayer.error.NO_SOLUTION, 
 					context: "{solution:'" + this.options.solution + "', supplied:'" + this.options.supplied + "'}",
 					message: $.jPlayer.errorMsg.NO_SOLUTION,
